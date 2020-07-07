@@ -1,0 +1,82 @@
+//
+//  AppColors.swift
+//  Actio
+//
+//  Created by senthil on 06/07/20.
+//  Copyright © 2020 Knila. All rights reserved.
+//
+
+import UIKit
+
+class AppColor: UIColor {
+    class func OrangeColor() -> UIColor {
+        
+        return self.HexToColor(hexString: "#FF5733")
+    }
+    class func PurpleColor() -> UIColor {
+        
+        return self.HexToColor(hexString: "#511845")
+    }
+    class func RedColor() -> UIColor {
+        
+        return self.HexToColor(hexString: "#C70039")
+    }
+    class func TextFieldBorderColor() -> UIColor {
+        
+        return self.HexToColor(hexString: "#fedcd7")
+    }
+        
+    class func HexToColor(hexString: String) -> UIColor
+    {
+        // Convert hex string to an integer
+        let hexint = Int(self.intFromHexString(hexStr: hexString))
+        let red = CGFloat((hexint & 0xff0000) >> 16) / 255.0
+        let green = CGFloat((hexint & 0xff00) >> 8) / 255.0
+        let blue = CGFloat((hexint & 0xff) >> 0) / 255.0
+        // Create color object, specifying alpha as well
+        let color = UIColor(red: red, green: green, blue: blue, alpha: 1.0)
+        return color
+    }
+    
+    class func intFromHexString(hexStr: String) -> UInt32{
+        var hexInt: UInt32 = 0
+        // Create scanner
+        let scanner: Scanner = Scanner(string: hexStr)
+        // Tell scanner to skip the # character
+        scanner.charactersToBeSkipped = NSCharacterSet(charactersIn: "#") as CharacterSet
+        // Scan hex value
+        scanner.scanHexInt32(&hexInt)
+        return hexInt
+    }
+}
+//Gradient Color
+
+extension UIView {
+    @discardableResult
+    func applyGradient(colours: [UIColor]) -> CAGradientLayer {
+        return self.applyGradient(colours: colours, locations: nil)
+    }
+    
+    @discardableResult
+    func applyGradient(colours: [UIColor], locations: [NSNumber]?) -> CAGradientLayer {
+        let gradient: CAGradientLayer = CAGradientLayer()
+        gradient.frame = self.bounds
+        gradient.colors = colours.map { $0.cgColor }
+        gradient.startPoint = CGPoint(x: 0, y: 0)
+        gradient.endPoint = CGPoint(x: 1, y: 0)
+        self.layer.insertSublayer(gradient, at: 0)
+        return gradient
+    }
+}
+// Textfield BorderColor
+extension UITextField{
+    func setBorderColor(width:CGFloat,color:UIColor) -> Void{
+        self.layer.borderColor = color.cgColor
+        self.layer.borderWidth = width
+    }
+}
+
+
+
+
+
