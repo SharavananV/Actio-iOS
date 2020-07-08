@@ -1,0 +1,39 @@
+//
+//  Extensions.swift
+//  Actio
+//
+//  Created by apple on 07/07/20.
+//  Copyright © 2020 Knila. All rights reserved.
+//
+
+import UIKit
+
+extension CGFloat {
+    static let kExternalPadding: CGFloat = 20
+    static let kTableCellPadding: CGFloat = 15
+    static let kInternalPadding: CGFloat = 10
+}
+
+extension NSLayoutAnchor {
+    @objc func constraint(equalTo anchor: NSLayoutAnchor<AnchorType>, constant: CGFloat = 0, priority: UILayoutPriority) -> NSLayoutConstraint {
+        let constraint = self.constraint(equalTo: anchor, constant: constant)
+        constraint.priority = priority
+        
+        return constraint
+    }
+}
+
+extension UIEdgeInsets {
+    var horizontal: CGFloat { return right + left }
+    var vertical: CGFloat { return top + bottom }
+}
+
+extension CGSize {
+    func paddedBy(_ insets: UIEdgeInsets) -> CGSize {
+        return CGSize(width: width + insets.horizontal, height: height + insets.vertical)
+    }
+    
+    var roundedUp: CGSize {
+        return CGSize(width: ceil(width), height: ceil(height))
+    }
+}

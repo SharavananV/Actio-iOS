@@ -7,8 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18196CF824B4727E00DBECCA /* ActioTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18196CF724B4727E00DBECCA /* ActioTextField.swift */; };
+		18196CFC24B47BF900DBECCA /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18196CFB24B47BF900DBECCA /* SignupViewController.swift */; };
+		183384C624B49CDD009911A8 /* ActioGradientButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183384C524B49CDD009911A8 /* ActioGradientButton.swift */; };
+		183384C824B4A561009911A8 /* ImagePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183384C724B4A561009911A8 /* ImagePickerTableViewCell.swift */; };
+		183384CA24B4A94C009911A8 /* JustTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183384C924B4A94C009911A8 /* JustTextTableViewCell.swift */; };
+		183384CC24B4A9BF009911A8 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183384CB24B4A9BF009911A8 /* SwitchTableViewCell.swift */; };
+		1841F19324B480680021D131 /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1841F18F24B480670021D131 /* DatePickerTableViewCell.swift */; };
+		1841F19424B480680021D131 /* TextPickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1841F19024B480680021D131 /* TextPickerTableViewCell.swift */; };
+		1841F19524B480680021D131 /* TextEditTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1841F19124B480680021D131 /* TextEditTableViewCell.swift */; };
+		1841F19624B480680021D131 /* FootnoteButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1841F19224B480680021D131 /* FootnoteButtonTableViewCell.swift */; };
+		1841F19924B480F10021D131 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1841F19824B480F10021D131 /* Extensions.swift */; };
+		18F6A07224B57D18000ACDF1 /* SelfSizingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F6A07124B57D18000ACDF1 /* SelfSizingTextView.swift */; };
 		8D94E07524AF1D0A00DBC46A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D94E07424AF1D0A00DBC46A /* AppDelegate.swift */; };
-		8D94E07724AF1D0A00DBC46A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D94E07624AF1D0A00DBC46A /* SceneDelegate.swift */; };
 		8D94E07C24AF1D0A00DBC46A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D94E07A24AF1D0A00DBC46A /* Main.storyboard */; };
 		8D94E07F24AF1D0A00DBC46A /* Actio.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8D94E07D24AF1D0A00DBC46A /* Actio.xcdatamodeld */; };
 		8D94E08124AF1D0C00DBC46A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D94E08024AF1D0C00DBC46A /* Assets.xcassets */; };
@@ -38,9 +49,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18196CF724B4727E00DBECCA /* ActioTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActioTextField.swift; sourceTree = "<group>"; };
+		18196CFB24B47BF900DBECCA /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		183384C524B49CDD009911A8 /* ActioGradientButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActioGradientButton.swift; sourceTree = "<group>"; };
+		183384C724B4A561009911A8 /* ImagePickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerTableViewCell.swift; sourceTree = "<group>"; };
+		183384C924B4A94C009911A8 /* JustTextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustTextTableViewCell.swift; sourceTree = "<group>"; };
+		183384CB24B4A9BF009911A8 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
+		1841F18F24B480670021D131 /* DatePickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerTableViewCell.swift; sourceTree = "<group>"; };
+		1841F19024B480680021D131 /* TextPickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextPickerTableViewCell.swift; sourceTree = "<group>"; };
+		1841F19124B480680021D131 /* TextEditTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextEditTableViewCell.swift; sourceTree = "<group>"; };
+		1841F19224B480680021D131 /* FootnoteButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FootnoteButtonTableViewCell.swift; sourceTree = "<group>"; };
+		1841F19824B480F10021D131 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		18F6A07124B57D18000ACDF1 /* SelfSizingTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSizingTextView.swift; sourceTree = "<group>"; };
 		8D94E07124AF1D0A00DBC46A /* Actio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Actio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D94E07424AF1D0A00DBC46A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8D94E07624AF1D0A00DBC46A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		8D94E07B24AF1D0A00DBC46A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8D94E07E24AF1D0A00DBC46A /* Actio.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Actio.xcdatamodel; sourceTree = "<group>"; };
 		8D94E08024AF1D0C00DBC46A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -81,6 +103,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18196CF624B4725700DBECCA /* Custom Subclasses */ = {
+			isa = PBXGroup;
+			children = (
+				18196CF724B4727E00DBECCA /* ActioTextField.swift */,
+				183384C524B49CDD009911A8 /* ActioGradientButton.swift */,
+				18F6A07124B57D18000ACDF1 /* SelfSizingTextView.swift */,
+			);
+			path = "Custom Subclasses";
+			sourceTree = "<group>";
+		};
+		1841F18E24B480510021D131 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				1841F18F24B480670021D131 /* DatePickerTableViewCell.swift */,
+				1841F19124B480680021D131 /* TextEditTableViewCell.swift */,
+				1841F19024B480680021D131 /* TextPickerTableViewCell.swift */,
+				1841F19224B480680021D131 /* FootnoteButtonTableViewCell.swift */,
+				183384C724B4A561009911A8 /* ImagePickerTableViewCell.swift */,
+				183384C924B4A94C009911A8 /* JustTextTableViewCell.swift */,
+				183384CB24B4A9BF009911A8 /* SwitchTableViewCell.swift */,
+			);
+			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		1841F19724B480DA0021D131 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				1841F19824B480F10021D131 /* Extensions.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		8D94E06824AF1D0A00DBC46A = {
 			isa = PBXGroup;
 			children = (
@@ -101,11 +155,13 @@
 			isa = PBXGroup;
 			children = (
 				8DE6B64C24B35B890010A3EC /* LaunchPage */,
-				8DE6B64B24B337B50010A3EC /* LoginPage */,
+				8DE6B64B24B337B50010A3EC /* Login */,
+				1841F18E24B480510021D131 /* TableViewCells */,
+				18196CF624B4725700DBECCA /* Custom Subclasses */,
 				8DE6B64A24B3366B0010A3EC /* Colors */,
 				8DE6B64724B3352C0010A3EC /* Fonts */,
+				1841F19724B480DA0021D131 /* Utilities */,
 				8D94E07424AF1D0A00DBC46A /* AppDelegate.swift */,
-				8D94E07624AF1D0A00DBC46A /* SceneDelegate.swift */,
 				8D94E07A24AF1D0A00DBC46A /* Main.storyboard */,
 				8D94E08024AF1D0C00DBC46A /* Assets.xcassets */,
 				8D94E08224AF1D0C00DBC46A /* LaunchScreen.storyboard */,
@@ -149,12 +205,13 @@
 			path = Colors;
 			sourceTree = "<group>";
 		};
-		8DE6B64B24B337B50010A3EC /* LoginPage */ = {
+		8DE6B64B24B337B50010A3EC /* Login */ = {
 			isa = PBXGroup;
 			children = (
 				8D94E08B24AF1D3600DBC46A /* LoginViewController.swift */,
+				18196CFB24B47BF900DBECCA /* SignupViewController.swift */,
 			);
-			path = LoginPage;
+			path = Login;
 			sourceTree = "<group>";
 		};
 		8DE6B64C24B35B890010A3EC /* LaunchPage */ = {
@@ -254,13 +311,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18196CF824B4727E00DBECCA /* ActioTextField.swift in Sources */,
 				8D94E07524AF1D0A00DBC46A /* AppDelegate.swift in Sources */,
+				183384C824B4A561009911A8 /* ImagePickerTableViewCell.swift in Sources */,
+				1841F19424B480680021D131 /* TextPickerTableViewCell.swift in Sources */,
+				183384CA24B4A94C009911A8 /* JustTextTableViewCell.swift in Sources */,
+				18F6A07224B57D18000ACDF1 /* SelfSizingTextView.swift in Sources */,
+				1841F19624B480680021D131 /* FootnoteButtonTableViewCell.swift in Sources */,
+				183384CC24B4A9BF009911A8 /* SwitchTableViewCell.swift in Sources */,
+				18196CFC24B47BF900DBECCA /* SignupViewController.swift in Sources */,
 				8DE6B64924B335630010A3EC /* AppFonts.swift in Sources */,
 				8D94E07F24AF1D0A00DBC46A /* Actio.xcdatamodeld in Sources */,
+				1841F19524B480680021D131 /* TextEditTableViewCell.swift in Sources */,
+				183384C624B49CDD009911A8 /* ActioGradientButton.swift in Sources */,
+				1841F19924B480F10021D131 /* Extensions.swift in Sources */,
 				8DA048BB24B331D40099D528 /* AppColors.swift in Sources */,
 				8D94E08C24AF1D3600DBC46A /* LoginViewController.swift in Sources */,
-				8D94E07724AF1D0A00DBC46A /* SceneDelegate.swift in Sources */,
 				8DE6B64E24B35BA60010A3EC /* LaunchViewController.swift in Sources */,
+				1841F19324B480680021D131 /* DatePickerTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,6 +475,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9722T8G52H;
 				INFOPLIST_FILE = Actio/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -425,6 +494,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9722T8G52H;
 				INFOPLIST_FILE = Actio/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

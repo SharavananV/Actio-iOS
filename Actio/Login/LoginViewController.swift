@@ -23,6 +23,7 @@ class LoginViewController: UIViewController {
         self.loginButton.applyGradient(colours: [AppColor.OrangeColor(),AppColor.RedColor()])
         
        self.button.setImage(UIImage(named: "hidden-eye.png"), for: .normal)
+       self.navigationController?.setNavigationBarHidden(true, animated: false)
 
         
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -16, bottom: 0, right: 0)
@@ -31,6 +32,13 @@ class LoginViewController: UIViewController {
         passwordTextField.rightView = button
         passwordTextField.rightViewMode = .always
         
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     @objc func secureIconClickAction() {
