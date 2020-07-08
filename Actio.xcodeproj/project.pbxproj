@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,6 +19,10 @@
 		1841F19624B480680021D131 /* FootnoteButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1841F19224B480680021D131 /* FootnoteButtonTableViewCell.swift */; };
 		1841F19924B480F10021D131 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1841F19824B480F10021D131 /* Extensions.swift */; };
 		18F6A07224B57D18000ACDF1 /* SelfSizingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F6A07124B57D18000ACDF1 /* SelfSizingTextView.swift */; };
+		38754D908539C921C392B92E /* Pods_Actio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD5218CD43054BEE6FAD8D4 /* Pods_Actio.framework */; };
+		8D8C6A9324B591B200D6DBE3 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8C6A9224B591B200D6DBE3 /* Extensions.swift */; };
+		8D8C6A9624B591F400D6DBE3 /* ApiDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8C6A9524B591F400D6DBE3 /* ApiDetails.swift */; };
+		8D8C6A9824B5939700D6DBE3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D8C6A9724B5939700D6DBE3 /* GoogleService-Info.plist */; };
 		8D94E07524AF1D0A00DBC46A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D94E07424AF1D0A00DBC46A /* AppDelegate.swift */; };
 		8D94E07C24AF1D0A00DBC46A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D94E07A24AF1D0A00DBC46A /* Main.storyboard */; };
 		8D94E07F24AF1D0A00DBC46A /* Actio.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8D94E07D24AF1D0A00DBC46A /* Actio.xcdatamodeld */; };
@@ -61,6 +65,10 @@
 		1841F19224B480680021D131 /* FootnoteButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FootnoteButtonTableViewCell.swift; sourceTree = "<group>"; };
 		1841F19824B480F10021D131 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		18F6A07124B57D18000ACDF1 /* SelfSizingTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSizingTextView.swift; sourceTree = "<group>"; };
+		267AD54F159D35EB605378D6 /* Pods-Actio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Actio.debug.xcconfig"; path = "Target Support Files/Pods-Actio/Pods-Actio.debug.xcconfig"; sourceTree = "<group>"; };
+		8D8C6A9224B591B200D6DBE3 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		8D8C6A9524B591F400D6DBE3 /* ApiDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiDetails.swift; sourceTree = "<group>"; };
+		8D8C6A9724B5939700D6DBE3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8D94E07124AF1D0A00DBC46A /* Actio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Actio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D94E07424AF1D0A00DBC46A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8D94E07B24AF1D0A00DBC46A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -90,6 +98,8 @@
 		8DA048BA24B331D40099D528 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		8DE6B64824B335630010A3EC /* AppFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFonts.swift; sourceTree = "<group>"; };
 		8DE6B64D24B35BA60010A3EC /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		ADD5218CD43054BEE6FAD8D4 /* Pods_Actio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Actio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4F560E4604B46CDD6DFB538 /* Pods-Actio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Actio.release.xcconfig"; path = "Target Support Files/Pods-Actio/Pods-Actio.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38754D908539C921C392B92E /* Pods_Actio.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,6 +144,39 @@
 				1841F19824B480F10021D131 /* Extensions.swift */,
 			);
 			path = Utilities;
+            sourceTree = "<group>";
+        };
+		2A427FD09032731094E7B830 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ADD5218CD43054BEE6FAD8D4 /* Pods_Actio.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		69522B8B5B223129BFEE5CD1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				267AD54F159D35EB605378D6 /* Pods-Actio.debug.xcconfig */,
+				D4F560E4604B46CDD6DFB538 /* Pods-Actio.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		8D8C6A9124B5919A00D6DBE3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8D8C6A9224B591B200D6DBE3 /* Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		8D8C6A9424B591DA00D6DBE3 /* APIDetails */ = {
+			isa = PBXGroup;
+			children = (
+				8D8C6A9524B591F400D6DBE3 /* ApiDetails.swift */,
+			);
+			path = APIDetails;
 			sourceTree = "<group>";
 		};
 		8D94E06824AF1D0A00DBC46A = {
@@ -140,6 +184,8 @@
 			children = (
 				8D94E07324AF1D0A00DBC46A /* Actio */,
 				8D94E07224AF1D0A00DBC46A /* Products */,
+				69522B8B5B223129BFEE5CD1 /* Pods */,
+				2A427FD09032731094E7B830 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -154,6 +200,8 @@
 		8D94E07324AF1D0A00DBC46A /* Actio */ = {
 			isa = PBXGroup;
 			children = (
+				8D8C6A9424B591DA00D6DBE3 /* APIDetails */,
+				8D8C6A9124B5919A00D6DBE3 /* Extensions */,
 				8DE6B64C24B35B890010A3EC /* LaunchPage */,
 				8DE6B64B24B337B50010A3EC /* Login */,
 				1841F18E24B480510021D131 /* TableViewCells */,
@@ -165,6 +213,7 @@
 				8D94E07A24AF1D0A00DBC46A /* Main.storyboard */,
 				8D94E08024AF1D0C00DBC46A /* Assets.xcassets */,
 				8D94E08224AF1D0C00DBC46A /* LaunchScreen.storyboard */,
+				8D8C6A9724B5939700D6DBE3 /* GoogleService-Info.plist */,
 				8D94E08524AF1D0C00DBC46A /* Info.plist */,
 				8D94E07D24AF1D0A00DBC46A /* Actio.xcdatamodeld */,
 			);
@@ -229,9 +278,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8D94E08824AF1D0C00DBC46A /* Build configuration list for PBXNativeTarget "Actio" */;
 			buildPhases = (
+				1E8E0B35BFEEC68C824AD013 /* [CP] Check Pods Manifest.lock */,
 				8D94E06D24AF1D0A00DBC46A /* Sources */,
 				8D94E06E24AF1D0A00DBC46A /* Frameworks */,
 				8D94E06F24AF1D0A00DBC46A /* Resources */,
+				F7964521A7556CCBBC44E3F8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -286,6 +337,7 @@
 				8DA048B024B328FF0099D528 /* Poppins-MediumItalic.ttf in Resources */,
 				8DA048B624B328FF0099D528 /* Poppins-Black.ttf in Resources */,
 				8DA048B524B328FF0099D528 /* Poppins-SemiBoldItalic.ttf in Resources */,
+				8D8C6A9824B5939700D6DBE3 /* GoogleService-Info.plist in Resources */,
 				8DA048AE24B328FF0099D528 /* Poppins-Medium.ttf in Resources */,
 				8DA048AA24B328FF0099D528 /* Poppins-ExtraLightItalic.ttf in Resources */,
 				8D94E08424AF1D0C00DBC46A /* LaunchScreen.storyboard in Resources */,
@@ -306,6 +358,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1E8E0B35BFEEC68C824AD013 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Actio-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F7964521A7556CCBBC44E3F8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Actio/Pods-Actio-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Actio/Pods-Actio-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Actio/Pods-Actio-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8D94E06D24AF1D0A00DBC46A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -325,10 +419,12 @@
 				1841F19524B480680021D131 /* TextEditTableViewCell.swift in Sources */,
 				183384C624B49CDD009911A8 /* ActioGradientButton.swift in Sources */,
 				1841F19924B480F10021D131 /* Extensions.swift in Sources */,
+				8D8C6A9324B591B200D6DBE3 /* Extensions.swift in Sources */,
 				8DA048BB24B331D40099D528 /* AppColors.swift in Sources */,
 				8D94E08C24AF1D3600DBC46A /* LoginViewController.swift in Sources */,
 				8DE6B64E24B35BA60010A3EC /* LaunchViewController.swift in Sources */,
 				1841F19324B480680021D131 /* DatePickerTableViewCell.swift in Sources */,
+				8D8C6A9624B591F400D6DBE3 /* ApiDetails.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -470,6 +566,7 @@
 		};
 		8D94E08924AF1D0C00DBC46A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 267AD54F159D35EB605378D6 /* Pods-Actio.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -489,6 +586,7 @@
 		};
 		8D94E08A24AF1D0C00DBC46A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D4F560E4604B46CDD6DFB538 /* Pods-Actio.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

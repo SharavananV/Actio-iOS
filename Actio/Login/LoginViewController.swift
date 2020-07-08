@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+
 
 class LoginViewController: UIViewController {
     
@@ -15,6 +17,8 @@ class LoginViewController: UIViewController {
     @IBOutlet var loginButton: UIButton!
     var iconClick = true
     let button = UIButton(type: .custom)
+    var urlString = String()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +28,6 @@ class LoginViewController: UIViewController {
         
        self.button.setImage(UIImage(named: "hidden-eye.png"), for: .normal)
        self.navigationController?.setNavigationBarHidden(true, animated: false)
-
         
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -16, bottom: 0, right: 0)
         button.frame = CGRect(x: CGFloat(self.passwordTextField.frame.size.width - 25), y: CGFloat(5), width: CGFloat(25), height: CGFloat(25))
@@ -32,8 +35,13 @@ class LoginViewController: UIViewController {
         passwordTextField.rightView = button
         passwordTextField.rightViewMode = .always
         
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
+        
     }
-    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -45,13 +53,13 @@ class LoginViewController: UIViewController {
         if(iconClick == true) {
             self.passwordTextField.isSecureTextEntry = false
             button.setImage(UIImage(named: "visibility-eye.png"), for: .normal)
-
-
+            
+            
         } else {
             self.passwordTextField.isSecureTextEntry = true
             self.button.setImage(UIImage(named: "hidden-eye.png"), for: .normal)
-
-
+            
+            
         }
         
         iconClick = !iconClick
@@ -61,6 +69,21 @@ class LoginViewController: UIViewController {
         
     }
     @IBAction func loginButtonAction(_ sender: Any) {
+        apiCall(username: userNameTextField.text!, password: passwordTextField.text!,Mode: "3", deviceToken: Extensions.getDeviceToken())
+        
+    }
+    func apiCall(username: String,password: String,Mode: String,deviceToken:String) {
+        urlString = loginUrl
+        AF.request(urlString, method: .post, parameters: ["username": username,"password": password,"Mode": Mode,"deviceToken": deviceToken],encoding:JSONEncoding.default, headers: nil).responseJSON {
+            response in
+            switch response.result {
+            case .success:
+                print(response,"fgfgfgfsg")
+            case .failure(_):
+                print("JSON")
+            }
+            
+        }
         
     }
     
