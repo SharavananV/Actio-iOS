@@ -8,6 +8,24 @@
 
 import UIKit
 
+extension String {
+    var toDate: Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        
+        return dateFormatter.date(from: self)
+    }
+}
+
+extension Date {
+    var ddMMyyyy: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        
+        return dateFormatter.string(from: self)
+    }
+}
+
 extension UIViewController {
     func presentAlert(withTitle title: String, message : String?) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)

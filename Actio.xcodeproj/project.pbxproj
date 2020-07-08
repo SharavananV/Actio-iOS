@@ -20,6 +20,7 @@
 		1841F19924B480F10021D131 /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1841F19824B480F10021D131 /* UIKitExtensions.swift */; };
 		18BBAC7D24B5B99900306A8F /* ActioImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BBAC7C24B5B99900306A8F /* ActioImagePicker.swift */; };
 		18BBAC7F24B5E90A00306A8F /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BBAC7E24B5E90A00306A8F /* Validator.swift */; };
+		18DC39BD24B608EB008708FC /* ActioSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DC39BC24B608EB008708FC /* ActioSpinner.swift */; };
 		18F6A07224B57D18000ACDF1 /* SelfSizingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F6A07124B57D18000ACDF1 /* SelfSizingTextView.swift */; };
 		18F6A07624B5A4FD000ACDF1 /* RegisterDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F6A07524B5A4FD000ACDF1 /* RegisterDatasource.swift */; };
 		18F6A07824B5AB76000ACDF1 /* DependencyProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F6A07724B5AB76000ACDF1 /* DependencyProvider.swift */; };
@@ -70,6 +71,7 @@
 		1841F19824B480F10021D131 /* UIKitExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitExtensions.swift; sourceTree = "<group>"; };
 		18BBAC7C24B5B99900306A8F /* ActioImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActioImagePicker.swift; sourceTree = "<group>"; };
 		18BBAC7E24B5E90A00306A8F /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
+		18DC39BC24B608EB008708FC /* ActioSpinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActioSpinner.swift; sourceTree = "<group>"; };
 		18F6A07124B57D18000ACDF1 /* SelfSizingTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSizingTextView.swift; sourceTree = "<group>"; };
 		18F6A07524B5A4FD000ACDF1 /* RegisterDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDatasource.swift; sourceTree = "<group>"; };
 		18F6A07724B5AB76000ACDF1 /* DependencyProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyProvider.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				1841F19824B480F10021D131 /* UIKitExtensions.swift */,
 				18BBAC7C24B5B99900306A8F /* ActioImagePicker.swift */,
 				18BBAC7E24B5E90A00306A8F /* Validator.swift */,
+				18DC39BC24B608EB008708FC /* ActioSpinner.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -224,8 +227,8 @@
 				8D94E07424AF1D0A00DBC46A /* AppDelegate.swift */,
 				18F6A07324B5A3FB000ACDF1 /* ViewControllers */,
 				1841F18E24B480510021D131 /* TableViewCells */,
-				18196CF624B4725700DBECCA /* Custom Subclasses */,
 				18F6A07424B5A4E7000ACDF1 /* Datasource */,
+				18196CF624B4725700DBECCA /* Custom Subclasses */,
 				8D8C6A9424B591DA00D6DBE3 /* APIDetails */,
 				8DE6B64A24B3366B0010A3EC /* Colors */,
 				8DE6B64724B3352C0010A3EC /* Fonts */,
@@ -446,6 +449,7 @@
 				8D8C6A9324B591B200D6DBE3 /* UDHelper.swift in Sources */,
 				8DA048BB24B331D40099D528 /* AppColors.swift in Sources */,
 				8D94E08C24AF1D3600DBC46A /* LoginViewController.swift in Sources */,
+				18DC39BD24B608EB008708FC /* ActioSpinner.swift in Sources */,
 				8DE6B64E24B35BA60010A3EC /* LaunchViewController.swift in Sources */,
 				1841F19324B480680021D131 /* DatePickerTableViewCell.swift in Sources */,
 				8D8C6A9624B591F400D6DBE3 /* ApiDetails.swift in Sources */,

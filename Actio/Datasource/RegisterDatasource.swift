@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import Toast_Swift
 
 class RegisterDatasource {
     static let shared = RegisterDatasource()
@@ -19,6 +20,8 @@ class RegisterDatasource {
     func prepareMasterData(with countryCode: Int?, presentAlertOn controller: UIViewController, completion: ((MasterData)->Void)? = nil) {
         let parameters = countryCode == nil ? nil : ["countryID": countryCode]
         
+        ActioSpinner.shared.show(on: controller.view, showBlur: false)
+        
         AF.request(masterUrl, method: .post, parameters: parameters)
             .validate()
             .responseDecodable(of: MasterData.self) { (response) in
@@ -29,6 +32,8 @@ class RegisterDatasource {
                 case .failure(let error):
                     controller.presentAlert(withTitle: "Network Error", message: error.errorDescription)
                 }
+                
+                ActioSpinner.shared.hide()
         }
     }
     
@@ -36,6 +41,8 @@ class RegisterDatasource {
         let headers: HTTPHeaders = [
             "Content-type": "multipart/form-data"
         ]
+        
+        ActioSpinner.shared.show(on: controller.view)
         
         self.registerUserUpload = AF.upload(multipartFormData: { (multipartFormData) in
             for (key, value) in registerUserModel.parameters() {
@@ -54,18 +61,28 @@ class RegisterDatasource {
             progressHandler(progress)
         })
         .responseDecodable(of: RegisterUserResponse.self) { (response) in
-                switch response.result {
-                case .success(let user):
+            switch response.result {
+            case .success(let user):
+                if user.status == "200" {
                     self.currentUser = user
                     completion(user)
-                case .failure(let error):
-                    controller.presentAlert(withTitle: "Network Error", message: error.errorDescription)
+                } else {
+                    if let firstError = user.errors?.first {
+                        controller.view.makeToast(firstError.msg)
+                    }
                 }
+            case .failure(let error):
+                controller.presentAlert(withTitle: "Network Error", message: error.errorDescription)
+                print(error)
+            }
+                
+            ActioSpinner.shared.hide()
         }
     }
     
     func cancelRegisterUpload() {
         self.registerUserUpload?.cancel()
+        self.registerUserUpload = nil
     }
 }
 
@@ -134,10 +151,7 @@ class RegisterUser {
     }
     
     var dateOfBirth: Date {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd-MM-yyyy"
-        
-        return dateFormatter.date(from: self.dob) ?? Date()
+        return self.dob.toDate ?? Date()
     }
     
     func parameters() -> [String: Any] {
@@ -201,8 +215,13 @@ class RegisterUser {
 
 // MARK: - RegisterUserResponse
 struct RegisterUserResponse: Codable {
-    let emailID, fullName, isdCode: String
-    let mobileNumber, status, subscriberID, subscriberSeqID: Int
-    let token, userName: String
-    let userStatus: Int
+    let emailID, fullName, isdCode, status, subscriberID, subscriberSeqID: String?
+    let token, userName, userStatus: String?
+    
+    let errors: [Error]?
+}
+
+// MARK: - Error
+struct Error: Codable {
+    let value, msg, param, location: String
 }

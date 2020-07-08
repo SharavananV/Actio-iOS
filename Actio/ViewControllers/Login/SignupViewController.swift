@@ -47,6 +47,7 @@ class SignupViewController: UIViewController {
     }
     
     @objc func cancelTapped() {
+        registerDatasource.cancelRegisterUpload()
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -214,6 +215,7 @@ extension SignupViewController: UITableViewDataSource, UITableViewDelegate {
 extension SignupViewController: FootnoteButtonDelegate, CellDataFetchProtocol, ImagePickerCellDelegate, TextPickerDelegate, SwitchCellDelegate {
     func toggleValueChanged(_ key: String, value: Bool) {
         self.registerUserModel.termsAccepted = value
+        updateCellFormData(key: key, value: value == true ? "true" : "false")
     }
     
     func didPickText(_ key: String, index: Int) {
@@ -233,6 +235,7 @@ extension SignupViewController: FootnoteButtonDelegate, CellDataFetchProtocol, I
         case .idType:
             if let idType = registerDatasource.masterData?.proof[index] {
                 self.registerUserModel.idType = String(idType.id)
+                updateCellFormData(key: key, value: idType.proof)
             }
             
         default:
@@ -268,9 +271,44 @@ extension SignupViewController: FootnoteButtonDelegate, CellDataFetchProtocol, I
         default:
             break
         }
+        
+        updateCellFormData(key: keyValuePair.key, value: keyValuePair.value)
+    }
+    
+    private func updateCellFormData(key: String, value: String) {
+        // Update form data
+        let cellData = self.formData?.first(where: { (cellType) -> Bool in
+            switch cellType {
+            case .textEdit(let model):
+                return model.key == key
+            case .date(let model):
+                return model.key == key
+            case .textPicker(let model):
+                return model.key == key
+            case .toggle(let model):
+                return model.key == key
+            default:
+                return false
+            }
+        })
+        
+        switch cellData {
+        case .textEdit(let model):
+            model.textValue = value
+        case .date(let model):
+            model.dateValue = value.toDate
+        case .textPicker(let model):
+            return model.textValue = value
+        case .toggle(let model):
+            return model.defaultValue = value == "true"
+        default:
+            break;
+        }
     }
     
     func footnoteButtonCallback(_ key: String) {
+        self.view.endEditing(true)
+        
         let isValid = registerUserModel.validate()
         
         switch isValid {
@@ -281,7 +319,14 @@ extension SignupViewController: FootnoteButtonDelegate, CellDataFetchProtocol, I
             registerDatasource.registerUser(registerUserModel: self.registerUserModel, presentAlertOn: self, progressHandler: { (progress) in
                 // Handle progress
             }) { (user) in
-                // Handle current user response
+                self.view.makeToast("Registration successful")
+                
+                // Reset fields
+                self.registerUserModel = RegisterUser()
+                self.formData = self.prepareFormData()
+                self.tableView.reloadData()
+                
+                // TODO: Move to next controller
             }
         }
     }

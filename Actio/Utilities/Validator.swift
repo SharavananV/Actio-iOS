@@ -29,10 +29,10 @@ struct Validator {
     }
     
     static func isValidMobileNumber(_ number: String) -> ValidType {
-        if !number.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+        if number.trimmingCharacters(in: .whitespacesAndNewlines).count == 10 {
             return .valid
         } else {
-            return .invalid(message: "Select a valid country code")
+            return .invalid(message: "Select a valid mobile number")
         }
     }
     
@@ -85,7 +85,7 @@ struct Validator {
     }
     
     static func isValidIdNumber(_ number: String) -> ValidType {
-        if number.trimmingCharacters(in: .whitespacesAndNewlines).count == 10 {
+        if !number.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             return .valid
         } else {
             return .invalid(message: "Enter a valid ID number")

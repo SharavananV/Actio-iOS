@@ -39,12 +39,10 @@ class LoginViewController: UIViewController {
         button.addTarget(self, action: #selector(secureIconClickAction), for: .touchUpInside)
         passwordTextField.rightView = button
         passwordTextField.rightViewMode = .always
-        
-        
+                
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
         
     }

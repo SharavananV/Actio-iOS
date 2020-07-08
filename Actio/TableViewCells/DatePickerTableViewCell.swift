@@ -87,18 +87,12 @@ class DatePickerTableViewCell: UITableViewCell {
         return datePicker
     }()
     
-    private var dateFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd-MM-yyyy"
-        return dateFormatter
-    }()
-    
     private func setupToolBar() {
         textField.inputView = self.datePicker
     }
     
     @objc func datePicked(_ sender: UIDatePicker) {
-        textField.text = dateFormatter.string(from: sender.date)
+        textField.text = sender.date.ddMMyyyy
         self.model?.dateValue = sender.date
     }
     
@@ -114,7 +108,7 @@ class DatePickerTableViewCell: UITableViewCell {
         
         if let defaultDate = model.dateValue {
             datePicker.date = defaultDate
-            textField.text = dateFormatter.string(from: defaultDate)
+            textField.text = defaultDate.ddMMyyyy
         }
     }
     
@@ -126,7 +120,7 @@ class DatePickerTableViewCell: UITableViewCell {
 extension DatePickerTableViewCell: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         let date = self.model?.dateValue ?? datePicker.date
-        textField.text = dateFormatter.string(from: date)
+        textField.text = date.ddMMyyyy
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -154,10 +148,7 @@ class DatePickerModel {
     }
     
     convenience init(key: String, dateString: String? = nil, contextText: String) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd-MM-yyyy"
-        
-        let date = dateFormatter.date(from: dateString ?? "")
+        let date = dateString?.toDate
         self.init(key: key, dateValue: date, contextText: contextText)
     }
 }
