@@ -70,6 +70,7 @@ class DatePickerTableViewCell: UITableViewCell {
             textField.topAnchor.constraint(equalTo: contentLabel.bottomAnchor, constant: .kInternalPadding),
             textField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -.kInternalPadding),
             textField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.kInternalPadding),
+            textField.heightAnchor.constraint(equalToConstant: 40)
         ]
         
         NSLayoutConstraint.activate(constraints)
@@ -88,7 +89,7 @@ class DatePickerTableViewCell: UITableViewCell {
     
     private var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM/dd/yyyy"
+        dateFormatter.dateFormat = "dd-MM-yyyy"
         return dateFormatter
     }()
     
@@ -108,7 +109,7 @@ class DatePickerTableViewCell: UITableViewCell {
         self.model = model
         
         contentLabel.text = model.contextText
-        datePicker.minimumDate = Date()
+        datePicker.minimumDate = model.minDate
         datePicker.maximumDate = model.maxDate
         
         if let defaultDate = model.dateValue {
@@ -154,7 +155,7 @@ class DatePickerModel {
     
     convenience init(key: String, dateString: String? = nil, contextText: String) {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM/dd/yyyy"
+        dateFormatter.dateFormat = "dd-MM-yyyy"
         
         let date = dateFormatter.date(from: dateString ?? "")
         self.init(key: key, dateValue: date, contextText: contextText)

@@ -64,7 +64,6 @@ class TextPickerTableViewCell: UITableViewCell {
     private func setConstraints() {
         contentView.addSubview(contentLabel)
         contentView.addSubview(textField)
-        contentView.addSubview(imageButton)
         
         let constraints = [
             contentLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .kInternalPadding),
@@ -74,13 +73,14 @@ class TextPickerTableViewCell: UITableViewCell {
             textField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .kInternalPadding),
             textField.topAnchor.constraint(equalTo: contentLabel.bottomAnchor, constant: .kInternalPadding),
             textField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -.kInternalPadding),
-            
-            imageButton.leadingAnchor.constraint(equalTo: textField.trailingAnchor, constant: .kInternalPadding),
-            imageButton.centerYAnchor.constraint(equalTo: textField.centerYAnchor),
-            imageButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.kInternalPadding),
-            imageButton.widthAnchor.constraint(equalTo: imageButton.heightAnchor),
-            imageButton.heightAnchor.constraint(equalToConstant: 16)
+            textField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.kInternalPadding),
+            textField.heightAnchor.constraint(equalToConstant: 40)
         ]
+        
+        imageButton.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
+        imageButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -16, bottom: 0, right: 0)
+        textField.rightView = imageButton
+        textField.rightViewMode = .always
         
         NSLayoutConstraint.activate(constraints)
     }
@@ -113,11 +113,14 @@ class TextPickerTableViewCell: UITableViewCell {
         
         textField.text = model.textValue
         contentLabel.text = model.contextText
+        textField.placeholder = model.placeHolder
     }
 }
 
 extension TextPickerTableViewCell: UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        if self.model?.allValues?.count == 0 { return }
+        
         let timeValue = self.model?.textValue?.isEmpty == false ? self.model?.textValue : self.model?.allValues?[0]
         textField.text = timeValue
     }
@@ -155,14 +158,16 @@ extension TextPickerTableViewCell: UITextFieldDelegate, UIPickerViewDataSource, 
 class TextPickerModel {
     var key: String?
     var textValue: String?
+    var placeHolder: String?
     
     var allValues: [String]?
     var contextText: String?
     
-    init(key: String, textValue: String? = nil, allValues: [String], contextText: String) {
+    init(key: String, textValue: String? = nil, allValues: [String], contextText: String, placeHolder: String? = nil) {
         self.key = key
         self.textValue = textValue
         self.allValues = allValues
         self.contextText = contextText
+        self.placeHolder = placeHolder
     }
 }

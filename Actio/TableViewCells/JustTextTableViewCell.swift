@@ -51,7 +51,9 @@ class JustTextTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate(constraints)
     }
     
-    func configure(_ title: String) {
+    func configure(_ title: String? = nil, _ attrText: NSAttributedString? = nil, alignment: NSTextAlignment) {
         contentLabel.text = title
+        contentLabel.attributedText = attrText
+        contentLabel.textAlignment = alignment
     }
 }

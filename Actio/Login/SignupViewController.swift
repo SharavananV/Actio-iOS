@@ -26,6 +26,7 @@ class SignupViewController: UIViewController {
         tableView.register(SwitchTableViewCell.self, forCellReuseIdentifier: SwitchTableViewCell.reuseId)
         
         self.formData = prepareFormData()
+        self.setObservers()
         tableView.reloadData()
     }
     
@@ -33,14 +34,64 @@ class SignupViewController: UIViewController {
         super.viewWillAppear(true)
         
         self.navigationController?.setNavigationBarHidden(false, animated: false)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelTapped))
+    }
+    
+    @objc func cancelTapped() {
+        self.dismiss(animated: true, completion: nil)
     }
     
     private func prepareFormData() -> [FormCellType] {
+        let startedText = NSMutableAttributedString(string:"Let's get\n", attributes: [NSAttributedString.Key.font: AppFont.PoppinsMedium(size: 26), NSAttributedString.Key.foregroundColor : AppColor.PurpleColor()])
         
-        let attributedString = NSMutableAttributedString(string: "Want to learn iOS? You should visit the best source of free iOS tutorials!")
-        attributedString.addAttribute(.link, value: "https://www.hackingwithswift.com", range: NSRange(location: 19, length: 55))
+        let tempString = NSMutableAttributedString(string:"Started", attributes: [NSAttributedString.Key.font : AppFont.PoppinsBold(size: 32), NSAttributedString.Key.foregroundColor : AppColor.OrangeColor()])
         
-        return [.textEdit(TextEditModel(key: "key", textValue: nil, contextText: "Full Name", placeHolder: "Full Name", keyboardType: .default, isSecure: true)), .button("Sign up"), .text("Uploda Image"), .imagePicker("front", "Click to upload the front image", "Front Image"), .toggle(ToggleViewModel(key: "toggle", contextText: attributedString))]
+        startedText.append(tempString)
+        
+        let termsString = NSMutableAttributedString(string: "By clicking Let's Go, you agree to the Privacy Policy and Our Terms and Conditions", attributes: [NSAttributedString.Key.font : AppFont.PoppinsRegular(size: 15)])
+        termsString.addAttribute(.link, value: "https://www.hackingwithswift.com", range: NSRange(location: 34, length: 48))
+        
+        let formData: [FormCellType] = [
+            .attrText(startedText, .center),
+            .textEdit(TextEditModel(key: "fullName", contextText: "Full Name", placeHolder: "Full Name")),
+            .textPicker(TextPickerModel(key: "countryCode", textValue: nil, allValues: [], contextText: "Country Code")),
+            .textEdit(TextEditModel(key: "mobile", textValue: nil, contextText: "Mobile Number", placeHolder: "Mobile Number", keyboardType: .phonePad, isSecure: false)),
+            .textEdit(TextEditModel(key: "email", textValue: nil, contextText: "Email ID", placeHolder: "Email ID", keyboardType: .emailAddress, isSecure: false)),
+            .date(DatePickerModel(key: "dob", minDate: nil, maxDate: Date(), dateValue: nil, contextText: "Date of Birth (dd-mm-yyyy)")),
+            .textEdit(TextEditModel(key: "userName", contextText: "Username", placeHolder: "Username allows a-z,0-9,_,.")),
+            .textEdit(TextEditModel(key: "password", textValue: nil, contextText: "Password", placeHolder: "", keyboardType: .default, isSecure: true)),
+            .textEdit(TextEditModel(key: "confirm", textValue: nil, contextText: "Confirm Password", placeHolder: "", keyboardType: .default, isSecure: true)),
+            .textPicker(TextPickerModel(key: "idType", allValues: [], contextText: "ID Type", placeHolder: "Select ID Type")),
+            .textEdit(TextEditModel(key: "idNumber", textValue: nil, contextText: "ID Number", placeHolder: "ID Type Number", keyboardType: .numberPad, isSecure: false)),
+            .text("Upload ID", .natural),
+            .imagePicker("front", "Click here to upload Front Side Image", "Front Image"),
+            .imagePicker("back", "Click here to upload Back Side Image", "Back Image"),
+            .toggle(ToggleViewModel(key: "terms", contextText: termsString, defaultValue: false)),
+            .button("LET'S GO")
+        ]
+        
+        return formData
+    }
+    
+    private func setObservers() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
+    
+    @objc func adjustForKeyboard(notification: Notification) {
+        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+
+        let keyboardScreenEndFrame = keyboardValue.cgRectValue
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+
+        if notification.name == UIResponder.keyboardWillHideNotification {
+            tableView.contentInset = .zero
+        } else {
+            tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height-view.safeAreaInsets.bottom, right: 0)
+        }
+        
+        tableView.scrollIndicatorInsets = tableView.contentInset
     }
 }
 
@@ -101,12 +152,20 @@ extension SignupViewController: UITableViewDataSource, UITableViewDelegate {
             buttonCell.configure(key: key, title: title, contextText: context, delegate: self)
             cell = buttonCell
             
-        case .text(let text):
+        case .text(let text, let alignment):
             guard let textCell = tableView.dequeueReusableCell(withIdentifier: JustTextTableViewCell.reuseId, for: indexPath) as? JustTextTableViewCell else {
                 return UITableViewCell()
             }
             
-            textCell.configure(text)
+            textCell.configure(text, nil, alignment: alignment)
+            cell = textCell
+            
+        case .attrText(let text, let alignment):
+            guard let textCell = tableView.dequeueReusableCell(withIdentifier: JustTextTableViewCell.reuseId, for: indexPath) as? JustTextTableViewCell else {
+                return UITableViewCell()
+            }
+            
+            textCell.configure(nil, text, alignment: alignment)
             cell = textCell
             
         case .toggle(let model):
@@ -117,6 +176,8 @@ extension SignupViewController: UITableViewDataSource, UITableViewDelegate {
             toggleCell.configure(model)
             cell = toggleCell
         }
+        
+        cell?.selectionStyle = .none
         
         return cell ?? UITableViewCell()
     }
@@ -134,6 +195,7 @@ private enum FormCellType {
     case textPicker(TextPickerModel)
     case button(String)
     case imagePicker(String, String, String)
-    case text(String)
+    case text(String, NSTextAlignment)
+    case attrText(NSAttributedString, NSTextAlignment)
     case toggle(ToggleViewModel)
 }

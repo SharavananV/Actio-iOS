@@ -12,7 +12,9 @@ class ActioTextField: UITextField {
     /// Toggle this to display eye icon on the textfield
     override var isSecureTextEntry: Bool {
         didSet {
-            makeFieldSecure()
+            if self.isSecureTextEntry {
+                makeFieldSecure()
+            }
         }
     }
     

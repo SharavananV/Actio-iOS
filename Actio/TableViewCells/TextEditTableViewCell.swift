@@ -61,7 +61,7 @@ class TextEditTableViewCell: UITableViewCell {
             textField.topAnchor.constraint(equalTo: contentLabel.bottomAnchor, constant: .kInternalPadding),
             textField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -.kInternalPadding),
             textField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.kInternalPadding),
-            textField.heightAnchor.constraint(equalToConstant: 44)
+            textField.heightAnchor.constraint(equalToConstant: 40)
         ]
         
         NSLayoutConstraint.activate(constraints)
@@ -111,7 +111,7 @@ extension TextEditTableViewCell: UITextFieldDelegate {
     
     private func formattedNumber(number: String) -> String {
         let cleanPhoneNumber = number.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
-        let mask = "(XXX) XXX-XXXX"
+        let mask = "XXXXXXXXXX"
 
         var result = ""
         var index = cleanPhoneNumber.startIndex
