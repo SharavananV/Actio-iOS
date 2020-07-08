@@ -2,19 +2,19 @@
 //  ImagePickerTableViewCell.swift
 //  Actio
 //
-//  Created by apple on 07/07/20.
+//  Created by Arun Eswaramurthi on 07/07/20.
 //  Copyright © 2020 Knila. All rights reserved.
 //
 
 import UIKit
 
-protocol ImagePickerCellDelegate {
-    func pickImage(_ key: String)
+protocol ImagePickerCellDelegate: class {
+    func pickImage(_ key: String, cell: ImagePickerTableViewCell)
 }
 
 class ImagePickerTableViewCell: UITableViewCell {
     static let reuseId = "ImagePickerTableViewCell"
-    private weak var delegate: FootnoteButtonDelegate?
+    private weak var delegate: ImagePickerCellDelegate?
     
     // MARK: - UIRelated
     private lazy var contentLabel: UILabel = {
@@ -58,13 +58,13 @@ class ImagePickerTableViewCell: UITableViewCell {
         contentView.addSubview(footnoteButton)
         
         let constraints = [
-            contentLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .kInternalPadding),
-            contentLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.kInternalPadding),
+            contentLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .kTableCellPadding),
+            contentLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.kTableCellPadding),
             contentLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: .kInternalPadding),
             
-            footnoteButton.topAnchor.constraint(equalTo: contentLabel.bottomAnchor, constant: .kExternalPadding),
-            footnoteButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .kInternalPadding),
-            footnoteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.kInternalPadding),
+            footnoteButton.topAnchor.constraint(equalTo: contentLabel.bottomAnchor, constant: .kInternalPadding),
+            footnoteButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .kTableCellPadding),
+            footnoteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.kTableCellPadding),
             footnoteButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -.kInternalPadding)
         ]
         
@@ -73,16 +73,38 @@ class ImagePickerTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate(constraints)
     }
     
-    var key: String?
+    var model: ImagePickerModel?
     
-    func configure(key: String, title: String, contextText: String, delegate: FootnoteButtonDelegate) {
-        self.key = key
+    func configure(_ model: ImagePickerModel, delegate: ImagePickerCellDelegate) {
+        self.model = model
         self.delegate = delegate
-        contentLabel.text = contextText
-        footnoteButton.setTitle(title, for: .normal)
+        
+        self.refreshTitleText()
+        contentLabel.text = model.contextText
+    }
+    
+    func refreshTitleText() {
+        if let url = model?.imageUrl {
+            footnoteButton.setTitle(url.absoluteString, for: .normal)
+        } else {
+            footnoteButton.setTitle(model?.titleText, for: .normal)
+        }
     }
     
     @objc func buttonTapped(_ sender: UIButton) {
-        delegate?.footnoteButtonCallback(key ?? "")
+        delegate?.pickImage(model?.key ?? "", cell: self)
+    }
+}
+
+class ImagePickerModel {
+    var key: String?
+    var titleText: String?
+    var contextText: String?
+    var imageUrl: URL?
+    
+    internal init(key: String?, titleText: String?, contextText: String?) {
+        self.key = key
+        self.titleText = titleText
+        self.contextText = contextText
     }
 }

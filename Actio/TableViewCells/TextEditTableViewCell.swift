@@ -53,14 +53,14 @@ class TextEditTableViewCell: UITableViewCell {
         contentView.addSubview(textField)
         
         let constraints = [
-            contentLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .kInternalPadding),
-            contentLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.kInternalPadding),
+            contentLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .kTableCellPadding),
+            contentLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.kTableCellPadding),
             contentLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: .kInternalPadding),
             
-            textField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .kInternalPadding),
+            textField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .kTableCellPadding),
             textField.topAnchor.constraint(equalTo: contentLabel.bottomAnchor, constant: .kInternalPadding),
             textField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -.kInternalPadding),
-            textField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.kInternalPadding),
+            textField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.kTableCellPadding),
             textField.heightAnchor.constraint(equalToConstant: 40)
         ]
         
@@ -142,5 +142,6 @@ class TextEditModel {
         self.textValue = textValue
         self.contextText = contextText
         self.keyBoardType = keyboardType
+        self.placeHolder = placeHolder
     }
 }

@@ -11,6 +11,7 @@ import CoreData
 import Firebase
 import FirebaseInstanceID
 import UserNotifications
+import IQKeyboardManager
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -26,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = vc
         window?.makeKeyAndVisible()
         
+        IQKeyboardManager.shared().isEnabled = true
         FirebaseApp.configure()
         Messaging.messaging().isAutoInitEnabled = true
 

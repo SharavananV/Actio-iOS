@@ -46,8 +46,8 @@ class FootnoteButtonTableViewCell: UITableViewCell {
         contentView.addSubview(footnoteButton)
         
         let constraints = [
-            footnoteButton.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor, constant: .kInternalPadding),
-            footnoteButton.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -.kInternalPadding),
+            footnoteButton.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor, constant: .kTableCellPadding),
+            footnoteButton.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -.kTableCellPadding),
             footnoteButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: .kExternalPadding),
             footnoteButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -.kInternalPadding, priority: .defaultLow),
             footnoteButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),

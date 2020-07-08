@@ -2,7 +2,7 @@
 //  JustTextTableViewCell.swift
 //  Actio
 //
-//  Created by apple on 07/07/20.
+//  Created by Arun Eswaramurthi on 07/07/20.
 //  Copyright © 2020 Knila. All rights reserved.
 //
 
@@ -42,8 +42,8 @@ class JustTextTableViewCell: UITableViewCell {
         contentView.addSubview(contentLabel)
         
         let constraints = [
-            contentLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .kInternalPadding),
-            contentLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.kInternalPadding),
+            contentLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .kTableCellPadding),
+            contentLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.kTableCellPadding),
             contentLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: .kInternalPadding),
             contentLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -.kInternalPadding)
         ]
@@ -52,8 +52,12 @@ class JustTextTableViewCell: UITableViewCell {
     }
     
     func configure(_ title: String? = nil, _ attrText: NSAttributedString? = nil, alignment: NSTextAlignment) {
-        contentLabel.text = title
-        contentLabel.attributedText = attrText
+        if let title = title {
+            contentLabel.text = title
+        } else if let attrText = attrText {
+            contentLabel.attributedText = attrText
+        }
+        
         contentLabel.textAlignment = alignment
     }
 }

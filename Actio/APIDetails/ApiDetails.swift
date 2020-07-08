@@ -9,5 +9,6 @@
 import Foundation
 import UIKit
 
+let masterUrl = "http://203.223.189.158:8085/v1/subscriber/init"
 let loginUrl = "http://203.223.189.158:8085/v1/login"
-
+let registerUrl = "http://203.223.189.158:8085/v1/subscriber/register"

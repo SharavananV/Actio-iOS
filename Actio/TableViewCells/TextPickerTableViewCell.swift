@@ -8,9 +8,13 @@
 
 import UIKit
 
+protocol TextPickerDelegate: class {
+    func didPickText(_ key: String, index: Int)
+}
+
 class TextPickerTableViewCell: UITableViewCell {
     static let reuseId = "TextPickerTableViewCell"
-    weak var delegate: CellDataFetchProtocol?
+    weak var delegate: TextPickerDelegate?
 
     // MARK: - UIRelated
     private lazy var contentLabel: UILabel = {
@@ -66,14 +70,14 @@ class TextPickerTableViewCell: UITableViewCell {
         contentView.addSubview(textField)
         
         let constraints = [
-            contentLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .kInternalPadding),
-            contentLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.kInternalPadding),
+            contentLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .kTableCellPadding),
+            contentLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.kTableCellPadding),
             contentLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: .kInternalPadding),
             
-            textField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .kInternalPadding),
+            textField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .kTableCellPadding),
             textField.topAnchor.constraint(equalTo: contentLabel.bottomAnchor, constant: .kInternalPadding),
             textField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -.kInternalPadding),
-            textField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.kInternalPadding),
+            textField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.kTableCellPadding),
             textField.heightAnchor.constraint(equalToConstant: 40)
         ]
         
@@ -126,8 +130,8 @@ extension TextPickerTableViewCell: UITextFieldDelegate, UIPickerViewDataSource, 
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if let key = self.model?.key, let value = textField.text {
-            delegate?.valueChanged(keyValuePair: (key, value))
+        if let key = self.model?.key {
+            delegate?.didPickText(key, index: textPicker.selectedRow(inComponent: 0))
         }
     }
     

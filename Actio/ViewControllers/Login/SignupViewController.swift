@@ -2,16 +2,24 @@
 //  SignupViewController.swift
 //  Actio
 //
-//  Created by apple on 07/07/20.
+//  Created by Arun Eswaramurthi on 07/07/20.
 //  Copyright © 2020 Knila. All rights reserved.
 //
 
 import UIKit
+import Alamofire
 
 class SignupViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
+    fileprivate var registerUserModel: RegisterUser = RegisterUser()
     fileprivate var formData: [FormCellType]?
+    fileprivate var registerDatasource: RegisterDatasource = {
+        return DependencyProvider.shared.registerDatasource
+    }()
+    
+    private lazy var imagePicker = ActioImagePicker(presentationController: self, delegate: self)
+    private var lastPickedCell: ImagePickerTableViewCell?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +50,25 @@ class SignupViewController: UIViewController {
     }
     
     private func prepareFormData() -> [FormCellType] {
+        var allCountries = [String]()
+        var allIDCards = [String]()
+        
+        if let masterData = registerDatasource.masterData {
+            allCountries = masterData.country.map({
+                return "(\($0.alias)) \($0.code)"
+            })
+            
+            allIDCards = masterData.proof.map({
+                return $0.proof
+            })
+        }
+        
+        if self.registerUserModel.isdCode.isEmpty, allCountries.count > 0 {
+            // Select India by default
+            self.registerUserModel.isdCodeDisplay = allCountries[0]
+            self.registerUserModel.isdCode = registerDatasource.masterData?.country[0].code ?? ""
+        }
+        
         let startedText = NSMutableAttributedString(string:"Let's get\n", attributes: [NSAttributedString.Key.font: AppFont.PoppinsMedium(size: 26), NSAttributedString.Key.foregroundColor : AppColor.PurpleColor()])
         
         let tempString = NSMutableAttributedString(string:"Started", attributes: [NSAttributedString.Key.font : AppFont.PoppinsBold(size: 32), NSAttributedString.Key.foregroundColor : AppColor.OrangeColor()])
@@ -53,19 +80,19 @@ class SignupViewController: UIViewController {
         
         let formData: [FormCellType] = [
             .attrText(startedText, .center),
-            .textEdit(TextEditModel(key: "fullName", contextText: "Full Name", placeHolder: "Full Name")),
-            .textPicker(TextPickerModel(key: "countryCode", textValue: nil, allValues: [], contextText: "Country Code")),
-            .textEdit(TextEditModel(key: "mobile", textValue: nil, contextText: "Mobile Number", placeHolder: "Mobile Number", keyboardType: .phonePad, isSecure: false)),
-            .textEdit(TextEditModel(key: "email", textValue: nil, contextText: "Email ID", placeHolder: "Email ID", keyboardType: .emailAddress, isSecure: false)),
-            .date(DatePickerModel(key: "dob", minDate: nil, maxDate: Date(), dateValue: nil, contextText: "Date of Birth (dd-mm-yyyy)")),
-            .textEdit(TextEditModel(key: "userName", contextText: "Username", placeHolder: "Username allows a-z,0-9,_,.")),
-            .textEdit(TextEditModel(key: "password", textValue: nil, contextText: "Password", placeHolder: "", keyboardType: .default, isSecure: true)),
-            .textEdit(TextEditModel(key: "confirm", textValue: nil, contextText: "Confirm Password", placeHolder: "", keyboardType: .default, isSecure: true)),
-            .textPicker(TextPickerModel(key: "idType", allValues: [], contextText: "ID Type", placeHolder: "Select ID Type")),
-            .textEdit(TextEditModel(key: "idNumber", textValue: nil, contextText: "ID Number", placeHolder: "ID Type Number", keyboardType: .numberPad, isSecure: false)),
+            .textEdit(TextEditModel(key: "fullName", textValue: registerUserModel.fullName, contextText: "Full Name", placeHolder: "Full Name")),
+            .textPicker(TextPickerModel(key: "isdCode", textValue: registerUserModel.isdCodeDisplay, allValues: allCountries, contextText: "Country Code")),
+            .textEdit(TextEditModel(key: "mobileNumber", textValue: registerUserModel.mobileNumber, contextText: "Mobile Number", placeHolder: "Mobile Number", keyboardType: .phonePad, isSecure: false)),
+            .textEdit(TextEditModel(key: "emailID", textValue: registerUserModel.emailID, contextText: "Email ID", placeHolder: "Email ID", keyboardType: .emailAddress, isSecure: false)),
+            .date(DatePickerModel(key: "dob", minDate: nil, maxDate: Date(), dateValue: registerUserModel.dateOfBirth, contextText: "Date of Birth (dd-mm-yyyy)")),
+            .textEdit(TextEditModel(key: "userName", textValue: registerUserModel.userName, contextText: "Username", placeHolder: "Username allows a-z,0-9,_,.")),
+            .textEdit(TextEditModel(key: "password", textValue: registerUserModel.password, contextText: "Password", placeHolder: "", keyboardType: .default, isSecure: true)),
+            .textEdit(TextEditModel(key: "confirmPassword", textValue: registerUserModel.confirmPassword, contextText: "Confirm Password", placeHolder: "", keyboardType: .default, isSecure: true)),
+            .textPicker(TextPickerModel(key: "idType", allValues: allIDCards, contextText: "ID Type", placeHolder: "Select ID Type")),
+            .textEdit(TextEditModel(key: "idNumber", contextText: "ID Number", placeHolder: "ID Type Number", keyboardType: .numberPad, isSecure: false)),
             .text("Upload ID", .natural),
-            .imagePicker("front", "Click here to upload Front Side Image", "Front Image"),
-            .imagePicker("back", "Click here to upload Back Side Image", "Back Image"),
+            .imagePicker(ImagePickerModel(key: "frontImage", titleText: "Click here to upload Front Side Image", contextText: "Front Image")),
+            .imagePicker(ImagePickerModel(key: "backImage", titleText: "Click here to upload Back Side Image", contextText: "Back Image")),
             .toggle(ToggleViewModel(key: "terms", contextText: termsString, defaultValue: false)),
             .button("LET'S GO")
         ]
@@ -115,7 +142,7 @@ extension SignupViewController: UITableViewDataSource, UITableViewDelegate {
             }
             
             dateCell.configure(model)
-            //dateCell.delegate = self
+            dateCell.delegate = self
             cell = dateCell
             
         case .textEdit(let model):
@@ -124,7 +151,7 @@ extension SignupViewController: UITableViewDataSource, UITableViewDelegate {
             }
             
             textEditCell.configure(model)
-            //textEditCell.delegate = self
+            textEditCell.delegate = self
             cell = textEditCell
             
         case .textPicker(let model):
@@ -133,7 +160,7 @@ extension SignupViewController: UITableViewDataSource, UITableViewDelegate {
             }
             
             textPickerCell.configure(model)
-            //textPickerCell.delegate = self
+            textPickerCell.delegate = self
             cell = textPickerCell
             
         case .button(let title):
@@ -144,12 +171,12 @@ extension SignupViewController: UITableViewDataSource, UITableViewDelegate {
             buttonCell.configure(title: title, delegate: self)
             cell = buttonCell
             
-        case .imagePicker(let key, let title, let context):
+        case .imagePicker(let model):
             guard let buttonCell = tableView.dequeueReusableCell(withIdentifier: ImagePickerTableViewCell.reuseId, for: indexPath) as? ImagePickerTableViewCell else {
                 return UITableViewCell()
             }
             
-            buttonCell.configure(key: key, title: title, contextText: context, delegate: self)
+            buttonCell.configure(model, delegate: self)
             cell = buttonCell
             
         case .text(let text, let alignment):
@@ -183,9 +210,92 @@ extension SignupViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-extension SignupViewController: FootnoteButtonDelegate {
-    func footnoteButtonCallback(_ title: String) {
+extension SignupViewController: FootnoteButtonDelegate, CellDataFetchProtocol, ImagePickerCellDelegate, TextPickerDelegate {
+    func didPickText(_ key: String, index: Int) {
+        guard let codingKey = RegisterUser.CodingKeys(rawValue: key) else { return }
         
+        switch codingKey {
+        case .isdCode:
+            if let country = registerDatasource.masterData?.country[index] {
+                self.registerUserModel.isdCodeDisplay = "(\(country.alias)) \(country.code)"
+                self.registerUserModel.isdCode = country.code
+                
+                self.registerDatasource.prepareMasterData(with: country.id, presentAlertOn: self) { (_) in
+                    self.formData = self.prepareFormData()
+                }
+            }
+            
+        case .idType:
+            if let idType = registerDatasource.masterData?.proof[index] {
+                self.registerUserModel.idType = String(idType.id)
+            }
+            
+        default:
+            break
+        }
+    }
+    
+    func pickImage(_ key: String, cell: ImagePickerTableViewCell) {
+        self.lastPickedCell = cell
+        imagePicker.present(from: self.view)
+    }
+    
+    func valueChanged(keyValuePair: (key: String, value: String)) {
+        guard let codingKey = RegisterUser.CodingKeys(rawValue: keyValuePair.key) else { return }
+        
+        switch codingKey {
+        case .fullName:
+            self.registerUserModel.fullName = keyValuePair.value
+        case .mobileNumber:
+            self.registerUserModel.mobileNumber = keyValuePair.value
+        case .emailID:
+            self.registerUserModel.emailID = keyValuePair.value
+        case .dob:
+            self.registerUserModel.dob = keyValuePair.value
+        case .idNumber:
+            self.registerUserModel.idNumber = keyValuePair.value
+        case .userName:
+            self.registerUserModel.userName = keyValuePair.value
+        case .password:
+            self.registerUserModel.password = keyValuePair.value
+        case .confirmPassword:
+            self.registerUserModel.confirmPassword = keyValuePair.value
+        default:
+            break
+        }
+    }
+    
+    func footnoteButtonCallback(_ key: String) {
+        registerDatasource.registerUser(registerUserModel: self.registerUserModel, presentAlertOn: self, progressHandler: { (progress) in
+            // Handle progress
+        }) { (user) in
+            // Handle current user response
+        }
+    }
+}
+
+extension SignupViewController: ActioPickerDelegate {
+    func didSelect(url: URL?, type: String) {
+        self.lastPickedCell?.model?.imageUrl = url
+        self.lastPickedCell?.refreshTitleText()
+        
+        guard let key = self.lastPickedCell?.model?.key, let codingKey = RegisterUser.CodingKeys(rawValue: key), let url = url else { return }
+        
+        do {
+            let mediaData = try Data(contentsOf: url)
+            
+            switch codingKey {
+            case .frontImage:
+                self.registerUserModel.frontImage = mediaData
+            case .backImage:
+                self.registerUserModel.backImage = mediaData
+            default:
+                break
+            }
+        }
+        catch {
+            print("Error when converting media to data")
+        }
     }
 }
 
@@ -194,7 +304,7 @@ private enum FormCellType {
     case textEdit(TextEditModel)
     case textPicker(TextPickerModel)
     case button(String)
-    case imagePicker(String, String, String)
+    case imagePicker(ImagePickerModel)
     case text(String, NSTextAlignment)
     case attrText(NSAttributedString, NSTextAlignment)
     case toggle(ToggleViewModel)
