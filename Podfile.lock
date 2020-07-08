@@ -80,12 +80,14 @@ PODS:
   - nanopb/encode (1.30905.0)
   - PromisesObjC (1.2.9)
   - Protobuf (3.12.0)
+  - Toast-Swift (5.0.1)
 
 DEPENDENCIES:
   - Alamofire
   - Firebase/Analytics
   - FirebaseMessaging
   - IQKeyboardManager
+  - Toast-Swift (~> 5.0.1)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -105,6 +107,7 @@ SPEC REPOS:
     - nanopb
     - PromisesObjC
     - Protobuf
+    - Toast-Swift
 
 SPEC CHECKSUMS:
   Alamofire: e911732990610fe89af59ac0077f923d72dc3dfd
@@ -123,7 +126,8 @@ SPEC CHECKSUMS:
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
   Protobuf: 2793fcd0622a00b546c60e7cbbcc493e043e9bb9
+  Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 6a108ead5fe584a8621ce3152a64788340b28db5
+PODFILE CHECKSUM: b5660a47b8811ab3a13dbe67853918f9f8fa6648
 
 COCOAPODS: 1.8.4

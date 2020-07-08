@@ -11,5 +11,6 @@ pod 'Alamofire'
 pod 'Firebase/Analytics'
 pod 'FirebaseMessaging'
 pod 'IQKeyboardManager'
+pod 'Toast-Swift', '~> 5.0.1'
 
 end

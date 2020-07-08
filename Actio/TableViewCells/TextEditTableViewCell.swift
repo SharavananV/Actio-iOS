@@ -30,6 +30,8 @@ class TextEditTableViewCell: UITableViewCell {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = AppFont.PoppinsMedium(size: 17)
         textField.delegate = self
+        textField.autocapitalizationType = .none
+        textField.autocorrectionType = .no
         
         return textField
     }()

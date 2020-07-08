@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import Toast_Swift
 
 class SignupViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
@@ -200,7 +201,7 @@ extension SignupViewController: UITableViewDataSource, UITableViewDelegate {
                 return UITableViewCell()
             }
             
-            toggleCell.configure(model)
+            toggleCell.configure(model, delegate: self)
             cell = toggleCell
         }
         
@@ -210,7 +211,11 @@ extension SignupViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-extension SignupViewController: FootnoteButtonDelegate, CellDataFetchProtocol, ImagePickerCellDelegate, TextPickerDelegate {
+extension SignupViewController: FootnoteButtonDelegate, CellDataFetchProtocol, ImagePickerCellDelegate, TextPickerDelegate, SwitchCellDelegate {
+    func toggleValueChanged(_ key: String, value: Bool) {
+        self.registerUserModel.termsAccepted = value
+    }
+    
     func didPickText(_ key: String, index: Int) {
         guard let codingKey = RegisterUser.CodingKeys(rawValue: key) else { return }
         
@@ -266,10 +271,18 @@ extension SignupViewController: FootnoteButtonDelegate, CellDataFetchProtocol, I
     }
     
     func footnoteButtonCallback(_ key: String) {
-        registerDatasource.registerUser(registerUserModel: self.registerUserModel, presentAlertOn: self, progressHandler: { (progress) in
-            // Handle progress
-        }) { (user) in
-            // Handle current user response
+        let isValid = registerUserModel.validate()
+        
+        switch isValid {
+        case .invalid(let message):
+            self.view.makeToast(message)
+            
+        case .valid:
+            registerDatasource.registerUser(registerUserModel: self.registerUserModel, presentAlertOn: self, progressHandler: { (progress) in
+                // Handle progress
+            }) { (user) in
+                // Handle current user response
+            }
         }
     }
 }

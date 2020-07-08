@@ -103,6 +103,8 @@ class RegisterUser {
     var dob, idType, idNumber, userName: String
     var password, confirmPassword, mode, deviceToken: String
     var frontImage, backImage: Data?
+    
+    var termsAccepted: Bool
 
     enum CodingKeys: String, CodingKey {
         case fullName, isdCode, mobileNumber, emailID, dob, idType, idNumber, userName, password, confirmPassword
@@ -127,6 +129,8 @@ class RegisterUser {
         self.deviceToken = ""
         self.frontImage = nil
         self.backImage = nil
+        
+        self.termsAccepted = false
     }
     
     var dateOfBirth: Date {
@@ -151,6 +155,47 @@ class RegisterUser {
             CodingKeys.mode.rawValue: mode,
             CodingKeys.deviceToken.rawValue: UDHelper.getDeviceToken()
         ]
+    }
+    
+    func validate() -> ValidType {
+        if Validator.isValidFullName(self.fullName) != .valid {
+            return Validator.isValidFullName(self.fullName)
+        }
+        if Validator.isValidCountryCode(self.isdCode) != .valid {
+            return Validator.isValidEmail(self.isdCode)
+        }
+        if Validator.isValidMobileNumber(self.mobileNumber) != .valid {
+            return Validator.isValidEmail(self.mobileNumber)
+        }
+        if Validator.isValidEmail(self.emailID) != .valid {
+            return Validator.isValidEmail(self.emailID)
+        }
+        if Validator.isValidDob(self.dob) != .valid {
+            return Validator.isValidDob(self.dob)
+        }
+        if Validator.isValidUsername(self.userName) != .valid {
+            return Validator.isValidUsername(self.userName)
+        }
+        if Validator.isValidPassword(self.password) != .valid {
+            return Validator.isValidPassword(self.password)
+        }
+        if Validator.isValidConfirmPassword(self.password, confirmPassword: self.confirmPassword) != .valid {
+            return Validator.isValidConfirmPassword(self.password, confirmPassword: self.confirmPassword)
+        }
+        if Validator.isValidIdType(self.idType) != .valid {
+            return Validator.isValidIdType(self.idType)
+        }
+        if Validator.isValidIdNumber(self.idNumber) != .valid {
+            return Validator.isValidIdNumber(self.idNumber)
+        }
+        if termsAccepted == false {
+            return .invalid(message: "Please accept the terms and conditions")
+        }
+        if frontImage == nil || backImage == nil {
+            return .invalid(message: "Please upload the ID images")
+        }
+        
+        return .valid
     }
 }
 

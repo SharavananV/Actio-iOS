@@ -19,6 +19,7 @@
 		1841F19624B480680021D131 /* FootnoteButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1841F19224B480680021D131 /* FootnoteButtonTableViewCell.swift */; };
 		1841F19924B480F10021D131 /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1841F19824B480F10021D131 /* UIKitExtensions.swift */; };
 		18BBAC7D24B5B99900306A8F /* ActioImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BBAC7C24B5B99900306A8F /* ActioImagePicker.swift */; };
+		18BBAC7F24B5E90A00306A8F /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BBAC7E24B5E90A00306A8F /* Validator.swift */; };
 		18F6A07224B57D18000ACDF1 /* SelfSizingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F6A07124B57D18000ACDF1 /* SelfSizingTextView.swift */; };
 		18F6A07624B5A4FD000ACDF1 /* RegisterDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F6A07524B5A4FD000ACDF1 /* RegisterDatasource.swift */; };
 		18F6A07824B5AB76000ACDF1 /* DependencyProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F6A07724B5AB76000ACDF1 /* DependencyProvider.swift */; };
@@ -68,6 +69,7 @@
 		1841F19224B480680021D131 /* FootnoteButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FootnoteButtonTableViewCell.swift; sourceTree = "<group>"; };
 		1841F19824B480F10021D131 /* UIKitExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitExtensions.swift; sourceTree = "<group>"; };
 		18BBAC7C24B5B99900306A8F /* ActioImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActioImagePicker.swift; sourceTree = "<group>"; };
+		18BBAC7E24B5E90A00306A8F /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		18F6A07124B57D18000ACDF1 /* SelfSizingTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSizingTextView.swift; sourceTree = "<group>"; };
 		18F6A07524B5A4FD000ACDF1 /* RegisterDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDatasource.swift; sourceTree = "<group>"; };
 		18F6A07724B5AB76000ACDF1 /* DependencyProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyProvider.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				8D8C6A9224B591B200D6DBE3 /* UDHelper.swift */,
 				1841F19824B480F10021D131 /* UIKitExtensions.swift */,
 				18BBAC7C24B5B99900306A8F /* ActioImagePicker.swift */,
+				18BBAC7E24B5E90A00306A8F /* Validator.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -438,6 +441,7 @@
 				18BBAC7D24B5B99900306A8F /* ActioImagePicker.swift in Sources */,
 				183384C624B49CDD009911A8 /* ActioGradientButton.swift in Sources */,
 				1841F19924B480F10021D131 /* UIKitExtensions.swift in Sources */,
+				18BBAC7F24B5E90A00306A8F /* Validator.swift in Sources */,
 				18F6A07824B5AB76000ACDF1 /* DependencyProvider.swift in Sources */,
 				8D8C6A9324B591B200D6DBE3 /* UDHelper.swift in Sources */,
 				8DA048BB24B331D40099D528 /* AppColors.swift in Sources */,

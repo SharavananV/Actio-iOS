@@ -76,8 +76,9 @@ class SwitchTableViewCell: UITableViewCell, UITextViewDelegate {
     // MARK: Data manipulation
     var model: ToggleViewModel?
     
-    func configure(_ model: ToggleViewModel) {
+    func configure(_ model: ToggleViewModel, delegate: SwitchCellDelegate) {
         self.model = model
+        self.delegate = delegate
         
         contextTextView.attributedText = model.contextText
         toggle.setOn(model.defaultValue, animated: false)
