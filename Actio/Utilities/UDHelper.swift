@@ -9,17 +9,16 @@
 import Foundation
 import UIKit
 
-class Extensions: NSObject,XMLParserDelegate
+class UDHelper: NSObject,XMLParserDelegate
 {
-    
     // MARK: - GET Action
-    class func getDeviceToken()->String{
+    class func getDeviceToken()-> String {
         let getDeviceToken =  UserDefaults.standard.object(forKey: "DEVICE_TOKEN")
         return getDeviceToken != nil ? getDeviceToken as! String : ""
     }
     
     // MARK: -  SET Action
-    class func setDeviceToken(_ DeviceToken:String)->Void
+    class func setDeviceToken(_ DeviceToken:String)-> Void
     {
         UserDefaults.standard.set(DeviceToken, forKey: "DEVICE_TOKEN")
         UserDefaults.standard.synchronize()

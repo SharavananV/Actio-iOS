@@ -17,10 +17,10 @@
 		1841F19424B480680021D131 /* TextPickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1841F19024B480680021D131 /* TextPickerTableViewCell.swift */; };
 		1841F19524B480680021D131 /* TextEditTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1841F19124B480680021D131 /* TextEditTableViewCell.swift */; };
 		1841F19624B480680021D131 /* FootnoteButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1841F19224B480680021D131 /* FootnoteButtonTableViewCell.swift */; };
-		1841F19924B480F10021D131 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1841F19824B480F10021D131 /* Extensions.swift */; };
+		1841F19924B480F10021D131 /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1841F19824B480F10021D131 /* UIKitExtensions.swift */; };
 		18F6A07224B57D18000ACDF1 /* SelfSizingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F6A07124B57D18000ACDF1 /* SelfSizingTextView.swift */; };
 		38754D908539C921C392B92E /* Pods_Actio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD5218CD43054BEE6FAD8D4 /* Pods_Actio.framework */; };
-		8D8C6A9324B591B200D6DBE3 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8C6A9224B591B200D6DBE3 /* Extensions.swift */; };
+		8D8C6A9324B591B200D6DBE3 /* UDHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8C6A9224B591B200D6DBE3 /* UDHelper.swift */; };
 		8D8C6A9624B591F400D6DBE3 /* ApiDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8C6A9524B591F400D6DBE3 /* ApiDetails.swift */; };
 		8D8C6A9824B5939700D6DBE3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D8C6A9724B5939700D6DBE3 /* GoogleService-Info.plist */; };
 		8D94E07524AF1D0A00DBC46A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D94E07424AF1D0A00DBC46A /* AppDelegate.swift */; };
@@ -63,10 +63,10 @@
 		1841F19024B480680021D131 /* TextPickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextPickerTableViewCell.swift; sourceTree = "<group>"; };
 		1841F19124B480680021D131 /* TextEditTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextEditTableViewCell.swift; sourceTree = "<group>"; };
 		1841F19224B480680021D131 /* FootnoteButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FootnoteButtonTableViewCell.swift; sourceTree = "<group>"; };
-		1841F19824B480F10021D131 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		1841F19824B480F10021D131 /* UIKitExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitExtensions.swift; sourceTree = "<group>"; };
 		18F6A07124B57D18000ACDF1 /* SelfSizingTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSizingTextView.swift; sourceTree = "<group>"; };
 		267AD54F159D35EB605378D6 /* Pods-Actio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Actio.debug.xcconfig"; path = "Target Support Files/Pods-Actio/Pods-Actio.debug.xcconfig"; sourceTree = "<group>"; };
-		8D8C6A9224B591B200D6DBE3 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		8D8C6A9224B591B200D6DBE3 /* UDHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDHelper.swift; sourceTree = "<group>"; };
 		8D8C6A9524B591F400D6DBE3 /* ApiDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiDetails.swift; sourceTree = "<group>"; };
 		8D8C6A9724B5939700D6DBE3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8D94E07124AF1D0A00DBC46A /* Actio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Actio.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -141,11 +141,21 @@
 		1841F19724B480DA0021D131 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				1841F19824B480F10021D131 /* Extensions.swift */,
+				8D8C6A9224B591B200D6DBE3 /* UDHelper.swift */,
+				1841F19824B480F10021D131 /* UIKitExtensions.swift */,
 			);
 			path = Utilities;
-            sourceTree = "<group>";
-        };
+			sourceTree = "<group>";
+		};
+		18F6A07324B5A3FB000ACDF1 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8DE6B64C24B35B890010A3EC /* LaunchPage */,
+				8DE6B64B24B337B50010A3EC /* Login */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		2A427FD09032731094E7B830 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -161,14 +171,6 @@
 				D4F560E4604B46CDD6DFB538 /* Pods-Actio.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		8D8C6A9124B5919A00D6DBE3 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				8D8C6A9224B591B200D6DBE3 /* Extensions.swift */,
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		8D8C6A9424B591DA00D6DBE3 /* APIDetails */ = {
@@ -200,19 +202,17 @@
 		8D94E07324AF1D0A00DBC46A /* Actio */ = {
 			isa = PBXGroup;
 			children = (
-				8D8C6A9424B591DA00D6DBE3 /* APIDetails */,
-				8D8C6A9124B5919A00D6DBE3 /* Extensions */,
-				8DE6B64C24B35B890010A3EC /* LaunchPage */,
-				8DE6B64B24B337B50010A3EC /* Login */,
+				8D94E07424AF1D0A00DBC46A /* AppDelegate.swift */,
+				18F6A07324B5A3FB000ACDF1 /* ViewControllers */,
 				1841F18E24B480510021D131 /* TableViewCells */,
 				18196CF624B4725700DBECCA /* Custom Subclasses */,
+				8D8C6A9424B591DA00D6DBE3 /* APIDetails */,
 				8DE6B64A24B3366B0010A3EC /* Colors */,
 				8DE6B64724B3352C0010A3EC /* Fonts */,
 				1841F19724B480DA0021D131 /* Utilities */,
-				8D94E07424AF1D0A00DBC46A /* AppDelegate.swift */,
+				8D94E08224AF1D0C00DBC46A /* LaunchScreen.storyboard */,
 				8D94E07A24AF1D0A00DBC46A /* Main.storyboard */,
 				8D94E08024AF1D0C00DBC46A /* Assets.xcassets */,
-				8D94E08224AF1D0C00DBC46A /* LaunchScreen.storyboard */,
 				8D8C6A9724B5939700D6DBE3 /* GoogleService-Info.plist */,
 				8D94E08524AF1D0C00DBC46A /* Info.plist */,
 				8D94E07D24AF1D0A00DBC46A /* Actio.xcdatamodeld */,
@@ -418,8 +418,8 @@
 				8D94E07F24AF1D0A00DBC46A /* Actio.xcdatamodeld in Sources */,
 				1841F19524B480680021D131 /* TextEditTableViewCell.swift in Sources */,
 				183384C624B49CDD009911A8 /* ActioGradientButton.swift in Sources */,
-				1841F19924B480F10021D131 /* Extensions.swift in Sources */,
-				8D8C6A9324B591B200D6DBE3 /* Extensions.swift in Sources */,
+				1841F19924B480F10021D131 /* UIKitExtensions.swift in Sources */,
+				8D8C6A9324B591B200D6DBE3 /* UDHelper.swift in Sources */,
 				8DA048BB24B331D40099D528 /* AppColors.swift in Sources */,
 				8D94E08C24AF1D3600DBC46A /* LoginViewController.swift in Sources */,
 				8DE6B64E24B35BA60010A3EC /* LaunchViewController.swift in Sources */,

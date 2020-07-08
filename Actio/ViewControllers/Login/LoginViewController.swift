@@ -69,7 +69,7 @@ class LoginViewController: UIViewController {
         
     }
     @IBAction func loginButtonAction(_ sender: Any) {
-        apiCall(username: userNameTextField.text!, password: passwordTextField.text!,Mode: "3", deviceToken: Extensions.getDeviceToken())
+        apiCall(username: userNameTextField.text!, password: passwordTextField.text!,Mode: "3", deviceToken: UDHelper.getDeviceToken())
         
     }
     func apiCall(username: String,password: String,Mode: String,deviceToken:String) {
