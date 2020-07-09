@@ -319,6 +319,7 @@ extension SignupViewController: FootnoteButtonDelegate, CellDataFetchProtocol, I
             registerDatasource.registerUser(registerUserModel: self.registerUserModel, presentAlertOn: self, progressHandler: { (progress) in
                 // Handle progress
             }) { (user) in
+                print(UDHelper.getDeviceToken())
                 self.view.makeToast("Registration successful")
                 
                 // Reset fields

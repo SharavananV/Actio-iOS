@@ -25,6 +25,9 @@
 		18F6A07624B5A4FD000ACDF1 /* RegisterDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F6A07524B5A4FD000ACDF1 /* RegisterDatasource.swift */; };
 		18F6A07824B5AB76000ACDF1 /* DependencyProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F6A07724B5AB76000ACDF1 /* DependencyProvider.swift */; };
 		38754D908539C921C392B92E /* Pods_Actio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD5218CD43054BEE6FAD8D4 /* Pods_Actio.framework */; };
+		8D21855D24B6E383002688A8 /* OtpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D21855C24B6E383002688A8 /* OtpViewController.swift */; };
+		8D21855F24B6ED5F002688A8 /* VPMOTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D21855E24B6ED5F002688A8 /* VPMOTPView.swift */; };
+		8D21856124B6ED75002688A8 /* VPMOTPTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D21856024B6ED75002688A8 /* VPMOTPTextField.swift */; };
 		8D8C6A9324B591B200D6DBE3 /* UDHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8C6A9224B591B200D6DBE3 /* UDHelper.swift */; };
 		8D8C6A9624B591F400D6DBE3 /* ApiDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8C6A9524B591F400D6DBE3 /* ApiDetails.swift */; };
 		8D8C6A9824B5939700D6DBE3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D8C6A9724B5939700D6DBE3 /* GoogleService-Info.plist */; };
@@ -76,6 +79,9 @@
 		18F6A07524B5A4FD000ACDF1 /* RegisterDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDatasource.swift; sourceTree = "<group>"; };
 		18F6A07724B5AB76000ACDF1 /* DependencyProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyProvider.swift; sourceTree = "<group>"; };
 		267AD54F159D35EB605378D6 /* Pods-Actio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Actio.debug.xcconfig"; path = "Target Support Files/Pods-Actio/Pods-Actio.debug.xcconfig"; sourceTree = "<group>"; };
+		8D21855C24B6E383002688A8 /* OtpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpViewController.swift; sourceTree = "<group>"; };
+		8D21855E24B6ED5F002688A8 /* VPMOTPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPMOTPView.swift; sourceTree = "<group>"; };
+		8D21856024B6ED75002688A8 /* VPMOTPTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPMOTPTextField.swift; sourceTree = "<group>"; };
 		8D8C6A9224B591B200D6DBE3 /* UDHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDHelper.swift; sourceTree = "<group>"; };
 		8D8C6A9524B591F400D6DBE3 /* ApiDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiDetails.swift; sourceTree = "<group>"; };
 		8D8C6A9724B5939700D6DBE3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -163,6 +169,7 @@
 		18F6A07324B5A3FB000ACDF1 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				8D21855B24B6E283002688A8 /* OTP */,
 				8DE6B64C24B35B890010A3EC /* LaunchPage */,
 				8DE6B64B24B337B50010A3EC /* Login */,
 			);
@@ -193,6 +200,16 @@
 				D4F560E4604B46CDD6DFB538 /* Pods-Actio.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		8D21855B24B6E283002688A8 /* OTP */ = {
+			isa = PBXGroup;
+			children = (
+				8D21855C24B6E383002688A8 /* OtpViewController.swift */,
+				8D21855E24B6ED5F002688A8 /* VPMOTPView.swift */,
+				8D21856024B6ED75002688A8 /* VPMOTPTextField.swift */,
+			);
+			path = OTP;
 			sourceTree = "<group>";
 		};
 		8D8C6A9424B591DA00D6DBE3 /* APIDetails */ = {
@@ -438,9 +455,12 @@
 				1841F19624B480680021D131 /* FootnoteButtonTableViewCell.swift in Sources */,
 				183384CC24B4A9BF009911A8 /* SwitchTableViewCell.swift in Sources */,
 				18196CFC24B47BF900DBECCA /* SignupViewController.swift in Sources */,
+				8D21855F24B6ED5F002688A8 /* VPMOTPView.swift in Sources */,
 				8DE6B64924B335630010A3EC /* AppFonts.swift in Sources */,
 				8D94E07F24AF1D0A00DBC46A /* Actio.xcdatamodeld in Sources */,
+				8D21855D24B6E383002688A8 /* OtpViewController.swift in Sources */,
 				1841F19524B480680021D131 /* TextEditTableViewCell.swift in Sources */,
+				8D21856124B6ED75002688A8 /* VPMOTPTextField.swift in Sources */,
 				18BBAC7D24B5B99900306A8F /* ActioImagePicker.swift in Sources */,
 				183384C624B49CDD009911A8 /* ActioGradientButton.swift in Sources */,
 				1841F19924B480F10021D131 /* UIKitExtensions.swift in Sources */,

@@ -104,6 +104,12 @@ class LoginViewController: UIViewController {
                 print(response,"fgfgfgfsg")
                 if let resultDict = data as? [String: Any], let successText = resultDict["msg"] as? String, successText == "Login Success"{
                     print("Logged In")
+                    print(resultDict["token"])
+                    UDHelper.setAuthToken(resultDict["token"] as! String)
+                    print(UDHelper.getAuthToken())
+                    let otpNavigate = self.storyboard?.instantiateViewController(withIdentifier: "OtpViewController") as! OtpViewController
+                    self.navigationController?.pushViewController(otpNavigate, animated: false)
+
                     
                 }else {
                    if let resultDict = data as? [String: Any], let invalidText = resultDict["msg"] as? String, invalidText == "Invalid Login"{

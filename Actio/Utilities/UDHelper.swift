@@ -16,11 +16,21 @@ class UDHelper: NSObject,XMLParserDelegate
         let getDeviceToken =  UserDefaults.standard.object(forKey: "DEVICE_TOKEN")
         return getDeviceToken != nil ? getDeviceToken as! String : ""
     }
+    class func getAuthToken()-> String {
+        let getAuthToken =  UserDefaults.standard.object(forKey: "DEVICE_AUTHTOKEN")
+        return getAuthToken != nil ? getAuthToken as! String : ""
+    }
+    
     
     // MARK: -  SET Action
     class func setDeviceToken(_ DeviceToken:String)-> Void
     {
         UserDefaults.standard.set(DeviceToken, forKey: "DEVICE_TOKEN")
+        UserDefaults.standard.synchronize()
+    }
+    class func setAuthToken(_ AuthDeviceToken:String)-> Void
+    {
+        UserDefaults.standard.set(AuthDeviceToken, forKey: "DEVICE_AUTHTOKEN")
         UserDefaults.standard.synchronize()
     }
 }
