@@ -75,7 +75,6 @@ class AppColor: UIColor {
         
         return self.HexToColor(hexString: "#fedcd7")
     }
-        
     class func HexToColor(hexString: String) -> UIColor
     {
         // Convert hex string to an integer

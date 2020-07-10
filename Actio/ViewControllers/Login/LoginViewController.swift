@@ -8,6 +8,8 @@
 
 import UIKit
 import Alamofire
+import Toast_Swift
+
 
 
 class LoginViewController: UIViewController {
@@ -39,11 +41,19 @@ class LoginViewController: UIViewController {
         button.addTarget(self, action: #selector(secureIconClickAction), for: .touchUpInside)
         passwordTextField.rightView = button
         passwordTextField.rightViewMode = .always
-                
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        view.addGestureRecognizer(tap)
+        
+        self.loginButton.layer.cornerRadius = 5.0
+        self.loginButton.clipsToBounds = true
+
+        //FIXME: - Status bar color
+        
+         let view: UIView = UIView.init(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIApplication.shared.statusBarFrame.height))
+
+         view.backgroundColor = AppColor.OrangeColor()
+
+         self.view.addSubview(view)
+
+
         
     }
     
@@ -57,19 +67,6 @@ class LoginViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
-   @objc func keyboardWillShow(notification: NSNotification) {
-    if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            if self.view.frame.origin.y == 0 {
-                self.view.frame.origin.y -= keyboardSize.height
-            }
-        }
-    }
-
-    @objc func keyboardWillHide(notification: NSNotification) {
-        if self.view.frame.origin.y != 0 {
-            self.view.frame.origin.y = 0
-        }
-    }
 
     @objc func secureIconClickAction() {
         if(iconClick == true) {
@@ -103,17 +100,14 @@ class LoginViewController: UIViewController {
             case .success (let data):
                 print(response,"fgfgfgfsg")
                 if let resultDict = data as? [String: Any], let successText = resultDict["msg"] as? String, successText == "Login Success"{
-                    print("Logged In")
-                    print(resultDict["token"])
                     UDHelper.setAuthToken(resultDict["token"] as! String)
-                    print(UDHelper.getAuthToken())
                     let otpNavigate = self.storyboard?.instantiateViewController(withIdentifier: "OtpViewController") as! OtpViewController
                     self.navigationController?.pushViewController(otpNavigate, animated: false)
 
                     
                 }else {
                    if let resultDict = data as? [String: Any], let invalidText = resultDict["msg"] as? String, invalidText == "Invalid Login"{
-                       print("Invalid Login")
+                        self.view.makeToast(invalidText)
                    }
                 }
             case .failure(_):

@@ -14,16 +14,18 @@ import Toast_Swift
 class OtpViewController: UIViewController,VPMOTPViewDelegate {
     var stringOtp = String()
     var urlString = String()
-    var counter = 30
+    
+    var countTimer:Timer!
 
+    var counter = 30
 
     @IBOutlet var headerView: UIView!
     @IBOutlet var resendButton: UIButton!
     @IBOutlet var otpTextView: VPMOTPView!
     @IBOutlet var headerImage: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         otpTextView.otpFieldsCount = 4
         otpTextView.otpFieldDefaultBorderColor = AppColor.textFieldBorder
         otpTextView.otpFieldEnteredBorderColor = AppColor.textFieldBorder
@@ -38,16 +40,22 @@ class OtpViewController: UIViewController,VPMOTPViewDelegate {
         
         self.headerImage.layer.cornerRadius = self.headerImage.frame.height/2
         self.headerImage.clipsToBounds = true
-        resendButton.isHidden = true
-        Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
-
-
-
         
-  
+        self.resendButton.layer.cornerRadius = 5.0
+        self.resendButton.clipsToBounds = true
+
+        self.countTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateCounter), userInfo: nil, repeats: true)
+        
+        //FIXME: - Status bar color
+        
+         let view: UIView = UIView.init(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIApplication.shared.statusBarFrame.height))
+
+         view.backgroundColor = AppColor.OrangeColor()
+
+         self.view.addSubview(view)
+
 
     }
-    @IBOutlet var countTimerLabel: UILabel!
     func shouldBecomeFirstResponderForOTP(otpFieldIndex index: Int) -> Bool {
         return true
 
@@ -95,12 +103,17 @@ class OtpViewController: UIViewController,VPMOTPViewDelegate {
     }
     
     @objc func updateCounter() {
-        resendButton.isHidden = false
-
-    if counter > 0 {
-        print("\(counter) seconds to the end of the world")
-        counter -= 1
-        countTimerLabel.text = String(counter)
+        if counter > 0
+        {
+            self.resendButton.isEnabled = false
+            resendButton.setTitle("Resend in \(counter)" + "s", for: .normal)
+            counter -= 1
+        }
+        else
+        {
+            self.resendButton.isEnabled = true
+            resendButton.setTitle("Resend", for: .normal)
+            countTimer.invalidate()
+        }
     }
-}
 }
