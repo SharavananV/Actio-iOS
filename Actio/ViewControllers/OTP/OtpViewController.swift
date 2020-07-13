@@ -63,16 +63,19 @@ class OtpViewController: UIViewController,VPMOTPViewDelegate {
     func enteredOTP(otpString: String) {
                stringOtp = otpString
                print("OTPString: \(otpString)")
-        
     }
     func hasEnteredAllOTP(hasEntered: Bool) {
         print("Has entered all OTP? \(hasEntered)")
-
+        apiCall(otp: stringOtp)
+        
+        // For Test
+//        let subscriptionNavigate = self.storyboard?.instantiateViewController(withIdentifier: "SubscriberIDViewController") as! SubscriberIDViewController
+//        self.navigationController?.pushViewController(subscriptionNavigate, animated: false)
+        
     }
     
     @IBAction func resendButtonAction(_ sender: Any) {
  
-        apiCall(otp: stringOtp)
     }
     
     func apiCall(otp:String) {
@@ -86,12 +89,13 @@ class OtpViewController: UIViewController,VPMOTPViewDelegate {
             case .success (let data):
                 if let resultDict = data as? [String: Any], let successText = resultDict["msg"] as? String, successText == "Success" {
                     print("Success")
-                }
+                    let subscriptionNavigate = self.storyboard?.instantiateViewController(withIdentifier: "SubscriberIDViewController") as! SubscriberIDViewController
+                     self.navigationController?.pushViewController(subscriptionNavigate, animated: false)
+               }
                 else
                 {
-                    if let resultDict = data as? [String: Any], let invalidText = resultDict["msg"] as? String, invalidText == "Not Authorized"{
+                    if let resultDict = data as? [String: Any], let invalidText = resultDict["msg"] as? String{
                         self.view.makeToast(invalidText)
-
                     }
                 }
                 print("something")

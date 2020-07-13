@@ -7,9 +7,9 @@
 //
 
 import UIKit
-
+import Alamofire
 class SubscriberIDViewController: UIViewController ,UIScrollViewDelegate{
-
+    
     @IBOutlet var headerView: UIView!
     @IBOutlet var subsScrollView: UIScrollView!
     @IBOutlet var continueButton: UIButton!
@@ -17,28 +17,138 @@ class SubscriberIDViewController: UIViewController ,UIScrollViewDelegate{
     @IBOutlet var subscriberIDLabel: UILabel!
     @IBOutlet var subscriberNameLabel: UILabel!
     
+    var urlString = String()
+    var parentNameString = String()
+    var parendIsdString = String()
+    var parentMobileString = String()
+    var currentUserStatus = String()
+    var Mode = Int()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        subsScrollView.delegate = self
         self.continueButton.layer.cornerRadius = 5.0
         self.continueButton.clipsToBounds = true
         subscriptionIDTextField.setBorderColor(width: 1.0, color: AppColor.TextFieldBorderColor())
         self.continueButton.applyGradient(colours: [AppColor.OrangeColor(),AppColor.RedColor()])
         self.headerView.applyGradient(colours: [AppColor.OrangeColor(),AppColor.RedColor()])
         
-        subsScrollView.contentOffset = CGPoint(x: 0,y: 190)
-
         //FIXME: - Status bar color
         
-         let view: UIView = UIView.init(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIApplication.shared.statusBarFrame.height))
-
-         view.backgroundColor = AppColor.OrangeColor()
-
-         self.view.addSubview(view)
-
+        let view: UIView = UIView.init(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIApplication.shared.statusBarFrame.height))
+        
+        view.backgroundColor = AppColor.OrangeColor()
+        
+        self.view.addSubview(view)
+        
+        apiCall(parentName: parentNameString, parentIsd: parendIsdString, parentMobile: parentMobileString, currentUserStatus: currentUserStatus)
+        
+        
+         
     }
-    
 
     @IBAction func continueButtonAction(_ sender: Any) {
+        if self.subscriptionIDTextField.text == "" {
+            self.view.makeToast("SUBSCRIPTION ID Empty!!")
+            
+        } else {
+            apiSubmitCall(parentID: self.subscriptionIDTextField.text!, Mode: Mode)
+        }
     }
+    
+    
+    func apiSubmitCall(parentID:String,Mode : Int) {
+        urlString = parentIdUrl
+        
+ 
+        let headers : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"",
+                                     "Content-Type": "application/json"]
+        AF.request(parentIdUrl,method: .post,parameters: ["parentID":parentID,"Mode":Mode],encoding: JSONEncoding.default,headers: headers).responseJSON {
+            response in
+            switch response.result {
+            case .success (let data):
+                print(data)
+                if let resultDict = data as? [String: Any]{
+                    print(resultDict)
+                }
+                else
+                {
+                    if let resultDict = data as? [String: Any], let invalidText = resultDict["msg"] as? String{
+                        self.view.makeToast(invalidText)
+                        
+                    }
+                }
+                print("something")
+            case .failure(_):
+                print("error")
+            }
+            
+        }
+    }
+    
+    
+    
+    
+    
+    
+    //UserStatusInfo - Api Call
+    func apiCall(parentName:String,parentIsd:String,parentMobile:String,currentUserStatus:String) {
+        urlString = userStatusUrl
+        
+        let headers : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"",
+                                     "Content-Type": "application/json"]
+        AF.request(userStatusUrl,method: .post,parameters: ["parentName":parentName,"parentIsd":parentIsd,"parentMobile":parentMobile,"currentUserStatus":currentUserStatus],encoding: JSONEncoding.default,headers: headers).responseJSON {
+            response in
+            switch response.result {
+            case .success (let data):
+                print(response,"subscription")
+                if let resultDict = data as? [String: Any] {
+                    print(resultDict)
+                    self.currentUserStatus = (resultDict["currentUserStatus"] as? String)!
+                    self.parendIsdString = (resultDict["parentIsd"] as? String)!
+                    self.parentMobileString = (resultDict["parentMobile"] as? String)!
+                    self.parentNameString = (resultDict["parentName"] as? String)!
+                     
+                    
+                    let parentNameNumberAttrs1 = [NSAttributedString.Key.font: AppFont.PoppinsSemiBold(size: 18), NSAttributedString.Key.foregroundColor : AppColor.PurpleColor()]
+                    let parentNameNumberAttributedString1 = NSMutableAttributedString(string: "The mobile number "+self.parendIsdString+self.parentMobileString+" has ", attributes:parentNameNumberAttrs1 as [NSAttributedString.Key : Any])
+                    
+                    let parentNameNumberAttributedString2 = NSMutableAttributedString(string: " been used by our subscriber "+self.parentNameString, attributes:parentNameNumberAttrs1 as [NSAttributedString.Key : Any])
+                    
+                    parentNameNumberAttributedString1.append(parentNameNumberAttributedString2)
+                    self.subscriberNameLabel.attributedText = parentNameNumberAttributedString1
+                    
+                    
+                    
+                    let parentNameAttrs1 = [NSAttributedString.Key.font: AppFont.PoppinsRegular(size: 16), NSAttributedString.Key.foregroundColor : AppColor.PurpleColor()]
+                    let parentNameAttributedString1 = NSMutableAttributedString(string: "Please enter the Subscriber ID of "+self.parentNameString, attributes:parentNameAttrs1 as [NSAttributedString.Key : Any])
+                    
+                    let parentNameAttributedString2 = NSMutableAttributedString(string: " to obtain his authorization ", attributes:parentNameAttrs1 as [NSAttributedString.Key : Any])
+                    
+                    parentNameAttributedString1.append(parentNameAttributedString2)
+                    self.subscriberIDLabel.attributedText = parentNameAttributedString1
+                    
+                   
+                      if self.currentUserStatus == "5"{
+                        self.Mode = 1
+                    } else if self.currentUserStatus == "6" {
+                        self.Mode = 2
+                    }
+                 }
+                    
+                else
+                {
+                    if let resultDict = data as? [String: Any], let invalidText = resultDict["msg"] as? String, invalidText == "Not Authorized"{
+                        self.view.makeToast(invalidText)
+                    }
+                }
+                print("something")
+            case .failure(_):
+                print("error")
+            }
+            
+        }
+    }
+    
+    
 }

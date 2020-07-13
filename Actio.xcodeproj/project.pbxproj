@@ -56,6 +56,7 @@
 		8DA048B824B328FF0099D528 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8DA048A624B328FE0099D528 /* Poppins-SemiBold.ttf */; };
 		8DA048B924B328FF0099D528 /* Poppins-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8DA048A724B328FE0099D528 /* Poppins-ExtraLight.ttf */; };
 		8DA048BB24B331D40099D528 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA048BA24B331D40099D528 /* AppColors.swift */; };
+		8DA3055A24BC310D0090142B /* AcceptRejectRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA3055924BC310D0090142B /* AcceptRejectRequestViewController.swift */; };
 		8DE6B64924B335630010A3EC /* AppFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE6B64824B335630010A3EC /* AppFonts.swift */; };
 		8DE6B64E24B35BA60010A3EC /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE6B64D24B35BA60010A3EC /* LaunchViewController.swift */; };
 		8DF7863C24B846E900062261 /* SubscriberIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF7863B24B846E900062261 /* SubscriberIDViewController.swift */; };
@@ -113,6 +114,7 @@
 		8DA048A624B328FE0099D528 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		8DA048A724B328FE0099D528 /* Poppins-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraLight.ttf"; sourceTree = "<group>"; };
 		8DA048BA24B331D40099D528 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
+		8DA3055924BC310D0090142B /* AcceptRejectRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptRejectRequestViewController.swift; sourceTree = "<group>"; };
 		8DE6B64824B335630010A3EC /* AppFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFonts.swift; sourceTree = "<group>"; };
 		8DE6B64D24B35BA60010A3EC /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		8DF7863B24B846E900062261 /* SubscriberIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberIDViewController.swift; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 			isa = PBXGroup;
 			children = (
 				8DF7863B24B846E900062261 /* SubscriberIDViewController.swift */,
+				8DA3055924BC310D0090142B /* AcceptRejectRequestViewController.swift */,
 			);
 			path = Subscriber;
 			sourceTree = "<group>";
@@ -463,6 +466,7 @@
 				18F6A07624B5A4FD000ACDF1 /* RegisterDatasource.swift in Sources */,
 				183384CA24B4A94C009911A8 /* JustTextTableViewCell.swift in Sources */,
 				18F6A07224B57D18000ACDF1 /* SelfSizingTextView.swift in Sources */,
+				8DA3055A24BC310D0090142B /* AcceptRejectRequestViewController.swift in Sources */,
 				8DF7863C24B846E900062261 /* SubscriberIDViewController.swift in Sources */,
 				1841F19624B480680021D131 /* FootnoteButtonTableViewCell.swift in Sources */,
 				183384CC24B4A9BF009911A8 /* SwitchTableViewCell.swift in Sources */,
@@ -637,7 +641,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = knila.com.Actio;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Knila.Actio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -657,7 +661,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = knila.com.Actio;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Knila.Actio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
