@@ -323,6 +323,7 @@ extension SignupViewController: FootnoteButtonDelegate, CellDataFetchProtocol, I
                 
                 // Reset fields
                 self.registerUserModel = RegisterUser()
+                UDHelper.setAuthToken(user.token ?? "")
                 self.formData = self.prepareFormData()
                 self.tableView.reloadData()
                 

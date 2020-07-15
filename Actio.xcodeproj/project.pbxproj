@@ -62,6 +62,20 @@
 		8DF7863C24B846E900062261 /* SubscriberIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF7863B24B846E900062261 /* SubscriberIDViewController.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXBuildRule section */
+		18B569F224BEF15200D6A520 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = pattern.proxy;
+			inputFiles = (
+			);
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# Type a script or drag a script file from your workspace to insert its path.\n";
+		};
+/* End PBXBuildRule section */
+
 /* Begin PBXFileReference section */
 		18196CF724B4727E00DBECCA /* ActioTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActioTextField.swift; sourceTree = "<group>"; };
 		18196CFB24B47BF900DBECCA /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
@@ -339,6 +353,7 @@
 				F7964521A7556CCBBC44E3F8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
+				18B569F224BEF15200D6A520 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -564,7 +579,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -618,7 +633,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

@@ -80,10 +80,42 @@ class RegisterDatasource {
         }
     }
     
+    func getUserStatus(completion: @escaping ((UserStatus) -> Void)) {
+        let headers : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"",
+                                     "Content-Type": "application/json"]
+        AF.request(userStatusUrl,method: .post, parameters: [:], encoding: JSONEncoding.default, headers: headers).responseJSON {
+            response in
+            switch response.result {
+            case .success (let data):
+                if let resultDict = data as? [String: Any] {
+                    if let status = resultDict["status"] as? String, status == "200", let currentUserStatus = resultDict["currentUserStatus"] as? String, let intStatus = Int(currentUserStatus) {
+                        UDHelper.setUserStatus(currentUserStatus)
+                        completion(.success(intStatus))
+                    }
+                    else if let status = resultDict["status"] as? String, status == "422", let errors = resultDict["errors"] as? [[String: Any]] {
+                        if let firstError = errors.first, let msg = firstError["msg"] as? String {
+                            completion(.failure(msg))
+                        }
+                    }
+                    else {
+                        completion(.failure("Network error"))
+                    }
+                 }
+            case .failure(_):
+                completion(.failure("Network error"))
+            }
+        }
+    }
+    
     func cancelRegisterUpload() {
         self.registerUserUpload?.cancel()
         self.registerUserUpload = nil
     }
+}
+
+enum UserStatus {
+    case success(Int)
+    case failure(String)
 }
 
 // MARK: - MasterData

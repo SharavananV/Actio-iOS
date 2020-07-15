@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1Tf-Zr-8Z4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1Tf-Zr-8Z4">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -77,11 +77,14 @@
                     <connections>
                         <outlet property="welcomeLabel" destination="M8s-wv-pOq" id="LAx-Ap-rcK"/>
                         <segue destination="lPq-DN-YlK" kind="presentation" identifier="LoginPage" modalPresentationStyle="fullScreen" id="9u2-5l-DRQ"/>
+                        <segue destination="vAX-4q-VFK" kind="presentation" identifier="showOTP" modalPresentationStyle="fullScreen" id="vR9-e8-8w5"/>
+                        <segue destination="Fue-w0-wXz" kind="presentation" identifier="showChildSub" modalPresentationStyle="fullScreen" id="W7u-JL-15M"/>
+                        <segue destination="Ywa-wb-3Vh" kind="presentation" identifier="showEnterParentID" modalPresentationStyle="fullScreen" id="WSG-t3-hnP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cP9-OW-6L3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1245" y="100"/>
+            <point key="canvasLocation" x="1355" y="100"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="t1h-sc-FTf">
@@ -750,6 +753,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Fna-iD-HSG"/>
                     </view>
+                    <navigationItem key="navigationItem" id="VaM-Ya-nAn"/>
                     <size key="freeformSize" width="414" height="850"/>
                     <connections>
                         <outlet property="acceptButton" destination="nXN-nf-qXC" id="IvE-Yh-Y9C"/>
