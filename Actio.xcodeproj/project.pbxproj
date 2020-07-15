@@ -88,6 +88,7 @@
 		1841F19124B480680021D131 /* TextEditTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextEditTableViewCell.swift; sourceTree = "<group>"; };
 		1841F19224B480680021D131 /* FootnoteButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FootnoteButtonTableViewCell.swift; sourceTree = "<group>"; };
 		1841F19824B480F10021D131 /* UIKitExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitExtensions.swift; sourceTree = "<group>"; };
+		18B569F324BF005900D6A520 /* Actio.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Actio.entitlements; sourceTree = "<group>"; };
 		18BBAC7C24B5B99900306A8F /* ActioImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActioImagePicker.swift; sourceTree = "<group>"; };
 		18BBAC7E24B5E90A00306A8F /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		18DC39BC24B608EB008708FC /* ActioSpinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActioSpinner.swift; sourceTree = "<group>"; };
@@ -260,6 +261,7 @@
 		8D94E07324AF1D0A00DBC46A /* Actio */ = {
 			isa = PBXGroup;
 			children = (
+				18B569F324BF005900D6A520 /* Actio.entitlements */,
 				8D94E07424AF1D0A00DBC46A /* AppDelegate.swift */,
 				18F6A07324B5A3FB000ACDF1 /* ViewControllers */,
 				1841F18E24B480510021D131 /* TableViewCells */,
@@ -648,6 +650,7 @@
 			baseConfigurationReference = 267AD54F159D35EB605378D6 /* Pods-Actio.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Actio/Actio.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9722T8G52H;
 				INFOPLIST_FILE = Actio/Info.plist;
@@ -656,7 +659,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Knila.Actio;
+				PRODUCT_BUNDLE_IDENTIFIER = com.knila.Actio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -668,6 +671,7 @@
 			baseConfigurationReference = D4F560E4604B46CDD6DFB538 /* Pods-Actio.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Actio/Actio.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9722T8G52H;
 				INFOPLIST_FILE = Actio/Info.plist;
@@ -676,7 +680,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Knila.Actio;
+				PRODUCT_BUNDLE_IDENTIFIER = com.knila.Actio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
