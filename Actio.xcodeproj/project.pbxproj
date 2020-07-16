@@ -18,6 +18,7 @@
 		1841F19524B480680021D131 /* TextEditTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1841F19124B480680021D131 /* TextEditTableViewCell.swift */; };
 		1841F19624B480680021D131 /* FootnoteButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1841F19224B480680021D131 /* FootnoteButtonTableViewCell.swift */; };
 		1841F19924B480F10021D131 /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1841F19824B480F10021D131 /* UIKitExtensions.swift */; };
+		18A9750924C04972001B5BB3 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A9750824C04972001B5BB3 /* MenuViewController.swift */; };
 		18BBAC7D24B5B99900306A8F /* ActioImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BBAC7C24B5B99900306A8F /* ActioImagePicker.swift */; };
 		18BBAC7F24B5E90A00306A8F /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BBAC7E24B5E90A00306A8F /* Validator.swift */; };
 		18DC39BD24B608EB008708FC /* ActioSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DC39BC24B608EB008708FC /* ActioSpinner.swift */; };
@@ -91,7 +92,10 @@
 		1841F19124B480680021D131 /* TextEditTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextEditTableViewCell.swift; sourceTree = "<group>"; };
 		1841F19224B480680021D131 /* FootnoteButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FootnoteButtonTableViewCell.swift; sourceTree = "<group>"; };
 		1841F19824B480F10021D131 /* UIKitExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitExtensions.swift; sourceTree = "<group>"; };
+		18A9750824C04972001B5BB3 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		18B569F324BF005900D6A520 /* Actio.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Actio.entitlements; sourceTree = "<group>"; };
+		18B569F524C03F7800D6A520 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
+		18B569F724C03F8400D6A520 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		18BBAC7C24B5B99900306A8F /* ActioImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActioImagePicker.swift; sourceTree = "<group>"; };
 		18BBAC7E24B5E90A00306A8F /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		18DC39BC24B608EB008708FC /* ActioSpinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActioSpinner.swift; sourceTree = "<group>"; };
@@ -191,6 +195,15 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		18B569FA24C0426B00D6A520 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				18B569F724C03F8400D6A520 /* MenuViewController.swift */,
+				18B569F524C03F7800D6A520 /* ContainerViewController.swift */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		18F6A07324B5A3FB000ACDF1 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -254,6 +267,7 @@
 				8D94E07224AF1D0A00DBC46A /* Products */,
 				69522B8B5B223129BFEE5CD1 /* Pods */,
 				2A427FD09032731094E7B830 /* Frameworks */,
+				18B569FA24C0426B00D6A520 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -294,6 +308,7 @@
 				8DCBAB5924BF2D37009E8B7F /* HomePageCollectionViewCell.swift */,
 				8DCBAB5824BF2D37009E8B7F /* HomePageViewController.swift */,
 				8DCBAB5C24BF3ADC009E8B7F /* TabBarViewController.swift */,
+				18A9750824C04972001B5BB3 /* MenuViewController.swift */,
 			);
 			path = DashBoard;
 			sourceTree = "<group>";
@@ -504,6 +519,7 @@
 				8DF7863C24B846E900062261 /* SubscriberIDViewController.swift in Sources */,
 				1841F19624B480680021D131 /* FootnoteButtonTableViewCell.swift in Sources */,
 				183384CC24B4A9BF009911A8 /* SwitchTableViewCell.swift in Sources */,
+				18A9750924C04972001B5BB3 /* MenuViewController.swift in Sources */,
 				18196CFC24B47BF900DBECCA /* SignupViewController.swift in Sources */,
 				8D21855F24B6ED5F002688A8 /* VPMOTPView.swift in Sources */,
 				8DCBAB5D24BF3ADC009E8B7F /* TabBarViewController.swift in Sources */,
