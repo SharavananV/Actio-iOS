@@ -49,6 +49,8 @@ class LaunchViewController: UIViewController {
         switch status {
         case 1, 7, 8, 9:
             // TODO: Show main tab page and show child dialog for status 7,8,9
+            self.performSegue(withIdentifier: "showDashboard", sender: self)
+
             break
         case 5,6:
             self.performSegue(withIdentifier: "showEnterParentID", sender: self)
