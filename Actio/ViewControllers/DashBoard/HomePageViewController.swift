@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SideMenu
 
 class HomePageViewController: UIViewController {
 
@@ -32,18 +33,24 @@ class HomePageViewController: UIViewController {
         
         self.arrHomeTitle = ["Chat History","Events","Booking History"]
         self.arrHomeImage = ["Icon-Chat","Icon-Event.png","Icon-Seat.png"]
-//
-//        let menuButton = UIBarButtonItem(image: UIImage(named: "down"), style: .plain, target: self, action: #selector(self.clickButton))
-//        self.navigationItem.leftBarButtonItem  = menuButton
+        let menuButton = UIBarButtonItem(image: UIImage(named: "menu-white"), style: .plain, target: self, action: #selector(self.handleMenuToggle))
+        self.navigationItem.leftBarButtonItem  = menuButton
     }
     
-//    @objc func clickButton(){
-//        delegate?.handleMenuToggle()
-//           print("button click")
-//    }
+    @objc func handleMenuToggle() {
+        let menuController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuViewController")
+        let menu = SideMenuNavigationController(rootViewController: menuController)
+        menu.leftSide = true
+        menu.menuWidth = UIScreen.main.bounds.size.width - 80
+        menu.statusBarEndAlpha = 0
+        menu.isNavigationBarHidden = true
+        present(menu, animated: true, completion: nil)
+        print("handleMenuToggle")
+    }
 
 }
-extension HomePageViewController:UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
+
+extension HomePageViewController: UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return arrHomeTitle.count
@@ -84,7 +91,6 @@ extension HomePageViewController:UICollectionViewDelegate,UICollectionViewDataSo
     
 }
 extension UIView {
-
     func dropShadow(color: UIColor, opacity: Float = 0.16, offSet: CGSize, radius: CGFloat = 10.0, scale: Bool = true) {
     layer.masksToBounds = false
     layer.shadowColor = color.cgColor

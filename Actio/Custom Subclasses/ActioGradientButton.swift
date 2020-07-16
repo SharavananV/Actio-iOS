@@ -8,9 +8,11 @@
 
 import UIKit
 
+@IBDesignable
 class ActioGradientButton: UIButton {
 
     /// Corner radius of the background rectangle
+    @IBInspectable
     public var roundRectCornerRadius: CGFloat = 8 {
         didSet {
             self.setNeedsLayout()
@@ -18,6 +20,7 @@ class ActioGradientButton: UIButton {
     }
 
     /// Color of the background rectangle
+    @IBInspectable
     public var roundRectColor: UIColor = UIColor.white {
         didSet {
             self.setNeedsLayout()
