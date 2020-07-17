@@ -33,6 +33,10 @@ extension UIWindow {
     }
 }
 
+extension RangeExpression where Bound == String.Index  {
+    func nsRange<S: StringProtocol>(in string: S) -> NSRange { .init(self, in: string) }
+}
+
 extension String {
     var toDate: Date? {
         let dateFormatter = DateFormatter()
@@ -40,6 +44,14 @@ extension String {
         
         return dateFormatter.date(from: self)
     }
+    
+    func nsRange<S: StringProtocol>(of string: S, options: String.CompareOptions = [], range: Range<Index>? = nil, locale: Locale? = nil) -> NSRange? {
+           self.range(of: string,
+                      options: options,
+                      range: range ?? startIndex..<endIndex,
+                      locale: locale ?? .current)?
+               .nsRange(in: self)
+       }
 }
 
 extension Date {

@@ -68,8 +68,11 @@ class SubscriberIDViewController: UIViewController ,UIScrollViewDelegate{
             switch response.result {
             case .success (let data):
                 print(data)
-                if let resultDict = data as? [String: Any]{
-                    print(resultDict)
+                if let resultDict = data as? [String: Any] {
+                    if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BeforeApprovalViewController") as? BeforeApprovalViewController {
+                        controller.parentName = self.parentNameString
+                        self.present(controller, animated: false, completion: nil)
+                    }
                 }
                 else
                 {

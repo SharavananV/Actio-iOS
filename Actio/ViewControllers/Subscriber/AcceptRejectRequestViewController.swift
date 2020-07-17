@@ -35,6 +35,7 @@ class AcceptRejectRequestViewController: UIViewController {
     }
     
     @IBAction func acceptButtonAction(_ sender: Any) {
+        performSegue(withIdentifier: "showBeforeApproval", sender: sender)
     }
     /*
     // MARK: - Navigation
