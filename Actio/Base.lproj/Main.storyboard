@@ -573,7 +573,7 @@
         <!--Navigation Controller-->
         <scene sceneID="oPx-3F-aZV">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lPq-DN-YlK" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="LoginNavigation" automaticallyAdjustsScrollViewInsets="NO" id="lPq-DN-YlK" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="Gnk-Ap-BjK"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="P4Z-nf-nmy">
@@ -1067,6 +1067,9 @@
                                 <state key="normal" title="Logout">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="logoutAction:" destination="LCS-UO-QEb" eventType="touchUpInside" id="JXw-hH-Xsp"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="version: K 5.1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d7A-Kw-f81">
                                 <rect key="frame" x="156.66666666666666" y="636" width="100.99999999999997" height="21"/>

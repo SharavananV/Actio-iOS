@@ -65,7 +65,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func redirect(to view: String, with params: [String: String]) {
-        print(params)
+        if let topViewController = self.window?.topViewController() {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "AcceptRejectRequestViewController")
+            
+            topViewController.present(vc, animated: false, completion: nil)
+        }
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {

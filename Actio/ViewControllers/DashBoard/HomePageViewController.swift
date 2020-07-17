@@ -9,7 +9,7 @@
 import UIKit
 import SideMenu
 
-class HomePageViewController: UIViewController {
+class HomePageViewController: UIViewController, LogoutDelegate {
 
     @IBOutlet var homeCollectionView: UICollectionView!
     var arrHomeImage =  [String]()
@@ -38,16 +38,25 @@ class HomePageViewController: UIViewController {
     }
     
     @objc func handleMenuToggle() {
-        let menuController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuViewController")
+        let menuController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
+        menuController.delegate = self
+        
         let menu = SideMenuNavigationController(rootViewController: menuController)
         menu.leftSide = true
         menu.menuWidth = UIScreen.main.bounds.size.width - 80
         menu.statusBarEndAlpha = 0
         menu.isNavigationBarHidden = true
         present(menu, animated: true, completion: nil)
-        print("handleMenuToggle")
     }
 
+    func presentLogin() {
+        self.dismiss(animated: true) {
+            if let topController = UIApplication.shared.keyWindow()?.topViewController() {
+                let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginNavigation")
+                topController.present(controller, animated: false, completion: nil)
+            }
+        }
+    }
 }
 
 extension HomePageViewController: UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {

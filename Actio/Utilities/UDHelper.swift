@@ -43,5 +43,10 @@ class UDHelper: NSObject,XMLParserDelegate
         UserDefaults.standard.set(status, forKey: "USER_STATUS")
         UserDefaults.standard.synchronize()
     }
+    
+    class func resetUserStuff() {
+        setAuthToken("")
+        setUserStatus("")
+    }
 }
     

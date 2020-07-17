@@ -58,24 +58,17 @@ class OtpViewController: UIViewController,VPMOTPViewDelegate {
     }
     func shouldBecomeFirstResponderForOTP(otpFieldIndex index: Int) -> Bool {
         return true
-
-    }
-    func enteredOTP(otpString: String) {
-               stringOtp = otpString
-               print("OTPString: \(otpString)")
-    }
-    func hasEnteredAllOTP(hasEntered: Bool) {
-        print("Has entered all OTP? \(hasEntered)")
-        apiCall(otp: stringOtp)
-        
-        // For Test
-//        let subscriptionNavigate = self.storyboard?.instantiateViewController(withIdentifier: "SubscriberIDViewController") as! SubscriberIDViewController
-//        self.navigationController?.pushViewController(subscriptionNavigate, animated: false)
-        
     }
     
+    func enteredOTP(otpString: String) {
+        self.stringOtp = otpString
+        apiCall(otp: otpString)
+    }
+    
+    func hasEnteredAllOTP(hasEntered: Bool) {}
+    
     @IBAction func resendButtonAction(_ sender: Any) {
- 
+        apiCall(otp: stringOtp)
     }
     
     func apiCall(otp:String) {
@@ -88,9 +81,10 @@ class OtpViewController: UIViewController,VPMOTPViewDelegate {
             switch response.result {
             case .success (let data):
                 if let resultDict = data as? [String: Any], let successText = resultDict["msg"] as? String, successText == "Success" {
-                    print("Success")
-                    let subscriptionNavigate = self.storyboard?.instantiateViewController(withIdentifier: "SubscriberIDViewController") as! SubscriberIDViewController
-                     self.navigationController?.pushViewController(subscriptionNavigate, animated: false)
+                    if let dashController = self.storyboard?.instantiateViewController(withIdentifier: "TabBarViewController") {
+                        dashController.modalPresentationStyle = .fullScreen
+                        self.present(dashController, animated: true, completion: nil)
+                    }
                }
                 else
                 {
@@ -98,9 +92,8 @@ class OtpViewController: UIViewController,VPMOTPViewDelegate {
                         self.view.makeToast(invalidText)
                     }
                 }
-                print("something")
-            case .failure(_):
-                print("error")
+            case .failure(let error):
+                self.view.makeToast(error.errorDescription ?? "")
             }
             
         }

@@ -8,8 +8,14 @@
 
 import UIKit
 
-class MenuViewController: UIViewController {
+protocol LogoutDelegate: class {
+    func presentLogin()
+}
 
+class MenuViewController: UIViewController {
+    let dependencyProvider = DependencyProvider.shared
+    weak var delegate: LogoutDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -19,14 +25,17 @@ class MenuViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func logoutAction(_ sender: Any) {
+        ActioSpinner.shared.show(on: self.view)
+        
+        self.dependencyProvider.registerDatasource.logout { (message) in
+            self.view.makeToast(message)
+            ActioSpinner.shared.hide()
+            
+            if message == "Logout Success" {
+                self.delegate?.presentLogin()
+            }
+        }
     }
-    */
 
 }

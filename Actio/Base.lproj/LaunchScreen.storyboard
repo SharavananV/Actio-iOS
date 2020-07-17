@@ -1,26 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Poppins-Regular.ttf">
+            <string>Poppins-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="EHf-IW-A2E">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                    <view key="view" contentMode="scaleToFill" id="05V-Kb-HTY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="welcome-Image" translatesAutoresizingMaskIntoConstraints="NO" id="ta8-Up-DKu">
+                                <rect key="frame" x="20" y="158" width="374" height="328"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="328" id="XFl-0t-KpV"/>
+                                    <constraint firstAttribute="width" constant="374" id="w8K-Oi-XdV"/>
+                                </constraints>
+                            </imageView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Qf-dR-d8L">
+                                <rect key="frame" x="42" y="504" width="331" height="113"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="331" id="Dj5-zW-89d"/>
+                                    <constraint firstAttribute="height" constant="113" id="oND-b3-afX"/>
+                                </constraints>
+                                <string key="text">Suspendisse nunc leo, ornare vel facilisis lacinia, tincidunt sed erat. Aliquam ac nulla tristique, ultricies orci eu, accumsan metus.</string>
+                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qzu-DE-2ge">
+                                <rect key="frame" x="91" y="64" width="233" height="113"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="113" id="OOK-mp-ilA"/>
+                                    <constraint firstAttribute="width" constant="233" id="UMF-wP-PVf"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="Welcome to ">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="30" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Actio">
+                                        <attributes>
+                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <font key="NSFont" size="38" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <constraints>
+                            <constraint firstItem="qzu-DE-2ge" firstAttribute="top" secondItem="a6B-kB-Dq6" secondAttribute="top" constant="20" id="3sr-Yf-6eX"/>
+                            <constraint firstItem="2Qf-dR-d8L" firstAttribute="top" secondItem="ta8-Up-DKu" secondAttribute="bottom" constant="18" id="4aR-XV-fE4"/>
+                            <constraint firstItem="a6B-kB-Dq6" firstAttribute="trailing" secondItem="ta8-Up-DKu" secondAttribute="trailing" constant="20" id="IH4-j9-gme"/>
+                            <constraint firstItem="ta8-Up-DKu" firstAttribute="top" secondItem="qzu-DE-2ge" secondAttribute="bottom" constant="-19" id="YpJ-pf-GyG"/>
+                            <constraint firstItem="qzu-DE-2ge" firstAttribute="leading" secondItem="a6B-kB-Dq6" secondAttribute="leading" constant="91" id="h30-rs-lRh"/>
+                            <constraint firstItem="a6B-kB-Dq6" firstAttribute="trailing" secondItem="2Qf-dR-d8L" secondAttribute="trailing" constant="41" id="lYo-uJ-FAy"/>
+                            <constraint firstItem="ta8-Up-DKu" firstAttribute="leading" secondItem="a6B-kB-Dq6" secondAttribute="leading" constant="20" id="qpD-ou-Gbr"/>
+                            <constraint firstItem="a6B-kB-Dq6" firstAttribute="trailing" secondItem="qzu-DE-2ge" secondAttribute="trailing" constant="90" id="uSz-Zy-IH1"/>
+                            <constraint firstItem="2Qf-dR-d8L" firstAttribute="leading" secondItem="a6B-kB-Dq6" secondAttribute="leading" constant="42" id="z8L-rs-9Jz"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="a6B-kB-Dq6"/>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="welcome-Image" width="366.5" height="328.5"/>
+    </resources>
 </document>
