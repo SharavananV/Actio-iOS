@@ -107,10 +107,19 @@ class SubscriberIDViewController: UIViewController ,UIScrollViewDelegate{
                 print(response,"subscription")
                 if let resultDict = data as? [String: Any] {
                     print(resultDict)
+                    if ((resultDict["parentIsd"] as? String) != nil) {
+                        self.parendIsdString = (resultDict["parentIsd"] as? String)!
+
+                    }
+                    if ((resultDict["parentMobile"] as? String) != nil) {
+                        self.parentMobileString = (resultDict["parentMobile"] as? String)!
+
+                    }
+                    if ((resultDict["parentName"] as? String) != nil) {
+                        self.parentNameString = (resultDict["parentName"] as? String)!
+
+                    }
                     self.currentUserStatus = (resultDict["currentUserStatus"] as? String)!
-                    self.parendIsdString = (resultDict["parentIsd"] as? String)!
-                    self.parentMobileString = (resultDict["parentMobile"] as? String)!
-                    self.parentNameString = (resultDict["parentName"] as? String)!
                      
                     
                     let parentNameNumberAttrs1 = [NSAttributedString.Key.font: AppFont.PoppinsSemiBold(size: 18), NSAttributedString.Key.foregroundColor : AppColor.PurpleColor()]
@@ -120,8 +129,6 @@ class SubscriberIDViewController: UIViewController ,UIScrollViewDelegate{
                     
                     parentNameNumberAttributedString1.append(parentNameNumberAttributedString2)
                     self.subscriberNameLabel.attributedText = parentNameNumberAttributedString1
-                    
-                    
                     
                     let parentNameAttrs1 = [NSAttributedString.Key.font: AppFont.PoppinsRegular(size: 16), NSAttributedString.Key.foregroundColor : AppColor.PurpleColor()]
                     let parentNameAttributedString1 = NSMutableAttributedString(string: "Please enter the Subscriber ID of "+self.parentNameString, attributes:parentNameAttrs1 as [NSAttributedString.Key : Any])

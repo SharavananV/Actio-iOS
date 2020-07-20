@@ -730,10 +730,10 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="626"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u6z-Oy-mf6">
-                                                <rect key="frame" x="31" y="8" width="331" height="108"/>
+                                                <rect key="frame" x="19" y="8" width="375" height="108"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="108" id="WU1-C9-QZe"/>
-                                                    <constraint firstAttribute="width" constant="331" id="nmE-3p-5eW"/>
+                                                    <constraint firstAttribute="width" constant="375" id="nmE-3p-5eW"/>
                                                 </constraints>
                                                 <string key="text">Brito John, 04/22/1982 has requested to create a subscription under his name using your mobile number. Please Accept or Reject the request</string>
                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="16"/>
@@ -818,9 +818,9 @@
                                             <constraint firstAttribute="trailing" secondItem="Num-HO-aPu" secondAttribute="trailing" constant="52" id="1JN-cK-UX8"/>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="576" id="3Cr-93-4r6"/>
                                             <constraint firstItem="hpi-Qg-dFG" firstAttribute="top" secondItem="sth-YZ-yrx" secondAttribute="bottom" constant="72" id="4DP-8G-ya7"/>
-                                            <constraint firstItem="u6z-Oy-mf6" firstAttribute="leading" secondItem="XS3-5C-oV1" secondAttribute="leading" constant="31" id="4bX-8K-KDC"/>
+                                            <constraint firstItem="u6z-Oy-mf6" firstAttribute="leading" secondItem="XS3-5C-oV1" secondAttribute="leading" constant="19" id="4bX-8K-KDC"/>
                                             <constraint firstAttribute="width" constant="414" id="7hy-13-OjG"/>
-                                            <constraint firstAttribute="trailing" secondItem="u6z-Oy-mf6" secondAttribute="trailing" constant="52" id="C4j-qS-xAU"/>
+                                            <constraint firstAttribute="trailing" secondItem="u6z-Oy-mf6" secondAttribute="trailing" constant="20" id="C4j-qS-xAU"/>
                                             <constraint firstItem="Num-HO-aPu" firstAttribute="top" secondItem="u6z-Oy-mf6" secondAttribute="bottom" constant="8" id="DDT-yf-2hc"/>
                                             <constraint firstItem="g6Q-fp-cpB" firstAttribute="top" secondItem="Num-HO-aPu" secondAttribute="bottom" constant="41" id="Gnp-QP-GPj"/>
                                             <constraint firstItem="nXN-nf-qXC" firstAttribute="leading" secondItem="hpi-Qg-dFG" secondAttribute="trailing" constant="99" id="JRM-he-jAH"/>
@@ -874,7 +874,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mL5-V3-aAQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2142" y="-785"/>
+            <point key="canvasLocation" x="2139.130434782609" y="-785.054347826087"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Tqm-x8-SWs">
