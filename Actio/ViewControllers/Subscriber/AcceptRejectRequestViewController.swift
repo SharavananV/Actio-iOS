@@ -23,15 +23,19 @@ class AcceptRejectRequestViewController: UIViewController {
     var urlString = String()
     var childNameString = String()
     var childDobString = String()
-    var currentUserStatus = String()
+    var childUserStatus = String()
     var Mode = Int()
     var relationID = String()
-
-
     
+    var relations = ["Father","Mother"]
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let pickerView = UIPickerView()
+        pickerView.delegate = self
+        relationTextfield.inputView = pickerView
         
         self.rejectButton.layer.cornerRadius = 5.0
         self.rejectButton.clipsToBounds = true
@@ -47,14 +51,16 @@ class AcceptRejectRequestViewController: UIViewController {
     }
     
     @IBAction func rejectButtonAction(_ sender: Any) {
+        apiCall(childID: self.childID, Mode: self.Mode, relationID: self.relationID, Status: 2)
+
     }
     
     @IBAction func acceptButtonAction(_ sender: Any) {
         //performSegue(withIdentifier: "showBeforeApproval", sender: sender)
-        apiCall(childID: self.childID, Mode: <#T##String#>, relationID: self.relationID, Status: <#T##String#>)
+        apiCall(childID: self.childID, Mode: self.Mode, relationID: self.relationID, Status: 1)
         
     }
-    func apiCall(childID: String,Mode: String,relationID: String,Status:String) {
+    func apiCall(childID: String,Mode: Int,relationID: String,Status:Int) {
         urlString = parentApprovalUrl
         AF.request(urlString, method: .post, parameters: ["childID": childID,"Status": Status,"Mode": Mode,"relationID": relationID],encoding:JSONEncoding.default, headers: nil).responseJSON {
             response in
@@ -99,13 +105,12 @@ class AcceptRejectRequestViewController: UIViewController {
                     self.arNameLabel.attributedText = parentNameNumberAttributedString1
                     self.relationNameLabel.text = self.childNameString
                     
-                      if self.currentUserStatus == "5"{
+                    if self.childUserStatus == "7"{
                         self.Mode = 1
-                    } else if self.currentUserStatus == "6" {
+                    } else if self.childUserStatus == "8" {
                         self.Mode = 2
                     }
 
-                    
                     print(response,"fgfgfgfsg")
                 }
                 
@@ -116,5 +121,24 @@ class AcceptRejectRequestViewController: UIViewController {
         }
         
     }
+    
+}
+extension AcceptRejectRequestViewController : UIPickerViewDataSource, UIPickerViewDelegate {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return relations.count
+    }
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return relations[row]
+
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.relationTextfield.text = relations[row]
+
+    }
+    
     
 }

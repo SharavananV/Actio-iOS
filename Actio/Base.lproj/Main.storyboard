@@ -82,6 +82,7 @@
                         <segue destination="Fue-w0-wXz" kind="presentation" identifier="showChildSub" modalPresentationStyle="fullScreen" id="W7u-JL-15M"/>
                         <segue destination="Ywa-wb-3Vh" kind="presentation" identifier="showEnterParentID" modalPresentationStyle="fullScreen" id="WSG-t3-hnP"/>
                         <segue destination="FJj-qw-zzo" kind="presentation" identifier="showDashboard" modalPresentationStyle="fullScreen" id="bvK-Er-Hyf"/>
+                        <segue destination="Fp7-Uj-FQF" kind="presentation" identifier="showBeforeApproval" modalPresentationStyle="fullScreen" id="edO-MK-xxW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cP9-OW-6L3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -253,6 +254,7 @@
                         <segue destination="vv4-Cd-kIi" kind="presentation" identifier="showDashboard" modalPresentationStyle="fullScreen" id="Cd1-lU-7aD"/>
                         <segue destination="vAX-4q-VFK" kind="presentation" identifier="showOTP" modalPresentationStyle="fullScreen" id="2KU-G2-0an"/>
                         <segue destination="Ywa-wb-3Vh" kind="presentation" identifier="showEnterParentID" modalPresentationStyle="fullScreen" id="b20-Lc-qVC"/>
+                        <segue destination="Fp7-Uj-FQF" kind="presentation" identifier="showBeforeApproval" modalPresentationStyle="fullScreen" id="Y5Q-sF-ehq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nme-gK-eJA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -766,7 +768,7 @@
                                                     <constraint firstAttribute="width" constant="137" id="ClG-W6-cSD"/>
                                                     <constraint firstAttribute="height" constant="34" id="HLz-2p-Yvj"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="13"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -1220,8 +1222,9 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Cd1-lU-7aD"/>
-        <segue reference="WSG-t3-hnP"/>
-        <segue reference="vR9-e8-8w5"/>
+        <segue reference="Y5Q-sF-ehq"/>
+        <segue reference="b20-Lc-qVC"/>
+        <segue reference="2KU-G2-0an"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Icon awesome-user-alt" width="16" height="16"/>

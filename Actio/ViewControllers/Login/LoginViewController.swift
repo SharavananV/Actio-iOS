@@ -26,6 +26,7 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         userNameTextField.setBorderColor(width: 1.0, color: AppColor.TextFieldBorderColor())
         passwordTextField.setBorderColor(width: 1.0, color: AppColor.TextFieldBorderColor())
         self.loginButton.applyGradient(colours: [AppColor.OrangeColor(),AppColor.RedColor()])
@@ -107,6 +108,8 @@ class LoginViewController: UIViewController {
                 print(response,"fgfgfgfsg")
                 if let resultDict = data as? [String: Any], let successText = resultDict["msg"] as? String, successText == "Login Success"{
                     UDHelper.setAuthToken(resultDict["token"] as! String)
+                    UDHelper.setUserId(resultDict["subscriberID"] as! String)
+                    UDHelper.setUserLoggedIn(true)
                     self.navigateBasedOnStatus(resultDict["userStatus"] as! String)
                     
                 }else {

@@ -33,6 +33,30 @@ class UDHelper: NSObject,XMLParserDelegate
         UserDefaults.standard.synchronize()
     }
     
+    // MARK: UserId
+    class func getUserId()-> String {
+        let getUserId =  UserDefaults.standard.object(forKey: "USER_ID")
+        return getUserId != nil ? getUserId as! String : ""
+    }
+    class func setUserId(_ userId:String)-> Void
+    {
+        UserDefaults.standard.set(userId, forKey: "USER_ID")
+        UserDefaults.standard.synchronize()
+    }
+    
+    // MARK: UserLoggedIn
+    class func getUserLoggedIn()-> Bool {
+        let getUserIogged =  UserDefaults.standard.object(forKey: "USER_LOGGEDIN")
+        return (getUserIogged != nil)
+    }
+    class func setUserLoggedIn(_ userLoggedIn:Bool)-> Void
+    {
+        UserDefaults.standard.set(userLoggedIn, forKey: "USER_LOGGEDIN")
+        UserDefaults.standard.synchronize()
+    }
+
+
+    
     // MARK: User Status
     class func getUserStatus()-> String {
         let getUserStatus =  UserDefaults.standard.object(forKey: "USER_STATUS")
@@ -47,6 +71,8 @@ class UDHelper: NSObject,XMLParserDelegate
     class func resetUserStuff() {
         setAuthToken("")
         setUserStatus("")
+        setUserId("")
+        setUserLoggedIn(false)
     }
 }
     

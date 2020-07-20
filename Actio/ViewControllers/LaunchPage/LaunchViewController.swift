@@ -47,8 +47,10 @@ class LaunchViewController: UIViewController {
     
     private func navigateBasedOnStatus(_ status: Int) {
         switch status {
-        case 1, 7, 8, 9:
+        case 1,8, 9:
             self.performSegue(withIdentifier: "showDashboard", sender: self)
+        case 7:
+            self.performSegue(withIdentifier: "showBeforeApproval", sender: self)
         case 5,6:
             self.performSegue(withIdentifier: "showEnterParentID", sender: self)
         case 3,4:
