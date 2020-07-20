@@ -67,6 +67,11 @@ class AppColor: UIColor {
         
         return self.HexToColor(hexString: "#511845")
     }
+    class func GreyColor() -> UIColor {
+        
+        return self.HexToColor(hexString: "#505050")
+    }
+
     class func RedColor() -> UIColor {
         
         return self.HexToColor(hexString: "#C70039")

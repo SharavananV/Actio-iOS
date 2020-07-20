@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class AcceptRejectRequestViewController: UIViewController {
 
@@ -16,6 +17,10 @@ class AcceptRejectRequestViewController: UIViewController {
     @IBOutlet var relationNameLabel: UILabel!
     @IBOutlet var relationTextfield: UITextField!
     @IBOutlet var arNameLabel: UILabel!
+    var childID = String()
+    var parentID = String()
+    var urlString = String()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,6 +32,7 @@ class AcceptRejectRequestViewController: UIViewController {
         self.rejectButton.applyGradient(colours: [AppColor.OrangeColor(),AppColor.RedColor()])
         self.acceptButton.applyGradient(colours: [AppColor.OrangeColor(),AppColor.RedColor()])
         self.arHeaderView.applyGradient(colours: [AppColor.OrangeColor(),AppColor.RedColor()])
+        apiParentInitCall(childID: "7265")
 
 
     }
@@ -37,14 +43,41 @@ class AcceptRejectRequestViewController: UIViewController {
     @IBAction func acceptButtonAction(_ sender: Any) {
         performSegue(withIdentifier: "showBeforeApproval", sender: sender)
     }
-    /*
-    // MARK: - Navigation
+       func apiCall(childID: String,Mode: String,relationID: String,Status:String) {
+             urlString = parentApprovalUrl
+             AF.request(urlString, method: .post, parameters: ["childID": childID,"Status": Status,"Mode": Mode,"relationID": relationID],encoding:JSONEncoding.default, headers: nil).responseJSON {
+                 response in
+                 switch response.result {
+                 case .success (let data):
+                     print(response,"fgfgfgfsg")
+                     
+                 case .failure(_):
+                     print("JSON")
+                 }
+                 
+             }
+             
+         }
+        
+        
+        func apiParentInitCall(childID: String) {
+            let headers : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"",
+            "Content-Type": "application/json"]
+            urlString = parentApprovalInitUrl
+            AF.request(urlString, method: .post, parameters: ["childID": childID],encoding:JSONEncoding.default, headers: headers).responseJSON {
+                response in
+                switch response.result {
+                case .success (let data):
+                    self.childID = childID
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+                    print(response,"fgfgfgfsg")
+                    
+                case .failure(_):
+                    print("JSON")
+                }
+                
+            }
+            
+        }
+        
     }
-    */
-
-}

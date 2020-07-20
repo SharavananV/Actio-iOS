@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1Tf-Zr-8Z4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1Tf-Zr-8Z4">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -250,6 +250,9 @@
                         <outlet property="loginButton" destination="nsn-LU-Akv" id="VLk-JX-Lqs"/>
                         <outlet property="passwordTextField" destination="Skb-9T-12d" id="ISI-ZS-e5e"/>
                         <outlet property="userNameTextField" destination="Y5o-mk-fRB" id="E3k-9c-d0c"/>
+                        <segue destination="vv4-Cd-kIi" kind="presentation" identifier="showDashboard" modalPresentationStyle="fullScreen" id="Cd1-lU-7aD"/>
+                        <segue destination="vAX-4q-VFK" kind="presentation" identifier="showOTP" modalPresentationStyle="fullScreen" id="2KU-G2-0an"/>
+                        <segue destination="Ywa-wb-3Vh" kind="presentation" identifier="showEnterParentID" modalPresentationStyle="fullScreen" id="b20-Lc-qVC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nme-gK-eJA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1071,7 +1074,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eDZ-tj-xog" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2802.898550724638" y="1021.4673913043479"/>
+            <point key="canvasLocation" x="2803" y="953"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="OEF-18-yv7">
@@ -1174,16 +1177,9 @@
                                     <action selector="logoutAction:" destination="LCS-UO-QEb" eventType="touchUpInside" id="JXw-hH-Xsp"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="version: K 5.1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d7A-Kw-f81">
-                                <rect key="frame" x="156.66666666666666" y="636" width="100.99999999999997" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="d7A-Kw-f81" firstAttribute="centerX" secondItem="H4d-zK-1PF" secondAttribute="centerX" id="1TJ-bT-7as"/>
                             <constraint firstItem="MeP-PN-u4d" firstAttribute="top" secondItem="zYX-YD-RTc" secondAttribute="top" id="2SC-zZ-ZAo"/>
                             <constraint firstAttribute="trailing" secondItem="aOH-vH-1hl" secondAttribute="trailing" id="8rK-Dj-dZp"/>
                             <constraint firstItem="aOH-vH-1hl" firstAttribute="leading" secondItem="H4d-zK-1PF" secondAttribute="leading" id="PSh-M9-OeZ"/>
@@ -1194,7 +1190,6 @@
                             <constraint firstItem="GoX-8E-Ihn" firstAttribute="centerX" secondItem="H4d-zK-1PF" secondAttribute="centerX" id="sZz-Mg-XPr"/>
                             <constraint firstItem="GoX-8E-Ihn" firstAttribute="top" secondItem="aOH-vH-1hl" secondAttribute="bottom" constant="10" id="sbC-8d-Xjx"/>
                             <constraint firstItem="MeP-PN-u4d" firstAttribute="height" secondItem="H4d-zK-1PF" secondAttribute="height" multiplier="0.25" id="wIp-el-9Jm"/>
-                            <constraint firstItem="aOH-vH-1hl" firstAttribute="top" secondItem="d7A-Kw-f81" secondAttribute="bottom" constant="8" id="zQu-p6-KXS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zYX-YD-RTc"/>
                     </view>
@@ -1223,6 +1218,11 @@
             <point key="canvasLocation" x="2802.898550724638" y="3950.54347826087"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Cd1-lU-7aD"/>
+        <segue reference="WSG-t3-hnP"/>
+        <segue reference="vR9-e8-8w5"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="Icon awesome-user-alt" width="16" height="16"/>
         <image name="Icon material-home" width="19" height="16"/>

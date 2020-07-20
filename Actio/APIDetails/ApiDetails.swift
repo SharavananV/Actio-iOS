@@ -16,3 +16,6 @@ let validateOTPUrl = "http://203.223.189.158:8085/v1/validateotp"
 let userStatusUrl = "http://203.223.189.158:8085/v1/subscriber/userstatusInfo"
 let parentIdUrl = "http://203.223.189.158:8085/v1/subscriber/parentID"
 let logoutUrl = "http://203.223.189.158:8085/v1/logout"
+let parentApprovalUrl = "http://203.223.189.158:8085/v1/subscriber/parentApproval"
+let parentApprovalInitUrl =  "http://203.223.189.158:8085/v1/subscriber/parentApprovalInit"
+

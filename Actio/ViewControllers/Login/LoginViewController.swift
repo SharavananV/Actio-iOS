@@ -88,6 +88,12 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginButtonAction(_ sender: Any) {
+        
+//        var popUpWindow: PopUpWindow!
+//        popUpWindow = PopUpWindow(title: "Welcome on-board", text: "Brito John", buttontext: "OK")
+//        self.present(popUpWindow, animated: true, completion: nil)
+
+        
         apiCall(username: userNameTextField.text!, password: passwordTextField.text!,Mode: "3", deviceToken: UDHelper.getDeviceToken())
         
     }
@@ -101,9 +107,7 @@ class LoginViewController: UIViewController {
                 print(response,"fgfgfgfsg")
                 if let resultDict = data as? [String: Any], let successText = resultDict["msg"] as? String, successText == "Login Success"{
                     UDHelper.setAuthToken(resultDict["token"] as! String)
-                    let otpNavigate = self.storyboard?.instantiateViewController(withIdentifier: "OtpViewController") as! OtpViewController
-                    self.navigationController?.pushViewController(otpNavigate, animated: false)
-
+                    self.navigateBasedOnStatus(resultDict["userStatus"] as! String)
                     
                 }else {
                    if let resultDict = data as? [String: Any], let invalidText = resultDict["msg"] as? String, invalidText == "Invalid Login"{
@@ -116,6 +120,20 @@ class LoginViewController: UIViewController {
             
         }
         
+    }
+    
+    private func navigateBasedOnStatus(_ status: String) {
+        switch status {
+        case "1", "7", "8", "9":
+            self.performSegue(withIdentifier: "showDashboard", sender: self)
+            break
+        case "5","6":
+            self.performSegue(withIdentifier: "showEnterParentID", sender: self)
+        case "3","4":
+            self.performSegue(withIdentifier: "showOTP", sender: self)
+        default:
+            self.performSegue(withIdentifier: "LoginPage", sender: self)
+        }
     }
     
     
