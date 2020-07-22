@@ -18,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     let gcmMessageIDKey = "gcm.message_id"
+    var parentID = String()
+
 
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -30,6 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared().isEnabled = true
         FirebaseApp.configure()
         Messaging.messaging().isAutoInitEnabled = true
+        
         
        if #available(iOS 10.0, *) {
           // For iOS 10 display notification (sent via APNS)
@@ -65,13 +68,54 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func redirect(to view: String, with params: [String: String]) {
+        self.parentID = params["p"]!
+        print(self.parentID)
         if let topViewController = self.window?.topViewController() {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "AcceptRejectRequestViewController")
-            
-            topViewController.present(vc, animated: false, completion: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "AcceptRejectRequestViewController") as! AcceptRejectRequestViewController
+            if UDHelper.getUserLoggedIn() == true {
+                if parentID != "" {
+                    if parentID == UDHelper.getUserId() {
+                        vc.apiParentInitCall(childID: "7347")
+                        vc.modalPresentationStyle = .fullScreen
+                        topViewController.present(vc, animated: false, completion: nil)
+                        
+                    }
+                    else {
+                        let alertController = UIAlertController(title: "Title", message: "Message", preferredStyle: .actionSheet)
+                        let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
+                                UIAlertAction in
+                                NSLog("OK Pressed")
+                            }
+                        let cancelAction = UIAlertAction(title: "CANCEL", style: UIAlertAction.Style.cancel) {
+                                UIAlertAction in
+                                NSLog("Cancel Pressed")
+                            }
+                        alertController.addAction(okAction)
+                        alertController.addAction(cancelAction)
+                        self.window?.rootViewController?.present(alertController, animated: true, completion: nil)
+                        print("Child Login")
+                    }
+                }
+                else {
+                  
+                }
+            }
+            else {
+                print("Login Page")
+                if let topViewController = self.window?.topViewController() {
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let loginVc = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+                    loginVc.modalPresentationStyle = .fullScreen
+                    topViewController.present(loginVc, animated: false, completion: nil)
+
+            }
+
         }
     }
+    }
+    
+    
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
       // If you are receiving a notification message while your app is in the background,

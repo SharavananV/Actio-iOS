@@ -71,6 +71,8 @@ class SubscriberIDViewController: UIViewController ,UIScrollViewDelegate{
                 if let resultDict = data as? [String: Any] {
                     if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BeforeApprovalViewController") as? BeforeApprovalViewController {
                         controller.parentName = self.parentNameString
+                        controller.modalPresentationStyle = .fullScreen
+
                         self.present(controller, animated: false, completion: nil)
                     }
                 }

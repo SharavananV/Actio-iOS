@@ -26,8 +26,7 @@ class AcceptRejectRequestViewController: UIViewController {
     var childUserStatus = String()
     var Mode = Int()
     var relationID = String()
-    
-    var relations = ["Father","Mother"]
+    var addRelationArray = [String]()
 
     
     override func viewDidLoad() {
@@ -37,15 +36,33 @@ class AcceptRejectRequestViewController: UIViewController {
         pickerView.delegate = self
         relationTextfield.inputView = pickerView
         
+        
+        //FIXME: - Status bar color
+        
+         let view: UIView = UIView.init(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIApplication.shared.statusBarFrame.height))
+
+         view.backgroundColor = AppColor.OrangeColor()
+
+         self.view.addSubview(view)
+
+
+        
         self.rejectButton.layer.cornerRadius = 5.0
         self.rejectButton.clipsToBounds = true
         self.acceptButton.layer.cornerRadius = 5.0
         self.acceptButton.clipsToBounds = true
-        relationTextfield.setBorderColor(width: 1.0, color: AppColor.TextFieldBorderColor())
+       // relationTextfield.setBorderColor(width: 1.0, color: AppColor.TextFieldBorderColor())
         self.rejectButton.applyGradient(colours: [AppColor.OrangeColor(),AppColor.RedColor()])
         self.acceptButton.applyGradient(colours: [AppColor.OrangeColor(),AppColor.RedColor()])
         self.arHeaderView.applyGradient(colours: [AppColor.OrangeColor(),AppColor.RedColor()])
-        apiParentInitCall(childID: "7285")
+        apiParentInitCall(childID: "7347")
+        addRelationArray = []
+        
+        var bottomLine = CALayer()
+        bottomLine.frame = CGRect(x: 0.0, y: self.relationTextfield.frame.height - 1, width: self.relationTextfield.frame.width, height: 1.0)
+        bottomLine.backgroundColor = UIColor.black.cgColor
+        relationTextfield.borderStyle = UITextField.BorderStyle.none
+        relationTextfield.layer.addSublayer(bottomLine)
         
         
     }
@@ -88,6 +105,11 @@ class AcceptRejectRequestViewController: UIViewController {
                 self.childID = childID
                 if let resultDict = data as? [String: Any] {
                     print(resultDict)
+                    let val = resultDict["relation"] as? NSArray
+                    for data in val! {
+                        self.addRelationArray.append((data as AnyObject).value(forKey: "bond") as! String)
+                        }
+                    
                     if ((resultDict["name"] as? String) != nil) {
                         self.childNameString = (resultDict["name"] as? String)!
                         
@@ -111,7 +133,6 @@ class AcceptRejectRequestViewController: UIViewController {
                         self.Mode = 2
                     }
 
-                    print(response,"fgfgfgfsg")
                 }
                 
             case .failure(_):
@@ -129,14 +150,21 @@ extension AcceptRejectRequestViewController : UIPickerViewDataSource, UIPickerVi
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return relations.count
+        return addRelationArray.count
     }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return relations[row]
+        return "i am " + "" + addRelationArray[row] + "" + " of "
 
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.relationTextfield.text = relations[row]
+        self.relationTextfield.text = "i am " + "" + addRelationArray[row] + "" + " of "
+        if addRelationArray[row] == "Father" {
+            self.relationID = "1"
+            
+        }else if addRelationArray[row] == "Mother"   {
+            self.relationID = "2"
+            
+        }
 
     }
     

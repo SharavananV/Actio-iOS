@@ -53,6 +53,7 @@ class HomePageViewController: UIViewController, LogoutDelegate {
         self.dismiss(animated: true) {
             if let topController = UIApplication.shared.keyWindow()?.topViewController() {
                 let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginNavigation")
+                controller.modalPresentationStyle = .fullScreen
                 topController.present(controller, animated: false, completion: nil)
             }
         }

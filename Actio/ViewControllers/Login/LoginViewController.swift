@@ -21,7 +21,8 @@ class LoginViewController: UIViewController {
     var iconClick = true
     let button = UIButton(type: .custom)
     var urlString = String()
-    
+    var userNameString = String()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,10 +108,24 @@ class LoginViewController: UIViewController {
             case .success (let data):
                 print(response,"fgfgfgfsg")
                 if let resultDict = data as? [String: Any], let successText = resultDict["msg"] as? String, successText == "Login Success"{
+                    
+                    if (resultDict["userStatus"] as! String) == "1" {
+                        if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomeAlertViewController") as? WelcomeAlertViewController {
+                            self.userNameString = resultDict["fullName"] as! String
+                            controller.loggedUserName = self.userNameString
+                        
+                            controller.modalPresentationStyle = .fullScreen
+
+                            self.present(controller, animated: false, completion: nil)
+                        }
+
+                    }
+                    
                     UDHelper.setAuthToken(resultDict["token"] as! String)
                     UDHelper.setUserId(resultDict["subscriberID"] as! String)
                     UDHelper.setUserLoggedIn(true)
                     self.navigateBasedOnStatus(resultDict["userStatus"] as! String)
+                    
                     
                 }else {
                    if let resultDict = data as? [String: Any], let invalidText = resultDict["msg"] as? String, invalidText == "Invalid Login"{
