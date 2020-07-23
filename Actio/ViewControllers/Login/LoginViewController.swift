@@ -22,7 +22,7 @@ class LoginViewController: UIViewController {
     let button = UIButton(type: .custom)
     var urlString = String()
     var userNameString = String()
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,16 +46,16 @@ class LoginViewController: UIViewController {
         
         self.loginButton.layer.cornerRadius = 5.0
         self.loginButton.clipsToBounds = true
-
+        
         //FIXME: - Status bar color
         
-         let view: UIView = UIView.init(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIApplication.shared.statusBarFrame.height))
-
-         view.backgroundColor = AppColor.OrangeColor()
-
-         self.view.addSubview(view)
-
-
+        let view: UIView = UIView.init(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIApplication.shared.statusBarFrame.height))
+        
+        view.backgroundColor = AppColor.OrangeColor()
+        
+        self.view.addSubview(view)
+        
+        
         
     }
     
@@ -69,7 +69,7 @@ class LoginViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
-
+    
     @objc func secureIconClickAction() {
         if(iconClick == true) {
             self.passwordTextField.isSecureTextEntry = false
@@ -77,8 +77,6 @@ class LoginViewController: UIViewController {
         } else {
             self.passwordTextField.isSecureTextEntry = true
             self.button.setImage(UIImage(named: "hidden-eye.png"), for: .normal)
-            
-            
         }
         
         iconClick = !iconClick
@@ -108,25 +106,34 @@ class LoginViewController: UIViewController {
                         if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomeAlertViewController") as? WelcomeAlertViewController {
                             self.userNameString = resultDict["fullName"] as! String
                             controller.loggedUserName = self.userNameString
-                        
+                            
                             controller.modalPresentationStyle = .fullScreen
-
+                            
                             self.present(controller, animated: false, completion: nil)
                         }
-
+                        
                     }
                     
                     UDHelper.setAuthToken(resultDict["token"] as! String)
                     UDHelper.setUserId(resultDict["subscriberID"] as! String)
                     UDHelper.setUserLoggedIn(true)
                     self.navigateBasedOnStatus(resultDict["userStatus"] as! String)
-                    
-                    
-                }else {
-                   if let resultDict = data as? [String: Any], let invalidText = resultDict["msg"] as? String, invalidText == "Invalid Login"{
-                        self.view.makeToast(invalidText)
-                   }
                 }
+                else if let resultDict = data as? [String: Any], let invalidText = resultDict["msg"] as? String {
+                    self.view.makeToast(invalidText)
+                    
+                }
+                else {
+                    let resultDict = data as? [String: Any]
+                    if let status = resultDict!["status"] as? String, status == "422", let errors = resultDict!["errors"] as? [[String: Any]] {
+                        if let firstError = errors.first, let msg = firstError["msg"] as? String {
+                            self.view.makeToast(msg)
+                            
+                        }
+                        
+                    }
+                }
+                
             case .failure(_):
                 print("JSON")
             }

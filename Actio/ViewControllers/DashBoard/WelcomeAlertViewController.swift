@@ -25,9 +25,6 @@ class WelcomeAlertViewController: UIViewController {
         self.nameLabel.text = self.loggedUserName
         self.okButton.layer.cornerRadius = 5.0
         self.okButton.clipsToBounds = true
-
-        
-        // Do any additional setup after loading the view.
     }
     
     

@@ -40,7 +40,6 @@
 		8D94E08424AF1D0C00DBC46A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D94E08224AF1D0C00DBC46A /* LaunchScreen.storyboard */; };
 		8D94E08C24AF1D3600DBC46A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D94E08B24AF1D3600DBC46A /* LoginViewController.swift */; };
 		8D99566624C9515D006C3616 /* WelcomeAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D99566524C9515D006C3616 /* WelcomeAlertViewController.swift */; };
-		8D9EDEFC24C556AC00B6F343 /* PopUpWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9EDEFB24C556AC00B6F343 /* PopUpWindow.swift */; };
 		8DA048A824B328FF0099D528 /* Poppins-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8DA0489624B328FC0099D528 /* Poppins-ExtraBoldItalic.ttf */; };
 		8DA048A924B328FF0099D528 /* Poppins-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8DA0489724B328FC0099D528 /* Poppins-BlackItalic.ttf */; };
 		8DA048AA24B328FF0099D528 /* Poppins-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8DA0489824B328FC0099D528 /* Poppins-ExtraLightItalic.ttf */; };
@@ -122,7 +121,6 @@
 		8D94E08524AF1D0C00DBC46A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D94E08B24AF1D3600DBC46A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8D99566524C9515D006C3616 /* WelcomeAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeAlertViewController.swift; sourceTree = "<group>"; };
-		8D9EDEFB24C556AC00B6F343 /* PopUpWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpWindow.swift; sourceTree = "<group>"; };
 		8DA0489624B328FC0099D528 /* Poppins-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
 		8DA0489724B328FC0099D528 /* Poppins-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-BlackItalic.ttf"; sourceTree = "<group>"; };
 		8DA0489824B328FC0099D528 /* Poppins-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
@@ -377,7 +375,6 @@
 				8DF7863B24B846E900062261 /* SubscriberIDViewController.swift */,
 				8DA3055924BC310D0090142B /* AcceptRejectRequestViewController.swift */,
 				18F2F9BF24C1C367007CBBC0 /* BeforeApprovalViewController.swift */,
-				8D9EDEFB24C556AC00B6F343 /* PopUpWindow.swift */,
 			);
 			path = Subscriber;
 			sourceTree = "<group>";
@@ -525,7 +522,6 @@
 				183384CA24B4A94C009911A8 /* JustTextTableViewCell.swift in Sources */,
 				18F6A07224B57D18000ACDF1 /* SelfSizingTextView.swift in Sources */,
 				8DA3055A24BC310D0090142B /* AcceptRejectRequestViewController.swift in Sources */,
-				8D9EDEFC24C556AC00B6F343 /* PopUpWindow.swift in Sources */,
 				8DF7863C24B846E900062261 /* SubscriberIDViewController.swift in Sources */,
 				1841F19624B480680021D131 /* FootnoteButtonTableViewCell.swift in Sources */,
 				183384CC24B4A9BF009911A8 /* SwitchTableViewCell.swift in Sources */,
