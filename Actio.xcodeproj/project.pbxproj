@@ -27,7 +27,6 @@
 		18F6A07624B5A4FD000ACDF1 /* RegisterDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F6A07524B5A4FD000ACDF1 /* RegisterDatasource.swift */; };
 		18F6A07824B5AB76000ACDF1 /* DependencyProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F6A07724B5AB76000ACDF1 /* DependencyProvider.swift */; };
 		38754D908539C921C392B92E /* Pods_Actio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADD5218CD43054BEE6FAD8D4 /* Pods_Actio.framework */; };
-		8D18AE9B24C855700082744D /* WelcomeAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18AE9A24C855700082744D /* WelcomeAlertViewController.swift */; };
 		8D21855D24B6E383002688A8 /* OtpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D21855C24B6E383002688A8 /* OtpViewController.swift */; };
 		8D21855F24B6ED5F002688A8 /* VPMOTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D21855E24B6ED5F002688A8 /* VPMOTPView.swift */; };
 		8D21856124B6ED75002688A8 /* VPMOTPTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D21856024B6ED75002688A8 /* VPMOTPTextField.swift */; };
@@ -40,6 +39,7 @@
 		8D94E08124AF1D0C00DBC46A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D94E08024AF1D0C00DBC46A /* Assets.xcassets */; };
 		8D94E08424AF1D0C00DBC46A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D94E08224AF1D0C00DBC46A /* LaunchScreen.storyboard */; };
 		8D94E08C24AF1D3600DBC46A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D94E08B24AF1D3600DBC46A /* LoginViewController.swift */; };
+		8D99566624C9515D006C3616 /* WelcomeAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D99566524C9515D006C3616 /* WelcomeAlertViewController.swift */; };
 		8D9EDEFC24C556AC00B6F343 /* PopUpWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9EDEFB24C556AC00B6F343 /* PopUpWindow.swift */; };
 		8DA048A824B328FF0099D528 /* Poppins-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8DA0489624B328FC0099D528 /* Poppins-ExtraBoldItalic.ttf */; };
 		8DA048A924B328FF0099D528 /* Poppins-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8DA0489724B328FC0099D528 /* Poppins-BlackItalic.ttf */; };
@@ -107,7 +107,6 @@
 		18F6A07524B5A4FD000ACDF1 /* RegisterDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDatasource.swift; sourceTree = "<group>"; };
 		18F6A07724B5AB76000ACDF1 /* DependencyProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyProvider.swift; sourceTree = "<group>"; };
 		267AD54F159D35EB605378D6 /* Pods-Actio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Actio.debug.xcconfig"; path = "Target Support Files/Pods-Actio/Pods-Actio.debug.xcconfig"; sourceTree = "<group>"; };
-		8D18AE9A24C855700082744D /* WelcomeAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeAlertViewController.swift; sourceTree = "<group>"; };
 		8D21855C24B6E383002688A8 /* OtpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpViewController.swift; sourceTree = "<group>"; };
 		8D21855E24B6ED5F002688A8 /* VPMOTPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPMOTPView.swift; sourceTree = "<group>"; };
 		8D21856024B6ED75002688A8 /* VPMOTPTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPMOTPTextField.swift; sourceTree = "<group>"; };
@@ -122,6 +121,7 @@
 		8D94E08324AF1D0C00DBC46A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8D94E08524AF1D0C00DBC46A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D94E08B24AF1D3600DBC46A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		8D99566524C9515D006C3616 /* WelcomeAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeAlertViewController.swift; sourceTree = "<group>"; };
 		8D9EDEFB24C556AC00B6F343 /* PopUpWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpWindow.swift; sourceTree = "<group>"; };
 		8DA0489624B328FC0099D528 /* Poppins-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
 		8DA0489724B328FC0099D528 /* Poppins-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-BlackItalic.ttf"; sourceTree = "<group>"; };
@@ -315,7 +315,7 @@
 				8DCBAB5824BF2D37009E8B7F /* HomePageViewController.swift */,
 				8DCBAB5C24BF3ADC009E8B7F /* TabBarViewController.swift */,
 				18A9750824C04972001B5BB3 /* MenuViewController.swift */,
-				8D18AE9A24C855700082744D /* WelcomeAlertViewController.swift */,
+				8D99566524C9515D006C3616 /* WelcomeAlertViewController.swift */,
 			);
 			path = DashBoard;
 			sourceTree = "<group>";
@@ -541,7 +541,7 @@
 				8D21856124B6ED75002688A8 /* VPMOTPTextField.swift in Sources */,
 				18BBAC7D24B5B99900306A8F /* ActioImagePicker.swift in Sources */,
 				183384C624B49CDD009911A8 /* ActioGradientButton.swift in Sources */,
-				8D18AE9B24C855700082744D /* WelcomeAlertViewController.swift in Sources */,
+				8D99566624C9515D006C3616 /* WelcomeAlertViewController.swift in Sources */,
 				1841F19924B480F10021D131 /* UIKitExtensions.swift in Sources */,
 				18BBAC7F24B5E90A00306A8F /* Validator.swift in Sources */,
 				18F6A07824B5AB76000ACDF1 /* DependencyProvider.swift in Sources */,

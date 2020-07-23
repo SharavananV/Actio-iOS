@@ -82,7 +82,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         
                     }
                     else {
-                        let alertController = UIAlertController(title: "Title", message: "Message", preferredStyle: .actionSheet)
+                        let alertController = UIAlertController(title: "Test", message: "Message", preferredStyle: .actionSheet)
                         let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
                                 UIAlertAction in
                                 NSLog("OK Pressed")

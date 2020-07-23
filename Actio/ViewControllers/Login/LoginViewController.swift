@@ -91,11 +91,6 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginButtonAction(_ sender: Any) {
         
-//        var popUpWindow: PopUpWindow!
-//        popUpWindow = PopUpWindow(title: "Welcome on-board", text: "Brito John", buttontext: "OK")
-//        self.present(popUpWindow, animated: true, completion: nil)
-
-        
         apiCall(username: userNameTextField.text!, password: passwordTextField.text!,Mode: "3", deviceToken: UDHelper.getDeviceToken())
         
     }
