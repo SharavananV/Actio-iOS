@@ -100,7 +100,9 @@ class LoginViewController: UIViewController {
             switch response.result {
             case .success (let data):
                 print(response,"fgfgfgfsg")
-                if let resultDict = data as? [String: Any], let successText = resultDict["msg"] as? String, successText == "Login Success"{
+                
+                
+                if let resultDict = data as? [String: Any], let successText = resultDict["status"] as? String, successText == "200"{
                     
                     if (resultDict["userStatus"] as! String) == "1" {
                         if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomeAlertViewController") as? WelcomeAlertViewController {

@@ -10,11 +10,11 @@ import UIKit
 import SideMenu
 
 class HomePageViewController: UIViewController, LogoutDelegate {
-
+    
     @IBOutlet var homeCollectionView: UICollectionView!
     var arrHomeImage =  [String]()
     var arrHomeTitle =  [String]()
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         homeCollectionView.delegate = self
@@ -22,17 +22,15 @@ class HomePageViewController: UIViewController, LogoutDelegate {
         
         //FIXME: - Status bar color
         
-         let view: UIView = UIView.init(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIApplication.shared.statusBarFrame.height))
-
-         view.backgroundColor = AppColor.OrangeColor()
-
-         self.view.addSubview(view)
-
+        let view: UIView = UIView.init(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIApplication.shared.statusBarFrame.height))
         
-      //  self.navigationController?.navigationBar.applyGradient(colours: [AppColor.OrangeColor(),AppColor.RedColor()])
+        view.backgroundColor = AppColor.OrangeColor()
+        
+        self.view.addSubview(view)
         
         self.arrHomeTitle = ["Chat History","Events","Booking History"]
         self.arrHomeImage = ["Icon-Chat","Icon-Event.png","Icon-Seat.png"]
+        
         let menuButton = UIBarButtonItem(image: UIImage(named: "menu-white"), style: .plain, target: self, action: #selector(self.handleMenuToggle))
         self.navigationItem.leftBarButtonItem  = menuButton
     }
@@ -48,7 +46,7 @@ class HomePageViewController: UIViewController, LogoutDelegate {
         menu.isNavigationBarHidden = true
         present(menu, animated: true, completion: nil)
     }
-
+    
     func presentLogin() {
         self.dismiss(animated: true) {
             if let topController = UIApplication.shared.keyWindow()?.topViewController() {
@@ -75,7 +73,7 @@ extension HomePageViewController: UICollectionViewDelegate,UICollectionViewDataS
         cell.homeBackgroundView.dropShadow(color: .lightGray, opacity: 0.5, offSet: CGSize(width: 1, height: 1), radius: 3, scale: true)
         cell.homeBackgroundView.layer.cornerRadius = 5.0
         cell.homeBackgroundView.clipsToBounds = true
-
+        
         return cell
     }
     
@@ -102,19 +100,19 @@ extension HomePageViewController: UICollectionViewDelegate,UICollectionViewDataS
 }
 extension UIView {
     func dropShadow(color: UIColor, opacity: Float = 0.16, offSet: CGSize, radius: CGFloat = 10.0, scale: Bool = true) {
-    layer.masksToBounds = false
-    layer.shadowColor = color.cgColor
-    layer.shadowOpacity = opacity
-    layer.shadowOffset = offSet
-    layer.shadowRadius = radius
-
-    layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
-    layer.shouldRasterize = true
-    layer.rasterizationScale = scale ? UIScreen.main.scale : 1
-  }
+        layer.masksToBounds = false
+        layer.shadowColor = color.cgColor
+        layer.shadowOpacity = opacity
+        layer.shadowOffset = offSet
+        layer.shadowRadius = radius
+        
+        layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
+        layer.shouldRasterize = true
+        layer.rasterizationScale = scale ? UIScreen.main.scale : 1
+    }
 }
 extension UIImage {
-
+    
     func alpha(_ value:CGFloat) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
         draw(at: CGPoint.zero, blendMode: .normal, alpha: value)

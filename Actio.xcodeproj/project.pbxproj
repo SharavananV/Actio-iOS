@@ -40,6 +40,7 @@
 		8D94E08424AF1D0C00DBC46A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D94E08224AF1D0C00DBC46A /* LaunchScreen.storyboard */; };
 		8D94E08C24AF1D3600DBC46A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D94E08B24AF1D3600DBC46A /* LoginViewController.swift */; };
 		8D99566624C9515D006C3616 /* WelcomeAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D99566524C9515D006C3616 /* WelcomeAlertViewController.swift */; };
+		8D99566824C9784D006C3616 /* ChildLogoutWarningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D99566724C9784D006C3616 /* ChildLogoutWarningViewController.swift */; };
 		8DA048A824B328FF0099D528 /* Poppins-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8DA0489624B328FC0099D528 /* Poppins-ExtraBoldItalic.ttf */; };
 		8DA048A924B328FF0099D528 /* Poppins-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8DA0489724B328FC0099D528 /* Poppins-BlackItalic.ttf */; };
 		8DA048AA24B328FF0099D528 /* Poppins-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8DA0489824B328FC0099D528 /* Poppins-ExtraLightItalic.ttf */; };
@@ -121,6 +122,7 @@
 		8D94E08524AF1D0C00DBC46A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D94E08B24AF1D3600DBC46A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8D99566524C9515D006C3616 /* WelcomeAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeAlertViewController.swift; sourceTree = "<group>"; };
+		8D99566724C9784D006C3616 /* ChildLogoutWarningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildLogoutWarningViewController.swift; sourceTree = "<group>"; };
 		8DA0489624B328FC0099D528 /* Poppins-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
 		8DA0489724B328FC0099D528 /* Poppins-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-BlackItalic.ttf"; sourceTree = "<group>"; };
 		8DA0489824B328FC0099D528 /* Poppins-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
@@ -314,6 +316,7 @@
 				8DCBAB5C24BF3ADC009E8B7F /* TabBarViewController.swift */,
 				18A9750824C04972001B5BB3 /* MenuViewController.swift */,
 				8D99566524C9515D006C3616 /* WelcomeAlertViewController.swift */,
+				8D99566724C9784D006C3616 /* ChildLogoutWarningViewController.swift */,
 			);
 			path = DashBoard;
 			sourceTree = "<group>";
@@ -539,6 +542,7 @@
 				183384C624B49CDD009911A8 /* ActioGradientButton.swift in Sources */,
 				8D99566624C9515D006C3616 /* WelcomeAlertViewController.swift in Sources */,
 				1841F19924B480F10021D131 /* UIKitExtensions.swift in Sources */,
+				8D99566824C9784D006C3616 /* ChildLogoutWarningViewController.swift in Sources */,
 				18BBAC7F24B5E90A00306A8F /* Validator.swift in Sources */,
 				18F6A07824B5AB76000ACDF1 /* DependencyProvider.swift in Sources */,
 				8D8C6A9324B591B200D6DBE3 /* UDHelper.swift in Sources */,

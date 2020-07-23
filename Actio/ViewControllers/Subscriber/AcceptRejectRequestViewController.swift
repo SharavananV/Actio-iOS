@@ -27,7 +27,7 @@ class AcceptRejectRequestViewController: UIViewController {
     var Mode = Int()
     var relationID = String()
     var addRelationArray = [String]()
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,23 +39,19 @@ class AcceptRejectRequestViewController: UIViewController {
         
         //FIXME: - Status bar color
         
-         let view: UIView = UIView.init(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIApplication.shared.statusBarFrame.height))
-
-         view.backgroundColor = AppColor.OrangeColor()
-
-         self.view.addSubview(view)
-
-
+        let view: UIView = UIView.init(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIApplication.shared.statusBarFrame.height))
+        view.backgroundColor = AppColor.OrangeColor()
+        self.view.addSubview(view)
         
         self.rejectButton.layer.cornerRadius = 5.0
         self.rejectButton.clipsToBounds = true
         self.acceptButton.layer.cornerRadius = 5.0
         self.acceptButton.clipsToBounds = true
-       // relationTextfield.setBorderColor(width: 1.0, color: AppColor.TextFieldBorderColor())
+        
         self.rejectButton.applyGradient(colours: [AppColor.OrangeColor(),AppColor.RedColor()])
         self.acceptButton.applyGradient(colours: [AppColor.OrangeColor(),AppColor.RedColor()])
         self.arHeaderView.applyGradient(colours: [AppColor.OrangeColor(),AppColor.RedColor()])
-        apiParentInitCall(childID: "7347")
+        apiParentInitCall(childID: "7354")
         addRelationArray = []
         
         var bottomLine = CALayer()
@@ -69,7 +65,9 @@ class AcceptRejectRequestViewController: UIViewController {
     
     @IBAction func rejectButtonAction(_ sender: Any) {
         apiCall(childID: self.childID, Mode: self.Mode, relationID: self.relationID, Status: 2)
-
+        self.dismiss(animated: false, completion: nil)
+        
+        
     }
     
     @IBAction func acceptButtonAction(_ sender: Any) {
@@ -78,13 +76,29 @@ class AcceptRejectRequestViewController: UIViewController {
         
     }
     func apiCall(childID: String,Mode: Int,relationID: String,Status:Int) {
+        let headers : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"",
+                                     "Content-Type": "application/json"]
         urlString = parentApprovalUrl
-        AF.request(urlString, method: .post, parameters: ["childID": childID,"Status": Status,"Mode": Mode,"relationID": relationID],encoding:JSONEncoding.default, headers: nil).responseJSON {
+        AF.request(urlString, method: .post, parameters: ["childID": childID,"Status": Status,"Mode": self.Mode,"relationID": relationID],encoding:JSONEncoding.default, headers: headers).responseJSON {
             response in
             switch response.result {
             case .success (let data):
-                print(response,"fgfgfgfsg")
-                
+                if let resultDict = data as? [String: Any], let successText = resultDict["status"] as? String, successText == "200"{
+                    print(response,"fgfgfgfsg")
+                }
+                else if let resultDict = data as? [String: Any], let invalidText = resultDict["msg"] as? String {
+                    self.view.makeToast(invalidText)
+                }
+                else {
+                    let resultDict = data as? [String: Any]
+                    if let status = resultDict!["status"] as? String, status == "422", let errors = resultDict!["errors"] as? [[String: Any]] {
+                        if let firstError = errors.first, let msg = firstError["msg"] as? String {
+                            self.view.makeToast(msg)
+                            
+                        }
+                        
+                    }
+                }
             case .failure(_):
                 print("JSON")
             }
@@ -103,12 +117,11 @@ class AcceptRejectRequestViewController: UIViewController {
             switch response.result {
             case .success (let data):
                 self.childID = childID
-                if let resultDict = data as? [String: Any] {
-                    print(resultDict)
+                if let resultDict = data as? [String: Any], let successText = resultDict["status"] as? String, successText == "200"{                    print(resultDict)
                     let val = resultDict["relation"] as? NSArray
                     for data in val! {
                         self.addRelationArray.append((data as AnyObject).value(forKey: "bond") as! String)
-                        }
+                    }
                     
                     if ((resultDict["name"] as? String) != nil) {
                         self.childNameString = (resultDict["name"] as? String)!
@@ -116,6 +129,10 @@ class AcceptRejectRequestViewController: UIViewController {
                     }
                     if ((resultDict["dob"] as? String) != nil) {
                         self.childDobString = (resultDict["dob"] as? String)!
+                        
+                    }
+                    if ((resultDict["childuserStatus"] as? String) != nil) {
+                        self.childUserStatus = (resultDict["childuserStatus"] as? String)!
                         
                     }
                     let parentNameNumberAttrs1 = [NSAttributedString.Key.font: AppFont.PoppinsSemiBold(size: 16), NSAttributedString.Key.foregroundColor : AppColor.PurpleColor()]
@@ -132,7 +149,20 @@ class AcceptRejectRequestViewController: UIViewController {
                     } else if self.childUserStatus == "8" {
                         self.Mode = 2
                     }
-
+                }
+                else if let resultDict = data as? [String: Any], let invalidText = resultDict["msg"] as? String {
+                    self.view.makeToast(invalidText)
+                    
+                }
+                else {
+                    let resultDict = data as? [String: Any]
+                    if let status = resultDict!["status"] as? String, status == "422", let errors = resultDict!["errors"] as? [[String: Any]] {
+                        if let firstError = errors.first, let msg = firstError["msg"] as? String {
+                            self.view.makeToast(msg)
+                            
+                        }
+                        
+                    }
                 }
                 
             case .failure(_):
@@ -154,7 +184,7 @@ extension AcceptRejectRequestViewController : UIPickerViewDataSource, UIPickerVi
     }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return "i am " + "" + addRelationArray[row] + "" + " of "
-
+        
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.relationTextfield.text = "i am " + "" + addRelationArray[row] + "" + " of "
@@ -165,7 +195,7 @@ extension AcceptRejectRequestViewController : UIPickerViewDataSource, UIPickerVi
             self.relationID = "2"
             
         }
-
+        
     }
     
     

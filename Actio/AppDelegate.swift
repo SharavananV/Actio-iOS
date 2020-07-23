@@ -28,6 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = vc
         window?.makeKeyAndVisible()
+        UINavigationBar.appearance().barTintColor = AppColor.OrangeColor()
+        
         
         IQKeyboardManager.shared().isEnabled = true
         FirebaseApp.configure()
@@ -76,29 +78,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if UDHelper.getUserLoggedIn() == true {
                 if parentID != "" {
                     if parentID == UDHelper.getUserId() {
-                        vc.apiParentInitCall(childID: "7347")
+                        vc.apiParentInitCall(childID: "7354")
                         vc.modalPresentationStyle = .fullScreen
                         topViewController.present(vc, animated: false, completion: nil)
                         
                     }
                     else {
-                        let alertController = UIAlertController(title: "Test", message: "Message", preferredStyle: .actionSheet)
-                        let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
-                                UIAlertAction in
-                                NSLog("OK Pressed")
-                            }
-                        let cancelAction = UIAlertAction(title: "CANCEL", style: UIAlertAction.Style.cancel) {
-                                UIAlertAction in
-                                NSLog("Cancel Pressed")
-                            }
-                        alertController.addAction(okAction)
-                        alertController.addAction(cancelAction)
-                        self.window?.rootViewController?.present(alertController, animated: true, completion: nil)
-                        print("Child Login")
+                        
+                        if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChildLogoutWarningViewController") as? ChildLogoutWarningViewController {
+                            controller.modalPresentationStyle = .fullScreen
+                            topViewController.present(controller, animated: false, completion: nil)
+                        }
+                        
                     }
-                }
-                else {
-                  
                 }
             }
             else {
@@ -108,13 +100,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     let loginVc = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
                     loginVc.modalPresentationStyle = .fullScreen
                     topViewController.present(loginVc, animated: false, completion: nil)
-
             }
-
         }
     }
     }
-    
+    private func displayAlert(message: String, buttonTitle: String, vc: UIViewController)
+    {
+        let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)
+
+        let okAction = UIAlertAction(title: buttonTitle, style: .default, handler: nil)
+        alertController.addAction(okAction)
+
+        vc.present(alertController, animated: true, completion: nil)
+    }
     
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
