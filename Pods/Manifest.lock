@@ -1,24 +1,22 @@
 PODS:
   - Alamofire (5.2.2)
-  - AlamofireImage (4.1.0):
-    - Alamofire (~> 5.1)
-  - Firebase/Analytics (6.31.1):
+  - Firebase/Analytics (6.32.0):
     - Firebase/Core
-  - Firebase/Core (6.31.1):
+  - Firebase/Core (6.32.0):
     - Firebase/CoreOnly
-    - FirebaseAnalytics (= 6.8.0)
-  - Firebase/CoreOnly (6.31.1):
-    - FirebaseCore (= 6.10.1)
-  - FirebaseAnalytics (6.8.0):
+    - FirebaseAnalytics (= 6.8.1)
+  - Firebase/CoreOnly (6.32.0):
+    - FirebaseCore (= 6.10.2)
+  - FirebaseAnalytics (6.8.1):
     - FirebaseCore (~> 6.10)
     - FirebaseInstallations (~> 1.6)
-    - GoogleAppMeasurement (= 6.8.0)
+    - GoogleAppMeasurement (= 6.8.1)
     - GoogleUtilities/AppDelegateSwizzler (~> 6.7)
     - GoogleUtilities/MethodSwizzler (~> 6.7)
     - GoogleUtilities/Network (~> 6.7)
     - "GoogleUtilities/NSData+zlib (~> 6.7)"
     - nanopb (~> 1.30906.0)
-  - FirebaseCore (6.10.1):
+  - FirebaseCore (6.10.2):
     - FirebaseCoreDiagnostics (~> 1.6)
     - GoogleUtilities/Environment (~> 6.7)
     - GoogleUtilities/Logger (~> 6.7)
@@ -45,7 +43,7 @@ PODS:
     - GoogleUtilities/Reachability (~> 6.7)
     - GoogleUtilities/UserDefaults (~> 6.7)
     - Protobuf (>= 3.9.2, ~> 3.9)
-  - GoogleAppMeasurement (6.8.0):
+  - GoogleAppMeasurement (6.8.1):
     - GoogleUtilities/AppDelegateSwizzler (~> 6.7)
     - GoogleUtilities/MethodSwizzler (~> 6.7)
     - GoogleUtilities/Network (~> 6.7)
@@ -80,26 +78,20 @@ PODS:
   - nanopb/encode (1.30906.0)
   - PromisesObjC (1.2.10)
   - Protobuf (3.13.0)
-  - SDWebImage (5.9.0):
-    - SDWebImage/Core (= 5.9.0)
-  - SDWebImage/Core (5.9.0)
   - SideMenu (6.4.9)
   - Toast-Swift (5.0.1)
 
 DEPENDENCIES:
   - Alamofire
-  - AlamofireImage
   - Firebase/Analytics
   - FirebaseMessaging
   - IQKeyboardManager
-  - SDWebImage
   - SideMenu
   - Toast-Swift (~> 5.0.1)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Alamofire
-    - AlamofireImage
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
@@ -114,31 +106,28 @@ SPEC REPOS:
     - nanopb
     - PromisesObjC
     - Protobuf
-    - SDWebImage
     - SideMenu
     - Toast-Swift
 
 SPEC CHECKSUMS:
   Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
-  AlamofireImage: c4a2ba349885fb3064feb74d2e547bd42ce9be10
-  Firebase: 658370fa0181826a74b7cfca8d68c5856ca749ae
-  FirebaseAnalytics: 0ca9aa2af7cc4dc92392b7a78bfc49feaa2eb60f
-  FirebaseCore: 6fb954e350af0885803d5aa49865d15d9a6b264c
+  Firebase: afa030f17f5421810f379a42b0e5d3302d27eb26
+  FirebaseAnalytics: a4d98464f455f5056063932123fa441025322f30
+  FirebaseCore: 1d697bb944bf2af5fc248f1a66e165c9dd88bf97
   FirebaseCoreDiagnostics: 7415bfb3883b3500c5a95c42b6ba66baae78f600
   FirebaseInstallations: 466c7b4d1f58fe16707693091da253726a731ed2
   FirebaseInstanceID: 84f5f5762f1bee94ca2254f693bbf5aec6666504
   FirebaseMessaging: 82d75b3770a78bbce470769a6980429608b4c407
-  GoogleAppMeasurement: ecc30d0ab5b66d7d18e85ce1b8e2b345db60626d
+  GoogleAppMeasurement: e3618c6e9f5166a6b320b03b759da3b04ec2a101
   GoogleDataTransport: e85fb700c9b027079ce182c3d08e12e0f9618bb4
   GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
   IQKeyboardManager: 2a6e97afdafc7becf0cb17a9a8d795e3a980717f
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
   Protobuf: 3dac39b34a08151c6d949560efe3f86134a3f748
-  SDWebImage: 62ae4a18473520c67b79e9724c31a63599cc9423
   SideMenu: 8ef57a3cfc024a2d3fc1c036c7fe98537baec9e0
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: eadfb737af426eeb13ab58362c9d1793da99e520
+PODFILE CHECKSUM: 3a768aa2f52ab84fb60cf20374bf8c8aff92d652
 
 COCOAPODS: 1.8.4

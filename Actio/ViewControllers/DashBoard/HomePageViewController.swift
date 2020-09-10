@@ -14,7 +14,6 @@ class HomePageViewController: UIViewController, LogoutDelegate {
     
     @IBOutlet var homeCollectionView: UICollectionView!
     
-    var dashboardModel: DashboardList!
     var dashboardModules: [[String: Any]] = [[String: Any]]()
     var urlString = String()
     var imagePath: URL!
