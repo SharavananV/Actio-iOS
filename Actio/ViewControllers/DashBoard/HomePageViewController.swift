@@ -9,8 +9,6 @@
 import UIKit
 import SideMenu
 import Alamofire
-import SDWebImage
-import AlamofireImage
 
 class HomePageViewController: UIViewController, LogoutDelegate {
     
