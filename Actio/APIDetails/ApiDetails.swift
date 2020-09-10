@@ -9,13 +9,17 @@
 import Foundation
 import UIKit
 
-let masterUrl = "http://203.223.189.158:8085/v1/subscriber/init"
-let loginUrl = "http://203.223.189.158:8085/v1/login"
-let registerUrl = "http://203.223.189.158:8085/v1/subscriber/register"
-let validateOTPUrl = "http://203.223.189.158:8085/v1/validateotp"
-let userStatusUrl = "http://203.223.189.158:8085/v1/subscriber/userstatusInfo"
-let parentIdUrl = "http://203.223.189.158:8085/v1/subscriber/parentID"
-let logoutUrl = "http://203.223.189.158:8085/v1/logout"
-let parentApprovalUrl = "http://203.223.189.158:8085/v1/subscriber/parentApproval"
-let parentApprovalInitUrl =  "http://203.223.189.158:8085/v1/subscriber/parentApprovalInit"
+let baseUrl = "http://192.168.1.11:8085/"
+
+let masterUrl = baseUrl + "v1/subscriber/init"
+let loginUrl = baseUrl + "v1/login"
+let registerUrl = baseUrl + "v1/subscriber/register"
+let validateOTPUrl = baseUrl + "v1/validateotp"
+let userStatusUrl = baseUrl + "v1/subscriber/userstatusInfo"
+let parentIdUrl = baseUrl + "v1/subscriber/parentID"
+let logoutUrl = baseUrl + "v1/logout"
+let parentApprovalUrl = baseUrl + "v1/subscriber/parentApproval"
+let parentApprovalInitUrl =  baseUrl + "v1/subscriber/parentApprovalInit"
+let dashboardUrl = baseUrl + "v1/dashboard/count"
+
 

@@ -10,7 +10,10 @@ import UIKit
 
 class HomePageCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet var homeBackgroundView: UIView!
-    @IBOutlet var homeImageView: UIImageView!
-    @IBOutlet var homeCellLabel: UILabel!
+    @IBOutlet var homeBackgroundImageView: UIImageView!
+    
+    @IBOutlet var homeCellImage: UIImageView!
+    //    @IBOutlet var homeBackgroundView: UIView!
+//    @IBOutlet var homeImageView: UIImageView!
+   @IBOutlet var homeCellLabel: UILabel!
 }

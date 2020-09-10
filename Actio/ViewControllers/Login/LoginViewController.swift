@@ -101,7 +101,6 @@ class LoginViewController: UIViewController {
             case .success (let data):
                 print(response,"fgfgfgfsg")
                 
-                
                 if let resultDict = data as? [String: Any], let successText = resultDict["status"] as? String, successText == "200"{
                     
                     if (resultDict["userStatus"] as! String) == "1" {
