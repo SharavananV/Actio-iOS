@@ -41,6 +41,10 @@
 		8D94E08C24AF1D3600DBC46A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D94E08B24AF1D3600DBC46A /* LoginViewController.swift */; };
 		8D99566624C9515D006C3616 /* WelcomeAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D99566524C9515D006C3616 /* WelcomeAlertViewController.swift */; };
 		8D99566824C9784D006C3616 /* ChildLogoutWarningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D99566724C9784D006C3616 /* ChildLogoutWarningViewController.swift */; };
+		8D9C079C250B53A400514692 /* NearMeTournamentListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9C079B250B53A400514692 /* NearMeTournamentListTableViewCell.swift */; };
+		8D9C07A1250B886100514692 /* TournamentListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9C07A0250B886100514692 /* TournamentListModel.swift */; };
+		8D9C07A3250B888000514692 /* TournamentFavoritesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9C07A2250B888000514692 /* TournamentFavoritesModel.swift */; };
+		8D9C07A5250B889300514692 /* TournamentNearMeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9C07A4250B889300514692 /* TournamentNearMeModel.swift */; };
 		8DA048A824B328FF0099D528 /* Poppins-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8DA0489624B328FC0099D528 /* Poppins-ExtraBoldItalic.ttf */; };
 		8DA048A924B328FF0099D528 /* Poppins-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8DA0489724B328FC0099D528 /* Poppins-BlackItalic.ttf */; };
 		8DA048AA24B328FF0099D528 /* Poppins-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8DA0489824B328FC0099D528 /* Poppins-ExtraLightItalic.ttf */; };
@@ -61,6 +65,8 @@
 		8DA048B924B328FF0099D528 /* Poppins-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8DA048A724B328FE0099D528 /* Poppins-ExtraLight.ttf */; };
 		8DA048BB24B331D40099D528 /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA048BA24B331D40099D528 /* AppColors.swift */; };
 		8DA3055A24BC310D0090142B /* AcceptRejectRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA3055924BC310D0090142B /* AcceptRejectRequestViewController.swift */; };
+		8DA5D452250A464E003EAB6B /* TournamentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA5D451250A464E003EAB6B /* TournamentListViewController.swift */; };
+		8DA5D456250A4AF1003EAB6B /* TournamentFavoriteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA5D455250A4AF1003EAB6B /* TournamentFavoriteCollectionViewCell.swift */; };
 		8DCBAB5A24BF2D37009E8B7F /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCBAB5824BF2D37009E8B7F /* HomePageViewController.swift */; };
 		8DCBAB5B24BF2D37009E8B7F /* HomePageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCBAB5924BF2D37009E8B7F /* HomePageCollectionViewCell.swift */; };
 		8DCBAB5D24BF3ADC009E8B7F /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCBAB5C24BF3ADC009E8B7F /* TabBarViewController.swift */; };
@@ -124,6 +130,10 @@
 		8D94E08B24AF1D3600DBC46A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8D99566524C9515D006C3616 /* WelcomeAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeAlertViewController.swift; sourceTree = "<group>"; };
 		8D99566724C9784D006C3616 /* ChildLogoutWarningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildLogoutWarningViewController.swift; sourceTree = "<group>"; };
+		8D9C079B250B53A400514692 /* NearMeTournamentListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearMeTournamentListTableViewCell.swift; sourceTree = "<group>"; };
+		8D9C07A0250B886100514692 /* TournamentListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentListModel.swift; sourceTree = "<group>"; };
+		8D9C07A2250B888000514692 /* TournamentFavoritesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentFavoritesModel.swift; sourceTree = "<group>"; };
+		8D9C07A4250B889300514692 /* TournamentNearMeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentNearMeModel.swift; sourceTree = "<group>"; };
 		8DA0489624B328FC0099D528 /* Poppins-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
 		8DA0489724B328FC0099D528 /* Poppins-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-BlackItalic.ttf"; sourceTree = "<group>"; };
 		8DA0489824B328FC0099D528 /* Poppins-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
@@ -144,6 +154,8 @@
 		8DA048A724B328FE0099D528 /* Poppins-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraLight.ttf"; sourceTree = "<group>"; };
 		8DA048BA24B331D40099D528 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		8DA3055924BC310D0090142B /* AcceptRejectRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptRejectRequestViewController.swift; sourceTree = "<group>"; };
+		8DA5D451250A464E003EAB6B /* TournamentListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentListViewController.swift; sourceTree = "<group>"; };
+		8DA5D455250A4AF1003EAB6B /* TournamentFavoriteCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentFavoriteCollectionViewCell.swift; sourceTree = "<group>"; };
 		8DCBAB5824BF2D37009E8B7F /* HomePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
 		8DCBAB5924BF2D37009E8B7F /* HomePageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageCollectionViewCell.swift; sourceTree = "<group>"; };
 		8DCBAB5C24BF3ADC009E8B7F /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -215,6 +227,7 @@
 		18F6A07324B5A3FB000ACDF1 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				8DA5D450250A45F4003EAB6B /* Tournament */,
 				8DCBAB5724BF2D05009E8B7F /* DashBoard */,
 				8DF7863A24B846B000062261 /* Subscriber */,
 				8D21855B24B6E283002688A8 /* OTP */,
@@ -309,6 +322,27 @@
 				8D94E07D24AF1D0A00DBC46A /* Actio.xcdatamodeld */,
 			);
 			path = Actio;
+			sourceTree = "<group>";
+		};
+		8D9C079F250B883D00514692 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8D9C07A0250B886100514692 /* TournamentListModel.swift */,
+				8D9C07A2250B888000514692 /* TournamentFavoritesModel.swift */,
+				8D9C07A4250B889300514692 /* TournamentNearMeModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8DA5D450250A45F4003EAB6B /* Tournament */ = {
+			isa = PBXGroup;
+			children = (
+				8D9C079F250B883D00514692 /* Model */,
+				8DA5D451250A464E003EAB6B /* TournamentListViewController.swift */,
+				8DA5D455250A4AF1003EAB6B /* TournamentFavoriteCollectionViewCell.swift */,
+				8D9C079B250B53A400514692 /* NearMeTournamentListTableViewCell.swift */,
+			);
+			path = Tournament;
 			sourceTree = "<group>";
 		};
 		8DCBAB5724BF2D05009E8B7F /* DashBoard */ = {
@@ -523,9 +557,12 @@
 				18196CF824B4727E00DBECCA /* ActioTextField.swift in Sources */,
 				8D94E07524AF1D0A00DBC46A /* AppDelegate.swift in Sources */,
 				183384C824B4A561009911A8 /* ImagePickerTableViewCell.swift in Sources */,
+				8DA5D452250A464E003EAB6B /* TournamentListViewController.swift in Sources */,
 				1841F19424B480680021D131 /* TextPickerTableViewCell.swift in Sources */,
 				18F6A07624B5A4FD000ACDF1 /* RegisterDatasource.swift in Sources */,
+				8D9C079C250B53A400514692 /* NearMeTournamentListTableViewCell.swift in Sources */,
 				183384CA24B4A94C009911A8 /* JustTextTableViewCell.swift in Sources */,
+				8D9C07A5250B889300514692 /* TournamentNearMeModel.swift in Sources */,
 				18F6A07224B57D18000ACDF1 /* SelfSizingTextView.swift in Sources */,
 				8DA3055A24BC310D0090142B /* AcceptRejectRequestViewController.swift in Sources */,
 				8DF7863C24B846E900062261 /* SubscriberIDViewController.swift in Sources */,
@@ -542,8 +579,10 @@
 				8DCBAB5B24BF2D37009E8B7F /* HomePageCollectionViewCell.swift in Sources */,
 				1841F19524B480680021D131 /* TextEditTableViewCell.swift in Sources */,
 				8D21856124B6ED75002688A8 /* VPMOTPTextField.swift in Sources */,
+				8D9C07A1250B886100514692 /* TournamentListModel.swift in Sources */,
 				18BBAC7D24B5B99900306A8F /* ActioImagePicker.swift in Sources */,
 				183384C624B49CDD009911A8 /* ActioGradientButton.swift in Sources */,
+				8DA5D456250A4AF1003EAB6B /* TournamentFavoriteCollectionViewCell.swift in Sources */,
 				8D99566624C9515D006C3616 /* WelcomeAlertViewController.swift in Sources */,
 				1841F19924B480F10021D131 /* UIKitExtensions.swift in Sources */,
 				8D99566824C9784D006C3616 /* ChildLogoutWarningViewController.swift in Sources */,
@@ -552,6 +591,7 @@
 				8D8C6A9324B591B200D6DBE3 /* UDHelper.swift in Sources */,
 				8DA048BB24B331D40099D528 /* AppColors.swift in Sources */,
 				8D94E08C24AF1D3600DBC46A /* LoginViewController.swift in Sources */,
+				8D9C07A3250B888000514692 /* TournamentFavoritesModel.swift in Sources */,
 				18DC39BD24B608EB008708FC /* ActioSpinner.swift in Sources */,
 				8DE6B64E24B35BA60010A3EC /* LaunchViewController.swift in Sources */,
 				1841F19324B480680021D131 /* DatePickerTableViewCell.swift in Sources */,

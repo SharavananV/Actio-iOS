@@ -84,6 +84,10 @@ class AppColor: UIColor {
         
         return self.HexToColor(hexString: "##FCF0EA")
     }
+    class func FavViewBackgroundColor() -> UIColor {
+        
+        return self.HexToColor(hexString: "#F2F2F2")
+    }
     class func HexToColor(hexString: String) -> UIColor
     {
         // Convert hex string to an integer

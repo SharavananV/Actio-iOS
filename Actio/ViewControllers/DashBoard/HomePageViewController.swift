@@ -65,11 +65,14 @@ class HomePageViewController: UIViewController, LogoutDelegate {
     
     func dashboardApiCall() {
         urlString = dashboardUrl
+        
+       // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxMjMiLCJpZCI6NzQwMiwiaWF0IjoxNTk5MjE2NTc2fQ.d_k_-0izxRbpKdoMkmUrrY9uhawiPCoEDQwnoiUUv4M"+"",
 
         let headers : HTTPHeaders = ["Authorization" : "Bearer "+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxMjMiLCJpZCI6NzQwMiwiaWF0IjoxNTk5MjE2NTc2fQ.d_k_-0izxRbpKdoMkmUrrY9uhawiPCoEDQwnoiUUv4M"+"",
+            //"Bearer "+UDHelper.getAuthToken()+"",
                                      "Content-Type": "application/json"]
 
-        //"Bearer "+UDHelper.getAuthToken()+"",
+      
         
         AF.request(dashboardUrl, method: .post, parameters: nil, headers: headers).responseJSON { (response) in
             switch response.result {
@@ -106,6 +109,9 @@ extension HomePageViewController: UICollectionViewDelegate,UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomePageCollectionViewCell", for: indexPath) as! HomePageCollectionViewCell
         
+        cell.homeBackgroundImageView.layer.cornerRadius = 5.0
+        cell.homeBackgroundImageView.clipsToBounds = true
+        
         if dashboardModules.count > 0 {
             let eachCellList = dashboardModules[indexPath.row]
             cell.homeCellLabel.text = (eachCellList["name"] as? String) ?? ""
@@ -136,7 +142,7 @@ extension HomePageViewController: UICollectionViewDelegate,UICollectionViewDataS
         return 0.0
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     }
     
     
