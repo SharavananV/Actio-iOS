@@ -20,7 +20,9 @@ class TournamentListViewController: UIViewController {
 
     
     var urlString = String()
+    var imagePath: URL!
     var tournamentFavorites = NSDictionary()
+    var tournamentFavoritesArray = NSArray()
     var TournamentListModel : TournamentListModel!
 
 
@@ -65,6 +67,7 @@ class TournamentListViewController: UIViewController {
                 print(data)
                 if let resultDict = data as? [String: Any], let successText = resultDict["status"] as? String, successText == "200" {
                     self.tournamentFavorites = resultDict["list"] as! NSDictionary
+                    self.tournamentFavoritesArray = self.tournamentFavorites.value(forKey: "favorites") as! NSArray
                     self.favoriteCollectionView.reloadData()
                 }
                 else if let resultDict = data as? [String: Any], let invalidText = resultDict["msg"] as? String{
@@ -88,7 +91,7 @@ class TournamentListViewController: UIViewController {
 extension TournamentListViewController : UICollectionViewDelegate,UICollectionViewDataSource ,UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return tournamentFavoritesArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -100,15 +103,33 @@ extension TournamentListViewController : UICollectionViewDelegate,UICollectionVi
         cell.tournamentFavoriteBackgroundView.layer.cornerRadius = 5.0
         cell.tournamentFavoriteBackgroundView.clipsToBounds = true
         
-        cell.tournamentFavTimeLabel.text = "28 July 2020"
-        cell.tournamentFavImageView.image = UIImage(named: "205383133115")
-        cell.tournamentFavSportsNameLabel.text = "International Football"
+        if self.tournamentFavoritesArray.count > 0 {
+            let tournamentName = (self.tournamentFavoritesArray.value(forKey: "tournament_name") as! [String])
+           // print(TournamentListModel.Favorites![indexPath.row])
+
+            let venue = (self.tournamentFavoritesArray.value(forKey: "venue") as! [String])
+            let tournamentStartDate = (self.tournamentFavoritesArray.value(forKey: "tournament_start_date") as! [String])
+            let tournamentStartMonth = (self.tournamentFavoritesArray.value(forKey: "tournament_start_month") as! [String])
+            let tournamentStartYear = (self.tournamentFavoritesArray.value(forKey: "tournament_start_year") as! [String])
+            if let tournamentLogo = (self.tournamentFavoritesArray.value(forKey: "tournament_logo") as? [String]) {
+                let dat = tournamentLogo[indexPath.row]
+                self.imagePath = URL(string:  baseUrl + dat)
+                if (self.imagePath != nil) {
+                    cell.tournamentFavImageView.load(url: self.imagePath)
+                }
+            }
+            
+            let dateValue = tournamentStartDate[indexPath.row] + tournamentStartMonth[indexPath.row] + tournamentStartYear[indexPath.row]
+
+            cell.tournamentFavSportsNameLabel.text = tournamentName[indexPath.row]
+            cell.tournamentFavLocationLabel.text = venue[indexPath.row]
+            cell.tournamentFavTimeLabel.text = dateValue
+            
+        }
+        
         cell.tournamentFavRegistrationStatusLabel.text = "Registration open"
         cell.tournamentFavLocationImage.image = UIImage(named: "Icon material-home")
-        cell.tournamentFavLocationLabel.text = "Barabati Stadium, Cuttack"
         return cell
-        
-        
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
