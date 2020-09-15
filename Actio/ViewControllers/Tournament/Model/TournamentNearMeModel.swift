@@ -9,48 +9,30 @@
 import Foundation
 
 struct TournamentNearMeModel: Codable {
+    let id: Int
+    let tournamentName, tournamentVenue, tournamentStartDate, tournamentStartMonth: String
+    let tournamentStartYear, tournamentStartRange, tournamentEndRange, tournamentLogo: String
+    let distance: Double
+    let isRegistrationOpen: Int
     
-    let id : Int?
-    let tournament_name : String?
-    let tournament_venue : String?
-    let tournament_start_date : String?
-    let tournament_start_month : String?
-    let tournament_start_year : String?
-    let tournament_start_range : String?
-    let tournament_end_range : String?
-    let tournament_logo : String?
-    let distance : Int?
-    let is_registration_open : Int?
-    
+    // 1 open , 2 close, 3 = yet to open
+    var registrationStatus: TournamentListModel.Status {
+        return TournamentListModel.Status(rawValue: isRegistrationOpen) ?? .closed
+    }
+
     enum CodingKeys: String, CodingKey {
-        case id = "id"
-        case tournament_name = "tournament_name"
-        case tournament_venue = "tournament_venue"
-        case tournament_start_date = "tournament_start_date"
-        case tournament_start_month = "tournament_start_month"
-        case tournament_start_year = "tournament_start_year"
-        case tournament_start_range = "tournament_start_range"
-        case tournament_end_range = "tournament_end_range"
-        case tournament_logo = "tournament_logo"
-        case distance = "distance"
-        case is_registration_open = "is_registration_open"
+        case id
+        case tournamentName = "tournament_name"
+        case tournamentVenue = "tournament_venue"
+        case tournamentStartDate = "tournament_start_date"
+        case tournamentStartMonth = "tournament_start_month"
+        case tournamentStartYear = "tournament_start_year"
+        case tournamentStartRange = "tournament_start_range"
+        case tournamentEndRange = "tournament_end_range"
+        case tournamentLogo = "tournament_logo"
+        case distance
+        case isRegistrationOpen = "is_registration_open"
     }
-    
-    internal init(id: Int, tournament_name: String, tournament_venue: String,tournament_start_date: String,tournament_start_month:String,tournament_start_year:String,tournament_start_range:String,tournament_end_range:String,tournament_logo:String,distance:Int,is_registration_open:Int) {
-        self.id = id
-        self.tournament_name = tournament_name
-        self.tournament_venue = tournament_venue
-        self.tournament_start_date = tournament_start_date
-        self.tournament_start_month = tournament_start_month
-        self.tournament_start_year = tournament_start_year
-        self.tournament_start_range = tournament_start_range
-        self.tournament_end_range = tournament_end_range
-        self.tournament_logo = tournament_logo
-        self.distance = distance
-        self.is_registration_open = is_registration_open
-        
-    }
-    
 }
 
 

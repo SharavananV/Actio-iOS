@@ -17,17 +17,7 @@ class TournamentListViewController: UIViewController {
     
     var locationManager: CLLocationManager = CLLocationManager()
     var currentCoordinates : CLLocationCoordinate2D?
-
-    
-    var urlString = String()
-    var imagePath: URL!
-    var tournamentFavorites = NSDictionary()
-    var tournamentFavoritesArray = NSArray()
     var tournamentListModel : TournamentListModel?
-
-
-    var latSend : String?
-    var lonSend : String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,82 +37,85 @@ class TournamentListViewController: UIViewController {
         
         self.nearMeTournamentListTableView.delegate = self
         self.nearMeTournamentListTableView.dataSource = self
-        
-        
-        
-    }
-    func tournamentListApiCall() {
-        urlString = tournamentListUrl
-        
-       // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxMjMiLCJpZCI6NzQwMiwiaWF0IjoxNTk5MjE2NTc2fQ.d_k_-0izxRbpKdoMkmUrrY9uhawiPCoEDQwnoiUUv4M"+"",
-
-        let headers : HTTPHeaders = ["Authorization" : "Bearer "+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxMjMiLCJpZCI6NzQwMiwiaWF0IjoxNTk5MjE2NTc2fQ.d_k_-0izxRbpKdoMkmUrrY9uhawiPCoEDQwnoiUUv4M"+"",
-            //"Bearer "+UDHelper.getAuthToken()+"",
-                                     "Content-Type": "application/json"]
-        
-        AF.request(urlString,method: .post, parameters: ["latitude":"\(currentCoordinates?.latitude ?? 0)", "longitude":"\(currentCoordinates?.longitude ?? 0)"], encoding: JSONEncoding.default, headers: headers).responseData {
-            response in
-            if let data = response.data {
-                do {
-                    self.tournamentListModel = try JSONDecoder().decode(TournamentListModel.self, from: data)
-                } catch {
-                    print("Error while decoding TournamentListModel")
-                }
-            }
-            else {
-                
-            }
-
-        }
-
     }
     
+    func tournamentListApiCall() {
+        let headers : HTTPHeaders = ["Authorization" : "Bearer "+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxMjMiLCJpZCI6NzQwMiwiaWF0IjoxNTk5MjE2NTc2fQ.d_k_-0izxRbpKdoMkmUrrY9uhawiPCoEDQwnoiUUv4M",
+                                     "Content-Type": "application/json"]
+        
+        ActioSpinner.shared.show(on: view)
+        
+        AF.request(tournamentListUrl, method: .post, parameters: ["latitude": "\(currentCoordinates?.latitude ?? 0)", "longitude": "\(currentCoordinates?.longitude ?? 0)"], encoding: JSONEncoding.default, headers: headers).responseDecodable(of: TournamentResponse.self, queue: .main) { (response) in
+            ActioSpinner.shared.hide()
+            
+            guard let model = response.value else {
+                print("🥶 Error on login: \(String(describing: response.error))")
+                return
+            }
+            
+            self.tournamentListModel = model.list
+            self.favoriteCollectionView.reloadData()
+            self.nearMeTournamentListTableView.reloadData()
+        }
+    }
 }
 extension TournamentListViewController : UICollectionViewDelegate,UICollectionViewDataSource ,UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.tournamentListModel?.favorites?.count ?? 0
+        return self.tournamentListModel?.favorites.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TournamentFavoriteCollectionViewCell", for: indexPath) as! TournamentFavoriteCollectionViewCell
         
-        guard let tournament = self.tournamentListModel?.favorites?[indexPath.row] else {
+        guard let tournament = self.tournamentListModel?.favorites[indexPath.row] else {
             return UICollectionViewCell()
         }
         
-        if let logo = tournament.tournament_logo,
-            let imagePath = URL(string:  baseUrl + logo) {
+        if let imagePath = URL(string:  baseUrl + tournament.tournamentLogo) {
             cell.tournamentFavImageView.load(url: imagePath)
         }
         
-        cell.tournamentFavSportsNameLabel.text = tournament.tournament_name
+        cell.tournamentFavSportsNameLabel.text = tournament.tournamentName
         cell.tournamentFavLocationLabel.text = tournament.venue
-        cell.tournamentFavTimeLabel.text = (tournament.tournament_start_date ?? "") + (tournament.tournament_start_month ?? "") + (tournament.tournament_start_year ?? "")
-        cell.tournamentFavRegistrationStatusLabel.text = "Registration open"
+        cell.setDateText(tournament.tournamentStartDate, month: tournament.tournamentStartMonth, year: tournament.tournamentStartYear)
+        cell.tournamentFavRegistrationStatusLabel.text = tournament.registrationStatus.displayString
+        cell.tournamentFavRegistrationStatusLabel.backgroundColor = tournament.registrationStatus.backgroundColor
         cell.tournamentFavLocationImage.image = UIImage(named: "Icon material-home")
         return cell
     }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 135, height: 220)
+    }
 }
 
 extension TournamentListViewController : UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return self.tournamentListModel?.nearMe.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NearMeTournamentListTableViewCell", for: indexPath) as! NearMeTournamentListTableViewCell
-        cell.nearMeTournamentImage.image = UIImage(named: "205383133115")
-        cell.nearMeTournamentRegistrationStatusLabel.text = "Registration open"
-        cell.nearMeTournamentNameLabel.text = "Cricket Tournament"
+        
+        guard let tournament = self.tournamentListModel?.favorites[indexPath.row] else {
+            return UITableViewCell()
+        }
+        
+        if let imagePath = URL(string:  baseUrl + tournament.tournamentLogo) {
+            cell.nearMeTournamentImage.load(url: imagePath)
+        }
+        cell.nearMeTournamentNameLabel.text = tournament.tournamentName
+        cell.nearMeDateLabel.text = tournament.tournamentStartDate + tournament.tournamentStartMonth + tournament.tournamentStartYear
+        cell.nearMeTournamentRegistrationStatusLabel.text = tournament.registrationStatus.displayString
+        cell.nearMeTournamentRegistrationStatusLabel.backgroundColor = tournament.registrationStatus.backgroundColor
+        cell.nearMeLocationLabel.text = tournament.venue
         cell.nearMeCalenderImage.image = UIImage(named: "Icon material-home")
-        cell.nearMeDateLabel.text = "FRI JUL 20 - SUN JUL 22 2020"
         cell.nearMeLocationImage.image = UIImage(named: "Icon material-home")
-        cell.nearMeLocationLabel.text = "University Platinum Jubilee Cricket Stadium, Mysore"
 
         return cell
     }

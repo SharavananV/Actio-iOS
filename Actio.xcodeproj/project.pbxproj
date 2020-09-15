@@ -21,6 +21,8 @@
 		18A9750924C04972001B5BB3 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A9750824C04972001B5BB3 /* MenuViewController.swift */; };
 		18BBAC7D24B5B99900306A8F /* ActioImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BBAC7C24B5B99900306A8F /* ActioImagePicker.swift */; };
 		18BBAC7F24B5E90A00306A8F /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BBAC7E24B5E90A00306A8F /* Validator.swift */; };
+		18C6B01E2510BDE200B7162E /* LocationFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C6B01D2510BDE200B7162E /* LocationFetcher.swift */; };
+		18C6B0202510C17300B7162E /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C6B01F2510C17300B7162E /* NotificationHelper.swift */; };
 		18DC39BD24B608EB008708FC /* ActioSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DC39BC24B608EB008708FC /* ActioSpinner.swift */; };
 		18F2F9C024C1C367007CBBC0 /* BeforeApprovalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F2F9BF24C1C367007CBBC0 /* BeforeApprovalViewController.swift */; };
 		18F6A07224B57D18000ACDF1 /* SelfSizingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F6A07124B57D18000ACDF1 /* SelfSizingTextView.swift */; };
@@ -108,6 +110,8 @@
 		18B569F724C03F8400D6A520 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		18BBAC7C24B5B99900306A8F /* ActioImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActioImagePicker.swift; sourceTree = "<group>"; };
 		18BBAC7E24B5E90A00306A8F /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
+		18C6B01D2510BDE200B7162E /* LocationFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationFetcher.swift; sourceTree = "<group>"; };
+		18C6B01F2510C17300B7162E /* NotificationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHelper.swift; sourceTree = "<group>"; };
 		18DC39BC24B608EB008708FC /* ActioSpinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActioSpinner.swift; sourceTree = "<group>"; };
 		18F2F9BF24C1C367007CBBC0 /* BeforeApprovalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeforeApprovalViewController.swift; sourceTree = "<group>"; };
 		18F6A07124B57D18000ACDF1 /* SelfSizingTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSizingTextView.swift; sourceTree = "<group>"; };
@@ -211,6 +215,8 @@
 				18BBAC7C24B5B99900306A8F /* ActioImagePicker.swift */,
 				18BBAC7E24B5E90A00306A8F /* Validator.swift */,
 				18DC39BC24B608EB008708FC /* ActioSpinner.swift */,
+				18C6B01D2510BDE200B7162E /* LocationFetcher.swift */,
+				18C6B01F2510C17300B7162E /* NotificationHelper.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -571,8 +577,10 @@
 				183384CC24B4A9BF009911A8 /* SwitchTableViewCell.swift in Sources */,
 				18A9750924C04972001B5BB3 /* MenuViewController.swift in Sources */,
 				18196CFC24B47BF900DBECCA /* SignupViewController.swift in Sources */,
+				18C6B01E2510BDE200B7162E /* LocationFetcher.swift in Sources */,
 				8D21855F24B6ED5F002688A8 /* VPMOTPView.swift in Sources */,
 				8DCBAB5D24BF3ADC009E8B7F /* TabBarViewController.swift in Sources */,
+				18C6B0202510C17300B7162E /* NotificationHelper.swift in Sources */,
 				8DE6B64924B335630010A3EC /* AppFonts.swift in Sources */,
 				8D94E07F24AF1D0A00DBC46A /* Actio.xcdatamodeld in Sources */,
 				8D21855D24B6E383002688A8 /* OtpViewController.swift in Sources */,

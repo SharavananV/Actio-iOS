@@ -36,5 +36,21 @@ class TournamentFavoriteCollectionViewCell: UICollectionViewCell {
         tournamentFavRegistrationStatusLabel.clipsToBounds = true
         tournamentFavoriteBackgroundView.layer.cornerRadius = 5.0
         tournamentFavoriteBackgroundView.clipsToBounds = true
+        
+        self.TournamentFavoriteHeaderView.applyGradient(colours: [AppColor.OrangeColor(),AppColor.RedColor()])
+    }
+    
+    func setDateText(_ day: String, month: String, year: String) {
+        let dayFont = AppFont.PoppinsSemiBold(size: 15)
+        let monthFont = AppFont.PoppinsSemiBold(size: 13)
+        let yearFont = AppFont.PoppinsSemiBold(size: 11)
+        
+        let dateString = "\(day) \(month) \(year)"
+        let attributedDate = NSMutableAttributedString(string: dateString)
+        attributedDate.addAttributes([.font: dayFont], range: dateString.nsRange(of: day) ?? NSRange())
+        attributedDate.addAttributes([.font: monthFont], range: dateString.nsRange(of: month) ?? NSRange())
+        attributedDate.addAttributes([.font: yearFont], range: dateString.nsRange(of: year) ?? NSRange())
+        
+        self.tournamentFavTimeLabel.attributedText = attributedDate
     }
 }
