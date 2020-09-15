@@ -13,8 +13,6 @@ pod 'FirebaseMessaging'
 pod 'IQKeyboardManager'
 pod 'Toast-Swift', '~> 5.0.1'
 pod 'SideMenu'
-pod 'SDWebImage'
-pod 'AlamofireImage'
 
 
 end
