@@ -1,5 +1,5 @@
 //
-//  TournamentFavoriteCollectionViewCell.swift
+//  TournamentFavoriteCollectionViewswift
 //  Actio
 //
 //  Created by senthil on 10/09/20.
@@ -27,4 +27,14 @@ class TournamentFavoriteCollectionViewCell: UICollectionViewCell {
     @IBOutlet var tournamentFavLocationLabel: UILabel!
     
     @IBOutlet var tournamentFavLocationImage: UIImageView!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        tournamentFavoriteBackgroundView.backgroundColor = AppColor.FavViewBackgroundColor()
+        tournamentFavRegistrationStatusLabel.layer.cornerRadius = 10.0
+        tournamentFavRegistrationStatusLabel.clipsToBounds = true
+        tournamentFavoriteBackgroundView.layer.cornerRadius = 5.0
+        tournamentFavoriteBackgroundView.clipsToBounds = true
+    }
 }

@@ -10,22 +10,13 @@ import Foundation
 
 struct TournamentListModel: Codable {
     let status : String?
-    let Favorites : [TournamentFavoritesModel]?
+    let favorites : [TournamentFavoritesModel]?
     let nearMe : [TournamentNearMeModel]?
-
     
     enum CodingKeys: String, CodingKey {
         case status = "status"
-        case Favorites = "Favorites"
+        case favorites = "Favorites"
         case nearMe = "nearMe"
     }
-    
-    internal init(status: String,Favorites: [TournamentFavoritesModel],nearMe:[TournamentNearMeModel]) {
-        self.status = status
-        self.Favorites = Favorites
-        self.nearMe = nearMe
-        
-    }
-    
 }
 

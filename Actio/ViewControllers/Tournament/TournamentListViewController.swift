@@ -23,7 +23,7 @@ class TournamentListViewController: UIViewController {
     var imagePath: URL!
     var tournamentFavorites = NSDictionary()
     var tournamentFavoritesArray = NSArray()
-    var TournamentListModel : TournamentListModel!
+    var tournamentListModel : TournamentListModel?
 
 
     var latSend : String?
@@ -60,27 +60,17 @@ class TournamentListViewController: UIViewController {
             //"Bearer "+UDHelper.getAuthToken()+"",
                                      "Content-Type": "application/json"]
         
-        AF.request(urlString,method: .post, parameters: ["latitude":"\(currentCoordinates?.latitude ?? 0)", "longitude":"\(currentCoordinates?.longitude ?? 0)"], encoding: JSONEncoding.default, headers: headers).responseJSON {
+        AF.request(urlString,method: .post, parameters: ["latitude":"\(currentCoordinates?.latitude ?? 0)", "longitude":"\(currentCoordinates?.longitude ?? 0)"], encoding: JSONEncoding.default, headers: headers).responseData {
             response in
-           switch response.result {
-            case .success (let data):
-                print(data)
-                if let resultDict = data as? [String: Any], let successText = resultDict["status"] as? String, successText == "200" {
-                    self.tournamentFavorites = resultDict["list"] as! NSDictionary
-                    self.tournamentFavoritesArray = self.tournamentFavorites.value(forKey: "favorites") as! NSArray
-                    self.favoriteCollectionView.reloadData()
+            if let data = response.data {
+                do {
+                    self.tournamentListModel = try JSONDecoder().decode(TournamentListModel.self, from: data)
+                } catch {
+                    print("Error while decoding TournamentListModel")
                 }
-                else if let resultDict = data as? [String: Any], let invalidText = resultDict["msg"] as? String{
-                    self.view.makeToast(invalidText)
-                }
-                else {
-                    print(data)
-
-                }
-
-            case .failure(let error):
-                print(error)
-                self.view.makeToast(error.errorDescription ?? "")
+            }
+            else {
+                
             }
 
         }
@@ -91,42 +81,24 @@ class TournamentListViewController: UIViewController {
 extension TournamentListViewController : UICollectionViewDelegate,UICollectionViewDataSource ,UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return tournamentFavoritesArray.count
+        return self.tournamentListModel?.favorites?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TournamentFavoriteCollectionViewCell", for: indexPath) as! TournamentFavoriteCollectionViewCell
         
-        cell.tournamentFavoriteBackgroundView.backgroundColor = AppColor.FavViewBackgroundColor()
-        cell.tournamentFavRegistrationStatusLabel.layer.cornerRadius = 10.0
-        cell.tournamentFavRegistrationStatusLabel.clipsToBounds = true
-        cell.tournamentFavoriteBackgroundView.layer.cornerRadius = 5.0
-        cell.tournamentFavoriteBackgroundView.clipsToBounds = true
-        
-        if self.tournamentFavoritesArray.count > 0 {
-            let tournamentName = (self.tournamentFavoritesArray.value(forKey: "tournament_name") as! [String])
-           // print(TournamentListModel.Favorites![indexPath.row])
-
-            let venue = (self.tournamentFavoritesArray.value(forKey: "venue") as! [String])
-            let tournamentStartDate = (self.tournamentFavoritesArray.value(forKey: "tournament_start_date") as! [String])
-            let tournamentStartMonth = (self.tournamentFavoritesArray.value(forKey: "tournament_start_month") as! [String])
-            let tournamentStartYear = (self.tournamentFavoritesArray.value(forKey: "tournament_start_year") as! [String])
-            if let tournamentLogo = (self.tournamentFavoritesArray.value(forKey: "tournament_logo") as? [String]) {
-                let dat = tournamentLogo[indexPath.row]
-                self.imagePath = URL(string:  baseUrl + dat)
-                if (self.imagePath != nil) {
-                    cell.tournamentFavImageView.load(url: self.imagePath)
-                }
-            }
-            
-            let dateValue = tournamentStartDate[indexPath.row] + tournamentStartMonth[indexPath.row] + tournamentStartYear[indexPath.row]
-
-            cell.tournamentFavSportsNameLabel.text = tournamentName[indexPath.row]
-            cell.tournamentFavLocationLabel.text = venue[indexPath.row]
-            cell.tournamentFavTimeLabel.text = dateValue
-            
+        guard let tournament = self.tournamentListModel?.favorites?[indexPath.row] else {
+            return UICollectionViewCell()
         }
         
+        if let logo = tournament.tournament_logo,
+            let imagePath = URL(string:  baseUrl + logo) {
+            cell.tournamentFavImageView.load(url: imagePath)
+        }
+        
+        cell.tournamentFavSportsNameLabel.text = tournament.tournament_name
+        cell.tournamentFavLocationLabel.text = tournament.venue
+        cell.tournamentFavTimeLabel.text = (tournament.tournament_start_date ?? "") + (tournament.tournament_start_month ?? "") + (tournament.tournament_start_year ?? "")
         cell.tournamentFavRegistrationStatusLabel.text = "Registration open"
         cell.tournamentFavLocationImage.image = UIImage(named: "Icon material-home")
         return cell
@@ -137,7 +109,7 @@ extension TournamentListViewController : UICollectionViewDelegate,UICollectionVi
     
 }
 
-extension TournamentListViewController : UITableViewDelegate,UITableViewDataSource {
+extension TournamentListViewController : UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
     }
