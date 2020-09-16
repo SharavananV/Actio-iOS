@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class TournamentResponse: Codable {
+class TournamentListResponse: Codable {
     let status : String
     let list: TournamentListModel
 }

@@ -22,5 +22,6 @@ let parentApprovalUrl = baseUrl + "v1/subscriber/parentApproval"
 let parentApprovalInitUrl =  baseUrl + "v1/subscriber/parentApprovalInit"
 let dashboardUrl = baseUrl + "v1/dashboard/count"
 let tournamentListUrl = baseUrl + "v1/tournament/list"
+let tournamentDetailsUrl = baseUrl + "v1/tournament/search"
 
 

@@ -86,11 +86,35 @@ extension NSLayoutAnchor {
         
         return constraint
     }
+    
+    @objc func constraint(lessThanOrEqualTo anchor: NSLayoutAnchor<AnchorType>, constant: CGFloat = 0, priority: UILayoutPriority) -> NSLayoutConstraint {
+        let constraint = self.constraint(lessThanOrEqualTo: anchor, constant: constant)
+        constraint.priority = priority
+        
+        return constraint
+    }
 }
 
 extension UIEdgeInsets {
     var horizontal: CGFloat { return right + left }
     var vertical: CGFloat { return top + bottom }
+}
+
+extension UILabel {
+    func textHeight(withWidth width: CGFloat) -> CGFloat {
+        guard let text = text else {
+            return 0
+        }
+        return text.height(withWidth: width, font: font)
+    }
+}
+
+extension String {
+    func height(withWidth width: CGFloat, font: UIFont) -> CGFloat {
+        let maxSize = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
+        let actualSize = self.boundingRect(with: maxSize, options: [.usesLineFragmentOrigin], attributes: [.font: font], context: nil)
+        return actualSize.height
+    }
 }
 
 extension CGSize {
