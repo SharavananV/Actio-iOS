@@ -23,6 +23,7 @@
 		18BBAC7F24B5E90A00306A8F /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BBAC7E24B5E90A00306A8F /* Validator.swift */; };
 		18C6B01E2510BDE200B7162E /* LocationFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C6B01D2510BDE200B7162E /* LocationFetcher.swift */; };
 		18C6B0202510C17300B7162E /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C6B01F2510C17300B7162E /* NotificationHelper.swift */; };
+		18C6B0222511C95F00B7162E /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C6B0212511C95E00B7162E /* PaddingLabel.swift */; };
 		18DC39BD24B608EB008708FC /* ActioSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DC39BC24B608EB008708FC /* ActioSpinner.swift */; };
 		18F2F9C024C1C367007CBBC0 /* BeforeApprovalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F2F9BF24C1C367007CBBC0 /* BeforeApprovalViewController.swift */; };
 		18F6A07224B57D18000ACDF1 /* SelfSizingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F6A07124B57D18000ACDF1 /* SelfSizingTextView.swift */; };
@@ -112,6 +113,7 @@
 		18BBAC7E24B5E90A00306A8F /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		18C6B01D2510BDE200B7162E /* LocationFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationFetcher.swift; sourceTree = "<group>"; };
 		18C6B01F2510C17300B7162E /* NotificationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHelper.swift; sourceTree = "<group>"; };
+		18C6B0212511C95E00B7162E /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		18DC39BC24B608EB008708FC /* ActioSpinner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActioSpinner.swift; sourceTree = "<group>"; };
 		18F2F9BF24C1C367007CBBC0 /* BeforeApprovalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeforeApprovalViewController.swift; sourceTree = "<group>"; };
 		18F6A07124B57D18000ACDF1 /* SelfSizingTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSizingTextView.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				18196CF724B4727E00DBECCA /* ActioTextField.swift */,
 				183384C524B49CDD009911A8 /* ActioGradientButton.swift */,
 				18F6A07124B57D18000ACDF1 /* SelfSizingTextView.swift */,
+				18C6B0212511C95E00B7162E /* PaddingLabel.swift */,
 			);
 			path = "Custom Subclasses";
 			sourceTree = "<group>";
@@ -590,6 +593,7 @@
 				8D9C07A1250B886100514692 /* TournamentListModel.swift in Sources */,
 				18BBAC7D24B5B99900306A8F /* ActioImagePicker.swift in Sources */,
 				183384C624B49CDD009911A8 /* ActioGradientButton.swift in Sources */,
+				18C6B0222511C95F00B7162E /* PaddingLabel.swift in Sources */,
 				8DA5D456250A4AF1003EAB6B /* TournamentFavoriteCollectionViewCell.swift in Sources */,
 				8D99566624C9515D006C3616 /* WelcomeAlertViewController.swift in Sources */,
 				1841F19924B480F10021D131 /* UIKitExtensions.swift in Sources */,

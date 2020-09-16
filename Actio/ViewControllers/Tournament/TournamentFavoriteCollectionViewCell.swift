@@ -22,7 +22,7 @@ class TournamentFavoriteCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet var tournamentFavSportsNameLabel: UILabel!
     
-    @IBOutlet var tournamentFavRegistrationStatusLabel: UILabel!
+    @IBOutlet var tournamentFavRegistrationStatusLabel: PaddingLabel!
     
     @IBOutlet var tournamentFavLocationLabel: UILabel!
     
@@ -32,8 +32,9 @@ class TournamentFavoriteCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         
         tournamentFavoriteBackgroundView.backgroundColor = AppColor.FavViewBackgroundColor()
-        tournamentFavRegistrationStatusLabel.layer.cornerRadius = 10.0
+        tournamentFavRegistrationStatusLabel.layer.cornerRadius = 12.0
         tournamentFavRegistrationStatusLabel.clipsToBounds = true
+        tournamentFavRegistrationStatusLabel.insets = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
         tournamentFavoriteBackgroundView.layer.cornerRadius = 5.0
         tournamentFavoriteBackgroundView.clipsToBounds = true
         

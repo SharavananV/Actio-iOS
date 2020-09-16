@@ -90,7 +90,7 @@ extension TournamentListViewController : UICollectionViewDelegate,UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 135, height: 220)
+        return CGSize(width: 145, height: 220)
     }
 }
 
@@ -110,7 +110,7 @@ extension TournamentListViewController : UITableViewDelegate,UITableViewDataSour
             cell.nearMeTournamentImage.load(url: imagePath)
         }
         cell.nearMeTournamentNameLabel.text = tournament.tournamentName
-        cell.nearMeDateLabel.text = tournament.tournamentStartDate + tournament.tournamentStartMonth + tournament.tournamentStartYear
+        cell.nearMeDateLabel.text = tournament.tournamentStartRange + " - " + tournament.tournamentEndRange
         cell.nearMeTournamentRegistrationStatusLabel.text = tournament.registrationStatus.displayString
         cell.nearMeTournamentRegistrationStatusLabel.backgroundColor = tournament.registrationStatus.backgroundColor
         cell.nearMeLocationLabel.text = tournament.venue
