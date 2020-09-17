@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import Alamofire
 import Toast_Swift
-
+import Alamofire
 
 class OtpViewController: UIViewController,VPMOTPViewDelegate {
     var stringOtp = String()
@@ -74,9 +73,9 @@ class OtpViewController: UIViewController,VPMOTPViewDelegate {
     func apiCall(otp:String) {
         urlString = validateOTPUrl
         
-        let headers : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"",
+        let headers: HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"",
                                      "Content-Type": "application/json"]
-        AF.request(validateOTPUrl,method: .post,parameters: ["otp":otp],encoding: JSONEncoding.default,headers: headers).responseJSON {
+        NetworkRouter.shared.request(validateOTPUrl,method: .post,parameters: ["otp":otp],encoding: JSONEncoding.default,headers: headers).responseJSON {
             response in
             switch response.result {
             case .success (let data):

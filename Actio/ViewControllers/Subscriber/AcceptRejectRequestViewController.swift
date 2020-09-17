@@ -79,7 +79,7 @@ class AcceptRejectRequestViewController: UIViewController {
         let headers : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"",
                                      "Content-Type": "application/json"]
         urlString = parentApprovalUrl
-        AF.request(urlString, method: .post, parameters: ["childID": childID,"Status": Status,"Mode": self.Mode,"relationID": relationID],encoding:JSONEncoding.default, headers: headers).responseJSON {
+        NetworkRouter.shared.request(urlString, method: .post, parameters: ["childID": childID,"Status": Status,"Mode": self.Mode,"relationID": relationID],encoding:JSONEncoding.default, headers: headers).responseJSON {
             response in
             switch response.result {
             case .success (let data):
@@ -112,7 +112,7 @@ class AcceptRejectRequestViewController: UIViewController {
         let headers : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"",
                                      "Content-Type": "application/json"]
         urlString = parentApprovalInitUrl
-        AF.request(urlString, method: .post, parameters: ["childID": childID],encoding:JSONEncoding.default, headers: headers).responseJSON {
+        NetworkRouter.shared.request(urlString, method: .post, parameters: ["childID": childID],encoding:JSONEncoding.default, headers: headers).responseJSON {
             response in
             switch response.result {
             case .success (let data):

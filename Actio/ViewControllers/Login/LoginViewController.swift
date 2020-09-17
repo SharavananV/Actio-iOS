@@ -10,8 +10,6 @@ import UIKit
 import Alamofire
 import Toast_Swift
 
-
-
 class LoginViewController: UIViewController {
     
     @IBOutlet var userNameTextField: UITextField!
@@ -95,7 +93,7 @@ class LoginViewController: UIViewController {
     
     func apiCall(username: String,password: String,Mode: String,deviceToken:String) {
         urlString = loginUrl
-        AF.request(urlString, method: .post, parameters: ["username": username,"password": password,"Mode": Mode,"deviceToken": deviceToken],encoding:JSONEncoding.default, headers: nil).responseJSON {
+        NetworkRouter.shared.request(urlString, method: .post, parameters: ["username": username,"password": password,"Mode": Mode,"deviceToken": deviceToken],encoding:JSONEncoding.default, headers: nil).responseJSON {
             response in
             switch response.result {
             case .success (let data):

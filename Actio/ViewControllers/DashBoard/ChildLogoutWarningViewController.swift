@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+
 class ChildLogoutWarningViewController: UIViewController {
     let dependencyProvider = DependencyProvider.shared
     weak var delegate: LogoutDelegate?
@@ -60,7 +61,7 @@ class ChildLogoutWarningViewController: UIViewController {
         
         let headers : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"",
                                      "Content-Type": "application/json"]
-        AF.request(logoutUrl,method: .post, parameters: ["Mode":"1", "deviceToken": UDHelper.getDeviceToken()], encoding: JSONEncoding.default, headers: headers).responseJSON {
+        NetworkRouter.shared.request(logoutUrl,method: .post, parameters: ["Mode":"1", "deviceToken": UDHelper.getDeviceToken()], encoding: JSONEncoding.default, headers: headers).responseJSON {
             response in
             switch response.result {
             case .success (let data):

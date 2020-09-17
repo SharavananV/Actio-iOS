@@ -17,7 +17,13 @@ class TournamentSponserDatasource: NSObject, UICollectionViewDelegate, UICollect
     
     weak var controller: UIViewController?
     private var affliations: [TournamentAffliation]
-    private let itemsPerRow: CGFloat = 2.5
+    private lazy var itemsPerRow: CGFloat = {
+        if affliations.count > 2 {
+            return 2.5
+        }
+        
+        return CGFloat(self.affliations.count)
+    }()
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return affliations.count

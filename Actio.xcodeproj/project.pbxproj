@@ -18,6 +18,7 @@
 		1841F19524B480680021D131 /* TextEditTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1841F19124B480680021D131 /* TextEditTableViewCell.swift */; };
 		1841F19624B480680021D131 /* FootnoteButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1841F19224B480680021D131 /* FootnoteButtonTableViewCell.swift */; };
 		1841F19924B480F10021D131 /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1841F19824B480F10021D131 /* UIKitExtensions.swift */; };
+		1880B020251364C2006BE848 /* NetworkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1880B01F251364C2006BE848 /* NetworkRouter.swift */; };
 		18A9750924C04972001B5BB3 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A9750824C04972001B5BB3 /* MenuViewController.swift */; };
 		18BBAC7D24B5B99900306A8F /* ActioImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BBAC7C24B5B99900306A8F /* ActioImagePicker.swift */; };
 		18BBAC7F24B5E90A00306A8F /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BBAC7E24B5E90A00306A8F /* Validator.swift */; };
@@ -112,6 +113,7 @@
 		1841F19124B480680021D131 /* TextEditTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextEditTableViewCell.swift; sourceTree = "<group>"; };
 		1841F19224B480680021D131 /* FootnoteButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FootnoteButtonTableViewCell.swift; sourceTree = "<group>"; };
 		1841F19824B480F10021D131 /* UIKitExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitExtensions.swift; sourceTree = "<group>"; };
+		1880B01F251364C2006BE848 /* NetworkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRouter.swift; sourceTree = "<group>"; };
 		18A9750824C04972001B5BB3 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		18B569F324BF005900D6A520 /* Actio.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Actio.entitlements; sourceTree = "<group>"; };
 		18B569F524C03F7800D6A520 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
@@ -329,6 +331,7 @@
 			children = (
 				8D8C6A9524B591F400D6DBE3 /* ApiDetails.swift */,
 				8DD154832506447F0072C545 /* ApiCall.swift */,
+				1880B01F251364C2006BE848 /* NetworkRouter.swift */,
 			);
 			path = APIDetails;
 			sourceTree = "<group>";
@@ -620,6 +623,7 @@
 				18F6A07224B57D18000ACDF1 /* SelfSizingTextView.swift in Sources */,
 				8DA3055A24BC310D0090142B /* AcceptRejectRequestViewController.swift in Sources */,
 				8DF7863C24B846E900062261 /* SubscriberIDViewController.swift in Sources */,
+				1880B020251364C2006BE848 /* NetworkRouter.swift in Sources */,
 				8DD154842506447F0072C545 /* ApiCall.swift in Sources */,
 				18C6B02D2512015200B7162E /* TournamentModel.swift in Sources */,
 				1841F19624B480680021D131 /* FootnoteButtonTableViewCell.swift in Sources */,

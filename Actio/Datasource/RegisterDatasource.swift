@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import Alamofire
 import Toast_Swift
+import Alamofire
 
 class RegisterDatasource {
     static let shared = RegisterDatasource()
@@ -22,7 +22,7 @@ class RegisterDatasource {
         
         ActioSpinner.shared.show(on: controller.view, showBlur: false)
         
-        AF.request(masterUrl, method: .post, parameters: parameters)
+        NetworkRouter.shared.request(masterUrl, method: .post, parameters: parameters)
             .validate()
             .responseDecodable(of: MasterData.self) { (response) in
                 switch response.result {
@@ -83,7 +83,7 @@ class RegisterDatasource {
     func getUserStatus(completion: @escaping ((UserStatus) -> Void)) {
         let headers : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"",
                                      "Content-Type": "application/json"]
-        AF.request(userStatusUrl,method: .post, parameters: [:], encoding: JSONEncoding.default, headers: headers).responseJSON {
+        NetworkRouter.shared.request(userStatusUrl,method: .post, parameters: [:], encoding: JSONEncoding.default, headers: headers).responseJSON {
             response in
             switch response.result {
             case .success (let data):
@@ -110,7 +110,7 @@ class RegisterDatasource {
     func logout(completion: @escaping ((String) -> Void)) {
         let headers : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"",
                                      "Content-Type": "application/json"]
-        AF.request(logoutUrl,method: .post, parameters: ["Mode":"1", "deviceToken": UDHelper.getDeviceToken()], encoding: JSONEncoding.default, headers: headers).responseJSON {
+        NetworkRouter.shared.request(logoutUrl,method: .post, parameters: ["Mode":"1", "deviceToken": UDHelper.getDeviceToken()], encoding: JSONEncoding.default, headers: headers).responseJSON {
             response in
             switch response.result {
             case .success (let data):

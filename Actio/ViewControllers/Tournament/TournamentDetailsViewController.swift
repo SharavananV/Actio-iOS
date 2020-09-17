@@ -49,7 +49,7 @@ class TournamentDetailsViewController: UIViewController {
         
         ActioSpinner.shared.show(on: view)
         
-        AF.request(tournamentDetailsUrl, method: .post, parameters: ["tournamentID": 96], encoding: JSONEncoding.default, headers: headers).responseDecodable(of: TournamentResponse.self, queue: .main) { (response) in
+        NetworkRouter.shared.request(tournamentDetailsUrl, method: .post, parameters: ["tournamentID": 166], encoding: JSONEncoding.default, headers: headers).responseDecodable(of: TournamentResponse.self, queue: .main) { (response) in
             ActioSpinner.shared.hide()
             
             guard let result = response.value, result.status == "200" else {

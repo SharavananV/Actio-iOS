@@ -74,7 +74,7 @@ class HomePageViewController: UIViewController, LogoutDelegate {
 
       
         
-        AF.request(dashboardUrl, method: .post, parameters: nil, headers: headers).responseJSON { (response) in
+        NetworkRouter.shared.request(dashboardUrl, method: .post, parameters: nil, headers: headers).responseJSON { (response) in
             switch response.result {
             case .success (let data):
                 if let resultDict = data as? [String: Any], let successText = resultDict["status"] as? String, successText == "200" {

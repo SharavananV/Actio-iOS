@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+
 class SubscriberIDViewController: UIViewController ,UIScrollViewDelegate{
     
     @IBOutlet var headerView: UIView!
@@ -63,7 +64,7 @@ class SubscriberIDViewController: UIViewController ,UIScrollViewDelegate{
         
         let headers : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"",
                                      "Content-Type": "application/json"]
-        AF.request(parentIdUrl,method: .post,parameters: ["parentID":parentID,"Mode":Mode],encoding: JSONEncoding.default,headers: headers).responseJSON {
+        NetworkRouter.shared.request(parentIdUrl,method: .post,parameters: ["parentID":parentID,"Mode":Mode],encoding: JSONEncoding.default,headers: headers).responseJSON {
             response in
             switch response.result {
             case .success (let data):
@@ -111,7 +112,7 @@ class SubscriberIDViewController: UIViewController ,UIScrollViewDelegate{
         
         let headers : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"",
                                      "Content-Type": "application/json"]
-        AF.request(userStatusUrl,method: .post,parameters: ["parentName":parentName,"parentIsd":parentIsd,"parentMobile":parentMobile,"currentUserStatus":currentUserStatus],encoding: JSONEncoding.default,headers: headers).responseJSON {
+        NetworkRouter.shared.request(userStatusUrl,method: .post,parameters: ["parentName":parentName,"parentIsd":parentIsd,"parentMobile":parentMobile,"currentUserStatus":currentUserStatus],encoding: JSONEncoding.default,headers: headers).responseJSON {
             response in
             switch response.result {
             case .success (let data):
