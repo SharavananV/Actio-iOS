@@ -54,7 +54,7 @@ class AcceptRejectRequestViewController: UIViewController {
         apiParentInitCall(childID: "7354")
         addRelationArray = []
         
-        var bottomLine = CALayer()
+        let bottomLine = CALayer()
         bottomLine.frame = CGRect(x: 0.0, y: self.relationTextfield.frame.height - 1, width: self.relationTextfield.frame.width, height: 1.0)
         bottomLine.backgroundColor = UIColor.black.cgColor
         relationTextfield.borderStyle = UITextField.BorderStyle.none

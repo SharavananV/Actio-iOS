@@ -18,7 +18,11 @@ class RegisterDatasource {
     var registerUserUpload: UploadRequest?
     
     func prepareMasterData(with countryCode: Int?, presentAlertOn controller: UIViewController, completion: ((MasterData)->Void)? = nil) {
-        let parameters = countryCode == nil ? nil : ["countryID": countryCode]
+        
+        var parameters: [String: Any]? = nil
+        if let code = countryCode {
+            parameters = ["countryID": code]
+        }
         
         ActioSpinner.shared.show(on: controller.view, showBlur: false)
         
