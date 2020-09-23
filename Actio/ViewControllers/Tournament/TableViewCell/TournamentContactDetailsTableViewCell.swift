@@ -15,7 +15,7 @@ class TournamentContactDetailsTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         cellBackgroundView.layer.cornerRadius = 10
-        cellBackgroundView.layer.masksToBounds = true;
+        cellBackgroundView.layer.masksToBounds = true
 
         cellBackgroundView.backgroundColor = UIColor.white
         cellBackgroundView.layer.shadowColor = UIColor.lightGray.cgColor

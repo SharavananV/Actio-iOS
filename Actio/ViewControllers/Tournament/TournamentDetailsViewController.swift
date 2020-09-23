@@ -49,7 +49,7 @@ class TournamentDetailsViewController: UIViewController {
         
         ActioSpinner.shared.show(on: view)
         
-        NetworkRouter.shared.request(tournamentDetailsUrl, method: .post, parameters: ["tournamentID": 166], encoding: JSONEncoding.default, headers: headers).responseDecodable(of: TournamentResponse.self, queue: .main) { (response) in
+        NetworkRouter.shared.request(tournamentDetailsUrl, method: .post, parameters: ["tournamentID": 188], encoding: JSONEncoding.default, headers: headers).responseDecodable(of: TournamentResponse.self, queue: .main) { (response) in
             ActioSpinner.shared.hide()
             
             guard let result = response.value, result.status == "200" else {
@@ -143,15 +143,27 @@ extension TournamentDetailsViewController: TournamentActionProtocol, TournamentG
     func didSelectAction(_ action: TournamentActionDatasource.TournamentAction) {
         switch action {
         case .organiser:
-            break
+            if let organiserVc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TournamentContactDetailsViewController") as? TournamentContactDetailsViewController {
+                self.navigationController?.pushViewController(organiserVc, animated: true)
+            }
         case .eventCategory:
             break
         case .prize:
-            break
+            if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TournamentPrizesViewController") as? TournamentPrizesViewController {
+                vc.affiliations = tournamentDetails?.affliations
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            
         case .location:
-            break
+            if let locationVc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TournamentLocationViewController") as? TournamentLocationViewController {
+                locationVc.tournamentLocation = tournamentDetails
+                self.navigationController?.pushViewController(locationVc, animated: true)
+            }
         case .affillations:
-            break
+            if let affiliationsVc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AffiliationsViewController") as? AffiliationsViewController {
+                affiliationsVc.affiliations = tournamentDetails?.affliations
+                self.navigationController?.pushViewController(affiliationsVc, animated: true)
+            }
         }
     }
     

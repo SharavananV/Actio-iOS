@@ -62,7 +62,8 @@ struct SubscriberList: Codable {
 
 // MARK: - Item
 struct Subscriber: Codable {
-    let subscriberID, username, emailID, mobileNumber: String
+    let subscriberID : Int
+    let username, emailID, mobileNumber: String
 
     enum CodingKeys: String, CodingKey {
         case subscriberID = "subscriber_id"
