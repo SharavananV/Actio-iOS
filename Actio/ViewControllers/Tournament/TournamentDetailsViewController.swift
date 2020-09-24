@@ -44,12 +44,12 @@ class TournamentDetailsViewController: UIViewController {
     }
     
     private func getTournamentDetails() {
-        let headers : HTTPHeaders = ["Authorization" : "Bearer "+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxMjMiLCJpZCI6NzQwMiwiaWF0IjoxNTk5MjE2NTc2fQ.d_k_-0izxRbpKdoMkmUrrY9uhawiPCoEDQwnoiUUv4M",
-                                     "Content-Type": "application/json"]
+         let headers : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"",
+                                            "Content-Type": "application/json"]
         
         ActioSpinner.shared.show(on: view)
         
-        NetworkRouter.shared.request(tournamentDetailsUrl, method: .post, parameters: ["tournamentID": 188], encoding: JSONEncoding.default, headers: headers).responseDecodable(of: TournamentResponse.self, queue: .main) { (response) in
+        NetworkRouter.shared.request(tournamentDetailsUrl, method: .post, parameters: ["tournamentID": tournamentId ?? 0], encoding: JSONEncoding.default, headers: headers).responseDecodable(of: TournamentResponse.self, queue: .main) { (response) in
             ActioSpinner.shared.hide()
             
             guard let result = response.value, result.status == "200" else {
@@ -144,6 +144,7 @@ extension TournamentDetailsViewController: TournamentActionProtocol, TournamentG
         switch action {
         case .organiser:
             if let organiserVc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TournamentContactDetailsViewController") as? TournamentContactDetailsViewController {
+                organiserVc.tournamentId = tournamentDetails?.id
                 self.navigationController?.pushViewController(organiserVc, animated: true)
             }
         case .eventCategory:
@@ -161,6 +162,7 @@ extension TournamentDetailsViewController: TournamentActionProtocol, TournamentG
             }
         case .affillations:
             if let affiliationsVc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AffiliationsViewController") as? AffiliationsViewController {
+                affiliationsVc.tournamentId = tournamentDetails?.id
                 affiliationsVc.affiliations = tournamentDetails?.affliations
                 self.navigationController?.pushViewController(affiliationsVc, animated: true)
             }

@@ -12,10 +12,13 @@ import Alamofire
 class AffiliationsViewController: UIViewController {
     @IBOutlet var affiliationsTableView: UITableView!
     var affiliations: [TournamentAffliation]?
+    var tournamentId: Int?
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationItem.title = "Affiliations"
+
         self.affiliationsTableView.delegate = self
         self.affiliationsTableView.dataSource = self
         self.affiliationsTableView.tableFooterView = UIView()
@@ -23,12 +26,12 @@ class AffiliationsViewController: UIViewController {
 
     }
     private func getAffiliationsDetails() {
-        let headers : HTTPHeaders = ["Authorization" : "Bearer "+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxMjMiLCJpZCI6NzQwMiwiaWF0IjoxNTk5MjE2NTc2fQ.d_k_-0izxRbpKdoMkmUrrY9uhawiPCoEDQwnoiUUv4M",
-                                     "Content-Type": "application/json"]
+         let headers : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"",
+                                            "Content-Type": "application/json"]
         
         ActioSpinner.shared.show(on: view)
         
-        NetworkRouter.shared.request(tournamentDetailsUrl, method: .post, parameters: ["tournamentID": 188], encoding: JSONEncoding.default, headers: headers).responseDecodable(of: TournamentResponse.self, queue: .main) { (response) in
+        NetworkRouter.shared.request(tournamentDetailsUrl, method: .post, parameters: ["tournamentID": tournamentId ?? 0], encoding: JSONEncoding.default, headers: headers).responseDecodable(of: TournamentResponse.self, queue: .main) { (response) in
             ActioSpinner.shared.hide()
             
             guard let result = response.value, result.status == "200" else {

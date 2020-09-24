@@ -23,6 +23,8 @@ class TournamentPrizesViewController: UIViewController {
         super.viewDidLoad()
         self.prizeCategoryLabel = ["Winner Prize","Runner Prize","Man of the Tournament","Man of the match"]
         self.prizeValueLabel = ["Rs.10000/- + Trophy","Rs.8000/- + Trophy","Rs.2000/- + Trophy","Medal"]
+        self.navigationItem.title = "Tournament Prizes"
+
         
         if let affiliations = self.affiliations {
             tournamentPrizeCollectionView.register(ImageTextCollectionViewCell.self, forCellWithReuseIdentifier: ImageTextCollectionViewCell.reuseId)

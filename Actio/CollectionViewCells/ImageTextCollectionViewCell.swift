@@ -76,8 +76,8 @@ class ImageTextCollectionViewCell: UICollectionViewCell {
             imageView.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
             
             textLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10),
-            textLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 10),
-            textLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -10),
+            textLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 0),
+            textLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: 0),
             textLabel.bottomAnchor.constraint(lessThanOrEqualTo: self.contentView.bottomAnchor, constant: -10, priority: .defaultHigh)
         ]
         

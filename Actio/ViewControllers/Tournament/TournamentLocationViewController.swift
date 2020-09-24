@@ -24,8 +24,11 @@ class TournamentLocationViewController: UIViewController,CLLocationManagerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.title = "Map Directions"
+
+        
         locationBackgroundView.layer.cornerRadius = 10
-        locationBackgroundView.layer.masksToBounds = true;
+        locationBackgroundView.layer.masksToBounds = true
 
         locationBackgroundView.backgroundColor = UIColor.white
         locationBackgroundView.layer.shadowColor = UIColor.lightGray.cgColor

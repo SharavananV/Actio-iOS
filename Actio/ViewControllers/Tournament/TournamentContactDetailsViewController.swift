@@ -15,6 +15,8 @@ class TournamentContactDetailsViewController: UIViewController {
     @IBOutlet var tournamentContactDetailLabel: UILabel!
     @IBOutlet var tournamentContactDetailTableView: UITableView!
     private var tournamentContactDetails: Tournament?
+    var tournamentId: Int?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,15 +24,21 @@ class TournamentContactDetailsViewController: UIViewController {
         self.tournamentContactDetailTableView.dataSource = self
         tournamentContactDetailTableView.tableFooterView = UIView()
         
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.navigationItem.title = "Tournament Contact Details"
         getTournamentContactDetails()
+
+       
     }
     private func getTournamentContactDetails() {
-        let headers : HTTPHeaders = ["Authorization" : "Bearer "+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxMjMiLCJpZCI6NzQwMiwiaWF0IjoxNTk5MjE2NTc2fQ.d_k_-0izxRbpKdoMkmUrrY9uhawiPCoEDQwnoiUUv4M",
-                                     "Content-Type": "application/json"]
+         let headers : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"",
+                                            "Content-Type": "application/json"]
         
         ActioSpinner.shared.show(on: view)
         
-        NetworkRouter.shared.request(tournamentDetailsUrl, method: .post, parameters: ["tournamentID": 188], encoding: JSONEncoding.default, headers: headers).responseDecodable(of: TournamentResponse.self, queue: .main) { (response) in
+        NetworkRouter.shared.request(tournamentDetailsUrl, method: .post, parameters: ["tournamentID": tournamentId ?? 0], encoding: JSONEncoding.default, headers: headers).responseDecodable(of: TournamentResponse.self, queue: .main) { (response) in
             ActioSpinner.shared.hide()
             
             guard let result = response.value, result.status == "200" else {
@@ -57,7 +65,13 @@ extension TournamentContactDetailsViewController :UITableViewDelegate,UITableVie
                   return UITableViewCell()
               }
         
-        cell.contactProfileImageView.image = UIImage.init(named: "contact-director-profile")
+        if tournamentContactDetails?.directorsOrganizers[indexPath.section].name == "Director" {
+            cell.contactProfileImageView.image = UIImage.init(named: "contact-director-profile")
+        } else {
+            cell.contactProfileImageView.image = UIImage.init(named: "contact-organizer-profile")
+
+        }
+        
         cell.contactNameLabel.text = tournament.username
         cell.contactEmailLabel.text = tournament.emailID
         cell.contactMobileNumLabel.text = tournament.mobileNumber

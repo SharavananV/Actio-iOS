@@ -40,8 +40,8 @@ class TournamentListViewController: UIViewController {
     }
     
     func tournamentListApiCall() {
-        let headers : HTTPHeaders = ["Authorization" : "Bearer "+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxMjMiLCJpZCI6NzQwMiwiaWF0IjoxNTk5MjE2NTc2fQ.d_k_-0izxRbpKdoMkmUrrY9uhawiPCoEDQwnoiUUv4M",
-                                     "Content-Type": "application/json"]
+        let headers : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"",
+                                            "Content-Type": "application/json"]
         
         ActioSpinner.shared.show(on: view)
         
@@ -81,7 +81,7 @@ extension TournamentListViewController : UICollectionViewDelegate,UICollectionVi
         cell.setDateText(tournament.tournamentStartDate, month: tournament.tournamentStartMonth, year: tournament.tournamentStartYear)
         cell.tournamentFavRegistrationStatusLabel.text = tournament.registrationStatus.displayString
         cell.tournamentFavRegistrationStatusLabel.backgroundColor = tournament.registrationStatus.backgroundColor
-        cell.tournamentFavLocationImage.image = UIImage(named: "Icon material-home")
+        cell.tournamentFavLocationImage.image = UIImage(named: "Icon-material-location-on")
         return cell
     }
     
@@ -92,6 +92,16 @@ extension TournamentListViewController : UICollectionViewDelegate,UICollectionVi
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 145, height: 220)
     }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard let tournament = self.tournamentListModel?.favorites[indexPath.row],
+            let vc = storyboard?.instantiateViewController(withIdentifier: "TournamentDetailsViewController") as? TournamentDetailsViewController else {
+            return
+        }
+        vc.tournamentId = tournament.id
+        self.navigationController?.pushViewController(vc, animated: false)
+    }
+
 }
 
 extension TournamentListViewController : UITableViewDelegate,UITableViewDataSource{
@@ -114,10 +124,20 @@ extension TournamentListViewController : UITableViewDelegate,UITableViewDataSour
         cell.nearMeTournamentRegistrationStatusLabel.text = tournament.registrationStatus.displayString
         cell.nearMeTournamentRegistrationStatusLabel.backgroundColor = tournament.registrationStatus.backgroundColor
         cell.nearMeLocationLabel.text = tournament.venue
-        cell.nearMeCalenderImage.image = UIImage(named: "Icon material-home")
-        cell.nearMeLocationImage.image = UIImage(named: "Icon material-home")
+        cell.nearMeCalenderImage.image = UIImage(named: "Icon-awesome-calendar-alt")
+        cell.nearMeLocationImage.image = UIImage(named: "Icon-material-location-on")
 
         return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let tournament = self.tournamentListModel?.favorites[indexPath.row],
+            let vc = storyboard?.instantiateViewController(withIdentifier: "TournamentDetailsViewController") as? TournamentDetailsViewController else {
+            return
+        }
+        
+        vc.tournamentId = tournament.id
+        self.navigationController?.pushViewController(vc, animated: false)
+        
     }
     
 }

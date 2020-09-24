@@ -84,15 +84,15 @@ class TournamentActionDatasource: NSObject, UICollectionViewDelegate, UICollecti
         var icon: String {
             switch self {
             case .organiser:
-                return "Dummy"
+                return "Organizer"
             case .eventCategory:
-                return "Dummy"
+                return "eventCategory"
             case .prize:
-                return "Dummy"
+                return "Prize"
             case .location:
-                return "Dummy"
+                return "Location"
             case .affillations:
-                return "Dummy"
+                return "Affillations"
             }
         }
     }

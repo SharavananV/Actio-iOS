@@ -42,9 +42,9 @@ class TournamentFavoriteCollectionViewCell: UICollectionViewCell {
     }
     
     func setDateText(_ day: String, month: String, year: String) {
-        let dayFont = AppFont.PoppinsSemiBold(size: 15)
-        let monthFont = AppFont.PoppinsSemiBold(size: 13)
-        let yearFont = AppFont.PoppinsSemiBold(size: 11)
+        let dayFont = AppFont.PoppinsSemiBold(size: 12)
+        let monthFont = AppFont.PoppinsSemiBold(size: 8)
+        let yearFont = AppFont.PoppinsSemiBold(size: 6)
         
         let dateString = "\(day) \(month) \(year)"
         let attributedDate = NSMutableAttributedString(string: dateString)

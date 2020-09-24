@@ -29,6 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = vc
         window?.makeKeyAndVisible()
         UINavigationBar.appearance().barTintColor = AppColor.OrangeColor()
+        UINavigationBar.appearance().tintColor = UIColor.white
+        UINavigationBar.appearance().titleTextAttributes = [ NSAttributedString.Key.font: AppFont.PoppinsSemiBold(size: 20),NSAttributedString.Key.foregroundColor: UIColor.white]
+
         
         
         IQKeyboardManager.shared().isEnabled = true

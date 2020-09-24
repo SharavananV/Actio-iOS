@@ -45,6 +45,10 @@
 		8D673A5E2514840D00585AF9 /* TournamentContactDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D673A5D2514840D00585AF9 /* TournamentContactDetailsTableViewCell.swift */; };
 		8D673A602514C28600585AF9 /* TournamentPrizesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D673A5F2514C28600585AF9 /* TournamentPrizesViewController.swift */; };
 		8D673A622514C86A00585AF9 /* TournamentPrizesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D673A612514C86A00585AF9 /* TournamentPrizesTableViewCell.swift */; };
+		8D673A64251B142100585AF9 /* TournamentPrizesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D673A63251B142100585AF9 /* TournamentPrizesCollectionViewCell.swift */; };
+		8D673A66251B1A0400585AF9 /* TournamentLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D673A65251B1A0400585AF9 /* TournamentLocationViewController.swift */; };
+		8D673A68251B3F3200585AF9 /* AffiliationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D673A67251B3F3200585AF9 /* AffiliationsViewController.swift */; };
+		8D673A6A251B3F4C00585AF9 /* AffiliationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D673A69251B3F4C00585AF9 /* AffiliationsTableViewCell.swift */; };
 		8D8C6A9324B591B200D6DBE3 /* UDHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8C6A9224B591B200D6DBE3 /* UDHelper.swift */; };
 		8D8C6A9624B591F400D6DBE3 /* ApiDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8C6A9524B591F400D6DBE3 /* ApiDetails.swift */; };
 		8D8C6A9824B5939700D6DBE3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D8C6A9724B5939700D6DBE3 /* GoogleService-Info.plist */; };
@@ -147,6 +151,10 @@
 		8D673A5D2514840D00585AF9 /* TournamentContactDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentContactDetailsTableViewCell.swift; sourceTree = "<group>"; };
 		8D673A5F2514C28600585AF9 /* TournamentPrizesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentPrizesViewController.swift; sourceTree = "<group>"; };
 		8D673A612514C86A00585AF9 /* TournamentPrizesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentPrizesTableViewCell.swift; sourceTree = "<group>"; };
+		8D673A63251B142100585AF9 /* TournamentPrizesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentPrizesCollectionViewCell.swift; sourceTree = "<group>"; };
+		8D673A65251B1A0400585AF9 /* TournamentLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentLocationViewController.swift; sourceTree = "<group>"; };
+		8D673A67251B3F3200585AF9 /* AffiliationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffiliationsViewController.swift; sourceTree = "<group>"; };
+		8D673A69251B3F4C00585AF9 /* AffiliationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffiliationsTableViewCell.swift; sourceTree = "<group>"; };
 		8D8C6A9224B591B200D6DBE3 /* UDHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDHelper.swift; sourceTree = "<group>"; };
 		8D8C6A9524B591F400D6DBE3 /* ApiDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiDetails.swift; sourceTree = "<group>"; };
 		8D8C6A9724B5939700D6DBE3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -262,6 +270,7 @@
 			children = (
 				8DA5D455250A4AF1003EAB6B /* TournamentFavoriteCollectionViewCell.swift */,
 				8D9C079B250B53A400514692 /* NearMeTournamentListTableViewCell.swift */,
+				8D673A63251B142100585AF9 /* TournamentPrizesCollectionViewCell.swift */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -339,6 +348,7 @@
 			children = (
 				8D673A5D2514840D00585AF9 /* TournamentContactDetailsTableViewCell.swift */,
 				8D673A612514C86A00585AF9 /* TournamentPrizesTableViewCell.swift */,
+				8D673A69251B3F4C00585AF9 /* AffiliationsTableViewCell.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -415,6 +425,8 @@
 				18C6B0232511F35400B7162E /* CollectionViewCells */,
 				8D9C079F250B883D00514692 /* Model */,
 				8DA5D451250A464E003EAB6B /* TournamentListViewController.swift */,
+				8D673A67251B3F3200585AF9 /* AffiliationsViewController.swift */,
+				8D673A65251B1A0400585AF9 /* TournamentLocationViewController.swift */,
 				8D673A5F2514C28600585AF9 /* TournamentPrizesViewController.swift */,
 				8D673A5A2513884000585AF9 /* TournamentContactDetailsViewController.swift */,
 				18C6B0242511F38700B7162E /* TournamentDetailsViewController.swift */,
@@ -637,6 +649,8 @@
 				8DA5D452250A464E003EAB6B /* TournamentListViewController.swift in Sources */,
 				1841F19424B480680021D131 /* TextPickerTableViewCell.swift in Sources */,
 				18F6A07624B5A4FD000ACDF1 /* RegisterDatasource.swift in Sources */,
+				8D673A6A251B3F4C00585AF9 /* AffiliationsTableViewCell.swift in Sources */,
+				8D673A66251B1A0400585AF9 /* TournamentLocationViewController.swift in Sources */,
 				8D9C079C250B53A400514692 /* NearMeTournamentListTableViewCell.swift in Sources */,
 				183384CA24B4A94C009911A8 /* JustTextTableViewCell.swift in Sources */,
 				8D9C07A5250B889300514692 /* TournamentNearMeModel.swift in Sources */,
@@ -667,10 +681,12 @@
 				183384C624B49CDD009911A8 /* ActioGradientButton.swift in Sources */,
 				18C6B0222511C95F00B7162E /* PaddingLabel.swift in Sources */,
 				8D673A602514C28600585AF9 /* TournamentPrizesViewController.swift in Sources */,
+				8D673A64251B142100585AF9 /* TournamentPrizesCollectionViewCell.swift in Sources */,
 				8DA5D456250A4AF1003EAB6B /* TournamentFavoriteCollectionViewCell.swift in Sources */,
 				8D99566624C9515D006C3616 /* WelcomeAlertViewController.swift in Sources */,
 				1841F19924B480F10021D131 /* UIKitExtensions.swift in Sources */,
 				18C253CD25122CD40043D20F /* TournamentGalleryDatasource.swift in Sources */,
+				8D673A68251B3F3200585AF9 /* AffiliationsViewController.swift in Sources */,
 				8D99566824C9784D006C3616 /* ChildLogoutWarningViewController.swift in Sources */,
 				18C6B02B2511FCD600B7162E /* TournamentActionDatasource.swift in Sources */,
 				18BBAC7F24B5E90A00306A8F /* Validator.swift in Sources */,
