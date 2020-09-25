@@ -49,6 +49,7 @@
 		8D673A66251B1A0400585AF9 /* TournamentLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D673A65251B1A0400585AF9 /* TournamentLocationViewController.swift */; };
 		8D673A68251B3F3200585AF9 /* AffiliationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D673A67251B3F3200585AF9 /* AffiliationsViewController.swift */; };
 		8D673A6A251B3F4C00585AF9 /* AffiliationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D673A69251B3F4C00585AF9 /* AffiliationsTableViewCell.swift */; };
+		8D673A6C251DB02000585AF9 /* ImagePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D673A6B251DB01F00585AF9 /* ImagePreviewViewController.swift */; };
 		8D8C6A9324B591B200D6DBE3 /* UDHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8C6A9224B591B200D6DBE3 /* UDHelper.swift */; };
 		8D8C6A9624B591F400D6DBE3 /* ApiDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8C6A9524B591F400D6DBE3 /* ApiDetails.swift */; };
 		8D8C6A9824B5939700D6DBE3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D8C6A9724B5939700D6DBE3 /* GoogleService-Info.plist */; };
@@ -155,6 +156,7 @@
 		8D673A65251B1A0400585AF9 /* TournamentLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentLocationViewController.swift; sourceTree = "<group>"; };
 		8D673A67251B3F3200585AF9 /* AffiliationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffiliationsViewController.swift; sourceTree = "<group>"; };
 		8D673A69251B3F4C00585AF9 /* AffiliationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffiliationsTableViewCell.swift; sourceTree = "<group>"; };
+		8D673A6B251DB01F00585AF9 /* ImagePreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewViewController.swift; sourceTree = "<group>"; };
 		8D8C6A9224B591B200D6DBE3 /* UDHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDHelper.swift; sourceTree = "<group>"; };
 		8D8C6A9524B591F400D6DBE3 /* ApiDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiDetails.swift; sourceTree = "<group>"; };
 		8D8C6A9724B5939700D6DBE3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -425,6 +427,7 @@
 				18C6B0232511F35400B7162E /* CollectionViewCells */,
 				8D9C079F250B883D00514692 /* Model */,
 				8DA5D451250A464E003EAB6B /* TournamentListViewController.swift */,
+				8D673A6B251DB01F00585AF9 /* ImagePreviewViewController.swift */,
 				8D673A67251B3F3200585AF9 /* AffiliationsViewController.swift */,
 				8D673A65251B1A0400585AF9 /* TournamentLocationViewController.swift */,
 				8D673A5F2514C28600585AF9 /* TournamentPrizesViewController.swift */,
@@ -705,6 +708,7 @@
 				8D8C6A9624B591F400D6DBE3 /* ApiDetails.swift in Sources */,
 				8D673A5B2513884000585AF9 /* TournamentContactDetailsViewController.swift in Sources */,
 				18C253D12512403F0043D20F /* TournamentSponserDatasource.swift in Sources */,
+				8D673A6C251DB02000585AF9 /* ImagePreviewViewController.swift in Sources */,
 				8DCBAB5A24BF2D37009E8B7F /* HomePageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

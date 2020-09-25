@@ -9,8 +9,12 @@
 import UIKit
 import Alamofire
 
-class TournamentDetailsViewController: UIViewController {
+class TournamentDetailsViewController: UIViewController, UIViewControllerPreviewingDelegate {
 
+    @IBOutlet var shareButton: UIButton!
+    
+    @IBOutlet var favoriteButton: UIButton!
+    
     @IBOutlet weak var bannerImageView: UIImageView!
     @IBOutlet weak var tournamentNameLabel: UILabel!
     @IBOutlet weak var tournamentActionCollectionView: UICollectionView!
@@ -39,6 +43,8 @@ class TournamentDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        registerForPreviewing(with: self, sourceView: galleryCollectionView)
+
         setupCollectionView()
         getTournamentDetails()
     }
@@ -62,6 +68,37 @@ class TournamentDetailsViewController: UIViewController {
         }
     }
     
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        if let indexPath = galleryCollectionView.indexPathForItem(at: location), let frame = galleryCollectionView.cellForItem(at: indexPath)?.frame {
+            previewingContext.sourceRect = frame
+            return detailViewController(for: indexPath.row)
+        }
+
+        return nil
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+            //navigationController?.pushViewController(viewControllerToCommit, animated: true)
+
+    }
+    func detailViewController(for index: Int) -> ImagePreviewViewController {
+        guard let vc = storyboard?.instantiateViewController(withIdentifier: "ImagePreviewViewController") as? ImagePreviewViewController else {
+            fatalError("Couldn't load detail view controller")
+        }
+
+        let bannerUrls = self.tournamentDetails?.tournamentBanner.map {
+            URL(string:  baseUrl + $0)
+        }
+        
+        vc.previewUrl = bannerUrls?[index]
+        return vc
+    }
+
+    @IBAction func favoriteButtonAction(_ sender: Any) {
+    }
+    
+    @IBAction func shareButtonAction(_ sender: Any) {
+    }
     @IBAction func readMoreSelected(_ sender: Any) {
         if isDescriptionExpanded {
             descriptionHeightConstraint = descriptionLabel.heightAnchor.constraint(equalToConstant: 80)

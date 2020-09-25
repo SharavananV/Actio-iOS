@@ -1429,6 +1429,13 @@
                                                     <constraint firstAttribute="width" secondItem="5RR-ac-6eQ" secondAttribute="height" multiplier="2:1.3" id="wuY-sL-krb"/>
                                                 </constraints>
                                             </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zAK-SP-9GI">
+                                                <rect key="frame" x="15.999999999999998" y="7" width="19.333333333333329" height="22"/>
+                                                <state key="normal" image="favorite"/>
+                                                <connections>
+                                                    <action selector="favoriteButtonAction:" destination="hsW-If-HZs" eventType="touchUpInside" id="LL3-Qb-6vu"/>
+                                                </connections>
+                                            </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gmv-Mc-GSP">
                                                 <rect key="frame" x="8" y="279" width="398" height="33.666666666666686"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="24"/>
@@ -1691,6 +1698,13 @@
                                                     <action selector="seeMoreRatingsTapped:" destination="hsW-If-HZs" eventType="touchUpInside" id="vqj-rY-p4L"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Bc-lv-yW0">
+                                                <rect key="frame" x="47" y="7" width="19" height="22"/>
+                                                <state key="normal" image="share"/>
+                                                <connections>
+                                                    <action selector="shareButtonAction:" destination="hsW-If-HZs" eventType="touchUpInside" id="hKp-qq-2OJ"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
@@ -1703,11 +1717,14 @@
                                             <constraint firstItem="iIg-2r-j1F" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="xba-Dq-0da" secondAttribute="trailing" constant="10" id="F3R-ph-lB5"/>
                                             <constraint firstItem="M2t-he-5nb" firstAttribute="trailing" secondItem="gmv-Mc-GSP" secondAttribute="trailing" id="Gdr-zz-5Fe"/>
                                             <constraint firstItem="BQR-5g-hrF" firstAttribute="leading" secondItem="wjQ-rf-mxS" secondAttribute="leading" id="Ipi-fL-iM8"/>
+                                            <constraint firstItem="zAK-SP-9GI" firstAttribute="leading" secondItem="5RR-ac-6eQ" secondAttribute="leading" constant="16" id="MdI-4S-p92"/>
+                                            <constraint firstItem="6Bc-lv-yW0" firstAttribute="leading" secondItem="zAK-SP-9GI" secondAttribute="trailing" constant="11.666666666666671" id="PL5-KZ-o9l"/>
                                             <constraint firstItem="xba-Dq-0da" firstAttribute="top" secondItem="DOh-Gg-ENm" secondAttribute="bottom" constant="10" id="QKc-QW-sng"/>
                                             <constraint firstItem="KBX-U6-qEf" firstAttribute="top" secondItem="M2t-he-5nb" secondAttribute="bottom" constant="10" id="QOH-YH-nRa"/>
                                             <constraint firstItem="DOh-Gg-ENm" firstAttribute="leading" secondItem="BQR-5g-hrF" secondAttribute="leading" id="QXn-Ps-euo"/>
                                             <constraint firstItem="iIg-2r-j1F" firstAttribute="trailing" secondItem="DOh-Gg-ENm" secondAttribute="trailing" id="Qrf-60-mUt"/>
                                             <constraint firstItem="iIg-2r-j1F" firstAttribute="centerY" secondItem="xba-Dq-0da" secondAttribute="centerY" id="Qyg-tH-men"/>
+                                            <constraint firstItem="5RR-ac-6eQ" firstAttribute="top" secondItem="6Bc-lv-yW0" secondAttribute="bottom" constant="-29" id="RM4-cf-Wxn"/>
                                             <constraint firstItem="KBX-U6-qEf" firstAttribute="trailing" secondItem="M2t-he-5nb" secondAttribute="trailing" id="SNR-5b-fRF"/>
                                             <constraint firstItem="xba-Dq-0da" firstAttribute="leading" secondItem="DOh-Gg-ENm" secondAttribute="leading" id="Tci-ik-fuX"/>
                                             <constraint firstItem="zMl-bO-tlQ" firstAttribute="leading" secondItem="K1o-Fb-56P" secondAttribute="leading" id="TnK-uh-xy4"/>
@@ -1717,6 +1734,7 @@
                                             <constraint firstItem="DOh-Gg-ENm" firstAttribute="top" secondItem="BQR-5g-hrF" secondAttribute="bottom" constant="10" id="bHo-yP-7r9"/>
                                             <constraint firstItem="5RR-ac-6eQ" firstAttribute="top" secondItem="gqw-kA-MqY" secondAttribute="top" id="bb6-iI-Psz"/>
                                             <constraint firstItem="M2t-he-5nb" firstAttribute="top" secondItem="gmv-Mc-GSP" secondAttribute="bottom" constant="10" id="fAo-Og-aba"/>
+                                            <constraint firstItem="5RR-ac-6eQ" firstAttribute="top" secondItem="zAK-SP-9GI" secondAttribute="bottom" constant="-29" id="fn9-u1-84E"/>
                                             <constraint firstItem="zlM-fz-6EF" firstAttribute="trailing" secondItem="iIg-2r-j1F" secondAttribute="trailing" id="fu2-qd-d9T"/>
                                             <constraint firstItem="K1o-Fb-56P" firstAttribute="leading" secondItem="KBX-U6-qEf" secondAttribute="leading" id="h0v-ZG-SpT"/>
                                             <constraint firstItem="zlM-fz-6EF" firstAttribute="top" secondItem="xba-Dq-0da" secondAttribute="bottom" constant="10" id="hAc-qj-A4L"/>
@@ -1789,8 +1807,10 @@
                         <outlet property="bannerImageView" destination="5RR-ac-6eQ" id="qqc-VM-d9k"/>
                         <outlet property="descriptionHeightConstraint" destination="Lii-R9-ffX" id="xn3-yB-ASc"/>
                         <outlet property="descriptionLabel" destination="K1o-Fb-56P" id="jMM-Eh-boj"/>
+                        <outlet property="favoriteButton" destination="zAK-SP-9GI" id="lKt-c4-nmp"/>
                         <outlet property="galleryCollectionView" destination="DOh-Gg-ENm" id="kgF-xR-iVy"/>
                         <outlet property="readMoreButton" destination="37w-y1-osE" id="wo4-Ic-jLB"/>
+                        <outlet property="shareButton" destination="6Bc-lv-yW0" id="uED-L0-h2N"/>
                         <outlet property="tournamentActionCollectionView" destination="M2t-he-5nb" id="yaw-44-0Wm"/>
                         <outlet property="tournamentDateLabel" destination="qQB-3i-vwx" id="7Pn-LI-AkZ"/>
                         <outlet property="tournamentEBEFeesLabel" destination="mPO-N8-hmO" id="Fk0-p4-4h6"/>
@@ -2200,6 +2220,35 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hY9-fn-U1b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="9456.5217391304359" y="1016.5760869565219"/>
+        </scene>
+        <!--Image Preview View Controller-->
+        <scene sceneID="lCC-Gd-iLU">
+            <objects>
+                <viewController storyboardIdentifier="ImagePreviewViewController" id="Bfc-7g-Tz3" customClass="ImagePreviewViewController" customModule="Actio" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Hl4-n4-Mlz">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7Wq-5j-vel">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="vQ5-4H-9AA" firstAttribute="bottom" secondItem="7Wq-5j-vel" secondAttribute="bottom" id="OxP-D9-ANT"/>
+                            <constraint firstItem="vQ5-4H-9AA" firstAttribute="trailing" secondItem="7Wq-5j-vel" secondAttribute="trailing" id="hwg-7c-HsP"/>
+                            <constraint firstItem="7Wq-5j-vel" firstAttribute="leading" secondItem="vQ5-4H-9AA" secondAttribute="leading" id="rHw-Kd-x9M"/>
+                            <constraint firstItem="7Wq-5j-vel" firstAttribute="top" secondItem="vQ5-4H-9AA" secondAttribute="top" id="xf9-uw-Nz5"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="vQ5-4H-9AA"/>
+                    </view>
+                    <connections>
+                        <outlet property="previewImage" destination="7Wq-5j-vel" id="ryW-ri-bgX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gOn-El-RQa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="10269.565217391306" y="1020.6521739130436"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="zzW-pn-lSZ">
@@ -2620,9 +2669,11 @@
         <image name="Subscriber-profile" width="109" height="109"/>
         <image name="chevron.down" catalog="system" width="128" height="72"/>
         <image name="eventFeed" width="16.333333969116211" height="16.333333969116211"/>
+        <image name="favorite" width="19.333333969116211" height="17"/>
         <image name="location-on" width="18" height="25.666666030883789"/>
         <image name="login" width="375" height="269"/>
         <image name="more" width="16" height="16.666666030883789"/>
+        <image name="share" width="18.333333969116211" height="16"/>
         <image name="userProfile" width="109" height="109"/>
         <image name="welcome-Image" width="366.33334350585938" height="328.33334350585938"/>
         <namedColor name="Orange Color">
