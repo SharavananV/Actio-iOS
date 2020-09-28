@@ -53,6 +53,8 @@
 		8D673A6F251DD72400585AF9 /* ProfilePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D673A6E251DD72400585AF9 /* ProfilePageViewController.swift */; };
 		8D673A72251DF5FF00585AF9 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D673A71251DF5FF00585AF9 /* FeedViewController.swift */; };
 		8D673A75251DFF6900585AF9 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D673A74251DFF6900585AF9 /* FeedTableViewCell.swift */; };
+		8D673A772521A67C00585AF9 /* FeedDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D673A762521A67C00585AF9 /* FeedDetailsViewController.swift */; };
+		8D673A7A2521E83B00585AF9 /* EventFeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D673A792521E83A00585AF9 /* EventFeedModel.swift */; };
 		8D8C6A9324B591B200D6DBE3 /* UDHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8C6A9224B591B200D6DBE3 /* UDHelper.swift */; };
 		8D8C6A9624B591F400D6DBE3 /* ApiDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8C6A9524B591F400D6DBE3 /* ApiDetails.swift */; };
 		8D8C6A9824B5939700D6DBE3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D8C6A9724B5939700D6DBE3 /* GoogleService-Info.plist */; };
@@ -163,6 +165,8 @@
 		8D673A6E251DD72400585AF9 /* ProfilePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePageViewController.swift; sourceTree = "<group>"; };
 		8D673A71251DF5FF00585AF9 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		8D673A74251DFF6900585AF9 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
+		8D673A762521A67C00585AF9 /* FeedDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDetailsViewController.swift; sourceTree = "<group>"; };
+		8D673A792521E83A00585AF9 /* EventFeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFeedModel.swift; sourceTree = "<group>"; };
 		8D8C6A9224B591B200D6DBE3 /* UDHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDHelper.swift; sourceTree = "<group>"; };
 		8D8C6A9524B591F400D6DBE3 /* ApiDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiDetails.swift; sourceTree = "<group>"; };
 		8D8C6A9724B5939700D6DBE3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -374,8 +378,10 @@
 		8D673A70251DF5E500585AF9 /* EventFeed */ = {
 			isa = PBXGroup;
 			children = (
+				8D673A782521E80F00585AF9 /* Model */,
 				8D673A73251DFF4D00585AF9 /* TableViewCells */,
 				8D673A71251DF5FF00585AF9 /* FeedViewController.swift */,
+				8D673A762521A67C00585AF9 /* FeedDetailsViewController.swift */,
 			);
 			path = EventFeed;
 			sourceTree = "<group>";
@@ -386,6 +392,14 @@
 				8D673A74251DFF6900585AF9 /* FeedTableViewCell.swift */,
 			);
 			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		8D673A782521E80F00585AF9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8D673A792521E83A00585AF9 /* EventFeedModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		8D8C6A9424B591DA00D6DBE3 /* APIDetails */ = {
@@ -708,6 +722,7 @@
 				18C6B0202510C17300B7162E /* NotificationHelper.swift in Sources */,
 				8D673A622514C86A00585AF9 /* TournamentPrizesTableViewCell.swift in Sources */,
 				8DE6B64924B335630010A3EC /* AppFonts.swift in Sources */,
+				8D673A7A2521E83B00585AF9 /* EventFeedModel.swift in Sources */,
 				8D94E07F24AF1D0A00DBC46A /* Actio.xcdatamodeld in Sources */,
 				8D21855D24B6E383002688A8 /* OtpViewController.swift in Sources */,
 				8DCBAB5B24BF2D37009E8B7F /* HomePageCollectionViewCell.swift in Sources */,
@@ -722,6 +737,7 @@
 				8D673A64251B142100585AF9 /* TournamentPrizesCollectionViewCell.swift in Sources */,
 				8D673A72251DF5FF00585AF9 /* FeedViewController.swift in Sources */,
 				8DA5D456250A4AF1003EAB6B /* TournamentFavoriteCollectionViewCell.swift in Sources */,
+				8D673A772521A67C00585AF9 /* FeedDetailsViewController.swift in Sources */,
 				8D99566624C9515D006C3616 /* WelcomeAlertViewController.swift in Sources */,
 				1841F19924B480F10021D131 /* UIKitExtensions.swift in Sources */,
 				18C253CD25122CD40043D20F /* TournamentGalleryDatasource.swift in Sources */,

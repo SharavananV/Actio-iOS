@@ -140,3 +140,31 @@ extension UIImageView {
         }
     }
 }
+
+extension TimeInterval {
+    func components() -> DateComponents {
+        let sysCalendar = Calendar.current
+        let date1 = Date()
+        let date2 = Date(timeInterval: self, since: date1)
+        
+        return sysCalendar.dateComponents([.hour, .minute], from: date1, to: date2)
+    }
+    
+    var displayString: String {
+        let components = self.components()
+        
+        var value = ""
+        if let hour = components.hour, hour > 0 {
+            value += components.hour == 1 ? "\(hour) hour" : "\(hour) hours"
+            
+            if let minute = components.minute, minute > 0 {
+                value += " and \(minute) minutes"
+            }
+        }
+        else if let minute = components.minute, minute > 0 {
+            value += "\(minute) minutes"
+        }
+        
+        return value
+    }
+}

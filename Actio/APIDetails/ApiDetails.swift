@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-let baseUrl = "http://192.168.1.11:8085/"
+let baseUrl = "http://203.223.191.66:8085/"
 
 let masterUrl = baseUrl + "v1/subscriber/init"
 let loginUrl = baseUrl + "v1/login"
@@ -23,5 +23,6 @@ let parentApprovalInitUrl =  baseUrl + "v1/subscriber/parentApprovalInit"
 let dashboardUrl = baseUrl + "v1/dashboard/count"
 let tournamentListUrl = baseUrl + "v1/tournament/list"
 let tournamentDetailsUrl = baseUrl + "v1/tournament/search"
+let feedListUrl = baseUrl + "v1/feed/list"
 
 
