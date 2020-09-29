@@ -71,7 +71,7 @@ extension FeedViewController : UITableViewDelegate,UITableViewDataSource {
         let feedDateFormatter = DateFormatter()
         feedDateFormatter.dateFormat = "MMM dd,yyyy hh:mm:ss a"
         if let createdDate = feedDateFormatter.date(from: "\(feed.createdDate) \(feed.createdTime)"), Calendar.current.isDateInToday(createdDate) {
-            let timeDiff = Date().timeIntervalSince(createdDate)
+            let timeDiff = createdDate.timeIntervalSince(Date())
             cell.feedTimeLabel.text = timeDiff.displayString + " ago"
         }
         else {
