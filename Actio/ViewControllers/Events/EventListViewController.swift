@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import Alamofire
 
 class EventListViewController: UIViewController {
 
+	var tournamentId: Int?
 	private var eventList: [EventCategory]?
 	
 	@IBOutlet var tableView: UITableView!
@@ -19,6 +21,24 @@ class EventListViewController: UIViewController {
 
         mockData()
     }
+	
+	private func fetchEvents() {
+		let headers: HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken(), "Content-Type": "application/json"]
+		
+		ActioSpinner.shared.show(on: view)
+		
+		NetworkRouter.shared.request(eventListUrl, parameters: ["tournamentID": self.tournamentId ?? 0, "search": ""], headers: headers).responseDecodable(of: EventCategoryResponse.self, queue: .main) { (response) in
+			ActioSpinner.shared.hide()
+			
+			guard let result = response.value, result.status == "200" else {
+				print("🥶 Error: \(String(describing: response.error))")
+				return
+			}
+			
+			self.eventList = result.eventCategory
+			self.tableView.reloadData()
+		}
+	}
     
 	private func mockData() {
 		let response = """
@@ -98,6 +118,7 @@ extension EventListViewController: UITableViewDataSource, UITableViewDelegate {
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		if let eventDetail = eventList?[indexPath.section].events[indexPath.row],
 			let eventCell = tableView.dequeueReusableCell(withIdentifier: EventListTableViewCell.reuseId, for: indexPath) as? EventListTableViewCell {
+			eventCell.selectionStyle = .none
 			eventCell.configure(eventDetail)
 			
 			return eventCell

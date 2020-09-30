@@ -26,4 +26,6 @@ let tournamentDetailsUrl = baseUrl + "v1/tournament/search"
 let feedListUrl = baseUrl + "v1/feed/list"
 let feedUrl = baseUrl + "v1/feed"
 
+// Events
+let eventListUrl = baseUrl + "v1/tournament/search/eventcategory"
 

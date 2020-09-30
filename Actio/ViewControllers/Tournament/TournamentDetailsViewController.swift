@@ -187,6 +187,7 @@ extension TournamentDetailsViewController: TournamentActionProtocol, TournamentG
         case .eventCategory:
 			if let vc = UIStoryboard(name: "Events", bundle: nil)
 				.instantiateViewController(withIdentifier: "EventListViewController") as? EventListViewController {
+				vc.tournamentId = tournamentDetails?.id
 				self.navigationController?.pushViewController(vc, animated: true)
 			}
         case .prize:
