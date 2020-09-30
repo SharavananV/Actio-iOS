@@ -88,6 +88,22 @@ class EventDetailViewController: UIViewController {
 	}
 	
 	@IBAction func shareButtonAction(_ sender: Any) {
+		let actionSheet = UIAlertController(title: "Share Event", message: nil, preferredStyle: .actionSheet)
+		
+		let internalShare = UIAlertAction(title: "Internal Share", style: .default) { (action) in
+			// TODO: Open Contacts list and send a message
+		}
+		actionSheet.addAction(internalShare)
+		
+		let externalShare = UIAlertAction(title: "External Share", style: .default) { (action) in
+			// TODO complete as below
+			// "https://actiosport.com/x?f="+itemDetails.getId()+"&screen=E"
+		}
+		actionSheet.addAction(externalShare)
+		
+		actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+		
+		self.present(actionSheet, animated: true, completion: nil)
 	}
 	
 	@IBAction func readMoreSelected(_ sender: Any) {
