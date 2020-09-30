@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 // MARK: - Welcome
 struct EventFeedResponse: Codable {
@@ -50,4 +51,55 @@ struct Master: Codable {
         case categoryID = "category_id"
         case category
     }
+}
+class AddFeedModel {
+    
+    var title, shortDescription, image, description: String
+    
+    enum CodingKeys: String, CodingKey, CaseIterable {
+        case title = "title"
+        case shortDescription = "shortDescription"
+        case image = "image"
+        case description = "description"
+    }
+    static func keyPath(for key: String) -> ReferenceWritableKeyPath<AddFeedModel, String>? {
+        switch key {
+        case "title":
+            return \AddFeedModel.title
+        case "shortDescription":
+            return \AddFeedModel.shortDescription
+        case "image":
+            return \AddFeedModel.image
+        case "description":
+            return \AddFeedModel.description
+        default:
+            return nil
+        }
+    }
+    internal init (title: String, shortDescription: String, image: String,description:String) {
+        self.title = title
+        self.shortDescription = shortDescription
+        self.image = image
+        self.description = description
+    }
+    convenience init() {
+        self.init(title: "", shortDescription: "", image: "", description: "")
+    }
+
+    
+    static func requiredFields() -> [ReferenceWritableKeyPath<AddFeedModel, String>] {
+        return [\AddFeedModel.title, \AddFeedModel.description, \AddFeedModel.shortDescription]
+    }
+    
+    func getParameters() -> [String: String] {
+        var parameters = [String: String]()
+        
+        parameters[CodingKeys.title.rawValue] = self.title
+        parameters[CodingKeys.description.rawValue] = self.description
+        parameters[CodingKeys.shortDescription.rawValue] = self.shortDescription
+        parameters[CodingKeys.image.rawValue] = self.image
+        return parameters
+    }
+
+
 }

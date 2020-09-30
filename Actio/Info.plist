@@ -39,6 +39,10 @@
 			<string></string>
 		</dict>
 	</array>
+    <key>NSCameraUsageDescription</key>
+    <string>This app will use camera</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>You can select photo</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>

@@ -29,6 +29,9 @@ class FeedViewController: UIViewController {
     
     @IBAction func addFeedButtonAction(_ sender: Any) {
         
+        let vc = storyboard?.instantiateViewController(withIdentifier: "AddEventViewController") as! AddEventViewController
+        self.navigationController?.pushViewController(vc, animated: false)
+        
     }
 
     func feedListApiCall() {

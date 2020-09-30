@@ -168,3 +168,24 @@ extension TimeInterval {
         return value
     }
 }
+extension UITextField
+{
+    open override func draw(_ rect: CGRect) {
+        self.layer.borderWidth = 1.0
+        self.layer.borderColor = AppColor.TextFieldBorderColor().cgColor
+        self.layer.masksToBounds = true
+    }
+}
+extension UIImageView {
+    func applyshadowWithCorner(containerView : UIView, cornerRadious : CGFloat){
+        containerView.clipsToBounds = false
+        containerView.layer.shadowColor = UIColor.black.cgColor
+        containerView.layer.shadowOpacity = 1
+        containerView.layer.shadowOffset = CGSize.zero
+        containerView.layer.shadowRadius = 10
+        containerView.layer.cornerRadius = cornerRadious
+        containerView.layer.shadowPath = UIBezierPath(roundedRect: containerView.bounds, cornerRadius: cornerRadious).cgPath
+        self.clipsToBounds = true
+        self.layer.cornerRadius = cornerRadious
+    }
+}
