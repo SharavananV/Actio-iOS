@@ -10,14 +10,14 @@ import UIKit
 
 // MARK: - EventCategoryResponse
 struct EventCategoryResponse: Codable {
-    let status: String
-    let eventCategory: [EventCategory]
+    let status: String?
+    let eventCategory: [EventCategory]?
 }
 
 // MARK: - EventCategory
 struct EventCategory: Codable {
     let sportsID: Int
-    let sportsName: String
+    let sportsName: String?
     let events: [Event]
 
     enum CodingKeys: String, CodingKey {
@@ -30,8 +30,8 @@ struct EventCategory: Codable {
 // MARK: - Event
 struct Event: Codable {
     let eventID: Int
-    let eventName, eventCategory, eventType, eventAddress: String
-    let eventStartDate, eventEndDate, eventLogo: String
+    let eventName, eventCategory, eventType, eventAddress: String?
+    let eventStartDate, eventEndDate, eventLogo: String?
     let isRegistrationOpen: Int
 
     enum CodingKeys: String, CodingKey {

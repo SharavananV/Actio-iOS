@@ -21,7 +21,7 @@ class EventListTableViewCell: UITableViewCell {
     @IBOutlet var venueLabel: UILabel!
     
 	func configure(_ event: Event) {
-		if let imageUrl = URL(string: event.eventLogo) {
+		if let eventLogo = event.eventLogo, let imageUrl = URL(string: baseUrl + eventLogo) {
 			self.eventImageView.load(url: imageUrl)
 		}
 		
@@ -31,8 +31,15 @@ class EventListTableViewCell: UITableViewCell {
 		eventTitleLabel.text = event.eventName
 		gameTypeLabel.text = event.eventType
 		gameCategoryLabel.text = event.eventCategory
-		gameTimeLabel.text = event.eventStartDate + " - " + event.eventEndDate
 		venueLabel.text = event.eventAddress
+		
+		if let startDate = event.eventStartDate, let endDate = event.eventEndDate {
+			gameTimeLabel.text = startDate + " - " + endDate
+		} else if let startDate = event.eventStartDate {
+			gameTimeLabel.text = startDate
+		} else {
+			gameTimeLabel.text = event.eventEndDate ?? ""
+		}
 	}
 	
 	override func awakeFromNib() {

@@ -25,7 +25,7 @@ class AddEventViewController: UIViewController {
     
     private var feedModel = AddFeedModel()
     
-    private lazy var imagePicker = ImagePicker(presentationController: self, delegate: self)
+    private lazy var imagePicker = ActioImagePicker(presentationController: self, delegate: self)
     var captureImgName: String?
     
     override func viewDidLoad() {
@@ -94,7 +94,7 @@ class AddEventViewController: UIViewController {
     
 
 }
-extension AddEventViewController : UITextViewDelegate,ImagePickerDelegate {
+extension AddEventViewController : UITextViewDelegate, ActioPickerDelegate {
     
     func didSelect(url: URL?, type: String) {
         if let filePath = url?.path, let image = UIImage(contentsOfFile: filePath), let fileName = url?.lastPathComponent {

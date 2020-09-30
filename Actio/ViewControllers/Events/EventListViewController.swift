@@ -19,7 +19,7 @@ class EventListViewController: UIViewController {
 	override func viewDidLoad() {
         super.viewDidLoad()
 
-        mockData()
+        fetchEvents()
     }
 	
 	private func fetchEvents() {
@@ -27,7 +27,7 @@ class EventListViewController: UIViewController {
 		
 		ActioSpinner.shared.show(on: view)
 		
-		NetworkRouter.shared.request(eventListUrl, parameters: ["tournamentID": self.tournamentId ?? 0, "search": ""], headers: headers).responseDecodable(of: EventCategoryResponse.self, queue: .main) { (response) in
+		NetworkRouter.shared.request(eventListUrl, method: .post, parameters: ["tournamentID": self.tournamentId ?? 0, "search": ""], encoding: JSONEncoding.default, headers: headers).responseDecodable(of: EventCategoryResponse.self, queue: .main) { (response) in
 			ActioSpinner.shared.hide()
 			
 			guard let result = response.value, result.status == "200" else {
@@ -40,6 +40,7 @@ class EventListViewController: UIViewController {
 		}
 	}
     
+	// TODO: Remove this
 	private func mockData() {
 		let response = """
 {
