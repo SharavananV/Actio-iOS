@@ -14,7 +14,9 @@ class FeedViewController: UIViewController {
     @IBOutlet var addFeedButton: UIButton!
     @IBOutlet var searchBar: UISearchBar!
     @IBOutlet var feedTableView: UITableView!
-    var feedListModel : EventFeedResponse?
+    var feedList: [FeedDetailModel]?
+    var filteredList: [FeedDetailModel]?
+    var searching = false
 
     var feedID: Int?
 
@@ -23,8 +25,17 @@ class FeedViewController: UIViewController {
         
         self.feedTableView.delegate = self
         self.feedTableView.dataSource = self
+        self.searchBar.delegate = self
         self.feedTableView.tableFooterView = UIView()
         feedListApiCall()
+        searchBar.backgroundImage = UIImage()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if let textfield = searchBar.value(forKey: "searchField") as? UITextField {
+            textfield.placeholder = "Search by Title or Description"
+            textfield.font = AppFont.PoppinsRegular(size: 15)
+        }
     }
     
     @IBAction func addFeedButtonAction(_ sender: Any) {
@@ -47,30 +58,33 @@ class FeedViewController: UIViewController {
                 print("🥶 Error on login: \(String(describing: response.error))")
                 return
             }
-            
-            self.feedListModel = model
+            self.feedList = model.list
             self.feedTableView.reloadData()
         }
     }
 
 
 }
-extension FeedViewController : UITableViewDelegate,UITableViewDataSource {
+extension FeedViewController : UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.feedListModel?.list.count ?? 0
+        return searching ? (self.filteredList?.count ?? 0) : (self.feedList?.count ?? 0)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableViewCell", for: indexPath) as! FeedTableViewCell
         
-        guard let feed = self.feedListModel?.list[indexPath.row] else {
+        let feedList = searching ? self.filteredList : self.feedList
+        
+        guard let feed = feedList?[indexPath.row] else {
             return UITableViewCell()
         }
-        
-        if let imagePath = URL(string:  baseUrl + feed.profileImage) {
-            cell.feedImageView.load(url: imagePath)
+        if feed.profileImage != nil {
+            if let imagePath = URL(string:  baseUrl + feed.profileImage!) {
+                cell.feedImageView.load(url: imagePath)
+            }
         }
         cell.feedDescriptionLabel.text = feed.shortDescription
+        
         let feedDateFormatter = DateFormatter()
         feedDateFormatter.dateFormat = "MMM dd,yyyy hh:mm:ss a"
         if let createdDate = feedDateFormatter.date(from: "\(feed.createdDate) \(feed.createdTime)"), Calendar.current.isDateInToday(createdDate) {
@@ -84,17 +98,47 @@ extension FeedViewController : UITableViewDelegate,UITableViewDataSource {
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let feedList = self.feedListModel?.list[indexPath.row],
+        let feedList = searching ? self.filteredList : self.feedList
+        
+        guard let feedDetail = feedList?[indexPath.row],
             let vc = storyboard?.instantiateViewController(withIdentifier: "FeedDetailsViewController") as? FeedDetailsViewController else {
             return
         }
-        vc.feedList = feedList
+        vc.feedDetail = feedDetail
 
         self.navigationController?.pushViewController(vc, animated: false)
 
 
     }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            self.filteredList = self.feedList
+        } else if let list = self.feedList {
+            self.filteredList = list.filter { (model) -> Bool in
+                model.title.contains(searchText) || model.shortDescription.contains(searchText)
+            }
+        }
+        searching = true
+        feedTableView.reloadData()
+     }
     
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        self.searchBar.endEditing(true)
+        searchBar.resignFirstResponder()
+    }
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searching = false
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+        self.feedTableView.reloadData()
+    }
     
 }
 

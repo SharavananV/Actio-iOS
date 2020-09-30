@@ -14,7 +14,7 @@ class FeedDetailsViewController: UIViewController {
     @IBOutlet var feedDescriptionLabel: UILabel!
     @IBOutlet var feedNameLabel: UILabel!
     @IBOutlet var feedImageView: UIImageView!
-    var feedList: FeedDetailModel?
+    var feedDetail: FeedDetailModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,11 +22,13 @@ class FeedDetailsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        if let feedDetails = self.feedList {
+        if let feedDetails = self.feedDetail {
             self.feedDescriptionLabel.text = feedDetails.listDescription
             self.feedNameLabel.text = feedDetails.fullName
-            if let imagePath = URL(string:  baseUrl + feedDetails.profileImage) {
-                self.feedImageView.load(url: imagePath)
+            if feedDetails.profileImage != nil {
+                if let imagePath = URL(string:  baseUrl + feedDetails.profileImage!) {
+                    self.feedImageView.load(url: imagePath)
+                }
             }
         }
     }

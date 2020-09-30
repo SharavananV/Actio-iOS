@@ -20,7 +20,7 @@ struct EventFeedResponse: Codable {
 struct FeedDetailModel: Codable {
     let feedID, categoryID: Int
     let category, title, shortDescription, listDescription: String
-    let profileImage: String
+    let profileImage: String?
     let images: String?
     let subscriberID: Int
     let fullName, createdDate, createdTime: String
