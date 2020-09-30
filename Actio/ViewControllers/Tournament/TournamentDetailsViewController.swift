@@ -185,7 +185,10 @@ extension TournamentDetailsViewController: TournamentActionProtocol, TournamentG
                 self.navigationController?.pushViewController(organiserVc, animated: true)
             }
         case .eventCategory:
-            break
+			if let vc = UIStoryboard(name: "Events", bundle: nil)
+				.instantiateViewController(withIdentifier: "EventListViewController") as? EventListViewController {
+				self.navigationController?.pushViewController(vc, animated: true)
+			}
         case .prize:
             if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TournamentPrizesViewController") as? TournamentPrizesViewController {
                 vc.affiliations = tournamentDetails?.affliations
