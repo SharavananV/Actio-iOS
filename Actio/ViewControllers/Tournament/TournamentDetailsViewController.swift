@@ -99,9 +99,11 @@ class TournamentDetailsViewController: UIViewController, UIViewControllerPreview
         if isDescriptionExpanded {
             descriptionHeightConstraint = descriptionLabel.heightAnchor.constraint(equalToConstant: 80)
             descriptionHeightConstraint.isActive = true
+			readMoreButton.setTitle("Read more", for: .normal)
         }
         else {
             descriptionLabel.removeConstraint(descriptionHeightConstraint)
+			readMoreButton.setTitle("Read less", for: .normal)
         }
         
         isDescriptionExpanded = !isDescriptionExpanded
