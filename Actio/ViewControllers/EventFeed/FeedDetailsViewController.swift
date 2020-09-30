@@ -25,8 +25,8 @@ class FeedDetailsViewController: UIViewController {
         if let feedDetails = self.feedDetail {
             self.feedDescriptionLabel.text = feedDetails.listDescription
             self.feedNameLabel.text = feedDetails.fullName
-            if feedDetails.profileImage != nil {
-                if let imagePath = URL(string:  baseUrl + feedDetails.profileImage!) {
+            if feedDetails.images != nil {
+                if let imagePath = URL(string:  baseUrl + feedDetails.images!) {
                     self.feedImageView.load(url: imagePath)
                 }
             }

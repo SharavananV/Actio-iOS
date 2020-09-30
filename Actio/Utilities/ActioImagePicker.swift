@@ -10,6 +10,11 @@ import UIKit
 
 public protocol ActioPickerDelegate: class {
     func didSelect(url: URL?, type: String)
+    func didCaptureImage(_ image: UIImage)
+}
+
+extension ActioPickerDelegate {
+    func didCaptureImage(_ image: UIImage) {}
 }
 
 open class ActioImagePicker: NSObject {
@@ -46,11 +51,11 @@ open class ActioImagePicker: NSObject {
     public func present(from sourceView: UIView) {
 
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-
-        if let action = self.action(for: .camera, title: "Take video") {
-            alertController.addAction(action)
-        }
-        if let action = self.action(for: .savedPhotosAlbum, title: "Camera roll") {
+//
+//        if let action = self.action(for: .camera, title: "Take video") {
+//            alertController.addAction(action)
+//        }
+        if let action = self.action(for: .camera, title: "Camera roll") {
             alertController.addAction(action)
         }
         if let action = self.action(for: .photoLibrary, title: "Photo Album") {
@@ -73,6 +78,12 @@ open class ActioImagePicker: NSObject {
 
         self.delegate?.didSelect(url: url, type: type)
     }
+    
+    private func pickerController(_ controller: UIImagePickerController, didCaptureImage image: UIImage) {
+        controller.dismiss(animated: true, completion: nil)
+        
+        self.delegate?.didCaptureImage(image)
+    }
 }
 
 extension ActioImagePicker: UIImagePickerControllerDelegate {
@@ -89,6 +100,9 @@ extension ActioImagePicker: UIImagePickerControllerDelegate {
         }
         else if let url = info[.imageURL] as? URL {
             return self.pickerController(picker, didSelect: url, type: "Image")
+        }
+        else if let image = info[.editedImage] as? UIImage {
+            return self.pickerController(picker, didCaptureImage: image)
         }
 
 //        //uncomment this if you want to save the video file to the media library

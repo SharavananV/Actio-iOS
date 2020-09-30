@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class AddEventViewController: UIViewController {
+class AddEditFeedViewController: UIViewController {
 
     @IBOutlet weak var feedTypeTextField: UITextField!
     
@@ -23,16 +23,13 @@ class AddEventViewController: UIViewController {
     
     @IBOutlet weak var addImageButton: UIButton!
     
-    private var feedModel = AddFeedModel()
+    var feedModel: FeedDetailModel?
     
     private lazy var imagePicker = ActioImagePicker(presentationController: self, delegate: self)
     var captureImgName: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.feedDescriptionTextView.text = "Enter Description"
-        self.feedDescriptionTextView.textColor = UIColor.lightGray
         
         self.feedDescriptionTextView.layer.borderColor = AppColor.TextFieldBorderColor().cgColor
         self.feedDescriptionTextView.layer.borderWidth = 1
@@ -43,7 +40,19 @@ class AddEventViewController: UIViewController {
         self.addImageButton.applyGradient(colours: [AppColor.OrangeColor(),AppColor.RedColor()])
         self.addImageButton.layer.cornerRadius = 5.0
         self.addImageButton.clipsToBounds = true
-
+        
+        if let feedDetail = self.feedModel {
+            feedTitleTextField.text = feedDetail.title
+            feedDescriptionTextView.text = feedDetail.listDescription
+            feedShortDescriptionTextField.text = feedDetail.shortDescription
+            
+            if let image = feedDetail.images, let url = URL(string: baseUrl + image) {
+                feedImageView.load(url: url)
+            }
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         let rightButtonItem = UIBarButtonItem.init(
             title: "Add",
             style: .done,
@@ -51,7 +60,9 @@ class AddEventViewController: UIViewController {
             action: #selector(addFeedButtonAction)
         )
         self.navigationItem.rightBarButtonItem = rightButtonItem
+
     }
+    
     @objc func addFeedButtonAction(){
         feedApiCall()
 
@@ -65,13 +76,16 @@ class AddEventViewController: UIViewController {
         let headers : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"",
                                      "Content-type": "multipart/form-data",
                                      "Content-Disposition" : "form-data"]
-        let params = ["title" : self.feedTitleTextField.text ?? "",
+        var params = ["title" : self.feedTitleTextField.text ?? "",
                       "shortDescription" : self.feedShortDescriptionTextField.text ?? "",
                       "description" : self.feedDescriptionTextView.text ?? "",
                       "isRemove":false,
-                      "image" : self.feedImageView.image?.pngData() ?? Data(),
                       "categoryID":1
         ] as [String : Any]
+        
+        if let feedId = feedModel?.feedID {
+            params["feedID"] = feedId
+        }
         
         AF.upload(multipartFormData: { (multipartFormData) in
             
@@ -80,7 +94,7 @@ class AddEventViewController: UIViewController {
             }
             
             guard let imgData = self.feedImageView.image?.jpegData(compressionQuality: 1) else { return }
-            multipartFormData.append(imgData, withName: "MediaFile", fileName: "\(self.captureImgName ?? "").jpg", mimeType: "image/jpeg")
+            multipartFormData.append(imgData, withName: "image", fileName: "\(self.captureImgName ?? "").jpg", mimeType: "image/jpeg")
             
         },to: feedUrl, usingThreshold: UInt64.init(),
         method: .post,
@@ -90,7 +104,7 @@ class AddEventViewController: UIViewController {
                     if let jsonData = response.data{
                         let parsedData = try JSONSerialization.jsonObject(with: jsonData) as! Dictionary<String, AnyObject>
                         
-                        if let resultDict = parsedData as? [String: Any], let successStatus = resultDict["status"] as? String, successStatus == "200" ,let successText = resultDict["msg"] as? String{
+                        if let successStatus = parsedData["status"] as? String, successStatus == "200" ,let successText = parsedData["msg"] as? String{
                             self.view.makeToast(successText)
                             
                             self.feedTypeTextField.text = nil
@@ -101,7 +115,7 @@ class AddEventViewController: UIViewController {
                             
                             
                         }
-                        else if let resultDict = parsedData as? [String: Any], let invalidText = resultDict["msg"] as? String{
+                        else if let invalidText = parsedData["msg"] as? String {
                             self.view.makeToast(invalidText)
                         }
                     }
@@ -116,7 +130,7 @@ class AddEventViewController: UIViewController {
     }
     
 }
-extension AddEventViewController : UITextViewDelegate, ActioPickerDelegate {
+extension AddEditFeedViewController : UITextViewDelegate, ActioPickerDelegate {
     
     func didSelect(url: URL?, type: String) {
         if let filePath = url?.path, let image = UIImage(contentsOfFile: filePath), let fileName = url?.lastPathComponent {
@@ -128,6 +142,15 @@ extension AddEventViewController : UITextViewDelegate, ActioPickerDelegate {
             }
         }
 
+    }
+    
+    func didCaptureImage(_ image: UIImage) {
+        if let data = image.jpegData(compressionQuality: 0.8) {
+            let fileUrl = getDocumentsDirectory().appendingPathComponent("images.jpeg")
+            try? data.write(to: fileUrl)
+            self.captureImgName = fileUrl.lastPathComponent
+            feedImageView.image = UIImage(contentsOfFile:fileUrl.path)
+        }
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {

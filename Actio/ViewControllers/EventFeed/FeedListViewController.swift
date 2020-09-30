@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class FeedViewController: UIViewController {
+class FeedListViewController: UIViewController {
 
     @IBOutlet var addFeedButton: UIButton!
     @IBOutlet var searchBar: UISearchBar!
@@ -17,7 +17,8 @@ class FeedViewController: UIViewController {
     var feedList: [FeedDetailModel]?
     var filteredList: [FeedDetailModel]?
     var searching = false
-
+    var deletePlanetIndexPath: NSIndexPath? = nil
+    var subscriberID :Int?
     var feedID: Int?
 
     override func viewDidLoad() {
@@ -27,7 +28,6 @@ class FeedViewController: UIViewController {
         self.feedTableView.dataSource = self
         self.searchBar.delegate = self
         self.feedTableView.tableFooterView = UIView()
-        feedListApiCall()
         searchBar.backgroundImage = UIImage()
     }
     
@@ -36,13 +36,14 @@ class FeedViewController: UIViewController {
             textfield.placeholder = "Search by Title or Description"
             textfield.font = AppFont.PoppinsRegular(size: 15)
         }
+        
+        feedListApiCall()
     }
     
     @IBAction func addFeedButtonAction(_ sender: Any) {
-        
-        let vc = storyboard?.instantiateViewController(withIdentifier: "AddEventViewController") as! AddEventViewController
-        self.navigationController?.pushViewController(vc, animated: false)
-        
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "AddEventViewController") as? AddEditFeedViewController {
+            self.navigationController?.pushViewController(vc, animated: false)
+        }
     }
 
     func feedListApiCall() {
@@ -62,10 +63,11 @@ class FeedViewController: UIViewController {
             self.feedTableView.reloadData()
         }
     }
+    
 
 
 }
-extension FeedViewController : UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate {
+extension FeedListViewController : UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searching ? (self.filteredList?.count ?? 0) : (self.feedList?.count ?? 0)
     }
@@ -84,6 +86,7 @@ extension FeedViewController : UITableViewDelegate,UITableViewDataSource,UISearc
             }
         }
         cell.feedDescriptionLabel.text = feed.shortDescription
+        self.subscriberID = feed.subscriberID
         
         let feedDateFormatter = DateFormatter()
         feedDateFormatter.dateFormat = "MMM dd,yyyy hh:mm:ss a"
@@ -110,6 +113,43 @@ extension FeedViewController : UITableViewDelegate,UITableViewDataSource,UISearc
 
 
     }
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        var configuration = UISwipeActionsConfiguration()
+        let feed = feedList?[indexPath.row]
+        if (feed?.myFeed == 1) {
+                let deleteAction = UIContextualAction(style: .destructive, title: nil) { _, _, complete in
+                    guard let feedDetail = feed else { return }
+                    
+                    self.deleteFeed(feedDetail) { (success) in
+                        if success {
+                            self.feedList?.remove(at: indexPath.row)
+                            self.feedTableView.deleteRows(at: [indexPath], with: .automatic)
+                        }
+                        
+                        complete(success)
+                    }
+                }
+                let editAction = UIContextualAction(style: .normal, title: nil) { _, _, complete in
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    if let vc = storyboard.instantiateViewController(withIdentifier: "AddEventViewController") as? AddEditFeedViewController {
+                        vc.feedModel = feed
+                        self.navigationController?.pushViewController(vc, animated: false)
+                    }
+                }
+                let shareAction = UIContextualAction(style: .normal, title: nil) { _, _, complete in
+                }
+                
+                // here set your image and background color
+                //  deleteAction.image = UIImage(named: "deletebin")
+                deleteAction.backgroundColor = .red
+                editAction.backgroundColor = .blue
+                shareAction.backgroundColor = .green
+                configuration = UISwipeActionsConfiguration(actions: [deleteAction,editAction,shareAction])
+                configuration.performsFirstActionWithFullSwipe = true
+        }
+        return configuration
+    }
+
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
             self.filteredList = self.feedList
@@ -121,9 +161,6 @@ extension FeedViewController : UITableViewDelegate,UITableViewDataSource,UISearc
         searching = true
         feedTableView.reloadData()
      }
-    
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-    }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         self.searchBar.endEditing(true)
@@ -140,6 +177,53 @@ extension FeedViewController : UITableViewDelegate,UITableViewDataSource,UISearc
         self.feedTableView.reloadData()
     }
     
+    func deleteFeed(_ feed: FeedDetailModel, completion: @escaping (Bool)-> Void) {
+        let headers : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"",
+                                     "Content-type": "multipart/form-data",
+                                     "Content-Disposition" : "form-data"]
+        let params = ["title" : feed.title,
+                      "shortDescription" : feed.shortDescription,
+                      "description" : feed.listDescription,
+                      "isRemove": true,
+                      "categoryID":1,
+                      "feedID": feed.feedID
+        ] as [String : Any]
+        
+        AF.upload(multipartFormData: { (multipartFormData) in
+            
+            for (key, value) in params {
+                multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
+            }
+            
+        },to: feedUrl, usingThreshold: UInt64.init(),
+        method: .post,
+        headers: headers).response{ response in
+            if(response.value != nil){
+                do{
+                    if let jsonData = response.data{
+                        let parsedData = try JSONSerialization.jsonObject(with: jsonData) as! Dictionary<String, AnyObject>
+                        
+                        if let successStatus = parsedData["status"] as? String, successStatus == "200" ,let successText = parsedData["msg"] as? String{
+                            self.view.makeToast(successText)
+                            
+                            completion(true)
+                            return
+                        }
+                        else if let invalidText = parsedData["msg"] as? String {
+                            self.view.makeToast(invalidText)
+                        }
+                    }
+                } catch{
+                    print(response.error ?? "")
+                    self.view.makeToast("Please try again later")
+                }
+            }else{
+                self.view.makeToast("Please try again later")
+            }
+            
+            completion(false)
+        }
+    }
 }
 
 
