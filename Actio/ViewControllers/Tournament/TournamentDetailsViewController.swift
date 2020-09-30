@@ -12,9 +12,7 @@ import Alamofire
 class TournamentDetailsViewController: UIViewController, UIViewControllerPreviewingDelegate {
 
     @IBOutlet var shareButton: UIButton!
-    
     @IBOutlet var favoriteButton: UIButton!
-    
     @IBOutlet weak var bannerImageView: UIImageView!
     @IBOutlet weak var tournamentNameLabel: UILabel!
     @IBOutlet weak var tournamentActionCollectionView: UICollectionView!
@@ -50,8 +48,7 @@ class TournamentDetailsViewController: UIViewController, UIViewControllerPreview
     }
     
     private func getTournamentDetails() {
-         let headers : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"",
-                                            "Content-Type": "application/json"]
+         let headers : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken(), "Content-Type": "application/json"]
         
         ActioSpinner.shared.show(on: view)
         
@@ -78,9 +75,8 @@ class TournamentDetailsViewController: UIViewController, UIViewControllerPreview
     }
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-            //navigationController?.pushViewController(viewControllerToCommit, animated: true)
-
     }
+	
     func detailViewController(for index: Int) -> ImagePreviewViewController {
         guard let vc = storyboard?.instantiateViewController(withIdentifier: "ImagePreviewViewController") as? ImagePreviewViewController else {
             fatalError("Couldn't load detail view controller")

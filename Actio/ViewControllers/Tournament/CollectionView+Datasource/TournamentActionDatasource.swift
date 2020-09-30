@@ -80,7 +80,6 @@ class TournamentActionDatasource: NSObject, UICollectionViewDelegate, UICollecti
             }
         }
         
-        // TODO: Add proper icons
         var icon: String {
             switch self {
             case .organiser:

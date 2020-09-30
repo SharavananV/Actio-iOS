@@ -137,4 +137,12 @@ extension EventListViewController: UITableViewDataSource, UITableViewDelegate {
 		
 		return nil
 	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		if let eventDetail = eventList?[indexPath.section].events[indexPath.row],
+			let vc = UIStoryboard(name: "Events", bundle: nil).instantiateViewController(withIdentifier: "EventDetailViewController") as? EventDetailViewController {
+			vc.eventId = eventDetail.eventID
+			self.navigationController?.pushViewController(vc, animated: true)
+		}
+	}
 }

@@ -48,6 +48,7 @@
 		8D0C5C3D2524901E005B3A4E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D0C5C3B2524901E005B3A4E /* LaunchScreen.storyboard */; };
 		8D0C5C3F25249822005B3A4E /* EventDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0C5C3E25249822005B3A4E /* EventDetailModel.swift */; };
 		8D0C5C4125249B66005B3A4E /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0C5C4025249B66005B3A4E /* EventDetailViewController.swift */; };
+		8D0C5C442524A8AE005B3A4E /* EventActionDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0C5C432524A8AE005B3A4E /* EventActionDatasource.swift */; };
 		8D21855D24B6E383002688A8 /* OtpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D21855C24B6E383002688A8 /* OtpViewController.swift */; };
 		8D21855F24B6ED5F002688A8 /* VPMOTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D21855E24B6ED5F002688A8 /* VPMOTPView.swift */; };
 		8D21856124B6ED75002688A8 /* VPMOTPTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D21856024B6ED75002688A8 /* VPMOTPTextField.swift */; };
@@ -166,6 +167,7 @@
 		8D0C5C3C2524901E005B3A4E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Actio/Base.lproj/LaunchScreen.storyboard; sourceTree = SOURCE_ROOT; };
 		8D0C5C3E25249822005B3A4E /* EventDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailModel.swift; sourceTree = "<group>"; };
 		8D0C5C4025249B66005B3A4E /* EventDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
+		8D0C5C432524A8AE005B3A4E /* EventActionDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventActionDatasource.swift; sourceTree = "<group>"; };
 		8D21855C24B6E383002688A8 /* OtpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpViewController.swift; sourceTree = "<group>"; };
 		8D21855E24B6ED5F002688A8 /* VPMOTPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPMOTPView.swift; sourceTree = "<group>"; };
 		8D21856024B6ED75002688A8 /* VPMOTPTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPMOTPTextField.swift; sourceTree = "<group>"; };
@@ -374,6 +376,7 @@
 		8D0C5C2E252457CA005B3A4E /* Events */ = {
 			isa = PBXGroup;
 			children = (
+				8D0C5C422524A88E005B3A4E /* CollectionView+Datasource */,
 				8D0C5C3425246DAE005B3A4E /* Models */,
 				8D0C5C31252465D7005B3A4E /* TableViewCells */,
 				8D0C5C2F252457EC005B3A4E /* EventListViewController.swift */,
@@ -398,6 +401,14 @@
 				8D0C5C3E25249822005B3A4E /* EventDetailModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		8D0C5C422524A88E005B3A4E /* CollectionView+Datasource */ = {
+			isa = PBXGroup;
+			children = (
+				8D0C5C432524A8AE005B3A4E /* EventActionDatasource.swift */,
+			);
+			path = "CollectionView+Datasource";
 			sourceTree = "<group>";
 		};
 		8D21855B24B6E283002688A8 /* OTP */ = {
@@ -752,6 +763,7 @@
 				183384C824B4A561009911A8 /* ImagePickerTableViewCell.swift in Sources */,
 				8DA5D452250A464E003EAB6B /* TournamentListViewController.swift in Sources */,
 				1841F19424B480680021D131 /* TextPickerTableViewCell.swift in Sources */,
+				8D0C5C442524A8AE005B3A4E /* EventActionDatasource.swift in Sources */,
 				18F6A07624B5A4FD000ACDF1 /* RegisterDatasource.swift in Sources */,
 				8D673A6A251B3F4C00585AF9 /* AffiliationsTableViewCell.swift in Sources */,
 				8D673A75251DFF6900585AF9 /* FeedTableViewCell.swift in Sources */,
