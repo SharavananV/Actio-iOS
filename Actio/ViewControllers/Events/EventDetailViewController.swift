@@ -96,8 +96,12 @@ class EventDetailViewController: UIViewController {
 		actionSheet.addAction(internalShare)
 		
 		let externalShare = UIAlertAction(title: "External Share", style: .default) { (action) in
-			// TODO complete as below
-			// "https://actiosport.com/x?f="+itemDetails.getId()+"&screen=E"
+			guard let eventId = self.eventDetails?.id else {
+				return
+			}
+			let shareLink = "Actio Application, Let me recommend you this event \n\nhttps://actiosport.com/x?f=" + String(eventId) + "&screen=E"
+			let activityController = UIActivityViewController(activityItems: [shareLink], applicationActivities: nil)
+			self.present(activityController, animated: true, completion: nil)
 		}
 		actionSheet.addAction(externalShare)
 		
