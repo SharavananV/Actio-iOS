@@ -105,7 +105,7 @@ class TournamentDetailsViewController: UIViewController, UIViewControllerPreview
         }
         else {
             descriptionLabel.removeConstraint(descriptionHeightConstraint)
-			readMoreButton.setTitle("Read less", for: .normal)
+			readMoreButton.setTitle("Less", for: .normal)
         }
         
         isDescriptionExpanded = !isDescriptionExpanded
