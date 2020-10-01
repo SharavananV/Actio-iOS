@@ -46,9 +46,9 @@ class FeedListViewController: UIViewController {
     }
 
     func feedListApiCall() {
+        
         let headers : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"",
                                             "Content-Type": "application/json"]
-        
         ActioSpinner.shared.show(on: view)
         
         NetworkRouter.shared.request(feedListUrl, method: .post, parameters: ["feed_id": feedID ?? 0], encoding: JSONEncoding.default, headers: headers).responseDecodable(of: EventFeedResponse.self, queue: .main) { (response) in
@@ -62,8 +62,6 @@ class FeedListViewController: UIViewController {
             self.feedTableView.reloadData()
         }
     }
-    
-
 
 }
 extension FeedListViewController : UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate {
@@ -85,6 +83,8 @@ extension FeedListViewController : UITableViewDelegate,UITableViewDataSource,UIS
             if let imagePath = URL(string:  baseUrl + feed.profileImage!) {
                 cell.feedImageView.load(url: imagePath)
             }
+        }else {
+            cell.feedImageView.image = #imageLiteral(resourceName: "205383133115.jpg")
         }
         cell.feedDescriptionLabel.text = feed.shortDescription
         self.subscriberID = feed.subscriberID
@@ -111,43 +111,67 @@ extension FeedListViewController : UITableViewDelegate,UITableViewDataSource,UIS
         vc.feedDetail = feedDetail
 
         self.navigationController?.pushViewController(vc, animated: false)
-
-
     }
+    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         var configuration = UISwipeActionsConfiguration()
         let feed = feedList?[indexPath.row]
         if (feed?.myFeed == 1) {
-                let deleteAction = UIContextualAction(style: .destructive, title: nil) { _, _, complete in
-                    guard let feedDetail = feed else { return }
-                    
+            let deleteAction = UIContextualAction(style: .destructive, title: nil) { _, _, complete in
+                guard let feedDetail = feed else { return }
+                
+                let alert = UIAlertController(title: nil, message: "Do You want to delete this feed?", preferredStyle: .alert)
+                
+                let cancel = UIAlertAction(title: "Cancel", style: .default, handler: { action in
+                })
+                alert.addAction(cancel)
+                                let ok = UIAlertAction(title: "OK", style: .default, handler: { action in
                     self.deleteFeed(feedDetail) { (success) in
                         if success {
                             self.feedList?.remove(at: indexPath.row)
                             self.feedTableView.deleteRows(at: [indexPath], with: .automatic)
                         }
-                        
                         complete(success)
                     }
+                })
+                alert.addAction(ok)
+               
+                DispatchQueue.main.async(execute: {
+                    self.present(alert, animated: true)
+                })
+                
+            }
+            let editAction = UIContextualAction(style: .normal, title: nil) { _, _, complete in
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                if let vc = storyboard.instantiateViewController(withIdentifier: "AddEventViewController") as? AddEditFeedViewController {
+                    vc.feedModel = feed
+                    self.navigationController?.pushViewController(vc, animated: false)
                 }
-                let editAction = UIContextualAction(style: .normal, title: nil) { _, _, complete in
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    if let vc = storyboard.instantiateViewController(withIdentifier: "AddEventViewController") as? AddEditFeedViewController {
-                        vc.feedModel = feed
-                        self.navigationController?.pushViewController(vc, animated: false)
-                    }
-                }
-                //  deleteAction.image = UIImage(named: "deletebin")
-                deleteAction.backgroundColor = .red
-                editAction.backgroundColor = .blue
-                configuration = UISwipeActionsConfiguration(actions: [deleteAction,editAction])
-                configuration.performsFirstActionWithFullSwipe = true
+            }
+            let shareAction = UIContextualAction(style: .normal, title: nil) { _, _, complete in
+            }
+            
+            shareAction.backgroundColor = .white
+            editAction.backgroundColor = .white
+            deleteAction.backgroundColor = .white
+            
+            UIImageView.appearance(
+                whenContainedInInstancesOf: [UITableView.self])
+                .tintColor = AppColor.OrangeColor()
+            
+            shareAction.image = UIImage(named: "Icon awesome-share-alt")
+            deleteAction.image = UIImage(named: "Icon material-delete")
+            editAction.image = UIImage(named: "Icon awesome-edit")
+            
+            configuration = UISwipeActionsConfiguration(actions: [deleteAction,editAction,shareAction])
+            configuration.performsFirstActionWithFullSwipe = true
+        }else {
+            let shareAction = UIContextualAction(style: .normal, title: nil) { _, _, complete in
+            }
+            shareAction.image = UIImage(named: "Icon awesome-share-alt")
+            shareAction.backgroundColor = .white
+            configuration = UISwipeActionsConfiguration(actions: [shareAction])
         }
-        let shareAction = UIContextualAction(style: .normal, title: nil) { _, _, complete in
-        }
-        shareAction.backgroundColor = .green
-
-        configuration = UISwipeActionsConfiguration(actions: [shareAction])
 
         return configuration
     }

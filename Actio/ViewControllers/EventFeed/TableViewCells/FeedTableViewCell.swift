@@ -32,10 +32,4 @@ class FeedTableViewCell: UITableViewCell {
         cellBackgroundView.layer.masksToBounds = false
 
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-    }
-
 }

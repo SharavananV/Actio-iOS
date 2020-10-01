@@ -76,6 +76,11 @@ class AppColor: UIColor {
         
         return self.HexToColor(hexString: "#C70039")
     }
+    class func iconPurpleColor() -> UIColor {
+        
+        return self.HexToColor(hexString: "#900C3F")
+    }
+
     class func TextFieldBorderColor() -> UIColor {
         
         return self.HexToColor(hexString: "#fedcd7")

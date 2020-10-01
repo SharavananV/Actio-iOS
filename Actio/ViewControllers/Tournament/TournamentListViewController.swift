@@ -48,7 +48,7 @@ class TournamentListViewController: UIViewController {
         NetworkRouter.shared.request(tournamentListUrl, method: .post, parameters: ["latitude": "\(currentCoordinates?.latitude ?? 0)", "longitude": "\(currentCoordinates?.longitude ?? 0)"], encoding: JSONEncoding.default, headers: headers).responseDecodable(of: TournamentListResponse.self, queue: .main) { (response) in
             ActioSpinner.shared.hide()
             
-            guard let model = response.value,result.model == "200" else {
+            guard let model = response.value,model.status == "200" else {
                 print("🥶 Error on login: \(String(describing: response.error))")
                 return
             }
@@ -66,7 +66,10 @@ extension TournamentListViewController : UICollectionViewDelegate,UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TournamentFavoriteCollectionViewCell", for: indexPath) as! TournamentFavoriteCollectionViewCell
+         
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:"TournamentFavoriteCollectionViewCell", for: indexPath) as? TournamentFavoriteCollectionViewCell else {
+            return UICollectionViewCell()
+        }
         
         guard let tournament = self.tournamentListModel?.favorites[indexPath.row] else {
             return UICollectionViewCell()
@@ -110,7 +113,9 @@ extension TournamentListViewController : UITableViewDelegate,UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "NearMeTournamentListTableViewCell", for: indexPath) as! NearMeTournamentListTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "NearMeTournamentListTableViewCell", for: indexPath) as? NearMeTournamentListTableViewCell else {
+            return UITableViewCell()
+        }
         
         guard let tournament = self.tournamentListModel?.favorites[indexPath.row] else {
             return UITableViewCell()

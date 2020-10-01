@@ -55,7 +55,10 @@ extension TournamentPrizesViewController : UITableViewDelegate,UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TournamentPrizesTableViewCell", for: indexPath) as! TournamentPrizesTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "TournamentPrizesTableViewCell", for: indexPath) as? TournamentPrizesTableViewCell else {
+            return UITableViewCell()
+        }
+
         cell.prizeCategoryLabel.text = prizeCategoryLabel[indexPath.row]
         cell.prizeValueLabel.text = prizeValueLabel[indexPath.row]
         return cell

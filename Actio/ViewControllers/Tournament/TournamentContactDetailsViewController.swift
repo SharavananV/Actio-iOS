@@ -59,7 +59,11 @@ extension TournamentContactDetailsViewController :UITableViewDelegate,UITableVie
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TournamentContactDetailsTableViewCell", for: indexPath) as! TournamentContactDetailsTableViewCell
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "TournamentContactDetailsTableViewCell", for: indexPath) as? TournamentContactDetailsTableViewCell else {
+                   return UITableViewCell()
+               }
+
 
         guard let tournament = self.tournamentContactDetails?.directorsOrganizers[indexPath.section].items[indexPath.row] else {
                   return UITableViewCell()

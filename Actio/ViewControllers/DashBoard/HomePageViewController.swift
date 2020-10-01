@@ -41,15 +41,16 @@ class HomePageViewController: UIViewController, LogoutDelegate {
     }
     
     @objc func handleMenuToggle() {
-        let menuController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
-        menuController.delegate = self
-        
-        let menu = SideMenuNavigationController(rootViewController: menuController)
-        menu.leftSide = true
-        menu.menuWidth = UIScreen.main.bounds.size.width - 80
-        menu.statusBarEndAlpha = 0
-        menu.isNavigationBarHidden = true
-        present(menu, animated: true, completion: nil)
+        if let menuController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuViewController") as? MenuViewController {
+            menuController.delegate = self
+            
+            let menu = SideMenuNavigationController(rootViewController: menuController)
+            menu.leftSide = true
+            menu.menuWidth = UIScreen.main.bounds.size.width - 80
+            menu.statusBarEndAlpha = 0
+            menu.isNavigationBarHidden = true
+            present(menu, animated: true, completion: nil)
+        }
     }
     
     func presentLogin() {
@@ -102,7 +103,10 @@ extension HomePageViewController: UICollectionViewDelegate,UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomePageCollectionViewCell", for: indexPath) as! HomePageCollectionViewCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:"HomePageCollectionViewCell", for: indexPath) as? HomePageCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+
         
         cell.homeBackgroundImageView.layer.cornerRadius = 5.0
         cell.homeBackgroundImageView.clipsToBounds = true
@@ -130,8 +134,8 @@ extension HomePageViewController: UICollectionViewDelegate,UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-              let nav = storyboard?.instantiateViewController(withIdentifier: "TournamentListViewController") as! TournamentListViewController
-              self.navigationController?.pushViewController(nav, animated: false)
+            if let nav = storyboard?.instantiateViewController(withIdentifier: "TournamentListViewController") as? TournamentListViewController {
+                self.navigationController?.pushViewController(nav, animated: false)}
           }
     }
 }

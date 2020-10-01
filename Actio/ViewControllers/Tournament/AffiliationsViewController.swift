@@ -50,7 +50,10 @@ extension AffiliationsViewController : UITableViewDelegate,UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "AffiliationsTableViewCell", for: indexPath) as! AffiliationsTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "AffiliationsTableViewCell", for: indexPath) as? AffiliationsTableViewCell else {
+                   return UITableViewCell()
+               }
+
         guard let tournamentaffiliations = affiliations?[indexPath.section] else {
             return UITableViewCell()
         }

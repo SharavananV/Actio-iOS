@@ -113,7 +113,10 @@ class AddEditFeedViewController: UIViewController {
                             self.feedDescriptionTextView.text = nil
                             self.feedImageView.image = nil
                             
-                            
+                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                            if let vc = storyboard.instantiateViewController(withIdentifier: "FeedListViewController") as? FeedListViewController {
+                                self.navigationController?.pushViewController(vc, animated: false)
+                            }
                         }
                         else if let invalidText = parsedData["msg"] as? String {
                             self.view.makeToast(invalidText)
