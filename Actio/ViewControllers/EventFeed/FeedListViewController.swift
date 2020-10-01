@@ -96,7 +96,7 @@ extension FeedListViewController : UITableViewDelegate,UITableViewDataSource,UIS
             cell.feedTimeLabel.text = timeDiff.displayString + " ago"
         }
         else {
-            cell.feedTimeLabel.text = feed.createdDate+" "+feed.createdTime
+            cell.feedTimeLabel.text = feed.createdDate ?? ""+" "+feed.createdTime!
         }
         
         return cell
@@ -181,7 +181,7 @@ extension FeedListViewController : UITableViewDelegate,UITableViewDataSource,UIS
             self.filteredList = self.feedList
         } else if let list = self.feedList {
             self.filteredList = list.filter { (model) -> Bool in
-                model.title.contains(searchText) || model.shortDescription.contains(searchText)
+                model.title?.contains(searchText) ?? false || model.shortDescription?.contains(searchText) ?? false
             }
         }
         searching = true

@@ -58,9 +58,11 @@ extension AffiliationsViewController : UITableViewDelegate,UITableViewDataSource
             return UITableViewCell()
         }
         cell.affiliationsNameLabel.text = tournamentaffiliations.name
-        if let imagePath = URL(string:  baseUrl + tournamentaffiliations.logo) {
+        
+        if let logo = tournamentaffiliations.logo,let imagePath = URL(string:  baseUrl + logo) {
             cell.affiliationsImageView.load(url: imagePath)
         }
+
         return cell
     }
     

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class TournamentListResponse: Codable {
-    let status : String
+    let status : String?
     let list: TournamentListModel
 }
 

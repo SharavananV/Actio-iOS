@@ -25,7 +25,7 @@ class EventListTableViewCell: UITableViewCell {
 			self.eventImageView.load(url: imageUrl)
 		}
 		
-		let status = Event.Status.init(rawValue: event.isRegistrationOpen)
+        let status = Event.Status.init(rawValue: event.isRegistrationOpen ?? 0)
 		eventStatusLabel.text = status?.displayString
 		eventStatusLabel.backgroundColor = status?.backgroundColor
 		eventTitleLabel.text = event.eventName

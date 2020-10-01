@@ -7,13 +7,13 @@
 //
 
 struct TournamentFavoritesModel: Codable {
-    let id: Int
-    let tournamentName, venue, tournamentStartDate, tournamentStartMonth: String
-    let tournamentStartYear, tournamentStartRange, tournamentEndRange, tournamentLogo: String
-    let isRegistrationOpen: Int
+    let id: Int?
+    let tournamentName, venue, tournamentStartDate, tournamentStartMonth: String?
+    let tournamentStartYear, tournamentStartRange, tournamentEndRange, tournamentLogo: String?
+    let isRegistrationOpen: Int?
     
     var registrationStatus: TournamentListModel.Status {
-        return TournamentListModel.Status(rawValue: isRegistrationOpen) ?? .closed
+        return TournamentListModel.Status(rawValue: isRegistrationOpen ?? 0) ?? .closed
     }
 
     enum CodingKeys: String, CodingKey {

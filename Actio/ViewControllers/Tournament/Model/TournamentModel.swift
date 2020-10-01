@@ -9,22 +9,22 @@
 import Foundation
 
 struct TournamentResponse: Codable {
-    let status : String
+    let status : String?
     let tournament: Tournament
 }
 
 // MARK: - Tournament
 struct Tournament: Codable {
-    let id: Int
-    let tournamentName, tournamentDescription, tournamentType, tournamentVenue: String
-    let tournamentAddress: String
-    let tournamentLat, tournamentLong: Double
-    let registrationEndDateRange, tournamentLogo: String
-    let tournamentBanner: [String]
-    let sponsers, affliations: [TournamentAffliation]
-    let feeType, eBEDateRange, tournamentDate: String
-    let directorsOrganizers: [SubscriberList]
-    let entryFees, earlyBirdEntryFees: String
+    let id: Int?
+    let tournamentName, tournamentDescription, tournamentType, tournamentVenue: String?
+    let tournamentAddress: String?
+    let tournamentLat, tournamentLong: Double?
+    let registrationEndDateRange, tournamentLogo: String?
+    let tournamentBanner: [String]?
+    let sponsers, affliations: [TournamentAffliation]?
+    let feeType, eBEDateRange, tournamentDate: String?
+    let directorsOrganizers: [SubscriberList]?
+    let entryFees, earlyBirdEntryFees: String?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -51,19 +51,19 @@ struct Tournament: Codable {
 
 // MARK: - TournamentAffliationElement
 struct TournamentAffliation: Codable {
-    let name, logo: String
+    let name, logo: String?
 }
 
 // MARK: - TournamentDirectorsOrganizer
 struct SubscriberList: Codable {
-    let name: String
-    let items: [Subscriber]
+    let name: String?
+    let items: [Subscriber]?
 }
 
 // MARK: - Item
 struct Subscriber: Codable {
-    let subscriberID : Int
-    let username, emailID, mobileNumber: String
+    let subscriberID : Int?
+    let username, emailID, mobileNumber: String?
 
     enum CodingKeys: String, CodingKey {
         case subscriberID = "subscriber_id"

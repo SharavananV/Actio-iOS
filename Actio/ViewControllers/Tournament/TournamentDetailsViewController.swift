@@ -81,12 +81,14 @@ class TournamentDetailsViewController: UIViewController, UIViewControllerPreview
         guard let vc = storyboard?.instantiateViewController(withIdentifier: "ImagePreviewViewController") as? ImagePreviewViewController else {
             fatalError("Couldn't load detail view controller")
         }
-
-        let bannerUrls = self.tournamentDetails?.tournamentBanner.map {
-            URL(string:  baseUrl + $0)
+        
+        if let tournamentBanner = tournamentDetails?.tournamentBanner {
+            let bannerUrls = tournamentBanner.map {
+                URL(string:  baseUrl + $0)
+            }
+            vc.previewUrl = bannerUrls[index]
         }
         
-        vc.previewUrl = bannerUrls?[index]
         return vc
     }
 
@@ -119,7 +121,7 @@ extension TournamentDetailsViewController: TournamentActionProtocol, TournamentG
     private func updateUI() {
         guard let tournament = self.tournamentDetails else { return }
         
-        if let imagePath = URL(string:  baseUrl + tournament.tournamentLogo) {
+        if let logo = tournament.tournamentLogo,let imagePath = URL(string:  baseUrl + logo) {
             bannerImageView.load(url: imagePath)
         }
         tournamentNameLabel.text = tournament.tournamentName
@@ -141,16 +143,18 @@ extension TournamentDetailsViewController: TournamentActionProtocol, TournamentG
             readMoreButton.isHidden = true
         }
         
-        let bannerUrls = tournament.tournamentBanner.map {
-            URL(string:  baseUrl + $0)
+        if let tournamentBanner = tournament.tournamentBanner {
+            let bannerUrls = tournamentBanner.map {
+                URL(string:  baseUrl + $0)
+            }
+            self.galleryDatasource = TournamentGalleryDatasource(self, galleryUrls: bannerUrls)
         }
-        self.galleryDatasource = TournamentGalleryDatasource(self, galleryUrls: bannerUrls)
         galleryCollectionView?.dataSource = galleryDatasource
         galleryCollectionView?.delegate = galleryDatasource
         
         galleryCollectionView?.reloadData()
         
-        self.affliationsDatasource = TournamentSponserDatasource(self, affliations: tournament.affliations)
+        self.affliationsDatasource = TournamentSponserDatasource(self, affliations: tournament.affliations ?? [])
         affliationsCollectionView?.dataSource = affliationsDatasource
         affliationsCollectionView?.delegate = affliationsDatasource
         

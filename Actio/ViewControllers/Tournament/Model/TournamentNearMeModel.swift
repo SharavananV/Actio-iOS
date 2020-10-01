@@ -9,15 +9,15 @@
 import Foundation
 
 struct TournamentNearMeModel: Codable {
-    let id: Int
-    let tournamentName, tournamentVenue, tournamentStartDate, tournamentStartMonth: String
-    let tournamentStartYear, tournamentStartRange, tournamentEndRange, tournamentLogo: String
-    let distance: Double
-    let isRegistrationOpen: Int
+    let id: Int?
+    let tournamentName, tournamentVenue, tournamentStartDate, tournamentStartMonth: String?
+    let tournamentStartYear, tournamentStartRange, tournamentEndRange, tournamentLogo: String?
+    let distance: Double?
+    let isRegistrationOpen: Int?
     
     // 1 open , 2 close, 3 = yet to open
     var registrationStatus: TournamentListModel.Status {
-        return TournamentListModel.Status(rawValue: isRegistrationOpen) ?? .closed
+        return TournamentListModel.Status(rawValue: isRegistrationOpen ?? 0) ?? .closed
     }
 
     enum CodingKeys: String, CodingKey {

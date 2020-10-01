@@ -75,13 +75,13 @@ extension TournamentListViewController : UICollectionViewDelegate,UICollectionVi
             return UICollectionViewCell()
         }
         
-        if let imagePath = URL(string:  baseUrl + tournament.tournamentLogo) {
+        if let logo = tournament.tournamentLogo,let imagePath = URL(string:  baseUrl + logo) {
             cell.tournamentFavImageView.load(url: imagePath)
         }
         
         cell.tournamentFavSportsNameLabel.text = tournament.tournamentName
         cell.tournamentFavLocationLabel.text = tournament.venue
-        cell.setDateText(tournament.tournamentStartDate, month: tournament.tournamentStartMonth, year: tournament.tournamentStartYear)
+        cell.setDateText(tournament.tournamentStartDate ?? "", month: tournament.tournamentStartMonth ?? "", year: tournament.tournamentStartYear ?? "")
         cell.tournamentFavRegistrationStatusLabel.text = tournament.registrationStatus.displayString
         cell.tournamentFavRegistrationStatusLabel.backgroundColor = tournament.registrationStatus.backgroundColor
         cell.tournamentFavLocationImage.image = UIImage(named: "Icon-material-location-on")
@@ -121,11 +121,12 @@ extension TournamentListViewController : UITableViewDelegate,UITableViewDataSour
             return UITableViewCell()
         }
         
-        if let imagePath = URL(string:  baseUrl + tournament.tournamentLogo) {
+        if let logo = tournament.tournamentLogo,let imagePath = URL(string:  baseUrl + logo) {
             cell.nearMeTournamentImage.load(url: imagePath)
         }
+     
         cell.nearMeTournamentNameLabel.text = tournament.tournamentName
-        cell.nearMeDateLabel.text = tournament.tournamentStartRange + " - " + tournament.tournamentEndRange
+        cell.nearMeDateLabel.text = (tournament.tournamentStartRange ?? "") + " - " + (tournament.tournamentEndRange ?? "")
         cell.nearMeTournamentRegistrationStatusLabel.text = tournament.registrationStatus.displayString
         cell.nearMeTournamentRegistrationStatusLabel.backgroundColor = tournament.registrationStatus.backgroundColor
         cell.nearMeLocationLabel.text = tournament.venue

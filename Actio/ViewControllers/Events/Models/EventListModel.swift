@@ -16,7 +16,7 @@ struct EventCategoryResponse: Codable {
 
 // MARK: - EventCategory
 struct EventCategory: Codable {
-    let sportsID: Int
+    let sportsID: Int?
     let sportsName: String?
     let events: [Event]
 
@@ -29,10 +29,10 @@ struct EventCategory: Codable {
 
 // MARK: - Event
 struct Event: Codable {
-    let eventID: Int
+    let eventID: Int?
     let eventName, eventCategory, eventType, eventAddress: String?
     let eventStartDate, eventEndDate, eventLogo: String?
-    let isRegistrationOpen: Int
+    let isRegistrationOpen: Int?
 
     enum CodingKeys: String, CodingKey {
         case eventID = "event_id"

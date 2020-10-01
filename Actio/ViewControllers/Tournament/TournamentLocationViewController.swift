@@ -46,7 +46,7 @@ class TournamentLocationViewController: UIViewController,CLLocationManagerDelega
             self.locationAddressLabel.text = tournamentDetails.tournamentAddress
             
             let annotation = MKPointAnnotation()
-            annotation.coordinate = CLLocationCoordinate2D(latitude: tournamentDetails.tournamentLat, longitude: tournamentDetails.tournamentLong)
+            annotation.coordinate = CLLocationCoordinate2D(latitude: tournamentDetails.tournamentLat ?? 0.0, longitude: tournamentDetails.tournamentLong ?? 0.0)
             
             let region = MKCoordinateRegion( center: annotation.coordinate, latitudinalMeters: CLLocationDistance(exactly: 5000)!, longitudinalMeters: CLLocationDistance(exactly: 5000)!)
             self.locationMapview.setRegion(locationMapview.regionThatFits(region), animated: true)

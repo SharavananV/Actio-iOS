@@ -55,7 +55,7 @@ class TournamentContactDetailsViewController: UIViewController {
 }
 extension TournamentContactDetailsViewController :UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tournamentContactDetails?.directorsOrganizers[section].items.count ?? 0
+        return tournamentContactDetails?.directorsOrganizers?[section].items?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -65,11 +65,11 @@ extension TournamentContactDetailsViewController :UITableViewDelegate,UITableVie
                }
 
 
-        guard let tournament = self.tournamentContactDetails?.directorsOrganizers[indexPath.section].items[indexPath.row] else {
+        guard let tournament = self.tournamentContactDetails?.directorsOrganizers?[indexPath.section].items?[indexPath.row] else {
                   return UITableViewCell()
               }
         
-        if tournamentContactDetails?.directorsOrganizers[indexPath.section].name == "Director" {
+        if tournamentContactDetails?.directorsOrganizers?[indexPath.section].name == "Director" {
             cell.contactProfileImageView.image = UIImage.init(named: "contact-director-profile")
         } else {
             cell.contactProfileImageView.image = UIImage.init(named: "contact-organizer-profile")
@@ -82,7 +82,7 @@ extension TournamentContactDetailsViewController :UITableViewDelegate,UITableVie
         return cell
     }
     func numberOfSections(in tableView: UITableView) -> Int {
-        return tournamentContactDetails?.directorsOrganizers.count ?? 0
+        return tournamentContactDetails?.directorsOrganizers?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
@@ -94,7 +94,7 @@ extension TournamentContactDetailsViewController :UITableViewDelegate,UITableVie
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return tournamentContactDetails?.directorsOrganizers[section].name ?? ""
+        return tournamentContactDetails?.directorsOrganizers?[section].name ?? ""
     }
     
 }

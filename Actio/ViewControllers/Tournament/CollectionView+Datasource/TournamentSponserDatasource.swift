@@ -35,10 +35,9 @@ class TournamentSponserDatasource: NSObject, UICollectionViewDelegate, UICollect
         }
         
         let affliation = affliations[indexPath.item]
-        if let imageUrl = URL(string:  baseUrl + affliation.logo) {
+        if let logo = affliation.logo,let imageUrl = URL(string:  baseUrl + logo) {
             cell.configure(imageUrl: imageUrl, text: affliation.name, isIcon: false)
         }
-        
         return cell
     }
     
