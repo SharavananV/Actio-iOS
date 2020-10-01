@@ -77,7 +77,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(self.parentID)
         if let topViewController = self.window?.topViewController() {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "AcceptRejectRequestViewController") as! AcceptRejectRequestViewController
+           if let vc = storyboard.instantiateViewController(withIdentifier: "AcceptRejectRequestViewController") as? AcceptRejectRequestViewController {
             if UDHelper.getUserLoggedIn() == true {
                 if parentID != "" {
                     if parentID == UDHelper.getUserId() {
@@ -100,11 +100,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("Login Page")
                 if let topViewController = self.window?.topViewController() {
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let loginVc = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-                    loginVc.modalPresentationStyle = .fullScreen
-                    topViewController.present(loginVc, animated: false, completion: nil)
-            }
+                    if let loginVc = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
+                        loginVc.modalPresentationStyle = .fullScreen
+                        topViewController.present(loginVc, animated: false, completion: nil)
+                        
+                    }
+                }
         }
+    }
     }
     }
     private func displayAlert(message: String, buttonTitle: String, vc: UIViewController)

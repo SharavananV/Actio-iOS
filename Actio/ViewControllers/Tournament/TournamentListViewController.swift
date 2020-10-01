@@ -48,7 +48,7 @@ class TournamentListViewController: UIViewController {
         NetworkRouter.shared.request(tournamentListUrl, method: .post, parameters: ["latitude": "\(currentCoordinates?.latitude ?? 0)", "longitude": "\(currentCoordinates?.longitude ?? 0)"], encoding: JSONEncoding.default, headers: headers).responseDecodable(of: TournamentListResponse.self, queue: .main) { (response) in
             ActioSpinner.shared.hide()
             
-            guard let model = response.value else {
+            guard let model = response.value,result.model == "200" else {
                 print("🥶 Error on login: \(String(describing: response.error))")
                 return
             }

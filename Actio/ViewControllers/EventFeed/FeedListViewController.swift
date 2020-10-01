@@ -23,7 +23,6 @@ class FeedListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.feedTableView.delegate = self
         self.feedTableView.dataSource = self
         self.searchBar.delegate = self
@@ -55,7 +54,7 @@ class FeedListViewController: UIViewController {
         NetworkRouter.shared.request(feedListUrl, method: .post, parameters: ["feed_id": feedID ?? 0], encoding: JSONEncoding.default, headers: headers).responseDecodable(of: EventFeedResponse.self, queue: .main) { (response) in
             ActioSpinner.shared.hide()
             
-            guard let model = response.value else {
+            guard let model = response.value,model.status == "200" else {
                 print("🥶 Error on login: \(String(describing: response.error))")
                 return
             }
@@ -73,7 +72,9 @@ extension FeedListViewController : UITableViewDelegate,UITableViewDataSource,UIS
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableViewCell", for: indexPath) as! FeedTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableViewCell", for: indexPath) as? FeedTableViewCell else {
+            return UITableViewCell()
+        }
         
         let feedList = searching ? self.filteredList : self.feedList
         
@@ -136,17 +137,18 @@ extension FeedListViewController : UITableViewDelegate,UITableViewDataSource,UIS
                         self.navigationController?.pushViewController(vc, animated: false)
                     }
                 }
-                let shareAction = UIContextualAction(style: .normal, title: nil) { _, _, complete in
-                }
-                
-                // here set your image and background color
                 //  deleteAction.image = UIImage(named: "deletebin")
                 deleteAction.backgroundColor = .red
                 editAction.backgroundColor = .blue
-                shareAction.backgroundColor = .green
-                configuration = UISwipeActionsConfiguration(actions: [deleteAction,editAction,shareAction])
+                configuration = UISwipeActionsConfiguration(actions: [deleteAction,editAction])
                 configuration.performsFirstActionWithFullSwipe = true
         }
+        let shareAction = UIContextualAction(style: .normal, title: nil) { _, _, complete in
+        }
+        shareAction.backgroundColor = .green
+
+        configuration = UISwipeActionsConfiguration(actions: [shareAction])
+
         return configuration
     }
 

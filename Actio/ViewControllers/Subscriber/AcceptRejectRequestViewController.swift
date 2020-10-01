@@ -84,7 +84,7 @@ class AcceptRejectRequestViewController: UIViewController {
             switch response.result {
             case .success (let data):
                 if let resultDict = data as? [String: Any], let successText = resultDict["status"] as? String, successText == "200"{
-                    print(response,"fgfgfgfsg")
+                    print(response)
                 }
                 else if let resultDict = data as? [String: Any], let invalidText = resultDict["msg"] as? String {
                     self.view.makeToast(invalidText)
