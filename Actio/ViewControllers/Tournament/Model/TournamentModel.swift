@@ -18,7 +18,7 @@ struct Tournament: Codable {
     let id: Int?
     let tournamentName, tournamentDescription, tournamentType, tournamentVenue: String?
     let tournamentAddress: String?
-    let tournamentLat, tournamentLong: Double?
+    let tournamentLat, tournamentLong: DoubleType?
     let registrationEndDateRange, tournamentLogo: String?
     let tournamentBanner: [String]?
     let sponsers, affliations: [TournamentAffliation]?

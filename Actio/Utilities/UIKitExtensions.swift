@@ -189,3 +189,37 @@ extension UIImageView {
         self.layer.cornerRadius = cornerRadious
     }
 }
+
+enum DoubleType: Codable {
+	
+	case string(String)
+	case double(Double)
+	
+	init(from decoder: Decoder) throws {
+		let container = try decoder.singleValueContainer()
+		do {
+			self = .double(try container.decode(Double.self))
+		} catch DecodingError.typeMismatch {
+			self = .string(try container.decode(String.self))
+		}
+	}
+	
+	func encode(to encoder: Encoder) throws {
+		var container = encoder.singleValueContainer()
+		switch self {
+		case .string(let value):
+			try container.encode(value)
+		case .double(let value):
+			try container.encode(value)
+		}
+	}
+	
+	var value: Double {
+		switch self {
+		case .string(_):
+			return 0
+		case .double(let value):
+			return value
+		}
+	}
+}

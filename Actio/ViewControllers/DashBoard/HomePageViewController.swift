@@ -28,8 +28,7 @@ class HomePageViewController: UIViewController, LogoutDelegate {
         
         let menuButton = UIBarButtonItem(image: UIImage(named: "menu-white"), style: .plain, target: self, action: #selector(self.handleMenuToggle))
         self.navigationItem.leftBarButtonItem  = menuButton
-        
-        let notificationButton = UIBarButtonItem(image: UIImage(named: "bell"), style: .plain, target: self, action: #selector(self.openNotificationPage))
+		let notificationButton = UIBarButtonItem(image: UIImage(named: "bell"), style: .plain, target: self, action: #selector(self.openNotificationPage))
 		self.navigationItem.rightBarButtonItem  = notificationButton
 		
 		changeNavigationBar()

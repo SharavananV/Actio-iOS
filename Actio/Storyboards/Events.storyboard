@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="d6V-CG-wAP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -315,7 +315,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pd4-x3-5cg">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pd4-x3-5cg">
                                                 <rect key="frame" x="8" y="477" width="398" height="80"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="80" id="0zw-gJ-2bo"/>
@@ -519,9 +519,16 @@
                                                     </collectionViewCell>
                                                 </cells>
                                             </collectionView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fDY-mB-fUW">
-                                                <rect key="frame" x="337" y="910" width="57" height="30"/>
-                                                <state key="normal" title="Register"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fDY-mB-fUW">
+                                                <rect key="frame" x="350" y="918" width="44" height="44"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="Yxg-fK-xJm"/>
+                                                    <constraint firstAttribute="width" constant="44" id="yWn-y3-XVh"/>
+                                                </constraints>
+                                                <state key="normal" image="create-event"/>
+                                                <connections>
+                                                    <segue destination="0pD-Hx-xX1" kind="show" id="6P2-MM-uaT"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -541,7 +548,6 @@
                                             <constraint firstItem="OIG-6C-H2B" firstAttribute="leading" secondItem="Rm4-NN-DMp" secondAttribute="leading" constant="16" id="KJJ-M5-N8h"/>
                                             <constraint firstItem="OSZ-yS-xAU" firstAttribute="leading" secondItem="W0r-V4-3lX" secondAttribute="leading" id="LvH-hl-mI4"/>
                                             <constraint firstItem="KHL-Eo-2Tx" firstAttribute="trailing" secondItem="NZ1-N3-wsp" secondAttribute="trailing" id="M3N-QY-hDj"/>
-                                            <constraint firstAttribute="bottom" secondItem="fDY-mB-fUW" secondAttribute="bottom" constant="20" id="NO0-um-sNa"/>
                                             <constraint firstItem="pd4-x3-5cg" firstAttribute="trailing" secondItem="OSZ-yS-xAU" secondAttribute="trailing" id="Obl-Cs-nlG"/>
                                             <constraint firstItem="fHI-6m-4ur" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Gxa-Oa-bZf" secondAttribute="leading" constant="10" id="Ogf-ny-l52"/>
                                             <constraint firstItem="Rm4-NN-DMp" firstAttribute="leading" secondItem="Gxa-Oa-bZf" secondAttribute="leading" id="UTK-7a-767"/>
@@ -550,7 +556,6 @@
                                             <constraint firstItem="ht3-L1-poQ" firstAttribute="leading" secondItem="KHL-Eo-2Tx" secondAttribute="leading" id="dpD-hF-xEf"/>
                                             <constraint firstItem="OSZ-yS-xAU" firstAttribute="top" secondItem="W0r-V4-3lX" secondAttribute="bottom" constant="10" id="eUq-yI-S1Q"/>
                                             <constraint firstItem="LiR-Xz-6bL" firstAttribute="leading" secondItem="Gxa-Oa-bZf" secondAttribute="leading" constant="8" id="g7a-79-up5"/>
-                                            <constraint firstAttribute="trailing" secondItem="fDY-mB-fUW" secondAttribute="trailing" constant="20" id="gep-6g-xel"/>
                                             <constraint firstItem="LiR-Xz-6bL" firstAttribute="top" secondItem="Rm4-NN-DMp" secondAttribute="bottom" constant="10" id="jIY-DI-Yp5"/>
                                             <constraint firstItem="tLS-nF-4RE" firstAttribute="top" secondItem="OIG-6C-H2B" secondAttribute="top" id="kYl-A3-3IV"/>
                                             <constraint firstAttribute="trailing" secondItem="Rm4-NN-DMp" secondAttribute="trailing" id="khv-I4-MYC"/>
@@ -579,10 +584,12 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="hLC-JD-4m4" firstAttribute="trailing" secondItem="fDY-mB-fUW" secondAttribute="trailing" constant="20" id="4Fo-tz-OQJ"/>
                             <constraint firstItem="hLC-JD-4m4" firstAttribute="bottom" secondItem="m4E-Wk-D7v" secondAttribute="bottom" id="LWM-0p-8tp"/>
                             <constraint firstItem="m4E-Wk-D7v" firstAttribute="leading" secondItem="PBG-un-Fop" secondAttribute="leading" id="Pe5-z4-umu"/>
                             <constraint firstItem="m4E-Wk-D7v" firstAttribute="top" secondItem="PBG-un-Fop" secondAttribute="top" id="TUj-wC-ewt"/>
                             <constraint firstItem="hLC-JD-4m4" firstAttribute="trailing" secondItem="m4E-Wk-D7v" secondAttribute="trailing" id="hpu-v7-kfw"/>
+                            <constraint firstItem="hLC-JD-4m4" firstAttribute="bottom" secondItem="fDY-mB-fUW" secondAttribute="bottom" constant="20" id="wJA-WX-OX5"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hLC-JD-4m4"/>
                     </view>
@@ -608,11 +615,46 @@
             </objects>
             <point key="canvasLocation" x="1260.8695652173915" y="55.580357142857139"/>
         </scene>
+        <!--Event Registration View Controller-->
+        <scene sceneID="WYs-QM-8ES">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="0pD-Hx-xX1" customClass="EventRegistrationViewController" customModule="Actio" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="c6U-k4-YuO">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6sO-xE-Qmy">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="0pD-Hx-xX1" id="4j2-7Q-VQA"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="8lv-zy-QuX" firstAttribute="trailing" secondItem="6sO-xE-Qmy" secondAttribute="trailing" id="Nk2-96-X20"/>
+                            <constraint firstItem="8lv-zy-QuX" firstAttribute="bottom" secondItem="6sO-xE-Qmy" secondAttribute="bottom" id="Qd7-h6-5Kp"/>
+                            <constraint firstItem="6sO-xE-Qmy" firstAttribute="top" secondItem="8lv-zy-QuX" secondAttribute="top" id="XiN-4P-YNl"/>
+                            <constraint firstItem="6sO-xE-Qmy" firstAttribute="leading" secondItem="8lv-zy-QuX" secondAttribute="leading" id="llh-MC-OsJ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="8lv-zy-QuX"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="3x8-S6-dzh"/>
+                    <connections>
+                        <outlet property="tableView" destination="6sO-xE-Qmy" id="8hh-KV-Dm4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Sh-Fi-eww" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2051" y="21"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Icon-awesome-calendar-alt" width="35.5" height="40"/>
         <image name="Icon-material-location-on" width="30" height="40"/>
         <image name="category" width="14.5" height="17"/>
+        <image name="create-event" width="44" height="44"/>
         <image name="favorite" width="19.5" height="17"/>
         <image name="outline" width="10" height="15"/>
         <image name="share" width="18.5" height="16"/>

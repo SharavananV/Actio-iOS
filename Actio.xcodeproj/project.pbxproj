@@ -105,6 +105,12 @@
 		8DC1BD2925259D9A005C55DE /* NotificationListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC1BD2825259D9A005C55DE /* NotificationListTableViewCell.swift */; };
 		8DC1BD2C2525A0E6005C55DE /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC1BD2B2525A0E6005C55DE /* NotificationModel.swift */; };
 		8DC1BD2E2525A4EF005C55DE /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC1BD2D2525A4EF005C55DE /* NetworkService.swift */; };
+		8DC1BD302525D99F005C55DE /* EventRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC1BD2F2525D99F005C55DE /* EventRegistrationViewController.swift */; };
+		8DC1BD322525DC25005C55DE /* EventMasterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC1BD312525DC25005C55DE /* EventMasterModel.swift */; };
+		8DC1BD342525DD9C005C55DE /* EventRegistrationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC1BD332525DD9C005C55DE /* EventRegistrationModel.swift */; };
+		8DC1BD372525FA7B005C55DE /* PersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC1BD362525FA7B005C55DE /* PersistentContainer.swift */; };
+		8DC1BD3B2525FACD005C55DE /* EventRegistration+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC1BD392525FACD005C55DE /* EventRegistration+CoreDataProperties.swift */; };
+		8DC1BD3C2525FACD005C55DE /* EventRegistration+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC1BD3A2525FACD005C55DE /* EventRegistration+CoreDataClass.swift */; };
 		8DCBAB5A24BF2D37009E8B7F /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCBAB5824BF2D37009E8B7F /* HomePageViewController.swift */; };
 		8DCBAB5B24BF2D37009E8B7F /* HomePageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCBAB5924BF2D37009E8B7F /* HomePageCollectionViewCell.swift */; };
 		8DCBAB5D24BF3ADC009E8B7F /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCBAB5C24BF3ADC009E8B7F /* TabBarViewController.swift */; };
@@ -231,6 +237,12 @@
 		8DC1BD2825259D9A005C55DE /* NotificationListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationListTableViewCell.swift; sourceTree = "<group>"; };
 		8DC1BD2B2525A0E6005C55DE /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
 		8DC1BD2D2525A4EF005C55DE /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		8DC1BD2F2525D99F005C55DE /* EventRegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRegistrationViewController.swift; sourceTree = "<group>"; };
+		8DC1BD312525DC25005C55DE /* EventMasterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMasterModel.swift; sourceTree = "<group>"; };
+		8DC1BD332525DD9C005C55DE /* EventRegistrationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRegistrationModel.swift; sourceTree = "<group>"; };
+		8DC1BD362525FA7B005C55DE /* PersistentContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentContainer.swift; sourceTree = "<group>"; };
+		8DC1BD392525FACD005C55DE /* EventRegistration+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EventRegistration+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		8DC1BD3A2525FACD005C55DE /* EventRegistration+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EventRegistration+CoreDataClass.swift"; sourceTree = "<group>"; };
 		8DCBAB5824BF2D37009E8B7F /* HomePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
 		8DCBAB5924BF2D37009E8B7F /* HomePageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageCollectionViewCell.swift; sourceTree = "<group>"; };
 		8DCBAB5C24BF3ADC009E8B7F /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -281,6 +293,8 @@
 		1841F19724B480DA0021D131 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				8DE6B64A24B3366B0010A3EC /* Colors */,
+				8DE6B64724B3352C0010A3EC /* Fonts */,
 				8D8C6A9224B591B200D6DBE3 /* UDHelper.swift */,
 				1841F19824B480F10021D131 /* UIKitExtensions.swift */,
 				18BBAC7C24B5B99900306A8F /* ActioImagePicker.swift */,
@@ -390,6 +404,7 @@
 				8D0C5C31252465D7005B3A4E /* TableViewCells */,
 				8D0C5C2F252457EC005B3A4E /* EventListViewController.swift */,
 				8D0C5C4025249B66005B3A4E /* EventDetailViewController.swift */,
+				8DC1BD2F2525D99F005C55DE /* EventRegistrationViewController.swift */,
 			);
 			path = Events;
 			sourceTree = "<group>";
@@ -408,6 +423,8 @@
 			children = (
 				8D0C5C3525246DBB005B3A4E /* EventListModel.swift */,
 				8D0C5C3E25249822005B3A4E /* EventDetailModel.swift */,
+				8DC1BD312525DC25005C55DE /* EventMasterModel.swift */,
+				8DC1BD332525DD9C005C55DE /* EventRegistrationModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -516,14 +533,12 @@
 				18F6A07424B5A4E7000ACDF1 /* Datasource */,
 				18196CF624B4725700DBECCA /* Custom Subclasses */,
 				8D8C6A9424B591DA00D6DBE3 /* APIDetails */,
-				8DE6B64A24B3366B0010A3EC /* Colors */,
-				8DE6B64724B3352C0010A3EC /* Fonts */,
+				8DC1BD352525F4C9005C55DE /* CoreData */,
 				1841F19724B480DA0021D131 /* Utilities */,
 				8D0C5C2B252451A4005B3A4E /* Storyboards */,
 				8D94E08024AF1D0C00DBC46A /* Assets.xcassets */,
 				8D8C6A9724B5939700D6DBE3 /* GoogleService-Info.plist */,
 				8D94E08524AF1D0C00DBC46A /* Info.plist */,
-				8D94E07D24AF1D0A00DBC46A /* Actio.xcdatamodeld */,
 			);
 			path = Actio;
 			sourceTree = "<group>";
@@ -571,6 +586,25 @@
 				8DC1BD2B2525A0E6005C55DE /* NotificationModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		8DC1BD352525F4C9005C55DE /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				8DC1BD382525FAB1005C55DE /* Models */,
+				8D94E07D24AF1D0A00DBC46A /* Actio.xcdatamodeld */,
+				8DC1BD362525FA7B005C55DE /* PersistentContainer.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		8DC1BD382525FAB1005C55DE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8DC1BD3A2525FACD005C55DE /* EventRegistration+CoreDataClass.swift */,
+				8DC1BD392525FACD005C55DE /* EventRegistration+CoreDataProperties.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		8DCBAB5724BF2D05009E8B7F /* DashBoard */ = {
@@ -818,6 +852,8 @@
 				18C6B0202510C17300B7162E /* NotificationHelper.swift in Sources */,
 				8D673A622514C86A00585AF9 /* TournamentPrizesTableViewCell.swift in Sources */,
 				8DE6B64924B335630010A3EC /* AppFonts.swift in Sources */,
+				8DC1BD372525FA7B005C55DE /* PersistentContainer.swift in Sources */,
+				8DC1BD3C2525FACD005C55DE /* EventRegistration+CoreDataClass.swift in Sources */,
 				8D673A7A2521E83B00585AF9 /* EventFeedModel.swift in Sources */,
 				8D94E07F24AF1D0A00DBC46A /* Actio.xcdatamodeld in Sources */,
 				8DC1BD2625259A8F005C55DE /* NotificationListViewController.swift in Sources */,
@@ -825,10 +861,12 @@
 				8DCBAB5B24BF2D37009E8B7F /* HomePageCollectionViewCell.swift in Sources */,
 				1841F19524B480680021D131 /* TextEditTableViewCell.swift in Sources */,
 				8D21856124B6ED75002688A8 /* VPMOTPTextField.swift in Sources */,
+				8DC1BD3B2525FACD005C55DE /* EventRegistration+CoreDataProperties.swift in Sources */,
 				8D9C07A1250B886100514692 /* TournamentListModel.swift in Sources */,
 				18BBAC7D24B5B99900306A8F /* ActioImagePicker.swift in Sources */,
 				8D0C5C33252465EE005B3A4E /* EventListTableViewCell.swift in Sources */,
 				8D673A6F251DD72400585AF9 /* ProfilePageViewController.swift in Sources */,
+				8DC1BD342525DD9C005C55DE /* EventRegistrationModel.swift in Sources */,
 				183384C624B49CDD009911A8 /* ActioGradientButton.swift in Sources */,
 				18C6B0222511C95F00B7162E /* PaddingLabel.swift in Sources */,
 				8D673A602514C28600585AF9 /* TournamentPrizesViewController.swift in Sources */,
@@ -849,6 +887,7 @@
 				18C6B02B2511FCD600B7162E /* TournamentActionDatasource.swift in Sources */,
 				18BBAC7F24B5E90A00306A8F /* Validator.swift in Sources */,
 				18F6A07824B5AB76000ACDF1 /* DependencyProvider.swift in Sources */,
+				8DC1BD302525D99F005C55DE /* EventRegistrationViewController.swift in Sources */,
 				8D8C6A9324B591B200D6DBE3 /* UDHelper.swift in Sources */,
 				8DA048BB24B331D40099D528 /* AppColors.swift in Sources */,
 				18C253CF2512323E0043D20F /* GalleryCollectionViewCell.swift in Sources */,
@@ -862,6 +901,7 @@
 				1841F19324B480680021D131 /* DatePickerTableViewCell.swift in Sources */,
 				18F2F9C024C1C367007CBBC0 /* BeforeApprovalViewController.swift in Sources */,
 				8D8C6A9624B591F400D6DBE3 /* ApiDetails.swift in Sources */,
+				8DC1BD322525DC25005C55DE /* EventMasterModel.swift in Sources */,
 				8D673A5B2513884000585AF9 /* TournamentContactDetailsViewController.swift in Sources */,
 				18C253D12512403F0043D20F /* TournamentSponserDatasource.swift in Sources */,
 				8D673A6C251DB02000585AF9 /* ImagePreviewViewController.swift in Sources */,

@@ -109,6 +109,12 @@ class EventDetailViewController: UIViewController {
 		
 		isDescriptionExpanded = !isDescriptionExpanded
 	}
+	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if let eventRegistrationVC = segue.destination as? EventRegistrationViewController {
+			eventRegistrationVC.eventDetails = eventDetails
+		}
+	}
 }
 
 extension EventDetailViewController: TournamentGalleryProtocol, EventActionProtocol {

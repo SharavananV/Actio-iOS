@@ -84,6 +84,8 @@ class TextEditTableViewCell: UITableViewCell {
         if let type = self.model?.keyBoardType, type == .phonePad {
             textField.text = formattedNumber(number: model.textValue ?? "")
         }
+		
+		textField.isUserInteractionEnabled = self.model?.enabled == true
     }
     
     func clearData() {
@@ -135,15 +137,17 @@ class TextEditModel {
     var textValue: String?
     var placeHolder: String?
     var keyBoardType: UIKeyboardType
+	var enabled: Bool = true
     
     var contextText: String?
     
-    init(key: String, textValue: String? = nil, contextText: String, placeHolder: String? = nil, keyboardType: UIKeyboardType = .default, isSecure: Bool = false) {
+	init(key: String, textValue: String? = nil, contextText: String, placeHolder: String? = nil, keyboardType: UIKeyboardType = .default, isSecure: Bool = false, enabled: Bool = true) {
         self.key = key
         self.isSecure = isSecure
         self.textValue = textValue
         self.contextText = contextText
         self.keyBoardType = keyboardType
         self.placeHolder = placeHolder
+		self.enabled = enabled
     }
 }
