@@ -25,7 +25,8 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        changeNavigationBar()
+
         userNameTextField.setBorderColor(width: 1.0, color: AppColor.TextFieldBorderColor())
         passwordTextField.setBorderColor(width: 1.0, color: AppColor.TextFieldBorderColor())
         self.loginButton.applyGradient(colours: [AppColor.OrangeColor(),AppColor.RedColor()])
@@ -101,9 +102,9 @@ class LoginViewController: UIViewController {
                 
                 if let resultDict = data as? [String: Any], let successText = resultDict["status"] as? String, successText == "200"{
                     
-                    if (resultDict["userStatus"] as! String) == "1" {
+                    if (resultDict["userStatus"] as? String) == "1" {
                         if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomeAlertViewController") as? WelcomeAlertViewController {
-                            self.userNameString = resultDict["fullName"] as! String
+                            self.userNameString = resultDict["fullName"] as? String ?? ""
                             controller.loggedUserName = self.userNameString
                             
                             controller.modalPresentationStyle = .fullScreen
@@ -113,12 +114,12 @@ class LoginViewController: UIViewController {
                         
                     }
                     
-                    UDHelper.setAuthToken(resultDict["token"] as! String)
-                    UDHelper.setUserId(resultDict["subscriberID"] as! String)
+                    UDHelper.setAuthToken(resultDict["token"] as? String ?? "")
+                    UDHelper.setUserId(resultDict["subscriberID"] as? String ?? "")
                     UDHelper.setUserLoggedIn(true)
-                    self.navigateBasedOnStatus(resultDict["userStatus"] as! String)
+                    self.navigateBasedOnStatus(resultDict["userStatus"] as? String ?? "")
                 }
-                else if let resultDict = data as? [String: Any], let invalidText = resultDict["msg"] as? String {
+                else if let resultDict = data as? [String: Any], let invalidText = resultDict["msg"] as? String ?? "" {
                     self.view.makeToast(invalidText)
                     
                 }

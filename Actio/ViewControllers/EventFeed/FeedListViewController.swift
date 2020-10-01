@@ -28,6 +28,8 @@ class FeedListViewController: UIViewController {
         self.searchBar.delegate = self
         self.feedTableView.tableFooterView = UIView()
         searchBar.backgroundImage = UIImage()
+        changeNavigationBar()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -227,15 +229,15 @@ extension FeedListViewController : UITableViewDelegate,UITableViewDataSource,UIS
             if(response.value != nil){
                 do{
                     if let jsonData = response.data{
-                        let parsedData = try JSONSerialization.jsonObject(with: jsonData) as! Dictionary<String, AnyObject>
+                        let parsedData = try JSONSerialization.jsonObject(with: jsonData) as? Dictionary<String, AnyObject>
                         
-                        if let successStatus = parsedData["status"] as? String, successStatus == "200" ,let successText = parsedData["msg"] as? String{
+                        if let successStatus = parsedData?["status"] as? String, successStatus == "200" ,let successText = parsedData?["msg"] as? String{
                             self.view.makeToast(successText)
                             
                             completion(true)
                             return
                         }
-                        else if let invalidText = parsedData["msg"] as? String {
+                        else if let invalidText = parsedData?["msg"] as? String {
                             self.view.makeToast(invalidText)
                         }
                     }

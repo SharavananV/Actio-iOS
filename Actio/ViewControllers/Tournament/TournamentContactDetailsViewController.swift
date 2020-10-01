@@ -23,6 +23,8 @@ class TournamentContactDetailsViewController: UIViewController {
         self.tournamentContactDetailTableView.delegate = self
         self.tournamentContactDetailTableView.dataSource = self
         tournamentContactDetailTableView.tableFooterView = UIView()
+        changeNavigationBar()
+
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -87,9 +89,9 @@ extension TournamentContactDetailsViewController :UITableViewDelegate,UITableVie
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
         view.tintColor = UIColor.white
-        let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.textColor = UIColor.themePurple
-        header.textLabel?.font = UIFont(name: "Poppins-Bold", size: 16)!
+        let header = view as? UITableViewHeaderFooterView
+        header?.textLabel?.textColor = UIColor.themePurple
+        header?.textLabel?.font = UIFont(name: "Poppins-Bold", size: 16)!
 
     }
     

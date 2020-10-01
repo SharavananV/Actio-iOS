@@ -22,22 +22,14 @@ class HomePageViewController: UIViewController, LogoutDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         dashboardApiCall()
-        
         homeCollectionView.delegate = self
         homeCollectionView.dataSource = self
         
-        //FIXME: - Status bar color
-        
-        let view: UIView = UIView.init(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIApplication.shared.statusBarFrame.height))
-        
-        view.backgroundColor = AppColor.OrangeColor()
-        
-        self.view.addSubview(view)
-        
         let menuButton = UIBarButtonItem(image: UIImage(named: "menu-white"), style: .plain, target: self, action: #selector(self.handleMenuToggle))
         self.navigationItem.leftBarButtonItem  = menuButton
+        
+        changeNavigationBar()
     }
     
     @objc func handleMenuToggle() {
@@ -135,8 +127,9 @@ extension HomePageViewController: UICollectionViewDelegate,UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row == 0 {
             if let nav = storyboard?.instantiateViewController(withIdentifier: "TournamentListViewController") as? TournamentListViewController {
-                self.navigationController?.pushViewController(nav, animated: false)}
-          }
+                self.navigationController?.pushViewController(nav, animated: false)
+            }
+        }
     }
 }
 extension UIView {
@@ -162,4 +155,5 @@ extension UIImage {
         return newImage!
     }
 }
+
 

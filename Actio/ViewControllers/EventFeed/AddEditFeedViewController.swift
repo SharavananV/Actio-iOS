@@ -40,6 +40,7 @@ class AddEditFeedViewController: UIViewController {
         self.addImageButton.applyGradient(colours: [AppColor.OrangeColor(),AppColor.RedColor()])
         self.addImageButton.layer.cornerRadius = 5.0
         self.addImageButton.clipsToBounds = true
+        changeNavigationBar()
         
         var title = "Add"
         
@@ -101,9 +102,9 @@ class AddEditFeedViewController: UIViewController {
             if(response.value != nil){
                 do{
                     if let jsonData = response.data{
-                        let parsedData = try JSONSerialization.jsonObject(with: jsonData) as! Dictionary<String, AnyObject>
+                        let parsedData = try JSONSerialization.jsonObject(with: jsonData) as? Dictionary<String, AnyObject>
                         
-                        if let successStatus = parsedData["status"] as? String, successStatus == "200" ,let successText = parsedData["msg"] as? String{
+                        if let successStatus = parsedData?["status"] as? String, successStatus == "200" ,let successText = parsedData?["msg"] as? String{
                             self.view.makeToast(successText)
                             
                             self.feedTypeTextField.text = nil
@@ -117,7 +118,7 @@ class AddEditFeedViewController: UIViewController {
                                 self.navigationController?.pushViewController(vc, animated: false)
                             }
                         }
-                        else if let invalidText = parsedData["msg"] as? String {
+                        else if let invalidText = parsedData?["msg"] as? String {
                             self.view.makeToast(invalidText)
                         }
                     }

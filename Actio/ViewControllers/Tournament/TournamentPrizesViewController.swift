@@ -25,7 +25,8 @@ class TournamentPrizesViewController: UIViewController {
         self.prizeValueLabel = ["Rs.10000/- + Trophy","Rs.8000/- + Trophy","Rs.2000/- + Trophy","Medal"]
         self.navigationItem.title = "Tournament Prizes"
 
-        
+        changeNavigationBar()
+
         if let affiliations = self.affiliations {
             tournamentPrizeCollectionView.register(ImageTextCollectionViewCell.self, forCellWithReuseIdentifier: ImageTextCollectionViewCell.reuseId)
             
@@ -65,9 +66,9 @@ extension TournamentPrizesViewController : UITableViewDelegate,UITableViewDataSo
     }
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
         view.tintColor = UIColor.white
-        let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.textColor = UIColor.themePurple
-        header.textLabel?.font = UIFont(name: "Poppins-Bold", size: 16)!
+        let header = view as? UITableViewHeaderFooterView
+        header?.textLabel?.textColor = UIColor.themePurple
+        header?.textLabel?.font = UIFont(name: "Poppins-Bold", size: 16)!
 
     }
     

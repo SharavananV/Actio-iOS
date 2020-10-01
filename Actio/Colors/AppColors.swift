@@ -135,6 +135,11 @@ extension UIView {
         return gradient
     }
 }
+extension UIViewController {
+    func changeNavigationBar() {
+        navigationController?.navigationBar.applyGradient(colours: [AppColor.RedColor(),AppColor.OrangeColor()], locations:[ 0,1])
+    }
+}
 // Textfield BorderColor
 extension UITextField{
     func setBorderColor(width:CGFloat,color:UIColor) -> Void{

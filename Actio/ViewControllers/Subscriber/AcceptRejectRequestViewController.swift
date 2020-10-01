@@ -35,7 +35,8 @@ class AcceptRejectRequestViewController: UIViewController {
         let pickerView = UIPickerView()
         pickerView.delegate = self
         relationTextfield.inputView = pickerView
-        
+        changeNavigationBar()
+
         
         //FIXME: - Status bar color
         
@@ -120,7 +121,7 @@ class AcceptRejectRequestViewController: UIViewController {
                 if let resultDict = data as? [String: Any], let successText = resultDict["status"] as? String, successText == "200"{                    print(resultDict)
                     let val = resultDict["relation"] as? NSArray
                     for data in val! {
-                        self.addRelationArray.append((data as AnyObject).value(forKey: "bond") as! String)
+                        self.addRelationArray.append((data as AnyObject).value(forKey: "bond") as? String ?? "")
                     }
                     
                     if ((resultDict["name"] as? String) != nil) {
