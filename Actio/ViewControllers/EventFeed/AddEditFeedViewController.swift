@@ -41,20 +41,19 @@ class AddEditFeedViewController: UIViewController {
         self.addImageButton.layer.cornerRadius = 5.0
         self.addImageButton.clipsToBounds = true
         
+        var title = "Add"
+        
         if let feedDetail = self.feedModel {
             feedTitleTextField.text = feedDetail.title
             feedDescriptionTextView.text = feedDetail.listDescription
             feedShortDescriptionTextField.text = feedDetail.shortDescription
-            
+            title = "Update"
             if let image = feedDetail.images, let url = URL(string: baseUrl + image) {
                 feedImageView.load(url: url)
             }
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
         let rightButtonItem = UIBarButtonItem.init(
-            title: "Add",
+            title: title,
             style: .done,
             target: self,
             action: #selector(addFeedButtonAction)
