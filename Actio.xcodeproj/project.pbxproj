@@ -369,6 +369,7 @@
 			children = (
 				8D0C5C3B2524901E005B3A4E /* LaunchScreen.storyboard */,
 				8D0C5C2C252451CA005B3A4E /* Events.storyboard */,
+				8D94E07A24AF1D0A00DBC46A /* Main.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -510,7 +511,6 @@
 				8DE6B64724B3352C0010A3EC /* Fonts */,
 				1841F19724B480DA0021D131 /* Utilities */,
 				8D0C5C2B252451A4005B3A4E /* Storyboards */,
-				8D94E07A24AF1D0A00DBC46A /* Main.storyboard */,
 				8D94E08024AF1D0C00DBC46A /* Assets.xcassets */,
 				8D8C6A9724B5939700D6DBE3 /* GoogleService-Info.plist */,
 				8D94E08524AF1D0C00DBC46A /* Info.plist */,

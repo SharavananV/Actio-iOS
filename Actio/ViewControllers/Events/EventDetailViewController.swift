@@ -26,6 +26,7 @@ class EventDetailViewController: UIViewController {
 	@IBOutlet weak var eventLastDateLabel: UILabel!
 	
 	@IBOutlet weak var galleryCollectionView: UICollectionView!
+	@IBOutlet var registerButton: UIButton!
 	
 	private var isDescriptionExpanded: Bool = false
 	private var eventDetails: EventDetail?
@@ -36,6 +37,8 @@ class EventDetailViewController: UIViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
+		
+		registerForPreviewing(with: self, sourceView: galleryCollectionView)
 
 		setupCollectionView()
 		getEventDetails()
@@ -57,15 +60,6 @@ class EventDetailViewController: UIViewController {
 			self.eventDetails = result.event
 			self.updateUI()
 		}
-	}
-	
-	func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-		if let indexPath = galleryCollectionView.indexPathForItem(at: location), let frame = galleryCollectionView.cellForItem(at: indexPath)?.frame {
-			previewingContext.sourceRect = frame
-			return detailViewController(for: indexPath.row)
-		}
-		
-		return nil
 	}
 	
 	func detailViewController(for index: Int) -> ImagePreviewViewController {
@@ -186,5 +180,19 @@ extension EventDetailViewController {
 			
 			galleryCollectionView?.reloadData()
 		}
+	}
+}
+
+extension EventDetailViewController: UIViewControllerPreviewingDelegate {
+	func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+		if let indexPath = galleryCollectionView.indexPathForItem(at: location), let frame = galleryCollectionView.cellForItem(at: indexPath)?.frame {
+			previewingContext.sourceRect = frame
+			return detailViewController(for: indexPath.row)
+		}
+		
+		return nil
+	}
+	
+	func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
 	}
 }
