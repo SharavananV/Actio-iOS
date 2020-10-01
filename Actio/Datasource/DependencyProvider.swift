@@ -11,5 +11,6 @@ import Foundation
 class DependencyProvider {
     static let shared = DependencyProvider()
     
+	let networkService = NetworkService.shared
     let registerDatasource = RegisterDatasource.shared
 }

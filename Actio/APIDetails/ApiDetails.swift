@@ -30,3 +30,6 @@ let feedUrl = baseUrl + "v1/feed"
 let eventListUrl = baseUrl + "v1/tournament/search/eventcategory"
 let eventDetailUrl = baseUrl + "v1/tournament/search/event"
 
+// Notification
+let notificationListUrl = baseUrl + "v1/notify/list"
+let notificationSeenUpdateUrl = baseUrl + "v1/notify/seen"

@@ -103,6 +103,8 @@
 		8DA5D456250A4AF1003EAB6B /* TournamentFavoriteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA5D455250A4AF1003EAB6B /* TournamentFavoriteCollectionViewCell.swift */; };
 		8DC1BD2625259A8F005C55DE /* NotificationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC1BD2525259A8F005C55DE /* NotificationListViewController.swift */; };
 		8DC1BD2925259D9A005C55DE /* NotificationListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC1BD2825259D9A005C55DE /* NotificationListTableViewCell.swift */; };
+		8DC1BD2C2525A0E6005C55DE /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC1BD2B2525A0E6005C55DE /* NotificationModel.swift */; };
+		8DC1BD2E2525A4EF005C55DE /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC1BD2D2525A4EF005C55DE /* NetworkService.swift */; };
 		8DCBAB5A24BF2D37009E8B7F /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCBAB5824BF2D37009E8B7F /* HomePageViewController.swift */; };
 		8DCBAB5B24BF2D37009E8B7F /* HomePageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCBAB5924BF2D37009E8B7F /* HomePageCollectionViewCell.swift */; };
 		8DCBAB5D24BF3ADC009E8B7F /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCBAB5C24BF3ADC009E8B7F /* TabBarViewController.swift */; };
@@ -227,6 +229,8 @@
 		8DA5D455250A4AF1003EAB6B /* TournamentFavoriteCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentFavoriteCollectionViewCell.swift; sourceTree = "<group>"; };
 		8DC1BD2525259A8F005C55DE /* NotificationListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationListViewController.swift; sourceTree = "<group>"; };
 		8DC1BD2825259D9A005C55DE /* NotificationListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationListTableViewCell.swift; sourceTree = "<group>"; };
+		8DC1BD2B2525A0E6005C55DE /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
+		8DC1BD2D2525A4EF005C55DE /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		8DCBAB5824BF2D37009E8B7F /* HomePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
 		8DCBAB5924BF2D37009E8B7F /* HomePageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageCollectionViewCell.swift; sourceTree = "<group>"; };
 		8DCBAB5C24BF3ADC009E8B7F /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -477,6 +481,7 @@
 			children = (
 				8D8C6A9524B591F400D6DBE3 /* ApiDetails.swift */,
 				1880B01F251364C2006BE848 /* NetworkRouter.swift */,
+				8DC1BD2D2525A4EF005C55DE /* NetworkService.swift */,
 			);
 			path = APIDetails;
 			sourceTree = "<group>";
@@ -560,9 +565,18 @@
 			path = TableViewCells;
 			sourceTree = "<group>";
 		};
+		8DC1BD2A2525A0D5005C55DE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8DC1BD2B2525A0E6005C55DE /* NotificationModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		8DCBAB5724BF2D05009E8B7F /* DashBoard */ = {
 			isa = PBXGroup;
 			children = (
+				8DC1BD2A2525A0D5005C55DE /* Model */,
 				8DC1BD2725259D7F005C55DE /* TableViewCells */,
 				8DCBAB5924BF2D37009E8B7F /* HomePageCollectionViewCell.swift */,
 				8DCBAB5824BF2D37009E8B7F /* HomePageViewController.swift */,
@@ -782,6 +796,7 @@
 				8D673A6A251B3F4C00585AF9 /* AffiliationsTableViewCell.swift in Sources */,
 				8D673A75251DFF6900585AF9 /* FeedTableViewCell.swift in Sources */,
 				8D673A66251B1A0400585AF9 /* TournamentLocationViewController.swift in Sources */,
+				8DC1BD2E2525A4EF005C55DE /* NetworkService.swift in Sources */,
 				8D9C079C250B53A400514692 /* NearMeTournamentListTableViewCell.swift in Sources */,
 				183384CA24B4A94C009911A8 /* JustTextTableViewCell.swift in Sources */,
 				188B699D25231138000F6030 /* AddEditFeedViewController.swift in Sources */,
@@ -823,6 +838,7 @@
 				8DA5D456250A4AF1003EAB6B /* TournamentFavoriteCollectionViewCell.swift in Sources */,
 				8D0C5C3625246DBB005B3A4E /* EventListModel.swift in Sources */,
 				8D673A772521A67C00585AF9 /* FeedDetailsViewController.swift in Sources */,
+				8DC1BD2C2525A0E6005C55DE /* NotificationModel.swift in Sources */,
 				8D99566624C9515D006C3616 /* WelcomeAlertViewController.swift in Sources */,
 				1841F19924B480F10021D131 /* UIKitExtensions.swift in Sources */,
 				8D0C5C4125249B66005B3A4E /* EventDetailViewController.swift in Sources */,

@@ -9,7 +9,7 @@
 import UIKit
 
 // MARK: - EventCategoryResponse
-struct EventCategoryResponse: Codable {
+struct EventCategoryResponse: ResponseType {
     let status: String?
     let eventCategory: [EventCategory]?
 }

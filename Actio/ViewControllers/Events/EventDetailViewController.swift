@@ -28,6 +28,7 @@ class EventDetailViewController: UIViewController {
 	@IBOutlet weak var galleryCollectionView: UICollectionView!
 	@IBOutlet var registerButton: UIButton!
 	
+	let service = DependencyProvider.shared.networkService
 	private var isDescriptionExpanded: Bool = false
 	private var eventDetails: EventDetail?
 	private lazy var actionDataSource = EventActionDatasource(self)
@@ -45,19 +46,10 @@ class EventDetailViewController: UIViewController {
     }
 	
 	private func getEventDetails() {
-		let headers : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"", "Content-Type": "application/json"]
-		
-		ActioSpinner.shared.show(on: view)
-		
-		NetworkRouter.shared.request(eventDetailUrl, method: .post, parameters: ["eventID": eventId ?? 0], encoding: JSONEncoding.default, headers: headers).responseDecodable(of: EventDetailResponse.self, queue: .main) { (response) in
-			ActioSpinner.shared.hide()
-			
-			guard let result = response.value, result.status == "200" else {
-				print("🥶 Error: \(String(describing: response.error))")
-				return
-			}
-			
-			self.eventDetails = result.event
+		service.post(eventDetailUrl,
+					 parameters: ["eventID": eventId ?? 0],
+					 onView: self.view) { (response: EventDetailResponse) in
+			self.eventDetails = response.event
 			self.updateUI()
 		}
 	}

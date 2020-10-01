@@ -29,7 +29,10 @@ class HomePageViewController: UIViewController, LogoutDelegate {
         let menuButton = UIBarButtonItem(image: UIImage(named: "menu-white"), style: .plain, target: self, action: #selector(self.handleMenuToggle))
         self.navigationItem.leftBarButtonItem  = menuButton
         
-        changeNavigationBar()
+        let notificationButton = UIBarButtonItem(image: UIImage(named: "bell"), style: .plain, target: self, action: #selector(self.openNotificationPage))
+		self.navigationItem.rightBarButtonItem  = notificationButton
+		
+		changeNavigationBar()
     }
     
     @objc func handleMenuToggle() {
@@ -44,6 +47,14 @@ class HomePageViewController: UIViewController, LogoutDelegate {
             present(menu, animated: true, completion: nil)
         }
     }
+	
+	@objc func openNotificationPage() {
+		let notificationVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NotificationListViewController") as! NotificationListViewController
+		let navigationController = UINavigationController(rootViewController: notificationVC)
+		
+		navigationController.modalPresentationStyle = .fullScreen
+		present(navigationController, animated: true, completion: nil)
+	}
     
     func presentLogin() {
         self.dismiss(animated: true) {

@@ -13,6 +13,7 @@ class EventListViewController: UIViewController {
 
 	var tournamentId: Int?
 	private var eventList: [EventCategory]?
+	private let service = DependencyProvider.shared.networkService
 	
 	@IBOutlet var tableView: UITableView!
 	
@@ -23,86 +24,11 @@ class EventListViewController: UIViewController {
     }
 	
 	private func fetchEvents() {
-		let headers: HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken(), "Content-Type": "application/json"]
-		
-		ActioSpinner.shared.show(on: view)
-		
-		NetworkRouter.shared.request(eventListUrl, method: .post, parameters: ["tournamentID": self.tournamentId ?? 0, "search": ""], encoding: JSONEncoding.default, headers: headers).responseDecodable(of: EventCategoryResponse.self, queue: .main) { (response) in
-			ActioSpinner.shared.hide()
-			
-			guard let result = response.value, result.status == "200" else {
-				print("🥶 Error: \(String(describing: response.error))")
-				return
-			}
-			
-			self.eventList = result.eventCategory
-			self.tableView.reloadData()
-		}
-	}
-    
-	// TODO: Remove this
-	private func mockData() {
-		let response = """
-{
-    "status": "200",
-    "eventCategory": [
-        {
-            "sports_id": 3,
-            "sports_name": "Badminton",
-            "events": [
-                {
-                    "event_id": 165,
-                    "event_name": "England",
-                    "event_category": " Mens Doubles ",
-                    "event_type": "Team",
-                    "event_address": "Coimbatore Golf Club, Coimbatore",
-                    "event_start_date": "TUE AUG 18 2020",
-                    "event_end_date": "WED AUG 19 2020",
-                    "event_logo": "images/event/158587.jpeg",
-                    "is_registration_open": 2
-                },
-                {
-                    "event_id": 189,
-                    "event_name": "RNS",
-                    "event_category": " Mens Doubles ",
-                    "event_type": "Team",
-                    "event_address": "Coimbatore Golf Club, Coimbatore",
-                    "event_start_date": "SAT JUN 20 2020",
-                    "event_end_date": "SUN OCT 25 2020",
-                    "event_logo": "images/event/613417.jpeg",
-                    "is_registration_open": 2
-                }
-            ]
-        },
-        {
-            "sports_id": 4,
-            "sports_name": "Cricket",
-            "events": [
-                {
-                    "event_id": 156,
-                    "event_name": "Sri Lanka Plan For Lankan Premier League In 2020",
-                    "event_category": " Men's Cricket ",
-                    "event_type": "Team",
-                    "event_address": "Coimbatore Golf Club, Coimbatore",
-                    "event_start_date": "FRI JUL 24 2020",
-                    "event_end_date": "THU AUG 06 2020",
-                    "event_logo": "images/event/196860.jpeg",
-                    "is_registration_open": 2
-                }
-            ]
-        }
-    ]
-}
-"""
-		guard let data = response.data(using: String.Encoding.utf8) else { return }
-		
-		do {
-			let eventResponse = try JSONDecoder().decode(EventCategoryResponse.self, from: data)
-			eventList = eventResponse.eventCategory
-			
-			tableView.reloadData()
-		} catch {
-			print("Error Decoding")
+		service.post(eventListUrl,
+					 parameters: ["tournamentID": self.tournamentId ?? 0, "search": ""],
+					 onView: self.view) { (response: EventCategoryResponse) in
+						self.eventList = response.eventCategory
+						self.tableView.reloadData()
 		}
 	}
 }

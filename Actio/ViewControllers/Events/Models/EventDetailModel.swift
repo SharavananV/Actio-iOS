@@ -9,8 +9,8 @@
 import Foundation
 
 // MARK: - EventDetailResponse
-struct EventDetailResponse: Codable {
-	let status: String
+struct EventDetailResponse: ResponseType {
+	var status: String?
 	let event: EventDetail?
 }
 
