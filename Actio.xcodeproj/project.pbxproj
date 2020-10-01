@@ -101,6 +101,8 @@
 		8DA3055A24BC310D0090142B /* AcceptRejectRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA3055924BC310D0090142B /* AcceptRejectRequestViewController.swift */; };
 		8DA5D452250A464E003EAB6B /* TournamentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA5D451250A464E003EAB6B /* TournamentListViewController.swift */; };
 		8DA5D456250A4AF1003EAB6B /* TournamentFavoriteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA5D455250A4AF1003EAB6B /* TournamentFavoriteCollectionViewCell.swift */; };
+		8DC1BD2625259A8F005C55DE /* NotificationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC1BD2525259A8F005C55DE /* NotificationListViewController.swift */; };
+		8DC1BD2925259D9A005C55DE /* NotificationListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC1BD2825259D9A005C55DE /* NotificationListTableViewCell.swift */; };
 		8DCBAB5A24BF2D37009E8B7F /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCBAB5824BF2D37009E8B7F /* HomePageViewController.swift */; };
 		8DCBAB5B24BF2D37009E8B7F /* HomePageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCBAB5924BF2D37009E8B7F /* HomePageCollectionViewCell.swift */; };
 		8DCBAB5D24BF3ADC009E8B7F /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCBAB5C24BF3ADC009E8B7F /* TabBarViewController.swift */; };
@@ -223,6 +225,8 @@
 		8DA3055924BC310D0090142B /* AcceptRejectRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptRejectRequestViewController.swift; sourceTree = "<group>"; };
 		8DA5D451250A464E003EAB6B /* TournamentListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentListViewController.swift; sourceTree = "<group>"; };
 		8DA5D455250A4AF1003EAB6B /* TournamentFavoriteCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentFavoriteCollectionViewCell.swift; sourceTree = "<group>"; };
+		8DC1BD2525259A8F005C55DE /* NotificationListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationListViewController.swift; sourceTree = "<group>"; };
+		8DC1BD2825259D9A005C55DE /* NotificationListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationListTableViewCell.swift; sourceTree = "<group>"; };
 		8DCBAB5824BF2D37009E8B7F /* HomePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
 		8DCBAB5924BF2D37009E8B7F /* HomePageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageCollectionViewCell.swift; sourceTree = "<group>"; };
 		8DCBAB5C24BF3ADC009E8B7F /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -548,15 +552,25 @@
 			path = Tournament;
 			sourceTree = "<group>";
 		};
+		8DC1BD2725259D7F005C55DE /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				8DC1BD2825259D9A005C55DE /* NotificationListTableViewCell.swift */,
+			);
+			path = TableViewCells;
+			sourceTree = "<group>";
+		};
 		8DCBAB5724BF2D05009E8B7F /* DashBoard */ = {
 			isa = PBXGroup;
 			children = (
+				8DC1BD2725259D7F005C55DE /* TableViewCells */,
 				8DCBAB5924BF2D37009E8B7F /* HomePageCollectionViewCell.swift */,
 				8DCBAB5824BF2D37009E8B7F /* HomePageViewController.swift */,
 				8DCBAB5C24BF3ADC009E8B7F /* TabBarViewController.swift */,
 				18A9750824C04972001B5BB3 /* MenuViewController.swift */,
 				8D99566524C9515D006C3616 /* WelcomeAlertViewController.swift */,
 				8D99566724C9784D006C3616 /* ChildLogoutWarningViewController.swift */,
+				8DC1BD2525259A8F005C55DE /* NotificationListViewController.swift */,
 			);
 			path = DashBoard;
 			sourceTree = "<group>";
@@ -791,6 +805,7 @@
 				8DE6B64924B335630010A3EC /* AppFonts.swift in Sources */,
 				8D673A7A2521E83B00585AF9 /* EventFeedModel.swift in Sources */,
 				8D94E07F24AF1D0A00DBC46A /* Actio.xcdatamodeld in Sources */,
+				8DC1BD2625259A8F005C55DE /* NotificationListViewController.swift in Sources */,
 				8D21855D24B6E383002688A8 /* OtpViewController.swift in Sources */,
 				8DCBAB5B24BF2D37009E8B7F /* HomePageCollectionViewCell.swift in Sources */,
 				1841F19524B480680021D131 /* TextEditTableViewCell.swift in Sources */,
@@ -811,6 +826,7 @@
 				8D99566624C9515D006C3616 /* WelcomeAlertViewController.swift in Sources */,
 				1841F19924B480F10021D131 /* UIKitExtensions.swift in Sources */,
 				8D0C5C4125249B66005B3A4E /* EventDetailViewController.swift in Sources */,
+				8DC1BD2925259D9A005C55DE /* NotificationListTableViewCell.swift in Sources */,
 				18C253CD25122CD40043D20F /* TournamentGalleryDatasource.swift in Sources */,
 				8D673A68251B3F3200585AF9 /* AffiliationsViewController.swift in Sources */,
 				8D99566824C9784D006C3616 /* ChildLogoutWarningViewController.swift in Sources */,
