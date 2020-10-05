@@ -109,7 +109,9 @@ class DatePickerTableViewCell: UITableViewCell {
         if let defaultDate = model.dateValue {
             datePicker.date = defaultDate
             textField.text = defaultDate.ddMMyyyy
-        }
+		} else {
+			textField.text = nil
+		}
     }
     
     func clearData() {

@@ -26,7 +26,6 @@ class EventRegistrationViewController: UIViewController {
 
 		tableView.register(TextEditTableViewCell.self, forCellReuseIdentifier: TextEditTableViewCell.reuseId)
 		tableView.register(TextPickerTableViewCell.self, forCellReuseIdentifier: TextPickerTableViewCell.reuseId)
-		tableView.register(FootnoteButtonTableViewCell.self, forCellReuseIdentifier: FootnoteButtonTableViewCell.reuseId)
 		tableView.register(SwitchTableViewCell.self, forCellReuseIdentifier: SwitchTableViewCell.reuseId)
 		tableView.separatorStyle = .none
 		
@@ -172,14 +171,6 @@ extension EventRegistrationViewController: UITableViewDataSource {
 			textPickerCell.configure(model)
 			textPickerCell.delegate = self
 			cell = textPickerCell
-			
-		case .button(let title):
-			guard let buttonCell = tableView.dequeueReusableCell(withIdentifier: FootnoteButtonTableViewCell.reuseId, for: indexPath) as? FootnoteButtonTableViewCell else {
-				return UITableViewCell()
-			}
-			
-			buttonCell.configure(title: title, delegate: self)
-			cell = buttonCell
 		
 		case .toggle(let model):
 			guard let toggleCell = tableView.dequeueReusableCell(withIdentifier: SwitchTableViewCell.reuseId, for: indexPath) as? SwitchTableViewCell else {
@@ -197,7 +188,7 @@ extension EventRegistrationViewController: UITableViewDataSource {
 }
 
 // MARK: Cell Delegates
-extension EventRegistrationViewController: CellDataFetchProtocol, TextPickerDelegate, FootnoteButtonDelegate, SwitchCellDelegate {
+extension EventRegistrationViewController: CellDataFetchProtocol, TextPickerDelegate, SwitchCellDelegate {
 	func valueChanged(keyValuePair: (key: String, value: String)) {
 		guard let codingKey = EventDetailsRegisterModel.CodingKeys(rawValue: keyValuePair.key) else { return }
 		
@@ -268,10 +259,6 @@ extension EventRegistrationViewController: CellDataFetchProtocol, TextPickerDele
 		prepareFormData()
 	}
 	
-	func footnoteButtonCallback(_ title: String) {
-		
-	}
-	
 	func toggleValueChanged(_ key: String, value: Bool) {
 		if key == "isCoach" {
 			addEventModel.isCoach = value
@@ -284,6 +271,5 @@ extension EventRegistrationViewController: CellDataFetchProtocol, TextPickerDele
 private enum FormCellType {
 	case textEdit(TextEditModel)
 	case textPicker(TextPickerModel)
-	case button(String)
 	case toggle(ToggleViewModel)
 }

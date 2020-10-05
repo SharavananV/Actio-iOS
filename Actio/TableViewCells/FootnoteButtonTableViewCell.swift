@@ -60,7 +60,7 @@ class FootnoteButtonTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate(constraints)
     }
     
-    func configure(title: String, delegate: FootnoteButtonDelegate) {
+	func configure(title: String, delegate: FootnoteButtonDelegate, alignLeft: Bool = false) {
         self.delegate = delegate
         footnoteButton.setTitle(title, for: .normal)
     }

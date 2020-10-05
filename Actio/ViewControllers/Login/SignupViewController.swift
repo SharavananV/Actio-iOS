@@ -77,6 +77,7 @@ class SignupViewController: UIViewController {
         startedText.append(tempString)
         
         let termsString = NSMutableAttributedString(string: "By clicking Let's Go, you agree to the Privacy Policy and Our Terms and Conditions", attributes: [NSAttributedString.Key.font : AppFont.PoppinsRegular(size: 15)])
+		// TODO: Change link
         termsString.addAttribute(.link, value: "https://www.hackingwithswift.com", range: NSRange(location: 34, length: 48))
         
         let formData: [FormCellType] = [
