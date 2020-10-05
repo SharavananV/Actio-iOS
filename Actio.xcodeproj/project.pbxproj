@@ -18,6 +18,9 @@
 		1841F19524B480680021D131 /* TextEditTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1841F19124B480680021D131 /* TextEditTableViewCell.swift */; };
 		1841F19624B480680021D131 /* FootnoteButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1841F19224B480680021D131 /* FootnoteButtonTableViewCell.swift */; };
 		1841F19924B480F10021D131 /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1841F19824B480F10021D131 /* UIKitExtensions.swift */; };
+		18435580252B233200DECA90 /* ForgotUsernameSubscriberIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1843557F252B233200DECA90 /* ForgotUsernameSubscriberIDViewController.swift */; };
+		18435583252B234A00DECA90 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18435582252B234A00DECA90 /* ForgotPasswordViewController.swift */; };
+		18435587252B2F4E00DECA90 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18435586252B2F4E00DECA90 /* LoginModel.swift */; };
 		1880B020251364C2006BE848 /* NetworkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1880B01F251364C2006BE848 /* NetworkRouter.swift */; };
 		188B699D25231138000F6030 /* AddEditFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188B699C25231137000F6030 /* AddEditFeedViewController.swift */; };
 		18A9750924C04972001B5BB3 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A9750824C04972001B5BB3 /* MenuViewController.swift */; };
@@ -145,6 +148,9 @@
 		1841F19124B480680021D131 /* TextEditTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextEditTableViewCell.swift; sourceTree = "<group>"; };
 		1841F19224B480680021D131 /* FootnoteButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FootnoteButtonTableViewCell.swift; sourceTree = "<group>"; };
 		1841F19824B480F10021D131 /* UIKitExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitExtensions.swift; sourceTree = "<group>"; };
+		1843557F252B233200DECA90 /* ForgotUsernameSubscriberIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotUsernameSubscriberIDViewController.swift; sourceTree = "<group>"; };
+		18435582252B234A00DECA90 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		18435586252B2F4E00DECA90 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		1880B01F251364C2006BE848 /* NetworkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRouter.swift; sourceTree = "<group>"; };
 		188B699C25231137000F6030 /* AddEditFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditFeedViewController.swift; sourceTree = "<group>"; };
 		18A9750824C04972001B5BB3 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
@@ -304,6 +310,14 @@
 				18C6B01F2510C17300B7162E /* NotificationHelper.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		18435585252B2F3700DECA90 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				18435586252B2F4E00DECA90 /* LoginModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		18B569FA24C0426B00D6A520 /* Recovered References */ = {
@@ -660,8 +674,11 @@
 		8DE6B64B24B337B50010A3EC /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				18435585252B2F3700DECA90 /* Model */,
 				8D94E08B24AF1D3600DBC46A /* LoginViewController.swift */,
+				1843557F252B233200DECA90 /* ForgotUsernameSubscriberIDViewController.swift */,
 				18196CFB24B47BF900DBECCA /* SignupViewController.swift */,
+				18435582252B234A00DECA90 /* ForgotPasswordViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -844,6 +861,7 @@
 				1841F19624B480680021D131 /* FootnoteButtonTableViewCell.swift in Sources */,
 				183384CC24B4A9BF009911A8 /* SwitchTableViewCell.swift in Sources */,
 				18A9750924C04972001B5BB3 /* MenuViewController.swift in Sources */,
+				18435583252B234A00DECA90 /* ForgotPasswordViewController.swift in Sources */,
 				18196CFC24B47BF900DBECCA /* SignupViewController.swift in Sources */,
 				18C6B01E2510BDE200B7162E /* LocationFetcher.swift in Sources */,
 				18C6B0252511F38800B7162E /* TournamentDetailsViewController.swift in Sources */,
@@ -852,6 +870,7 @@
 				18C6B0202510C17300B7162E /* NotificationHelper.swift in Sources */,
 				8D673A622514C86A00585AF9 /* TournamentPrizesTableViewCell.swift in Sources */,
 				8DE6B64924B335630010A3EC /* AppFonts.swift in Sources */,
+				18435580252B233200DECA90 /* ForgotUsernameSubscriberIDViewController.swift in Sources */,
 				8DC1BD372525FA7B005C55DE /* PersistentContainer.swift in Sources */,
 				8DC1BD3C2525FACD005C55DE /* EventRegistration+CoreDataClass.swift in Sources */,
 				8D673A7A2521E83B00585AF9 /* EventFeedModel.swift in Sources */,
@@ -902,6 +921,7 @@
 				18F2F9C024C1C367007CBBC0 /* BeforeApprovalViewController.swift in Sources */,
 				8D8C6A9624B591F400D6DBE3 /* ApiDetails.swift in Sources */,
 				8DC1BD322525DC25005C55DE /* EventMasterModel.swift in Sources */,
+				18435587252B2F4E00DECA90 /* LoginModel.swift in Sources */,
 				8D673A5B2513884000585AF9 /* TournamentContactDetailsViewController.swift in Sources */,
 				18C253D12512403F0043D20F /* TournamentSponserDatasource.swift in Sources */,
 				8D673A6C251DB02000585AF9 /* ImagePreviewViewController.swift in Sources */,

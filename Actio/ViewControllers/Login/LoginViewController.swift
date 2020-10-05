@@ -86,6 +86,19 @@ class LoginViewController: UIViewController {
         
     }
     
+    @IBAction func forgotUsernameButtonAction(_ sender: Any) {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "ForgotUsernameSubscriberIDViewController") as? ForgotUsernameSubscriberIDViewController {
+            self.navigationController?.pushViewController(vc, animated: false)
+        }
+        
+    }
+    @IBAction func forgotPasswordButtonAction(_ sender: Any) {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "ForgotPasswordViewController") as? ForgotPasswordViewController {
+            self.navigationController?.pushViewController(vc, animated: false)
+        }
+        
+    }
+    
     @IBAction func loginButtonAction(_ sender: Any) {
         
         apiCall(username: userNameTextField.text!, password: passwordTextField.text!,Mode: "3", deviceToken: UDHelper.getDeviceToken())
