@@ -15,18 +15,3 @@ struct LoginModelResponse: Codable {
     let emailID, isdCode, mobileNumber: String?
     let role: Int?
 }
-// MARK: - Welcome
-struct ForgotUsernameResponse: Codable {
-    let status: String?
-    let result: ForgotUsernameModel?
-}
-
-// MARK: - Result
-struct ForgotUsernameModel: Codable {
-    let username, subscriberID: String?
-
-    enum CodingKeys: String, CodingKey {
-        case username
-        case subscriberID = "subscriber_id"
-    }
-}

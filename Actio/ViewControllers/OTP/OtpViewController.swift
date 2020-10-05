@@ -71,7 +71,6 @@ class OtpViewController: UIViewController,VPMOTPViewDelegate {
     }
     
     func apiCall(otp:String) {
-        urlString = validateOTPUrl
         
         let headers: HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"",
                                      "Content-Type": "application/json"]

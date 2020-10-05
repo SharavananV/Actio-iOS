@@ -94,6 +94,7 @@ class LoginViewController: UIViewController {
     }
     @IBAction func forgotPasswordButtonAction(_ sender: Any) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "ForgotPasswordViewController") as? ForgotPasswordViewController {
+            vc.forgotUserName = self.userNameString
             self.navigationController?.pushViewController(vc, animated: false)
         }
         
@@ -173,8 +174,8 @@ class LoginViewController: UIViewController {
 }
 extension LoginViewController : UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder();
-        return true;
+        textField.resignFirstResponder()
+        return true
     }
 }
 

@@ -13,6 +13,8 @@ let baseUrl = "http://203.223.191.66:8085/"
 
 let masterUrl = baseUrl + "v1/subscriber/init"
 let loginUrl = baseUrl + "v1/login"
+let forgotUserNameUrl = baseUrl + "v1/forgotUsername"
+let forgotPasswordUrl = baseUrl + "v1/forgotpassword"
 let registerUrl = baseUrl + "v1/subscriber/register"
 let validateOTPUrl = baseUrl + "v1/validateotp"
 let userStatusUrl = baseUrl + "v1/subscriber/userstatusInfo"
