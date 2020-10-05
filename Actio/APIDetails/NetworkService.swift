@@ -29,7 +29,7 @@ class NetworkService {
 		onView view: UIView,
 		completion: @escaping (E)->Void)
 	{
-		var allHeaders : HTTPHeaders = ["Authorization" : "Bear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImR1cmFpIiwiaWQiOjk3LCJpYXQiOjE1ODkzNTI3NTd9.ufvIYZtIfUgA24t65zg2qBaJ3GDyZIciU9gYEh1gS_o", "Content-Type": "application/json"]
+		var allHeaders : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken(), "Content-Type": "application/json"]
 		
 		headers?.forEach { (key, value) in
 			allHeaders.add(name: key, value: value)
@@ -40,14 +40,14 @@ class NetworkService {
 		NetworkRouter.shared.request(url, method: (method == .get ? .get : .post), parameters: parameters, encoding: JSONEncoding.default, headers: allHeaders).responseDecodable(of: E.self, queue: .main) { (response) in
 			ActioSpinner.shared.hide()
 			
-			guard let result = response.value, result.status == "200" else {
+			guard let value = response.value else {
 				print("🥶 Error: \(String(describing: response.error))")
 				view.makeToast(String(describing: response.error))
 				
 				return
 			}
 			
-			completion(result)
+			completion(value)
 		}
 	}
 

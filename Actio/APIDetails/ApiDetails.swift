@@ -32,6 +32,9 @@ let feedUrl = baseUrl + "v1/feed"
 let eventListUrl = baseUrl + "v1/tournament/search/eventcategory"
 let eventDetailUrl = baseUrl + "v1/tournament/search/event"
 let eventMasterUrl = baseUrl + "v1/registration/master"
+let eventRegistrationStatusUrl = baseUrl + "v1/registration/view"
+let eventRegistrationPart1Url = baseUrl + "v1/registration/join"
+let searchPlayerUrl = baseUrl + "v1/registration/player"
 
 // Notification
 let notificationListUrl = baseUrl + "v1/notify/list"

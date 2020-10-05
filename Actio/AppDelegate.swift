@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let storyboard = UIStoryboard(name: "Events", bundle: nil)
         let vc = storyboard.instantiateInitialViewController()
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = vc
@@ -31,7 +31,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().barTintColor = AppColor.OrangeColor()
         UINavigationBar.appearance().titleTextAttributes = [ NSAttributedString.Key.font: AppFont.PoppinsSemiBold(size: 20),NSAttributedString.Key.foregroundColor: UIColor.white]
         UIBarButtonItem.appearance().tintColor = .white
-        IQKeyboardManager.shared().isEnabled = true
+        
+		IQKeyboardManager.shared().isEnabled = true
+		IQKeyboardManager.shared().toolbarTintColor = #colorLiteral(red: 1, green: 0.3411764706, blue: 0.2, alpha: 1)
+		
         FirebaseApp.configure()
         Messaging.messaging().isAutoInitEnabled = true
         

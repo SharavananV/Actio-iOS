@@ -15,14 +15,9 @@ class HomePageViewController: UIViewController, LogoutDelegate {
     @IBOutlet var homeCollectionView: UICollectionView!
     
     var dashboardModules: [[String: Any]] = [[String: Any]]()
-    var urlString = String()
-    var imagePath: URL!
-    var iconPath: URL!
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        dashboardApiCall()
         homeCollectionView.delegate = self
         homeCollectionView.dataSource = self
         
@@ -33,6 +28,14 @@ class HomePageViewController: UIViewController, LogoutDelegate {
 		
 		changeNavigationBar()
     }
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		if dashboardModules.isEmpty {
+			dashboardApiCall()
+		}
+	}
     
     @objc func handleMenuToggle() {
         if let menuController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuViewController") as? MenuViewController {
@@ -67,7 +70,6 @@ class HomePageViewController: UIViewController, LogoutDelegate {
     
     
     func dashboardApiCall() {
-        urlString = dashboardUrl
        let headers : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"",
                                             "Content-Type": "application/json"]
       
@@ -117,14 +119,12 @@ extension HomePageViewController: UICollectionViewDelegate,UICollectionViewDataS
             let eachCellList = dashboardModules[indexPath.row]
             cell.homeCellLabel.text = (eachCellList["name"] as? String) ?? ""
             
-            if let imageUrl = eachCellList["image"] as? String {
-                self.imagePath = URL(string:  baseUrl + imageUrl)
-                cell.homeBackgroundImageView.load(url: self.imagePath)
+            if let imageUrl = eachCellList["image"] as? String, let imagePath = URL(string:  baseUrl + imageUrl) {
+                cell.homeBackgroundImageView.load(url: imagePath)
             }
             
-            if let iconUrl = eachCellList["icon"] as? String {
-                self.iconPath = URL(string:  baseUrl + iconUrl)
-                cell.homeCellImage.load(url: self.iconPath)
+            if let iconUrl = eachCellList["icon"] as? String, let iconPath = URL(string:  baseUrl + iconUrl) {
+                cell.homeCellImage.load(url: iconPath)
             }
         }
         return cell

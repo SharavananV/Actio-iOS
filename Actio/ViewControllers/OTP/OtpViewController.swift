@@ -26,8 +26,8 @@ class OtpViewController: UIViewController,VPMOTPViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         otpTextView.otpFieldsCount = 4
-        otpTextView.otpFieldDefaultBorderColor = AppColor.textFieldBorder
-        otpTextView.otpFieldEnteredBorderColor = AppColor.textFieldBorder
+        otpTextView.otpFieldDefaultBorderColor = #colorLiteral(red: 1, green: 0.3411764706, blue: 0.2, alpha: 1)
+        otpTextView.otpFieldEnteredBorderColor = #colorLiteral(red: 1, green: 0.3411764706, blue: 0.2, alpha: 1)
         otpTextView.otpFieldBorderWidth = 1
         otpTextView.delegate = self
         otpTextView.otpFieldDisplayType = .square

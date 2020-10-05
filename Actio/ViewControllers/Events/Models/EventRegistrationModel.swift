@@ -24,9 +24,29 @@ class EventDetailsRegisterModel: Codable {
 		self.registrationID = nil
 	}
 	
-	let eventID, registerBy, teamName, ageGroup: String?
-	let cityID: String?
-	let isCoach: Bool?
-	let coachName, coachIsd, coachMobile, coachEmail: String?
-	let registrationID: String?
+	var eventID, registerBy, teamName, ageGroup: String?
+	var cityID: String?
+	var isCoach: Bool?
+	var coachName, coachIsd, coachMobile, coachEmail: String?
+	var registrationID: String?
+	
+	enum CodingKeys: String, CodingKey {
+		case eventID, registerBy, teamName, ageGroup, cityID, isCoach, coachName, coachIsd, coachMobile, coachEmail, registrationID
+	}
+	
+	func parameters() -> [String: Any] {
+		return [
+			CodingKeys.eventID.rawValue: eventID ?? "",
+			CodingKeys.registerBy.rawValue: registerBy ?? "",
+			CodingKeys.teamName.rawValue: teamName ?? "",
+			CodingKeys.ageGroup.rawValue: ageGroup ?? "",
+			CodingKeys.cityID.rawValue: cityID ?? "",
+			CodingKeys.isCoach.rawValue: isCoach ?? "false",
+			CodingKeys.coachName.rawValue: coachName ?? "",
+			CodingKeys.coachIsd.rawValue: coachIsd ?? "",
+			CodingKeys.coachMobile.rawValue: coachMobile ?? "",
+			CodingKeys.coachEmail.rawValue: coachEmail ?? "",
+			CodingKeys.registrationID.rawValue: registrationID ?? ""
+		]
+	}
 }

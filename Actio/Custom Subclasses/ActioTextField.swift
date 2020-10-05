@@ -43,9 +43,9 @@ class ActioTextField: UITextField {
     }
     
     private func beautify() {
-        self.layer.borderColor = UIColor.textFieldBorder.cgColor
+        self.layer.borderColor = #colorLiteral(red: 1, green: 0.3411764706, blue: 0.2, alpha: 1)
         self.layer.borderWidth = 0.5
-        self.tintColor = UIColor.themeOrange
+        self.tintColor = #colorLiteral(red: 1, green: 0.3411764706, blue: 0.2, alpha: 1)
     }
     
     private func makeFieldSecure() {

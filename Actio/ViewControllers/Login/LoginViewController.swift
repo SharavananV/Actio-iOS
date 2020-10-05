@@ -133,9 +133,8 @@ class LoginViewController: UIViewController {
                     UDHelper.setUserLoggedIn(true)
                     self.navigateBasedOnStatus(resultDict["userStatus"] as? String ?? "")
                 }
-                else if let resultDict = data as? [String: Any], let invalidText = resultDict["msg"] as? String ?? "" {
+                else if let resultDict = data as? [String: Any], let invalidText = resultDict["msg"] as? String {
                     self.view.makeToast(invalidText)
-                    
                 }
                 else {
                     let resultDict = data as? [String: Any]

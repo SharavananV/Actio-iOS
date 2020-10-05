@@ -110,6 +110,23 @@ class EventDetailViewController: UIViewController {
 		isDescriptionExpanded = !isDescriptionExpanded
 	}
 	
+	@IBAction func openRegistrationPage(_ sender: Any) {
+		service.post(eventRegistrationStatusUrl, parameters: ["eventID": String(eventId ?? 0)], onView: view) { (response: EventRegistrationStatus) in
+			if let status = response.view?.status {
+				switch status {
+				case 1:
+					break
+				case 2:
+					break
+				default:
+					break
+				}
+			}
+			else {
+				self.performSegue(withIdentifier: "toRegistration", sender: sender)
+			}
+		}
+	}
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if let eventRegistrationVC = segue.destination as? EventRegistrationViewController {
 			eventRegistrationVC.eventDetails = eventDetails

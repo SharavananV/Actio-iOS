@@ -21,10 +21,6 @@ extension UIColor {
         return UIColor(hex: "#C70039") ?? UIColor.red
     }()
     
-    static let textFieldBorder: UIColor = {
-        return UIColor(hex: "#FEDCD7") ?? UIColor.purple
-    }()
-    
     static let themeOrangeHalfAlpha: UIColor = {
         return UIColor(hex: "#FF573355") ?? UIColor.orange
     }()

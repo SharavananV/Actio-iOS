@@ -71,6 +71,7 @@
 		8D673A75251DFF6900585AF9 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D673A74251DFF6900585AF9 /* FeedTableViewCell.swift */; };
 		8D673A772521A67C00585AF9 /* FeedDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D673A762521A67C00585AF9 /* FeedDetailsViewController.swift */; };
 		8D673A7A2521E83B00585AF9 /* EventFeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D673A792521E83A00585AF9 /* EventFeedModel.swift */; };
+		8D69C318252B32EE00C186F4 /* SearchPlayerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D69C317252B32EE00C186F4 /* SearchPlayerResponse.swift */; };
 		8D8C6A9324B591B200D6DBE3 /* UDHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8C6A9224B591B200D6DBE3 /* UDHelper.swift */; };
 		8D8C6A9624B591F400D6DBE3 /* ApiDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8C6A9524B591F400D6DBE3 /* ApiDetails.swift */; };
 		8D8C6A9824B5939700D6DBE3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D8C6A9724B5939700D6DBE3 /* GoogleService-Info.plist */; };
@@ -121,6 +122,9 @@
 		8DCBAB5D24BF3ADC009E8B7F /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCBAB5C24BF3ADC009E8B7F /* TabBarViewController.swift */; };
 		8DE6B64924B335630010A3EC /* AppFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE6B64824B335630010A3EC /* AppFonts.swift */; };
 		8DE6B64E24B35BA60010A3EC /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE6B64D24B35BA60010A3EC /* LaunchViewController.swift */; };
+		8DF77D4D252B09500065720A /* EventRegistrationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF77D4C252B09500065720A /* EventRegistrationStatus.swift */; };
+		8DF77D4F252B1C090065720A /* UserSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF77D4E252B1C090065720A /* UserSelectionTableViewCell.swift */; };
+		8DF77D51252B1F680065720A /* AddPlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF77D50252B1F680065720A /* AddPlayersViewController.swift */; };
 		8DF7863C24B846E900062261 /* SubscriberIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF7863B24B846E900062261 /* SubscriberIDViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -205,6 +209,7 @@
 		8D673A74251DFF6900585AF9 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
 		8D673A762521A67C00585AF9 /* FeedDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDetailsViewController.swift; sourceTree = "<group>"; };
 		8D673A792521E83A00585AF9 /* EventFeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFeedModel.swift; sourceTree = "<group>"; };
+		8D69C317252B32EE00C186F4 /* SearchPlayerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPlayerResponse.swift; sourceTree = "<group>"; };
 		8D8C6A9224B591B200D6DBE3 /* UDHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDHelper.swift; sourceTree = "<group>"; };
 		8D8C6A9524B591F400D6DBE3 /* ApiDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiDetails.swift; sourceTree = "<group>"; };
 		8D8C6A9724B5939700D6DBE3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -258,6 +263,9 @@
 		8DCBAB5C24BF3ADC009E8B7F /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		8DE6B64824B335630010A3EC /* AppFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFonts.swift; sourceTree = "<group>"; };
 		8DE6B64D24B35BA60010A3EC /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		8DF77D4C252B09500065720A /* EventRegistrationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRegistrationStatus.swift; sourceTree = "<group>"; };
+		8DF77D4E252B1C090065720A /* UserSelectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSelectionTableViewCell.swift; sourceTree = "<group>"; };
+		8DF77D50252B1F680065720A /* AddPlayersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayersViewController.swift; sourceTree = "<group>"; };
 		8DF7863B24B846E900062261 /* SubscriberIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriberIDViewController.swift; sourceTree = "<group>"; };
 		ADD5218CD43054BEE6FAD8D4 /* Pods_Actio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Actio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4F560E4604B46CDD6DFB538 /* Pods-Actio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Actio.release.xcconfig"; path = "Target Support Files/Pods-Actio/Pods-Actio.release.xcconfig"; sourceTree = "<group>"; };
@@ -296,6 +304,7 @@
 				183384C724B4A561009911A8 /* ImagePickerTableViewCell.swift */,
 				183384C924B4A94C009911A8 /* JustTextTableViewCell.swift */,
 				183384CB24B4A9BF009911A8 /* SwitchTableViewCell.swift */,
+				8DF77D4E252B1C090065720A /* UserSelectionTableViewCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -424,6 +433,7 @@
 				8D0C5C2F252457EC005B3A4E /* EventListViewController.swift */,
 				8D0C5C4025249B66005B3A4E /* EventDetailViewController.swift */,
 				8DC1BD2F2525D99F005C55DE /* EventRegistrationViewController.swift */,
+				8DF77D50252B1F680065720A /* AddPlayersViewController.swift */,
 			);
 			path = Events;
 			sourceTree = "<group>";
@@ -444,6 +454,8 @@
 				8D0C5C3E25249822005B3A4E /* EventDetailModel.swift */,
 				8DC1BD312525DC25005C55DE /* EventMasterModel.swift */,
 				8DC1BD332525DD9C005C55DE /* EventRegistrationModel.swift */,
+				8DF77D4C252B09500065720A /* EventRegistrationStatus.swift */,
+				8D69C317252B32EE00C186F4 /* SearchPlayerResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -865,6 +877,7 @@
 				8D0C5C30252457EC005B3A4E /* EventListViewController.swift in Sources */,
 				1880B020251364C2006BE848 /* NetworkRouter.swift in Sources */,
 				18C6B02D2512015200B7162E /* TournamentModel.swift in Sources */,
+				8DF77D51252B1F680065720A /* AddPlayersViewController.swift in Sources */,
 				1841F19624B480680021D131 /* FootnoteButtonTableViewCell.swift in Sources */,
 				183384CC24B4A9BF009911A8 /* SwitchTableViewCell.swift in Sources */,
 				18A9750924C04972001B5BB3 /* MenuViewController.swift in Sources */,
@@ -934,6 +947,9 @@
 				18C253D12512403F0043D20F /* TournamentSponserDatasource.swift in Sources */,
 				8D673A6C251DB02000585AF9 /* ImagePreviewViewController.swift in Sources */,
 				8DCBAB5A24BF2D37009E8B7F /* HomePageViewController.swift in Sources */,
+				8D69C318252B32EE00C186F4 /* SearchPlayerResponse.swift in Sources */,
+				8DF77D4F252B1C090065720A /* UserSelectionTableViewCell.swift in Sources */,
+				8DF77D4D252B09500065720A /* EventRegistrationStatus.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

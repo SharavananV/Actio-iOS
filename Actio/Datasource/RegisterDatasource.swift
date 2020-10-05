@@ -240,10 +240,10 @@ class RegisterUser {
             return Validator.isValidFullName(self.fullName)
         }
         if Validator.isValidCountryCode(self.isdCode) != .valid {
-            return Validator.isValidEmail(self.isdCode)
+            return Validator.isValidCountryCode(self.isdCode)
         }
         if Validator.isValidMobileNumber(self.mobileNumber) != .valid {
-            return Validator.isValidEmail(self.mobileNumber)
+            return Validator.isValidMobileNumber(self.mobileNumber)
         }
         if Validator.isValidEmail(self.emailID) != .valid {
             return Validator.isValidEmail(self.emailID)
