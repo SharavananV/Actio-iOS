@@ -33,6 +33,7 @@ class SignupViewController: UIViewController {
         tableView.register(JustTextTableViewCell.self, forCellReuseIdentifier: JustTextTableViewCell.reuseId)
         tableView.register(SwitchTableViewCell.self, forCellReuseIdentifier: SwitchTableViewCell.reuseId)
         
+        self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         self.formData = prepareFormData()
         self.setObservers()
         tableView.reloadData()

@@ -23,6 +23,7 @@
 		18435587252B2F4E00DECA90 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18435586252B2F4E00DECA90 /* LoginModel.swift */; };
 		1843558B252B419200DECA90 /* ResetAlertForgotPaaswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1843558A252B419200DECA90 /* ResetAlertForgotPaaswordViewController.swift */; };
 		1843558E252B503900DECA90 /* ForgotModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1843558D252B503900DECA90 /* ForgotModel.swift */; };
+		184DD1E4252C52B90014ABB5 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184DD1E3252C52B90014ABB5 /* ResetPasswordViewController.swift */; };
 		1880B020251364C2006BE848 /* NetworkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1880B01F251364C2006BE848 /* NetworkRouter.swift */; };
 		188B699D25231138000F6030 /* AddEditFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188B699C25231137000F6030 /* AddEditFeedViewController.swift */; };
 		18A9750924C04972001B5BB3 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A9750824C04972001B5BB3 /* MenuViewController.swift */; };
@@ -159,6 +160,7 @@
 		18435586252B2F4E00DECA90 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		1843558A252B419200DECA90 /* ResetAlertForgotPaaswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetAlertForgotPaaswordViewController.swift; sourceTree = "<group>"; };
 		1843558D252B503900DECA90 /* ForgotModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotModel.swift; sourceTree = "<group>"; };
+		184DD1E3252C52B90014ABB5 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		1880B01F251364C2006BE848 /* NetworkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRouter.swift; sourceTree = "<group>"; };
 		188B699C25231137000F6030 /* AddEditFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditFeedViewController.swift; sourceTree = "<group>"; };
 		18A9750824C04972001B5BB3 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
@@ -332,6 +334,17 @@
 				1843558D252B503900DECA90 /* ForgotModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		184DD1E2252C52870014ABB5 /* ForgotPassword */ = {
+			isa = PBXGroup;
+			children = (
+				1843557F252B233200DECA90 /* ForgotUsernameSubscriberIDViewController.swift */,
+				1843558A252B419200DECA90 /* ResetAlertForgotPaaswordViewController.swift */,
+				18435582252B234A00DECA90 /* ForgotPasswordViewController.swift */,
+				184DD1E3252C52B90014ABB5 /* ResetPasswordViewController.swift */,
+			);
+			path = ForgotPassword;
 			sourceTree = "<group>";
 		};
 		18B569FA24C0426B00D6A520 /* Recovered References */ = {
@@ -691,12 +704,10 @@
 		8DE6B64B24B337B50010A3EC /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				184DD1E2252C52870014ABB5 /* ForgotPassword */,
 				18435585252B2F3700DECA90 /* Model */,
 				8D94E08B24AF1D3600DBC46A /* LoginViewController.swift */,
-				1843557F252B233200DECA90 /* ForgotUsernameSubscriberIDViewController.swift */,
-				1843558A252B419200DECA90 /* ResetAlertForgotPaaswordViewController.swift */,
 				18196CFB24B47BF900DBECCA /* SignupViewController.swift */,
-				18435582252B234A00DECA90 /* ForgotPasswordViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -906,6 +917,7 @@
 				8D0C5C33252465EE005B3A4E /* EventListTableViewCell.swift in Sources */,
 				8D673A6F251DD72400585AF9 /* ProfilePageViewController.swift in Sources */,
 				8DC1BD342525DD9C005C55DE /* EventRegistrationModel.swift in Sources */,
+				184DD1E4252C52B90014ABB5 /* ResetPasswordViewController.swift in Sources */,
 				183384C624B49CDD009911A8 /* ActioGradientButton.swift in Sources */,
 				18C6B0222511C95F00B7162E /* PaddingLabel.swift in Sources */,
 				8D673A602514C28600585AF9 /* TournamentPrizesViewController.swift in Sources */,

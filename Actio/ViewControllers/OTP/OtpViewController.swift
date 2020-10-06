@@ -13,10 +13,12 @@ import Alamofire
 class OtpViewController: UIViewController,VPMOTPViewDelegate {
     var stringOtp = String()
     var urlString = String()
-    
     var countTimer:Timer!
-    
-    var counter = 30
+    var counter = 60
+    var fromController: OtpStatus = .login
+    var username: String?
+
+    let service = DependencyProvider.shared.networkService
     
     @IBOutlet var headerView: UIView!
     @IBOutlet var resendButton: UIButton!
@@ -34,7 +36,6 @@ class OtpViewController: UIViewController,VPMOTPViewDelegate {
         otpTextView.otpFieldEntrySecureType = true
         otpTextView.initalizeUI()
         
-        self.resendButton.applyGradient(colours: [AppColor.OrangeColor(),AppColor.RedColor()])
         self.headerView.applyGradient(colours: [AppColor.OrangeColor(),AppColor.RedColor()])
         
         self.headerImage.layer.cornerRadius = self.headerImage.frame.height/2
@@ -55,33 +56,52 @@ class OtpViewController: UIViewController,VPMOTPViewDelegate {
         
         
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+
     func shouldBecomeFirstResponderForOTP(otpFieldIndex index: Int) -> Bool {
         return true
     }
     
     func enteredOTP(otpString: String) {
         self.stringOtp = otpString
-        apiCall(otp: otpString)
+        validateApiCall(otp: otpString)
     }
     
     func hasEnteredAllOTP(hasEntered: Bool) {}
     
     @IBAction func resendButtonAction(_ sender: Any) {
-        apiCall(otp: stringOtp)
+        apiSendOtpCall(otp: stringOtp)
     }
     
-    func apiCall(otp:String) {
-        
+    func validateApiCall(otp:String) {
+        let url = fromController == .login ? validateOTPUrl : validateForgotPasswordUrl
         let headers: HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"",
-                                     "Content-Type": "application/json"]
-        NetworkRouter.shared.request(validateOTPUrl,method: .post,parameters: ["otp":otp],encoding: JSONEncoding.default,headers: headers).responseJSON {
+                                    "Content-Type": "application/json"]
+        
+        var parameters = ["otp": otp]
+        if fromController == .forgotPassword {
+            parameters["username"] = (username ?? "")
+        }
+        
+        NetworkRouter.shared.request(url,method: .post ,parameters: parameters, encoding: JSONEncoding.default,headers: headers).responseJSON {
             response in
             switch response.result {
             case .success (let data):
                 if let resultDict = data as? [String: Any], let successText = resultDict["status"] as? String, successText == "200" {
-                    if let dashController = self.storyboard?.instantiateViewController(withIdentifier: "TabBarViewController") {
-                        dashController.modalPresentationStyle = .fullScreen
-                        self.present(dashController, animated: true, completion: nil)
+                    if url == validateOTPUrl {
+                        if let dashController = self.storyboard?.instantiateViewController(withIdentifier: "TabBarViewController") {
+                            dashController.modalPresentationStyle = .fullScreen
+                            self.present(dashController, animated: true, completion: nil)
+                        }
+                    }else {
+                        if let vc = self.storyboard?.instantiateViewController(withIdentifier: "ResetPasswordViewController") as? ResetPasswordViewController {
+                            vc.userName = self.username
+                            self.navigationController?.pushViewController(vc, animated: true)
+                         }
                     }
                 }
                 else if let resultDict = data as? [String: Any], let invalidText = resultDict["msg"] as? String{
@@ -94,7 +114,6 @@ class OtpViewController: UIViewController,VPMOTPViewDelegate {
                             self.view.makeToast(msg)
                             
                         }
-                        
                     }
                 }
                 
@@ -104,19 +123,63 @@ class OtpViewController: UIViewController,VPMOTPViewDelegate {
             
         }
     }
+    func apiSendOtpCall(otp:String) {
+        let url = fromController == .login ? validateOTPUrl : validateForgotPasswordUrl
+        let headers: HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"",
+                                    "Content-Type": "application/json"]
+        var parameters = ["otp": otp]
+        if fromController == .forgotPassword {
+            parameters["username"] = (username ?? "")
+        }
+
+        NetworkRouter.shared.request(url, method: .post,parameters: parameters,encoding: JSONEncoding.default,headers: headers).responseJSON {
+            response in
+            switch response.result {
+            case .success (let data):
+                if let resultDict = data as? [String: Any], let successText = resultDict["status"] as? String, successText == "200" {
+                    print(resultDict)
+                }
+                else if let resultDict = data as? [String: Any], let invalidText = resultDict["msg"] as? String{
+                    self.view.makeToast(invalidText)
+                }
+                else {
+                    let resultDict = data as? [String: Any]
+                    if let status = resultDict!["status"] as? String, status == "422", let errors = resultDict!["errors"] as? [[String: Any]] {
+                        if let firstError = errors.first, let msg = firstError["msg"] as? String {
+                            self.view.makeToast(msg)
+                            
+                        }
+                    }
+                }
+                
+            case .failure(let error):
+                self.view.makeToast(error.errorDescription ?? "")
+            }
+            
+        }
+    }
+
     
     @objc func updateCounter() {
         if counter > 0
         {
             self.resendButton.isEnabled = false
-            resendButton.setTitle("Resend in \(counter)" + "s", for: .normal)
+            resendButton.setTitle("\(counter)", for: .normal)
+            resendButton.backgroundColor = UIColor.white
+            resendButton.setTitleColor(UIColor(hex: "#505050"), for: .normal)
             counter -= 1
         }
         else
         {
             self.resendButton.isEnabled = true
-            resendButton.setTitle("Resend", for: .normal)
+            self.resendButton.applyGradient(colours: [AppColor.ButtonGreyColor(),AppColor.ButtonGreyColor()])
+            resendButton.setTitleColor(UIColor(hex: "#7D7D7D"), for: .normal)
+            resendButton.setTitle("RESEND OTP", for: .normal)
             countTimer.invalidate()
         }
+    }
+    
+    enum OtpStatus {
+        case login, forgotPassword
     }
 }

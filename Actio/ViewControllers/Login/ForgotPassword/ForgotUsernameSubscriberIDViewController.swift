@@ -26,6 +26,11 @@ class ForgotUsernameSubscriberIDViewController: UIViewController {
         mobileNumberTextField.delegate = self
         emailIdTextField.delegate = self
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+
     
     @IBAction func submitButtonAction(_ sender: Any) {
         getForgotUsernameDetails()

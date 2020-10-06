@@ -26,3 +26,9 @@ struct ForgotUsernameModel: Codable {
 struct ForgotPasswordModel: ResponseType {
     let status, msg, username: String?
 }
+// MARK: - UpdatePasswordModel
+
+struct UpdatePasswordModel: ResponseType {
+    let status, msg: String?
+}
+

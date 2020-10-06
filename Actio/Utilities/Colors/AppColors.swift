@@ -67,7 +67,10 @@ class AppColor: UIColor {
         
         return self.HexToColor(hexString: "#505050")
     }
-
+    class func ButtonGreyColor() -> UIColor {
+        
+        return self.HexToColor(hexString: "#E8E7E7")
+    }
     class func RedColor() -> UIColor {
         
         return self.HexToColor(hexString: "#C70039")

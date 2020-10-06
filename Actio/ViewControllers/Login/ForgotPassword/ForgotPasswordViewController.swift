@@ -27,19 +27,25 @@ class ForgotPasswordViewController: UIViewController {
     }
     
     @IBAction func submitButtonAction(_ sender: Any) {
-        getEventDetails()
+        getForgotDetails()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+
     
-    private func getEventDetails() {
+    private func getForgotDetails() {
         service.post(forgotPasswordUrl,
-                     parameters: ["subscriber_id": self.subscriptionIdTextField.text ?? "","username": "sushmitha_123" ],
+                     parameters: ["username": self.subscriptionIdTextField.text ?? "" ],
                      onView: self.view) { (response: ForgotPasswordModel) in
             self.forgotDetails = response
             if let vc = self.storyboard?.instantiateViewController(withIdentifier: "OtpViewController") as? OtpViewController {
+                vc.fromController = .forgotPassword
+                vc.username = self.subscriptionIdTextField.text
                 self.navigationController?.pushViewController(vc, animated: false)
             }
-
-            
         }
     }
 
