@@ -74,6 +74,8 @@
 		8D673A772521A67C00585AF9 /* FeedDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D673A762521A67C00585AF9 /* FeedDetailsViewController.swift */; };
 		8D673A7A2521E83B00585AF9 /* EventFeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D673A792521E83A00585AF9 /* EventFeedModel.swift */; };
 		8D69C318252B32EE00C186F4 /* SearchPlayerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D69C317252B32EE00C186F4 /* SearchPlayerResponse.swift */; };
+		8D833033252C97C7001CDE81 /* CDPlayer+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D833031252C97C7001CDE81 /* CDPlayer+CoreDataClass.swift */; };
+		8D833034252C97C7001CDE81 /* CDPlayer+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D833032252C97C7001CDE81 /* CDPlayer+CoreDataProperties.swift */; };
 		8D8C6A9324B591B200D6DBE3 /* UDHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8C6A9224B591B200D6DBE3 /* UDHelper.swift */; };
 		8D8C6A9624B591F400D6DBE3 /* ApiDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8C6A9524B591F400D6DBE3 /* ApiDetails.swift */; };
 		8D8C6A9824B5939700D6DBE3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D8C6A9724B5939700D6DBE3 /* GoogleService-Info.plist */; };
@@ -117,8 +119,6 @@
 		8DC1BD322525DC25005C55DE /* EventMasterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC1BD312525DC25005C55DE /* EventMasterModel.swift */; };
 		8DC1BD342525DD9C005C55DE /* EventRegistrationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC1BD332525DD9C005C55DE /* EventRegistrationModel.swift */; };
 		8DC1BD372525FA7B005C55DE /* PersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC1BD362525FA7B005C55DE /* PersistentContainer.swift */; };
-		8DC1BD3B2525FACD005C55DE /* EventRegistration+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC1BD392525FACD005C55DE /* EventRegistration+CoreDataProperties.swift */; };
-		8DC1BD3C2525FACD005C55DE /* EventRegistration+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC1BD3A2525FACD005C55DE /* EventRegistration+CoreDataClass.swift */; };
 		8DCBAB5A24BF2D37009E8B7F /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCBAB5824BF2D37009E8B7F /* HomePageViewController.swift */; };
 		8DCBAB5B24BF2D37009E8B7F /* HomePageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCBAB5924BF2D37009E8B7F /* HomePageCollectionViewCell.swift */; };
 		8DCBAB5D24BF3ADC009E8B7F /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCBAB5C24BF3ADC009E8B7F /* TabBarViewController.swift */; };
@@ -214,6 +214,8 @@
 		8D673A762521A67C00585AF9 /* FeedDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDetailsViewController.swift; sourceTree = "<group>"; };
 		8D673A792521E83A00585AF9 /* EventFeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventFeedModel.swift; sourceTree = "<group>"; };
 		8D69C317252B32EE00C186F4 /* SearchPlayerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPlayerResponse.swift; sourceTree = "<group>"; };
+		8D833031252C97C7001CDE81 /* CDPlayer+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CDPlayer+CoreDataClass.swift"; sourceTree = "<group>"; };
+		8D833032252C97C7001CDE81 /* CDPlayer+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CDPlayer+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8D8C6A9224B591B200D6DBE3 /* UDHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDHelper.swift; sourceTree = "<group>"; };
 		8D8C6A9524B591F400D6DBE3 /* ApiDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiDetails.swift; sourceTree = "<group>"; };
 		8D8C6A9724B5939700D6DBE3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -260,8 +262,6 @@
 		8DC1BD312525DC25005C55DE /* EventMasterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMasterModel.swift; sourceTree = "<group>"; };
 		8DC1BD332525DD9C005C55DE /* EventRegistrationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRegistrationModel.swift; sourceTree = "<group>"; };
 		8DC1BD362525FA7B005C55DE /* PersistentContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentContainer.swift; sourceTree = "<group>"; };
-		8DC1BD392525FACD005C55DE /* EventRegistration+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EventRegistration+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		8DC1BD3A2525FACD005C55DE /* EventRegistration+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EventRegistration+CoreDataClass.swift"; sourceTree = "<group>"; };
 		8DCBAB5824BF2D37009E8B7F /* HomePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
 		8DCBAB5924BF2D37009E8B7F /* HomePageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageCollectionViewCell.swift; sourceTree = "<group>"; };
 		8DCBAB5C24BF3ADC009E8B7F /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -648,8 +648,8 @@
 		8DC1BD382525FAB1005C55DE /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				8DC1BD3A2525FACD005C55DE /* EventRegistration+CoreDataClass.swift */,
-				8DC1BD392525FACD005C55DE /* EventRegistration+CoreDataProperties.swift */,
+				8D833031252C97C7001CDE81 /* CDPlayer+CoreDataClass.swift */,
+				8D833032252C97C7001CDE81 /* CDPlayer+CoreDataProperties.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -902,12 +902,12 @@
 				18C6B0252511F38800B7162E /* TournamentDetailsViewController.swift in Sources */,
 				8D21855F24B6ED5F002688A8 /* VPMOTPView.swift in Sources */,
 				8DCBAB5D24BF3ADC009E8B7F /* TabBarViewController.swift in Sources */,
+				8D833034252C97C7001CDE81 /* CDPlayer+CoreDataProperties.swift in Sources */,
 				18C6B0202510C17300B7162E /* NotificationHelper.swift in Sources */,
 				8D673A622514C86A00585AF9 /* TournamentPrizesTableViewCell.swift in Sources */,
 				8DE6B64924B335630010A3EC /* AppFonts.swift in Sources */,
 				18435580252B233200DECA90 /* ForgotUsernameSubscriberIDViewController.swift in Sources */,
 				8DC1BD372525FA7B005C55DE /* PersistentContainer.swift in Sources */,
-				8DC1BD3C2525FACD005C55DE /* EventRegistration+CoreDataClass.swift in Sources */,
 				8D673A7A2521E83B00585AF9 /* EventFeedModel.swift in Sources */,
 				8D94E07F24AF1D0A00DBC46A /* Actio.xcdatamodeld in Sources */,
 				8DC1BD2625259A8F005C55DE /* NotificationListViewController.swift in Sources */,
@@ -915,13 +915,13 @@
 				8DCBAB5B24BF2D37009E8B7F /* HomePageCollectionViewCell.swift in Sources */,
 				1841F19524B480680021D131 /* TextEditTableViewCell.swift in Sources */,
 				8D21856124B6ED75002688A8 /* VPMOTPTextField.swift in Sources */,
-				8DC1BD3B2525FACD005C55DE /* EventRegistration+CoreDataProperties.swift in Sources */,
 				8D9C07A1250B886100514692 /* TournamentListModel.swift in Sources */,
 				18BBAC7D24B5B99900306A8F /* ActioImagePicker.swift in Sources */,
 				8D0C5C33252465EE005B3A4E /* EventListTableViewCell.swift in Sources */,
 				8D673A6F251DD72400585AF9 /* ProfilePageViewController.swift in Sources */,
 				8DC1BD342525DD9C005C55DE /* EventRegistrationModel.swift in Sources */,
 				184DD1E4252C52B90014ABB5 /* ResetPasswordViewController.swift in Sources */,
+				8D833033252C97C7001CDE81 /* CDPlayer+CoreDataClass.swift in Sources */,
 				183384C624B49CDD009911A8 /* ActioGradientButton.swift in Sources */,
 				18C6B0222511C95F00B7162E /* PaddingLabel.swift in Sources */,
 				8D673A602514C28600585AF9 /* TournamentPrizesViewController.swift in Sources */,

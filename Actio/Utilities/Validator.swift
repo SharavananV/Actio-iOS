@@ -51,6 +51,14 @@ struct Validator {
             return .invalid(message: "Select a valid user name")
         }
     }
+	
+	static func isValidRequiredField(_ name: String) -> ValidType {
+		if name.trimmingCharacters(in: .whitespacesAndNewlines).count > 0 {
+			return .valid
+		} else {
+			return .invalid(message: "")
+		}
+	}
     
     static func isValidFullName(_ name: String) -> ValidType {
         if name.trimmingCharacters(in: .whitespacesAndNewlines).count >= 5 {

@@ -18,6 +18,7 @@ class EventRegistrationViewController: UIViewController {
 	fileprivate var formData: [FormCellType]?
 	let addEventModel = EventDetailsRegisterModel()
 	var eventDetails: EventDetail?
+	var registrationId: Int?
 	
 	var countryName, stateName: String?
 	
@@ -51,6 +52,14 @@ class EventRegistrationViewController: UIViewController {
 			}
 			else if let msg = response.msg {
 				self.view.makeToast(msg)
+				
+				if let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddPlayersViewController") as? AddPlayersViewController {
+					vc.eventDetails = self.eventDetails
+					vc.registrationId = Int(response.registrationID ?? "0")
+					
+					self.registrationId = Int(response.registrationID ?? "0")
+					self.navigationController?.pushViewController(vc, animated: true)
+				}
 			}
 		}
 	}

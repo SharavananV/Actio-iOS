@@ -67,6 +67,22 @@ class UDHelper: NSObject,XMLParserDelegate
         UserDefaults.standard.set(status, forKey: "USER_STATUS")
         UserDefaults.standard.synchronize()
     }
+	
+	class func setEventDetails(_ details: EventDetail?) {
+		if let details = details, let encoded = try? JSONEncoder().encode(details) {
+			UserDefaults.standard.set(encoded, forKey: "CurrentEventDetail")
+		}
+	}
+	
+	class func getEventDetails() -> EventDetail? {
+		if let savedDetails = UserDefaults.standard.object(forKey: "CurrentEventDetail") as? Data {
+			if let eventDetail = try? JSONDecoder().decode(EventDetail.self, from: savedDetails) {
+				return eventDetail
+			}
+		}
+		
+		return nil
+	}
     
     class func resetUserStuff() {
         setAuthToken("")

@@ -7,15 +7,20 @@
 //
 
 import UIKit
+import CoreData
 
 class AddPlayersViewController: UIViewController {
 
 	@IBOutlet var tableView: UITableView!
 	
-	let service = DependencyProvider.shared.networkService
+	private let service = DependencyProvider.shared.networkService
 	fileprivate var formData: [FormCellType]?
 	private var masterData: EventMaster?
 	private var currentPlayer: Player? = Player()
+	private var allPlayers: [CDPlayer]? = [CDPlayer]()
+	var eventDetails: EventDetail?
+	var registrationId: Int?
+	var updateMode: Bool = false
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +30,7 @@ class AddPlayersViewController: UIViewController {
         tableView.register(JustTextTableViewCell.self, forCellReuseIdentifier: JustTextTableViewCell.reuseId)
 		tableView.register(FootnoteButtonTableViewCell.self, forCellReuseIdentifier: FootnoteButtonTableViewCell.reuseId)
 		tableView.register(UserSelectionTableViewCell.self, forCellReuseIdentifier: UserSelectionTableViewCell.reuseId)
+		tableView.register(EventAddPlayerTableViewCell.self, forCellReuseIdentifier: EventAddPlayerTableViewCell.reuseId)
 		
 		var frame = CGRect.zero
 		frame.size.height = .leastNormalMagnitude
@@ -33,8 +39,25 @@ class AddPlayersViewController: UIViewController {
 		tableView.separatorStyle = .none
 		tableView.delegate = self
 		
+		self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Proceed", style: .done, target: self, action: #selector(self.proceedTapped))
+		self.navigationItem.rightBarButtonItem?.tintColor = .white
+		
 		fetchMasterData()
+		fetchPlayers()
     }
+	
+	@objc func proceedTapped() {
+		var players = [[String: Any]]()
+		
+		allPlayers?.forEach({ (player) in
+			players.append(player.parameters())
+		})
+		let parameters: [String : Any] = ["registrationID":  registrationId ?? 0,
+						  "players" : players]
+		service.post(addPlayersUrl, parameters: parameters, onView: view) { (response: ResponseHolder) in
+			
+		}
+	}
 	
 	private func fetchMasterData(countryId: String? = nil, stateId: String? = nil, sportsId: String? = nil) {
 		let parameters = [ "countryID": countryId ?? "", "stateID": stateId ?? "", "sportsID": sportsId ?? ""]
@@ -47,6 +70,8 @@ class AddPlayersViewController: UIViewController {
 	}
 	
 	private func prepareFormData() {
+		guard let eventDetails = eventDetails else { return }
+		
 		let allGenders = self.masterData?.gender?.map({ (gender) -> String in
 			return gender.gender ?? ""
 		}) ?? []
@@ -67,9 +92,11 @@ class AddPlayersViewController: UIViewController {
 			String($0.id ?? 0) == self.currentPlayer?.position
 		})
 		
-		let startedText = NSMutableAttributedString(string:"minimum 2 player\nmaximum 4 player", attributes: [NSAttributedString.Key.font: AppFont.PoppinsRegular(size: 12), NSAttributedString.Key.foregroundColor : UIColor.themeRed])
+		let startedText = NSMutableAttributedString(string:"minimum \(eventDetails.minMemberPerTeam ?? 0) player\nmaximum \(eventDetails.maxMemberPerTeam ?? 0) player", attributes: [NSAttributedString.Key.font: AppFont.PoppinsRegular(size: 12), NSAttributedString.Key.foregroundColor : UIColor.themeRed])
 		startedText.addAttribute(.foregroundColor, value: UIColor.black, range: NSRange(location: 8, length: 1))
 		startedText.addAttribute(.foregroundColor, value: UIColor.black, range: NSRange(location: 25, length: 1))
+		
+		let buttonTitle = updateMode ? "UPDATE" : "ADD"
 		
 		let formData: [FormCellType] = [
 			.attrText(startedText, .right),
@@ -81,7 +108,7 @@ class AddPlayersViewController: UIViewController {
 			.textEdit(TextEditModel(key: "mobileNumber", textValue: currentPlayer?.mobileNumber, contextText: "Mobile Number", placeHolder: "Mobile Number", keyboardType: .phonePad, isSecure: false)),
 			.textEdit(TextEditModel(key: "emailID", textValue: currentPlayer?.email, contextText: "Email ID", placeHolder: "Email ID", keyboardType: .emailAddress, isSecure: false)),
 			.textPicker(TextPickerModel(key: "gamePosition", textValue: position?.position, allValues: allPositions, contextText: "Game Position", placeHolder: "Select Game Position")),
-			.button("Add")
+			.button(buttonTitle)
 		]
 		
 		self.formData = formData
@@ -90,6 +117,7 @@ class AddPlayersViewController: UIViewController {
 	}
 }
 
+// MARK: TableView methods
 extension AddPlayersViewController: UITableViewDataSource, UITableViewDelegate {
 	func numberOfSections(in tableView: UITableView) -> Int {
 		return 2
@@ -99,12 +127,44 @@ extension AddPlayersViewController: UITableViewDataSource, UITableViewDelegate {
 		if section == 0 {
 			return formData?.count ?? 0
 		} else {
-			return 0
+			return allPlayers?.count ?? 0
 		}
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		var cell: UITableViewCell? = nil
+		
+		switch indexPath.section {
+		case 0:
+			cell = getCell(forIndexPath: indexPath)
+		case 1:
+			guard let player = allPlayers?[indexPath.row], let playerCell = tableView.dequeueReusableCell(withIdentifier: EventAddPlayerTableViewCell.reuseId, for: indexPath) as? EventAddPlayerTableViewCell else {
+				return UITableViewCell()
+			}
+			
+			playerCell.configure(player)
+			cell = playerCell
+			
+		default:
+			break
+		}
+		
+		cell?.selectionStyle = .none
+		
+		return cell ?? UITableViewCell()
+	}
+	
+	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+		return section == 1 && allPlayers?.isEmpty == false ? "Players" : nil
+	}
+	
+	func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+		return section == 0 ? 0 : UITableView.automaticDimension
+	}
+	
+	private func getCell(forIndexPath indexPath: IndexPath) -> UITableViewCell? {
+		var cell: UITableViewCell? = nil
+		
 		guard let cellData = self.formData?[indexPath.row] else { return UITableViewCell() }
 		
 		switch cellData {
@@ -160,24 +220,98 @@ extension AddPlayersViewController: UITableViewDataSource, UITableViewDelegate {
 			cell = buttonCell
 		}
 		
-		cell?.selectionStyle = .none
+		return cell
+	}
+	
+	func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+		if indexPath.section == 0 { return nil }
 		
-		return cell ?? UITableViewCell()
-	}
-	
-	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		return section == 1 ? "Players" : nil
-	}
-	
-	func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-		return section == 0 ? 0 : UITableView.automaticDimension
+		var configuration = UISwipeActionsConfiguration()
+		
+		let deleteAction = UIContextualAction(style: .destructive, title: nil) { _, _, complete in
+			guard let player = self.allPlayers?[indexPath.row] else { return }
+			
+			let alert = UIAlertController(title: nil, message: "Are you sure want to delete this player?", preferredStyle: .alert)
+			
+			let cancel = UIAlertAction(title: "Cancel", style: .default, handler: { action in
+			})
+			alert.addAction(cancel)
+			let ok = UIAlertAction(title: "OK", style: .default, handler: { action in
+				PersistentContainer.context.delete(player)
+				self.allPlayers?.remove(at: indexPath.row)
+				tableView.deleteRows(at: [indexPath], with: .fade)
+				
+				PersistentContainer.saveContext()
+			})
+			alert.addAction(ok)
+			
+			DispatchQueue.main.async(execute: {
+				self.present(alert, animated: true)
+			})
+		}
+		let editAction = UIContextualAction(style: .normal, title: nil) { _, _, complete in
+			guard let player = self.allPlayers?[indexPath.row] else { return }
+			
+			self.currentPlayer = Player(player)
+			self.updateMode = true
+			self.prepareFormData()
+		}
+		
+		editAction.backgroundColor = .white
+		deleteAction.backgroundColor = .white
+		
+		UIImageView.appearance(
+			whenContainedInInstancesOf: [UITableView.self])
+			.tintColor = AppColor.OrangeColor()
+		
+		deleteAction.image = UIImage(named: "Icon material-delete")
+		editAction.image = UIImage(named: "Icon awesome-edit")
+		
+		configuration = UISwipeActionsConfiguration(actions: [deleteAction,editAction])
+		configuration.performsFirstActionWithFullSwipe = true
+		
+		return configuration
 	}
 }
 
+// MARK: Cell Delegate
 extension AddPlayersViewController: UserSelectionProtocol, CellDataFetchProtocol, TextPickerDelegate, FootnoteButtonDelegate {
 	func footnoteButtonCallback(_ title: String) {
-		// TODO: Validate max and min players
+		view.endEditing(true)
 		
+		if updateMode {
+			do {
+				guard let playerId = currentPlayer?.id else { return }
+				if let cdPlayer = try PersistentContainer.context.fetch(CDPlayer.fetchRequest(withID: playerId, eventId: (self.eventDetails?.id ?? 0), subscriberId: (registrationId ?? 0))).first {
+					cdPlayer.eventId = Int64(eventDetails?.id ?? 0)
+					cdPlayer.subscriberId = Int64(registrationId ?? 0)
+					cdPlayer.dob = currentPlayer?.dob
+					cdPlayer.email = currentPlayer?.email
+					cdPlayer.gender = Int16(currentPlayer?.gender ?? 0)
+					cdPlayer.isdCode = currentPlayer?.isdCode
+					cdPlayer.mobileNumber = currentPlayer?.mobileNumber
+					cdPlayer.name = currentPlayer?.name
+					cdPlayer.position = currentPlayer?.position
+					
+					PersistentContainer.saveContext()
+					fetchPlayers()
+					currentPlayer = Player()
+					updateMode = false
+					
+					prepareFormData()
+				}
+			} catch let error as NSError {
+				print("Could not fetch. \(error), \(error.userInfo)")
+			}
+		} else {
+			if let playerCount = allPlayers?.count, playerCount >= (eventDetails?.maxMemberPerTeam ?? 0) {
+				view.makeToast("Can add minimum \(eventDetails?.minMemberPerTeam ?? 0) and maximum \(eventDetails?.maxMemberPerTeam ?? 0) players only")
+			} else {
+				guard let player = currentPlayer else { return }
+				
+				addPlayerToCoreData(player)
+			}
+		}
 	}
 	
 	func valueChanged(keyValuePair: (key: String, value: String)) {
@@ -240,7 +374,7 @@ extension AddPlayersViewController: UserSelectionProtocol, CellDataFetchProtocol
 	}
 	
 	func playerList(forSearchText text: String, completion: @escaping ([SearchUserModel]) -> Void) {
-		service.post(searchPlayerUrl, parameters: ["search": text, "eventID": 209], onView: view) { (response: SearchPlayerResponse) in
+		service.post(searchPlayerUrl, parameters: ["search": text, "eventID": eventDetails?.id ?? 0], onView: view) { (response: SearchPlayerResponse) in
 			completion(response.search ?? [])
 		}
 	}
@@ -248,6 +382,80 @@ extension AddPlayersViewController: UserSelectionProtocol, CellDataFetchProtocol
 	func reloadHeight() {
 		tableView.beginUpdates()
 		tableView.endUpdates()
+	}
+}
+
+// MARK: CoreData
+extension AddPlayersViewController {
+	private func addPlayerToCoreData(_ player: Player) {
+		let validationResult = validatePlayer(player)
+		
+		switch validationResult {
+		case .valid:
+			let cdPlayer = CDPlayer(context: PersistentContainer.context)
+			
+			cdPlayer.id = Int64(Date().uniqueId)
+			cdPlayer.eventId = Int64(eventDetails?.id ?? 0)
+			cdPlayer.subscriberId = Int64(registrationId ?? 0)
+			cdPlayer.dob = player.dob
+			cdPlayer.email = player.email
+			cdPlayer.gender = Int16(player.gender ?? 0)
+			cdPlayer.isdCode = player.isdCode
+			cdPlayer.mobileNumber = player.mobileNumber
+			cdPlayer.name = player.name
+			cdPlayer.position = player.position
+			
+			PersistentContainer.saveContext()
+			allPlayers?.append(cdPlayer)
+			currentPlayer = Player()
+			
+			prepareFormData()
+		
+		case .invalid(let message):
+			self.view.makeToast(message)
+		}
+	}
+	
+	private func fetchPlayers() {
+		do {
+			self.allPlayers = try PersistentContainer.context.fetch(CDPlayer.fetchRequest())
+			
+			self.tableView.reloadData()
+		} catch let error as NSError {
+			print("Could not fetch. \(error), \(error.userInfo)")
+		}
+	}
+	
+	private func validatePlayer(_ player: Player) -> ValidType {
+		if Validator.isValidRequiredField(player.name ?? "") != .valid {
+			return .invalid(message: "Enter Player Name")
+		}
+		if Validator.isValidRequiredField(String(player.gender ?? 0)) != .valid {
+			return .invalid(message: "Select Gender")
+		}
+		if Validator.isValidRequiredField(player.dob ?? "") != .valid {
+			return .invalid(message: "Enter Date Of Birth")
+		}
+		if let dob = player.dob?.toDate, let minAge = eventDetails?.minAge, let maxAge = eventDetails?.maxAge {
+			let age = dob.age()
+			if !(age >= minAge && age <= maxAge) {
+				return .invalid(message: "This Event has a \(minAge) to \(maxAge) age limit.")
+			}
+		}
+		if Validator.isValidRequiredField(player.isdCode ?? "") != .valid {
+			return .invalid(message: "Select Country Code")
+		}
+		if Validator.isValidRequiredField(player.mobileNumber ?? "") != .valid {
+			return .invalid(message: "Enter Mobile Number")
+		}
+		if Validator.isValidEmail(player.email ?? "") != .valid {
+			return .invalid(message: "Enter Valid Email ID")
+		}
+		if Validator.isValidRequiredField(player.position ?? "") != .valid {
+			return .invalid(message: "Select Game Position")
+		}
+		
+		return .valid
 	}
 }
 
@@ -261,8 +469,23 @@ private enum FormCellType {
 }
 
 fileprivate class Player: Codable {
-	var id, name: String?
-	var gender: Int?
+	internal init() { }
+	
+	var name: String?
+	var id, gender, eventId, subscriberId: Int?
 	var dob, isdCode, mobileNumber, email: String?
 	var position: String?
+	
+	init(_ player: CDPlayer) {
+		self.id = Int(player.id)
+		self.name = player.name
+		self.gender = Int(player.gender)
+		self.dob = player.dob
+		self.isdCode = player.isdCode
+		self.mobileNumber = player.mobileNumber
+		self.email = player.email
+		self.position = player.position
+		self.eventId = Int(player.eventId)
+		self.subscriberId = Int(player.subscriberId)
+	}
 }

@@ -39,6 +39,23 @@ class EventAddPlayerTableViewCell: UITableViewCell {
 		return label
 	}()
 	
+	private lazy var containerView: UIView = {
+		let view = UIView()
+		view.translatesAutoresizingMaskIntoConstraints = false
+		view.layer.cornerRadius = 7
+		view.clipsToBounds = true
+		
+		return view
+	}()
+	
+	func configure(_ player: CDPlayer) {
+		nameLabel.text = player.name
+		mobileLabel.text = player.mobileNumber
+		dobLabel.text = player.dob
+		
+		containerView.applyGradient(colours: [AppColor.OrangeColor(),AppColor.RedColor()])
+	}
+	
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
 		
@@ -54,25 +71,30 @@ class EventAddPlayerTableViewCell: UITableViewCell {
 	}
 	
 	private func setConstraints() {
-		contentView.addSubview(nameLabel)
-		contentView.addSubview(dobLabel)
-		contentView.addSubview(mobileLabel)
+		contentView.addSubview(containerView)
 		
-		let margins = contentView.safeAreaLayoutGuide
-		
+		containerView.addSubview(nameLabel)
+		containerView.addSubview(dobLabel)
+		containerView.addSubview(mobileLabel)
+				
 		let constraints = [
-			nameLabel.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
-			nameLabel.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
-			nameLabel.topAnchor.constraint(equalTo: margins.topAnchor),
+			containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .kExternalPadding),
+			containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.kExternalPadding),
+			containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: .kExternalPadding),
+			containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -.kExternalPadding),
 			
-			dobLabel.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
-			dobLabel.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
-			dobLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: -10),
+			nameLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: .kInternalPadding),
+			nameLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -.kInternalPadding),
+			nameLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: .kInternalPadding),
 			
-			mobileLabel.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
-			mobileLabel.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
-			mobileLabel.topAnchor.constraint(equalTo: dobLabel.bottomAnchor, constant: -10),
-			mobileLabel.bottomAnchor.constraint(equalTo: margins.bottomAnchor)
+			dobLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: .kInternalPadding),
+			dobLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -.kInternalPadding),
+			dobLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: .kInternalPadding),
+			
+			mobileLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: .kInternalPadding),
+			mobileLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -.kInternalPadding),
+			mobileLabel.topAnchor.constraint(equalTo: dobLabel.bottomAnchor, constant: .kInternalPadding),
+			mobileLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -.kInternalPadding)
 		]
 		
 		NSLayoutConstraint.activate(constraints)

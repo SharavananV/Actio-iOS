@@ -136,7 +136,7 @@ extension UIView {
 }
 extension UIViewController {
     func changeNavigationBar() {
-        navigationController?.navigationBar.applyGradient(colours: [AppColor.RedColor(),AppColor.OrangeColor()], locations:[ 0,1])
+//        navigationController?.navigationBar.applyGradient(colours: [AppColor.RedColor(),AppColor.OrangeColor()], locations:[ 0,1])
     }
 }
 // Textfield BorderColor

@@ -34,7 +34,7 @@ class EventDetailViewController: UIViewController {
 	private lazy var actionDataSource = EventActionDatasource(self)
 	private var galleryDatasource: TournamentGalleryDatasource?
 	
-	var eventId: Int?
+	var eventId, registrationID: Int?
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +49,7 @@ class EventDetailViewController: UIViewController {
 		service.post(eventDetailUrl,
 					 parameters: ["eventID": eventId ?? 0],
 					 onView: self.view) { (response: EventDetailResponse) in
+			UDHelper.setEventDetails(response.event)
 			self.eventDetails = response.event
 			self.updateUI()
 		}
@@ -115,12 +116,18 @@ class EventDetailViewController: UIViewController {
 			if let status = response.view?.status {
 				switch status {
 				case 1:
-					break
+					if let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddPlayersViewController") as? AddPlayersViewController {
+						vc.eventDetails = self.eventDetails
+						vc.registrationId = response.view?.registrationID
+						self.navigationController?.pushViewController(vc, animated: true)
+					}
 				case 2:
 					break
 				default:
 					break
 				}
+				
+				self.registrationID = response.view?.registrationID
 			}
 			else {
 				self.performSegue(withIdentifier: "toRegistration", sender: sender)
@@ -130,6 +137,7 @@ class EventDetailViewController: UIViewController {
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if let eventRegistrationVC = segue.destination as? EventRegistrationViewController {
 			eventRegistrationVC.eventDetails = eventDetails
+			eventRegistrationVC.registrationId = registrationID
 		}
 	}
 }

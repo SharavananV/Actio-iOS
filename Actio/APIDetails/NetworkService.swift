@@ -59,3 +59,7 @@ class NetworkService {
 protocol ResponseType: Codable {
 	var status: String? { get }
 }
+
+struct ResponseHolder: ResponseType {
+	var status: String?
+}

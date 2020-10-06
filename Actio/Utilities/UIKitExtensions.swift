@@ -61,6 +61,14 @@ extension Date {
         
         return dateFormatter.string(from: self)
     }
+	
+	func age() -> Int {
+		return Calendar.current.component(.year, from: Date()) -  Calendar.current.component(.year, from: self)
+	}
+	
+	var uniqueId: Int {
+		return Int(self.timeIntervalSince1970)
+	}
 }
 
 extension UIViewController {

@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19D76" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="EventRegistration" representedClassName="EventRegistration" syncable="YES">
-        <attribute name="ageGroup" optional="YES" attributeType="String"/>
-        <attribute name="cityID" optional="YES" attributeType="String"/>
-        <attribute name="coachEmail" optional="YES" attributeType="String"/>
-        <attribute name="coachIsd" optional="YES" attributeType="String"/>
-        <attribute name="coachMobile" optional="YES" attributeType="String"/>
-        <attribute name="coachName" optional="YES" attributeType="String"/>
-        <attribute name="eventID" optional="YES" attributeType="String"/>
-        <attribute name="isCoach" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="registerBy" optional="YES" attributeType="String"/>
-        <attribute name="registrationID" optional="YES" attributeType="String"/>
-        <attribute name="teamName" optional="YES" attributeType="String"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="19H2" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CDPlayer" representedClassName="CDPlayer" syncable="YES">
+        <attribute name="dob" optional="YES" attributeType="String"/>
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="eventId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="gender" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="isdCode" optional="YES" attributeType="String"/>
+        <attribute name="mobileNumber" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="position" optional="YES" attributeType="String"/>
+        <attribute name="subscriberId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="EventRegistration" positionX="-63" positionY="-18" width="128" height="208"/>
+        <element name="CDPlayer" positionX="-63" positionY="-18" width="128" height="193"/>
     </elements>
 </model>
