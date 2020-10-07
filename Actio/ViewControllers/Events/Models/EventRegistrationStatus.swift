@@ -46,6 +46,7 @@ struct ViewStatus: Codable {
 	var countryName: String?
 	var remarks: String?
 	var subscriberAllowEdit: Int?
+	var players: [PlayerSummary]?
 	var allowReject: Int?
 	
 	enum CodingKeys: String, CodingKey {
@@ -96,7 +97,33 @@ struct ViewStatus: Codable {
 		case countryName = "country_name"
 		case remarks
 		case subscriberAllowEdit = "subscriber_allow_edit"
+		case players
 		case allowReject = "allow_reject"
+	}
+}
+
+struct PlayerSummary: Codable {
+	var playerID, subscriberID, subscriberDisplayID: Int?
+	var fullName: String?
+	var genderID: Int?
+	var gender, dob, isdCode: String?
+	var mobileNumber: Int?
+	var emailID: String?
+	var positionID: Int?
+	var position: String?
+	
+	enum CodingKeys: String, CodingKey {
+		case playerID = "player_id"
+		case subscriberID = "subscriber_id"
+		case subscriberDisplayID = "subscriber_display_id"
+		case fullName = "full_name"
+		case genderID = "gender_id"
+		case gender, dob
+		case isdCode = "isd_code"
+		case mobileNumber = "mobile_number"
+		case emailID = "email_id"
+		case positionID = "position_id"
+		case position
 	}
 }
 

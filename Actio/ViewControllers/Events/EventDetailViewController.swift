@@ -121,8 +121,13 @@ class EventDetailViewController: UIViewController {
 						vc.registrationId = response.view?.registrationID
 						self.navigationController?.pushViewController(vc, animated: true)
 					}
+					
 				case 2:
-					break
+					if let vc = self.storyboard?.instantiateViewController(withIdentifier: "EventSummaryViewController") as? EventSummaryViewController {
+						vc.eventDetails = self.eventDetails
+						self.navigationController?.pushViewController(vc, animated: true)
+					}
+					
 				default:
 					break
 				}
@@ -202,6 +207,12 @@ extension EventDetailViewController {
 			galleryCollectionView?.delegate = galleryDatasource
 			
 			galleryCollectionView?.reloadData()
+		}
+		
+		if event.isEventOpen == 1 {
+			registerButton.isHidden = false
+		} else {
+			registerButton.isHidden = true
 		}
 	}
 }

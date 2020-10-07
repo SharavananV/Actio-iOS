@@ -69,6 +69,27 @@ extension Date {
 	var uniqueId: Int {
 		return Int(self.timeIntervalSince1970)
 	}
+	
+	func dateFormatWithSuffix() -> String {
+		let dateFormatter = DateFormatter()
+		dateFormatter.dateFormat = "MMM dd"
+		
+		return dateFormatter.string(from: self) + self.daySuffix()
+	}
+	
+	func daySuffix() -> String {
+		let components = Calendar.current.component(.day, from: self)
+		switch components {
+		case 1, 21, 31:
+			return "st"
+		case 2, 22:
+			return "nd"
+		case 3, 23:
+			return "rd"
+		default:
+			return "th"
+		}
+	}
 }
 
 extension UIViewController {

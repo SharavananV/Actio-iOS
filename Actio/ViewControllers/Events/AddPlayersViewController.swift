@@ -55,7 +55,10 @@ class AddPlayersViewController: UIViewController {
 		let parameters: [String : Any] = ["registrationID":  registrationId ?? 0,
 						  "players" : players]
 		service.post(addPlayersUrl, parameters: parameters, onView: view) { (response: ResponseHolder) in
-			
+			if let vc = self.storyboard?.instantiateViewController(withIdentifier: "EventSummaryViewController") as? EventSummaryViewController {
+				vc.eventDetails = self.eventDetails
+				self.navigationController?.pushViewController(vc, animated: true)
+			}
 		}
 	}
 	
