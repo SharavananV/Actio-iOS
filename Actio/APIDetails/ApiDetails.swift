@@ -9,27 +9,43 @@
 import Foundation
 import UIKit
 
+
+// Webpage URL
+let termsandConditionUrl = "http://playactio.com/terms.html"
+
+
 let baseUrl = "http://203.223.191.66:8085/"
 
 let masterUrl = baseUrl + "v1/subscriber/init"
 let loginUrl = baseUrl + "v1/login"
+let registerUrl = baseUrl + "v1/subscriber/register"
+let logoutUrl = baseUrl + "v1/logout"
+
+// Forgot
 let forgotUserNameUrl = baseUrl + "v1/forgotUsername"
 let forgotPasswordUrl = baseUrl + "v1/forgotpassword"
 let validateForgotPasswordUrl = baseUrl + "v1/validateforgotpassword"
 let updatePasswordUrl = baseUrl + "v1/updatepassword"
-let registerUrl = baseUrl + "v1/subscriber/register"
+
+// OTP
 let validateOTPUrl = baseUrl + "v1/validateotp"
 let sendOTPUrl = baseUrl + "v1/sendotp"
+
+//Dashboard
 let userStatusUrl = baseUrl + "v1/subscriber/userstatusInfo"
 let parentIdUrl = baseUrl + "v1/subscriber/parentID"
-let logoutUrl = baseUrl + "v1/logout"
 let parentApprovalUrl = baseUrl + "v1/subscriber/parentApproval"
 let parentApprovalInitUrl =  baseUrl + "v1/subscriber/parentApprovalInit"
 let dashboardUrl = baseUrl + "v1/dashboard/count"
+
+//Tournaments
 let tournamentListUrl = baseUrl + "v1/tournament/list"
 let tournamentDetailsUrl = baseUrl + "v1/tournament/search"
+
+//Feed
 let feedListUrl = baseUrl + "v1/feed/list"
 let feedUrl = baseUrl + "v1/feed"
+
 // Events
 let eventListUrl = baseUrl + "v1/tournament/search/eventcategory"
 let eventDetailUrl = baseUrl + "v1/tournament/search/event"
