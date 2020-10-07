@@ -9,6 +9,7 @@
 import Foundation
 // MARK: - ForgotUsernameResponse
 struct ForgotUsernameResponse: ResponseType {
+	let errors: [ActioError]?
     let status: String?
     let result: ForgotUsernameModel?
 }
@@ -24,11 +25,13 @@ struct ForgotUsernameModel: Codable {
 }
 // MARK: - ForgotPasswordModel
 struct ForgotPasswordModel: ResponseType {
+	let errors: [ActioError]?
     let status, msg, username: String?
 }
 // MARK: - UpdatePasswordModel
 
 struct UpdatePasswordModel: ResponseType {
+	let errors: [ActioError]?
     let status, msg: String?
 }
 

@@ -14,12 +14,12 @@ class NetworkService {
 	
 	private init() {}
 	
-	func get<E: ResponseType>(_ url: String, headers: [String: String]? = nil, parameters: [String: Any]? = nil, onView view: UIView, completion: @escaping (E)->Void) {
-		actualMethod(url, method: .get, headers: headers, parameters: parameters, onView: view, completion: completion)
+	func get<E: ResponseType>(_ url: String, headers: [String: String]? = nil, parameters: [String: Any]? = nil, onView view: UIView, handleError: Bool = true, completion: @escaping (E)->Void) {
+		actualMethod(url, method: .get, headers: headers, parameters: parameters, onView: view, handleError: handleError, completion: completion)
 	}
 	
-	func post<E: ResponseType>(_ url: String, headers: [String: String]? = nil, parameters: [String: Any]? = nil, onView view: UIView, completion: @escaping (E)->Void) {
-		actualMethod(url, method: .post, headers: headers, parameters: parameters, onView: view, completion: completion)
+	func post<E: ResponseType>(_ url: String, headers: [String: String]? = nil, parameters: [String: Any]? = nil, onView view: UIView, handleError: Bool = true, completion: @escaping (E)->Void) {
+		actualMethod(url, method: .post, headers: headers, parameters: parameters, onView: view, handleError: handleError, completion: completion)
 	}
 	
 	private func actualMethod<E: ResponseType>(
@@ -27,6 +27,7 @@ class NetworkService {
 		headers: [String: String]? = nil,
 		parameters: [String: Any]? = nil,
 		onView view: UIView,
+		handleError: Bool = true,
 		completion: @escaping (E)->Void)
 	{
 		var allHeaders : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken(), "Content-Type": "application/json"]
@@ -47,12 +48,17 @@ class NetworkService {
 				return
 			}
 			
-			completion(value)
+			if handleError, value.status == "422", let errorMessage = value.errors?.first?.msg {
+				view.makeToast(errorMessage)
+			}
+			else {
+				completion(value)
+			}
 		}
 	}
 	
-	func post(_ url: String, headers: [String: String]? = nil, parameters: [String: Any]? = nil, onView view: UIView, completion: @escaping ([String: Any])->Void) {
-		actualMethod(url, method: .post, headers: headers, parameters: parameters, onView: view, completion: completion)
+	func post(_ url: String, headers: [String: String]? = nil, parameters: [String: Any]? = nil, onView view: UIView, handleError: Bool = true, completion: @escaping ([String: Any])->Void) {
+		actualMethod(url, method: .post, headers: headers, parameters: parameters, onView: view, handleError: handleError, completion: completion)
 	}
 	
 	private func actualMethod(
@@ -60,6 +66,7 @@ class NetworkService {
 		headers: [String: String]? = nil,
 		parameters: [String: Any]? = nil,
 		onView view: UIView,
+		handleError: Bool = true,
 		completion: @escaping ([String: Any])->Void)
 	{
 		var allHeaders : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken(), "Content-Type": "application/json"]
@@ -82,7 +89,13 @@ class NetworkService {
 			
 			do {
 				if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-					completion(json)
+					if handleError, json["status"] as? String == "422", let errors = json["errors"] as? [[String: Any]], let message = errors.first?["msg"] as? String {
+						view.makeToast(message)
+						
+						return
+					} else {
+						completion(json)
+					}
 				}
 			} catch {
 				print("Error decoding data")
@@ -97,4 +110,10 @@ class NetworkService {
 
 protocol ResponseType: Codable {
 	var status: String? { get }
+	var errors: [ActioError]? { get }
+}
+
+// MARK: - ErrorElement
+struct ActioError: Codable {
+	var msg: String?
 }

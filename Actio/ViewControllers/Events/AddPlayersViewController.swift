@@ -68,7 +68,7 @@ class AddPlayersViewController: UIViewController {
 		})
 		
 		let parameters: [String : Any] = ["registrationID":  registrationId ?? 0, "players" : players]
-		service.post(addPlayersUrl, parameters: parameters, onView: view) { (response: [String: Any]) in
+		service.post(addPlayersUrl, parameters: parameters, onView: view, handleError: false) { (response: [String: Any]) in
 			
 			if response["status"] as? String == "422", let errors = response["errors"] as? [[String: Any]], var message = errors.first?["msg"] as? String {
 				

@@ -10,6 +10,7 @@ import Foundation
 
 // MARK: - EventDetailResponse
 struct EventDetailResponse: ResponseType {
+	let errors: [ActioError]?
 	var status: String?
 	let event: EventDetail?
 }

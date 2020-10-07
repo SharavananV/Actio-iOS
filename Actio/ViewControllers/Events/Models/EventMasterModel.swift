@@ -10,6 +10,7 @@ import Foundation
 
 // MARK: - EventsMasterResponse
 struct EventsMasterResponse: ResponseType {
+	let errors: [ActioError]?
 	let status: String?
 	let master: EventMaster?
 }

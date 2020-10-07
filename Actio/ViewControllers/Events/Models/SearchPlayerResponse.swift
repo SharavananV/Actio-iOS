@@ -10,6 +10,7 @@ import Foundation
 
 // MARK: - SearchPlayerResponse
 struct SearchPlayerResponse: ResponseType {
+	let errors: [ActioError]?
 	var status: String?
 	var search: [SearchUserModel]?
 }

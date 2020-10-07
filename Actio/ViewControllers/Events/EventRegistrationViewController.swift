@@ -59,10 +59,7 @@ class EventRegistrationViewController: UIViewController {
 		}
 		
 		service.post(eventRegistrationPart1Url, parameters: addEventModel.parameters(), onView: view) { (response: EventRegistrationResponse) in
-			if let errors = response.errors {
-				self.view.makeToast(errors.first?.msg)
-			}
-			else if let msg = response.msg {
+			if let msg = response.msg {
 				self.view.makeToast(msg)
 				
 				if self.fromController == .summary {

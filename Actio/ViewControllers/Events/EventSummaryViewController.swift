@@ -33,7 +33,7 @@ class EventSummaryViewController: UIViewController {
 	}
     
 	@objc func proceedTapped() {
-		service.post(submitRegistrationUrl, parameters: ["registrationID": String(eventSummary?.view?.registrationID ?? 0)], onView: view) { (response: [String: Any]) in
+		service.post(submitRegistrationUrl, parameters: ["registrationID": String(eventSummary?.view?.registrationID ?? 0)], onView: view, handleError: false) { (response: [String: Any]) in
 			
 			if response["status"] as? String == "422", let errors = response["errors"] as? [[String: Any]], let message = errors.first?["msg"] as? String {
 				self.view.makeToast(message)

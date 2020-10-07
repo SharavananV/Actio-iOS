@@ -10,6 +10,7 @@ import Foundation
 
 // MARK: - EventRegistrationStatus
 struct EventRegistrationStatus: ResponseType {
+	let errors: [ActioError]?
 	var status: String?
 	var view: ViewStatus?
 }
@@ -129,11 +130,6 @@ struct PlayerSummary: Codable {
 
 // MARK: - EventRegistrationResponse
 struct EventRegistrationResponse: ResponseType {
+	let errors: [ActioError]?
 	let status, msg, registrationID: String?
-	let errors: [ResponseError]?
-}
-
-// MARK: - Error
-struct ResponseError: Codable {
-	let msg, param, location: String?
 }
