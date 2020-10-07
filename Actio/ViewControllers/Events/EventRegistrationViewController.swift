@@ -48,6 +48,16 @@ class EventRegistrationViewController: UIViewController {
 	}
 	
 	@objc func proceedTapped() {
+		let validationResult = addEventModel.validate()
+		switch validationResult {
+		case .invalid(let message):
+			view.makeToast(message)
+			return
+			
+		case .valid:
+			break
+		}
+		
 		service.post(eventRegistrationPart1Url, parameters: addEventModel.parameters(), onView: view) { (response: EventRegistrationResponse) in
 			if let errors = response.errors {
 				self.view.makeToast(errors.first?.msg)

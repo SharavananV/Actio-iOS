@@ -54,4 +54,42 @@ class EventDetailsRegisterModel: Codable {
 		self.coachEmail = model?.coachEmailID
 		self.registrationID = String(model?.registrationID ?? 0)
 	}
+	
+	func validate() -> ValidType {
+		if Validator.isValidRequiredField(self.registerBy ?? "") != .valid {
+			return .invalid(message: "Select Registration By")
+		}
+		if Validator.isValidRequiredField(self.ageGroup ?? "") != .valid {
+			return .invalid(message: "Select Age Group")
+		}
+		if Validator.isValidRequiredField(self.teamName ?? "") != .valid {
+			return .invalid(message: "Enter Team Name")
+		}
+		if Validator.isValidRequiredField(self.countryID ?? "") != .valid {
+			return .invalid(message: "Select Country")
+		}
+		if Validator.isValidRequiredField(self.stateID ?? "") != .valid {
+			return .invalid(message: "Select State")
+		}
+		if Validator.isValidRequiredField(self.cityID ?? "") != .valid {
+			return .invalid(message: "Select City")
+		}
+		
+		if isCoach == true {
+			if Validator.isValidRequiredField(self.coachName ?? "") != .valid {
+				return .invalid(message: "Enter Coach Name")
+			}
+			if Validator.isValidRequiredField(self.coachIsd ?? "") != .valid {
+				return .invalid(message: "Select Country Code")
+			}
+			if Validator.isValidRequiredField(self.coachMobile ?? "") != .valid {
+				return .invalid(message: "Enter Coach Mobile No")
+			}
+			if Validator.isValidEmail(self.coachEmail ?? "") != .valid {
+				return .invalid(message: "Enter Valid Coach Email ID")
+			}
+		}
+		
+		return .valid
+	}
 }
