@@ -29,6 +29,18 @@ extension CDPlayer {
 		
 		return fetchRequest
 	}
+	
+	@nonobjc public class func fetchRequestForYesterday() -> NSFetchRequest<NSFetchRequestResult> {
+		var dateComponents = DateComponents()
+		dateComponents.setValue(-1, for: .day)
+		
+		let yesterday = Calendar.current.date(byAdding: dateComponents, to: Date())
+				
+		let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CDPlayer")
+		fetchRequest.predicate = NSPredicate(format: "createdAt > %@", yesterday! as NSDate)
+		
+		return fetchRequest
+	}
 
     @NSManaged public var name: String?
     @NSManaged public var gender: Int16
@@ -40,5 +52,6 @@ extension CDPlayer {
     @NSManaged public var id: Int64
     @NSManaged public var eventId: Int64
     @NSManaged public var registrationId: Int64
+	@NSManaged public var createdAt: Date?
 
 }

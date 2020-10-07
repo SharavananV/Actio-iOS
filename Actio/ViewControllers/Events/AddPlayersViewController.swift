@@ -453,6 +453,7 @@ extension AddPlayersViewController {
 			cdPlayer.mobileNumber = player.mobileNumber
 			cdPlayer.name = player.name
 			cdPlayer.position = player.position
+			cdPlayer.createdAt = Date()
 			
 			PersistentContainer.saveContext()
 			coreDataPlayers?.append(cdPlayer)

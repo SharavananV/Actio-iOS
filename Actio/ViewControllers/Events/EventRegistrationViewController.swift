@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 import IQKeyboardManager
 
 class EventRegistrationViewController: UIViewController {
@@ -38,6 +39,7 @@ class EventRegistrationViewController: UIViewController {
 		IQKeyboardManager.shared().previousNextDisplayMode = .alwaysHide
 		addEventModel.eventID = String(eventDetails?.id ?? 0)
 		
+		self.clearOldCoreData()
 		fetchMasterData(countryId: addEventModel.countryID, stateId: addEventModel.stateID)
     }
 	
@@ -286,6 +288,32 @@ extension EventRegistrationViewController: CellDataFetchProtocol, TextPickerDele
 			addEventModel.isCoach = value
 			
 			prepareFormData()
+		}
+	}
+	
+	func clearOldCoreData() {
+		let fetchRequest = CDPlayer.fetchRequestForYesterday()
+		let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+		deleteRequest.resultType = .resultTypeObjectIDs
+		
+		do {
+			let context = PersistentContainer.context
+			let result = try context.execute(
+				deleteRequest
+			)
+			
+			guard
+				let deleteResult = result as? NSBatchDeleteResult,
+				let ids = deleteResult.result as? [NSManagedObjectID]
+			else { return }
+			
+			let changes = [NSDeletedObjectsKey: ids]
+			NSManagedObjectContext.mergeChanges(
+				fromRemoteContextSave: changes,
+				into: [context]
+			)
+		} catch {
+			print(error as Any)
 		}
 	}
 }

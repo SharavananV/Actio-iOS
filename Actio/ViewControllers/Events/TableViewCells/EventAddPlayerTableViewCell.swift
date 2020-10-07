@@ -52,9 +52,12 @@ class EventAddPlayerTableViewCell: UITableViewCell {
 		nameLabel.text = player.name
 		mobileLabel.text = player.mobileNumber
 		dobLabel.text = player.dob
+	}
+	
+	override func layoutSubviews() {
+		super.layoutSubviews()
 		
 		containerView.applyGradient(colours: [AppColor.OrangeColor(),AppColor.RedColor()])
-		containerView.setNeedsLayout()
 	}
 	
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
