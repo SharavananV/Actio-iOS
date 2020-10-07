@@ -27,9 +27,11 @@ class TournamentListViewController: UIViewController {
         locationManager.startUpdatingLocation()
         locationManager.startMonitoringSignificantLocationChanges()
         
-        print((currentCoordinates?.latitude ?? 0))
-        print((currentCoordinates?.longitude ?? 0))
-
+        let reload = UIBarButtonItem(image: UIImage(named: "menu-white"), style: .plain, target: self, action: #selector(self.reloadTapped))
+        let search = UIBarButtonItem(image: UIImage(named: "menu-white"), style: .plain, target: self, action: #selector(self.searchTapped))
+        let filter = UIBarButtonItem(image: UIImage(named: "menu-white"), style: .plain, target: self, action: #selector(self.filterTapped))
+        navigationItem.rightBarButtonItems = [filter,search,reload]
+        
         tournamentListApiCall()
 
         self.favoriteCollectionView.delegate = self
@@ -37,6 +39,18 @@ class TournamentListViewController: UIViewController {
         
         self.nearMeTournamentListTableView.delegate = self
         self.nearMeTournamentListTableView.dataSource = self
+    }
+    
+    @objc func reloadTapped() {
+        tournamentListApiCall()
+    }
+    @objc func searchTapped() {
+    }
+    @objc func filterTapped() {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "TournamentFilterViewController") as? TournamentFilterViewController {
+            self.navigationController?.pushViewController(vc, animated: false)
+        }
+
     }
     
     func tournamentListApiCall() {
