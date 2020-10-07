@@ -69,6 +69,18 @@ class AddPlayersViewController: UIViewController {
 		
 		let parameters: [String : Any] = ["registrationID":  registrationId ?? 0, "players" : players]
 		service.post(addPlayersUrl, parameters: parameters, onView: view) { (response: [String: Any]) in
+			
+			if response["status"] as? String == "422", let errors = response["errors"] as? [[String: Any]], var message = errors.first?["msg"] as? String {
+				
+				if let playerName = errors.first?["player"] as? String {
+					message = "Error in \(playerName), " + message
+				}
+				
+				self.view.makeToast(message)
+				
+				return
+			}
+			
 			if let vc = self.storyboard?.instantiateViewController(withIdentifier: "EventSummaryViewController") as? EventSummaryViewController {
 				vc.eventDetails = self.eventDetails
 				self.navigationController?.pushViewController(vc, animated: true)
@@ -328,7 +340,7 @@ extension AddPlayersViewController: UserSelectionProtocol, CellDataFetchProtocol
 	private func editCoreDataPlayer() {
 		do {
 			guard let playerId = currentPlayer?.id else { return }
-			if let cdPlayer = try PersistentContainer.context.fetch(CDPlayer.fetchRequest(withID: playerId, eventId: (self.eventDetails?.id ?? 0), subscriberId: (registrationId ?? 0))).first {
+			if let cdPlayer = try PersistentContainer.context.fetch(CDPlayer.fetchRequest(withID: playerId, eventId: (self.eventDetails?.id ?? 0), registrationID: (registrationId ?? 0))).first {
 				cdPlayer.eventId = Int64(eventDetails?.id ?? 0)
 				cdPlayer.registrationId = Int64(registrationId ?? 0)
 				cdPlayer.dob = currentPlayer?.dob

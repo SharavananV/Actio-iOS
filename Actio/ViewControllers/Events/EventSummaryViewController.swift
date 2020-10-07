@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class EventSummaryViewController: UIViewController {
 
@@ -34,8 +35,19 @@ class EventSummaryViewController: UIViewController {
 	@objc func proceedTapped() {
 		service.post(submitRegistrationUrl, parameters: ["registrationID": String(eventSummary?.view?.registrationID ?? 0)], onView: view) { (response: [String: Any]) in
 			
-			if let msg = response["msg"] as? String {
+			if response["status"] as? String == "422", let errors = response["errors"] as? [[String: Any]], let message = errors.first?["msg"] as? String {
+				self.view.makeToast(message)
+				
+				return
+			} else if let msg = response["msg"] as? String {
 				self.view.makeToast(msg)
+			}
+			
+			if let eventDetailsPage = self.navigationController?.viewControllers.first(where: { (controller) -> Bool in
+				return controller is EventDetailViewController
+			}) {
+				self.clearCoreData()
+				self.navigationController?.popToViewController(eventDetailsPage, animated: true)
 			}
 		}
 	}
@@ -253,6 +265,32 @@ extension EventSummaryViewController: UITableViewDelegate, EditRegistrationDeleg
 			vc.updatingPlayer = player
 			
 			self.navigationController?.pushViewController(vc, animated: true)
+		}
+	}
+	
+	func clearCoreData() {
+		let fetchRequest = CDPlayer.fetchRequest(eventId: (eventDetails?.id ?? 0), registrationID: (eventSummary?.view?.registrationID ?? 0))
+		let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+		deleteRequest.resultType = .resultTypeObjectIDs
+		
+		do {
+			let context = PersistentContainer.context
+			let result = try context.execute(
+				deleteRequest
+			)
+			
+			guard
+				let deleteResult = result as? NSBatchDeleteResult,
+				let ids = deleteResult.result as? [NSManagedObjectID]
+			else { return }
+			
+			let changes = [NSDeletedObjectsKey: ids]
+			NSManagedObjectContext.mergeChanges(
+				fromRemoteContextSave: changes,
+				into: [context]
+			)
+		} catch {
+			print(error as Any)
 		}
 	}
 }

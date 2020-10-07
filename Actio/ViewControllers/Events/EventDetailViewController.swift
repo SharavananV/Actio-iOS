@@ -129,7 +129,7 @@ class EventDetailViewController: UIViewController {
 					}
 					
 				default:
-					break
+					self.performSegue(withIdentifier: "toRegistration", sender: sender)
 				}
 				
 				self.registrationID = response.view?.registrationID

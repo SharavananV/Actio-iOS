@@ -42,7 +42,7 @@ class NetworkService {
 			
 			guard let value = response.value else {
 				print("🥶 Error: \(String(describing: response.error))")
-				view.makeToast(String(describing: response.error))
+				view.makeToast("Network error, Try again later")
 				
 				return
 			}
@@ -75,19 +75,14 @@ class NetworkService {
 			
 			guard let data = response.data else {
 				print("🥶 Error: \(String(describing: response.error))")
-				view.makeToast(String(describing: response.error))
+				view.makeToast("Network error, Try again later")
 				
 				return
 			}
 			
 			do {
 				if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-					if json["status"] as? String == "422", let errors = json["errors"] as? [[String: String]], let message = errors.first?["msg"] {
-						view.makeToast(message)
-					}
-					else {
-						completion(json)
-					}
+					completion(json)
 				}
 			} catch {
 				print("Error decoding data")
