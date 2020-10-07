@@ -10,28 +10,17 @@ import Foundation
 
 // MARK: - EventDetailsRegisterModel
 class EventDetailsRegisterModel: Codable {
-	internal init() {
-		self.eventID = nil
-		self.registerBy = nil
-		self.teamName = nil
-		self.ageGroup = nil
-		self.cityID = nil
-		self.isCoach = nil
-		self.coachName = nil
-		self.coachIsd = nil
-		self.coachMobile = nil
-		self.coachEmail = nil
-		self.registrationID = nil
-	}
+	
+	internal init() {}
 	
 	var eventID, registerBy, teamName, ageGroup: String?
-	var cityID: String?
+	var countryID, stateID, cityID: String?
 	var isCoach: Bool?
 	var coachName, coachIsd, coachMobile, coachEmail: String?
 	var registrationID: String?
 	
 	enum CodingKeys: String, CodingKey {
-		case eventID, registerBy, teamName, ageGroup, cityID, isCoach, coachName, coachIsd, coachMobile, coachEmail, registrationID
+		case eventID, registerBy, teamName, ageGroup, cityID, isCoach, coachName, coachIsd, coachMobile, coachEmail, registrationID, countryID, stateID
 	}
 	
 	func parameters() -> [String: Any] {
@@ -48,5 +37,21 @@ class EventDetailsRegisterModel: Codable {
 			CodingKeys.coachEmail.rawValue: coachEmail ?? "",
 			CodingKeys.registrationID.rawValue: registrationID ?? ""
 		]
+	}
+	
+	init(_ model: ViewStatus?) {
+		self.eventID = String(model?.eventID ?? 0)
+		self.registerBy = String(model?.registerByID ?? 0)
+		self.teamName = model?.teamName
+		self.ageGroup = String(model?.ageGroupID ?? 0)
+		self.countryID = String(model?.countryID ?? 0)
+		self.stateID = String(model?.stateID ?? 0)
+		self.cityID = String(model?.cityID ?? 0)
+		self.isCoach = model?.coachName?.count ?? 0 > 0
+		self.coachName = model?.coachName
+		self.coachIsd = model?.coachIsdCode
+		self.coachMobile = model?.coachMobileNumber
+		self.coachEmail = model?.coachEmailID
+		self.registrationID = String(model?.registrationID ?? 0)
 	}
 }

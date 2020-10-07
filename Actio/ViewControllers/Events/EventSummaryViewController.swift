@@ -19,9 +19,26 @@ class EventSummaryViewController: UIViewController {
 	override func viewDidLoad() {
         super.viewDidLoad()
 
-        fetchRegistrationStatus()
+		self.title = "Summary"
+		
+		self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Submit", style: .done, target: self, action: #selector(self.proceedTapped))
+		self.navigationItem.rightBarButtonItem?.tintColor = .white
     }
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		fetchRegistrationStatus()
+	}
     
+	@objc func proceedTapped() {
+		service.post(submitRegistrationUrl, parameters: ["registrationID": String(eventSummary?.view?.registrationID ?? 0)], onView: view) { (response: [String: Any]) in
+			
+			if let msg = response["msg"] as? String {
+				self.view.makeToast(msg)
+			}
+		}
+	}
 
 	private func fetchRegistrationStatus() {
 		service.post(eventRegistrationStatusUrl, parameters: ["eventID": String(eventDetails?.id ?? 0)], onView: view) { (response: EventRegistrationStatus) in
@@ -141,19 +158,101 @@ extension EventSummaryViewController: UITableViewDataSource {
 		
 		return UITableViewCell()
 	}
+	
+	func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+		guard let players = eventSummary?.view?.players, indexPath.section == 1 && indexPath.row != 0 && indexPath.row != (players.count + 1) else { return nil }
+		
+		var configuration = UISwipeActionsConfiguration()
+		
+		let deleteAction = UIContextualAction(style: .destructive, title: nil) { _, _, complete in
+			let alert = UIAlertController(title: nil, message: "Are you sure want to delete this player?", preferredStyle: .alert)
+			
+			let cancel = UIAlertAction(title: "Cancel", style: .default, handler: { action in
+			})
+			alert.addAction(cancel)
+			let ok = UIAlertAction(title: "OK", style: .default, handler: { action in
+				if let player = self.eventSummary?.view?.players?[indexPath.row - 1] {
+					self.deletePlayer(player) { (success) in
+						if success {
+							self.fetchRegistrationStatus()
+						}
+					}
+				}
+			})
+			alert.addAction(ok)
+			
+			DispatchQueue.main.async(execute: {
+				self.present(alert, animated: true)
+			})
+		}
+		let editAction = UIContextualAction(style: .normal, title: nil) { _, _, complete in
+			if let player = self.eventSummary?.view?.players?[indexPath.row - 1] {
+				self.openAddPlayersPage(player)
+			}
+		}
+		
+		editAction.backgroundColor = .white
+		deleteAction.backgroundColor = .white
+		
+		UIImageView.appearance(
+			whenContainedInInstancesOf: [UITableView.self])
+			.tintColor = AppColor.OrangeColor()
+		
+		deleteAction.image = UIImage(named: "Icon material-delete")
+		editAction.image = UIImage(named: "Icon awesome-edit")
+		
+		configuration = UISwipeActionsConfiguration(actions: [deleteAction,editAction])
+		configuration.performsFirstActionWithFullSwipe = true
+		
+		return configuration
+	}
+	
+	private func deletePlayer(_ player: PlayerSummary, completion: @escaping (Bool)->Void) {
+		service.post(editDeletePlayerUrl, parameters: ["registrationID": String(eventSummary?.view?.registrationID ?? 0), "playerID": player.playerID ?? 0, "isRemove": true], onView: view) { (response: [String: Any]) in
+			
+			if let msg = response["msg"] as? String {
+				self.view.makeToast(msg)
+			}
+			
+			completion(true)
+		}
+	}
 }
 
 // MARK: TableView and Cell Delegates
 extension EventSummaryViewController: UITableViewDelegate, EditRegistrationDelegate, AddPlayerDelegate {
 	func editRegistration() {
-		
+		if let vc = self.storyboard?.instantiateViewController(withIdentifier: "EventRegistrationViewController") as? EventRegistrationViewController {
+			vc.eventDetails = self.eventDetails
+			vc.registrationId = self.eventSummary?.view?.registrationID
+			vc.fromController = .summary
+			
+			let addEventModel = EventDetailsRegisterModel(self.eventSummary?.view)
+			vc.addEventModel = addEventModel
+			
+			self.navigationController?.pushViewController(vc, animated: true)
+		}
 	}
 	
 	func addPlayer() {
-		
+		openAddPlayersPage()
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		
+		if (tableView.cellForRow(at: indexPath) as? AddPlayerButtonViewCell) != nil {
+			openAddPlayersPage()
+		}
+	}
+	
+	private func openAddPlayersPage(_ player: PlayerSummary? = nil) {
+		if let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddPlayersViewController") as? AddPlayersViewController {
+			vc.eventDetails = self.eventDetails
+			vc.registrationId = eventSummary?.view?.registrationID ?? 0
+			vc.summaryPlayers = eventSummary?.view?.players
+			vc.fromController = player == nil ? .summaryAdd : .summaryUpdate
+			vc.updatingPlayer = player
+			
+			self.navigationController?.pushViewController(vc, animated: true)
+		}
 	}
 }

@@ -10,7 +10,7 @@
         <attribute name="mobileNumber" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="position" optional="YES" attributeType="String"/>
-        <attribute name="subscriberId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="registrationId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <elements>
         <element name="CDPlayer" positionX="-63" positionY="-18" width="128" height="193"/>

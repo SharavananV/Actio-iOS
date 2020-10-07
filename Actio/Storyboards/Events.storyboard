@@ -889,10 +889,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RegistrationDetailSummaryCell" id="Hac-HO-pK0" customClass="RegistrationDetailSummaryCell" customModule="Actio" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="306" width="414" height="278"/>
+                                        <rect key="frame" x="0.0" y="306" width="414" height="354.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Hac-HO-pK0" id="2Ts-TH-YZd">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="278"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="354.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Registered Details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kVY-DT-vT5">
@@ -902,10 +902,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2il-GV-DHQ">
-                                                    <rect key="frame" x="20" y="41" width="374" height="216"/>
+                                                    <rect key="frame" x="20" y="41" width="374" height="292.5"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="0L5-Ob-F4z">
-                                                            <rect key="frame" x="10" y="10" width="354" height="196"/>
+                                                            <rect key="frame" x="10" y="10" width="354" height="272.5"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="mvn-L4-0Gi">
                                                                     <rect key="frame" x="0.0" y="0.0" width="354" height="17.5"/>
@@ -992,8 +992,64 @@
                                                                         </label>
                                                                     </subviews>
                                                                 </stackView>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="gCt-ea-Mbg">
+                                                                    <rect key="frame" x="0.0" y="127.5" width="354" height="68.5"/>
+                                                                    <subviews>
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="lTm-RP-BBj">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="354" height="17.5"/>
+                                                                            <subviews>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coach Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YpQ-wC-Iso">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="172" height="17.5"/>
+                                                                                    <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
+                                                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FUF-NR-cih">
+                                                                                    <rect key="frame" x="182" y="0.0" width="172" height="17.5"/>
+                                                                                    <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="15"/>
+                                                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                            </subviews>
+                                                                        </stackView>
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="J4F-Zr-EJH">
+                                                                            <rect key="frame" x="0.0" y="25.5" width="354" height="17.5"/>
+                                                                            <subviews>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coach Mobile No" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xu0-qW-0Tp">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="172" height="17.5"/>
+                                                                                    <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
+                                                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C50-xd-oVJ">
+                                                                                    <rect key="frame" x="182" y="0.0" width="172" height="17.5"/>
+                                                                                    <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="15"/>
+                                                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                            </subviews>
+                                                                        </stackView>
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ov0-zZ-X2g">
+                                                                            <rect key="frame" x="0.0" y="51" width="354" height="17.5"/>
+                                                                            <subviews>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coach Email ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4zX-bT-Njz">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="172" height="17.5"/>
+                                                                                    <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
+                                                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0tM-DF-DZ9">
+                                                                                    <rect key="frame" x="182" y="0.0" width="172" height="17.5"/>
+                                                                                    <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="15"/>
+                                                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                            </subviews>
+                                                                        </stackView>
+                                                                    </subviews>
+                                                                </stackView>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Bqh-7d-EN7">
-                                                                    <rect key="frame" x="0.0" y="127.5" width="354" height="17.5"/>
+                                                                    <rect key="frame" x="0.0" y="204" width="354" height="17.5"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Country" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FYf-CA-Ord">
                                                                             <rect key="frame" x="0.0" y="0.0" width="172" height="17.5"/>
@@ -1010,7 +1066,7 @@
                                                                     </subviews>
                                                                 </stackView>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="St8-h6-uiJ">
-                                                                    <rect key="frame" x="0.0" y="153" width="354" height="17.5"/>
+                                                                    <rect key="frame" x="0.0" y="229.5" width="354" height="17.5"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="State" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YEb-pd-9Az">
                                                                             <rect key="frame" x="0.0" y="0.0" width="172" height="17.5"/>
@@ -1027,7 +1083,7 @@
                                                                     </subviews>
                                                                 </stackView>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="M0O-7g-s1L">
-                                                                    <rect key="frame" x="0.0" y="178.5" width="354" height="17.5"/>
+                                                                    <rect key="frame" x="0.0" y="255" width="354" height="17.5"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tJZ-6b-ak4">
                                                                             <rect key="frame" x="0.0" y="0.0" width="172" height="17.5"/>
@@ -1082,16 +1138,21 @@
                                         <connections>
                                             <outlet property="ageGroupLabel" destination="MeQ-Yr-EzH" id="8bE-Ip-VgM"/>
                                             <outlet property="cityLabel" destination="7sh-Bo-0Dg" id="AUb-sH-P9m"/>
+                                            <outlet property="coachEmailLabel" destination="0tM-DF-DZ9" id="388-U3-VTz"/>
+                                            <outlet property="coachMobileLabel" destination="C50-xd-oVJ" id="nTf-wS-L3d"/>
+                                            <outlet property="coachName" destination="FUF-NR-cih" id="nuF-S0-sEc"/>
+                                            <outlet property="coachStackView" destination="gCt-ea-Mbg" id="rR0-Po-LqZ"/>
                                             <outlet property="countryLabel" destination="Lk1-gK-YPD" id="b9I-PN-YTT"/>
                                             <outlet property="playerTypeLabel" destination="TKj-6s-pmh" id="kxd-6c-Oh0"/>
                                             <outlet property="registerAsLabel" destination="xRY-XG-fEx" id="p7Z-pP-H5z"/>
                                             <outlet property="registrationByLabel" destination="cfN-Sb-i7G" id="CLn-97-cLh"/>
                                             <outlet property="stateLabel" destination="ZX1-hD-Dph" id="56D-Rx-2dH"/>
+                                            <outlet property="superStackView" destination="0L5-Ob-F4z" id="ydp-gq-lgu"/>
                                             <outlet property="teamNameLabel" destination="fUa-JX-wI5" id="k9u-3a-fgw"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlayerHeaderTableViewCell" id="vpX-tw-lOY" customClass="PlayerHeaderTableViewCell" customModule="Actio" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="584" width="414" height="50"/>
+                                        <rect key="frame" x="0.0" y="660.5" width="414" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vpX-tw-lOY" id="06g-FZ-kMf">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
@@ -1128,7 +1189,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PlayerSummaryTableViewCell" id="Pji-gd-P9a" customClass="PlayerSummaryTableViewCell" customModule="Actio" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="634" width="414" height="185"/>
+                                        <rect key="frame" x="0.0" y="710.5" width="414" height="185"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Pji-gd-P9a" id="yTZ-jK-fCw">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="185"/>
@@ -1276,7 +1337,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddPlayerButtonViewCell" id="nmX-cY-Qzu" customClass="AddPlayerButtonViewCell" customModule="Actio" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="819" width="414" height="57.5"/>
+                                        <rect key="frame" x="0.0" y="895.5" width="414" height="57.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nmX-cY-Qzu" id="m3V-c3-icg">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="57.5"/>

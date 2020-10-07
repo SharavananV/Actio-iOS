@@ -18,7 +18,7 @@ extension CDPlayer {
 	
 	@nonobjc public class func fetchRequest(withID id: Int, eventId: Int, subscriberId: Int) -> NSFetchRequest<CDPlayer> {
 		let fetchRequest = NSFetchRequest<CDPlayer>(entityName: "CDPlayer")
-		fetchRequest.predicate = NSPredicate(format: "id == %lld AND eventId == %lld AND subscriberId == %lld", id, eventId, subscriberId)
+		fetchRequest.predicate = NSPredicate(format: "id == %lld AND eventId == %lld AND registrationId == %lld", id, eventId, subscriberId)
 		
 		return fetchRequest
 	}
@@ -32,6 +32,6 @@ extension CDPlayer {
     @NSManaged public var position: String?
     @NSManaged public var id: Int64
     @NSManaged public var eventId: Int64
-    @NSManaged public var subscriberId: Int64
+    @NSManaged public var registrationId: Int64
 
 }

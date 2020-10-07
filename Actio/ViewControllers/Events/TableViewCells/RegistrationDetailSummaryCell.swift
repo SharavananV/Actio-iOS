@@ -24,7 +24,12 @@ class RegistrationDetailSummaryCell: UITableViewCell {
 	@IBOutlet var countryLabel: UILabel!
 	@IBOutlet var stateLabel: UILabel!
 	@IBOutlet var cityLabel: UILabel!
-
+	@IBOutlet var coachName: UILabel!
+	@IBOutlet var coachMobileLabel: UILabel!
+	@IBOutlet var coachEmailLabel: UILabel!
+	@IBOutlet var coachStackView: UIStackView!
+	@IBOutlet var superStackView: UIStackView!
+	
 	weak var delegate: EditRegistrationDelegate?
 	
 	func configure(_ data: ViewStatus) {
@@ -36,6 +41,15 @@ class RegistrationDetailSummaryCell: UITableViewCell {
 		countryLabel.text = data.countryName
 		stateLabel.text = data.stateName
 		cityLabel.text = data.cityName
+		
+		if let coachNameString = data.coachName, let coachMobile = data.coachMobileNumber, let coachEmail = data.coachEmailID {
+			coachName.text = coachNameString
+			coachEmailLabel.text = coachEmail
+			coachMobileLabel.text = coachMobile
+		} else {
+			coachStackView.removeFromSuperview()
+			superStackView.removeArrangedSubview(coachStackView)
+		}
 	}
 	
 	@IBAction func editRegistrationAction(_ sender: Any) {

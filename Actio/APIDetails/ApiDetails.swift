@@ -54,6 +54,8 @@ let eventRegistrationStatusUrl = baseUrl + "v1/registration/view"
 let eventRegistrationPart1Url = baseUrl + "v1/registration/join"
 let searchPlayerUrl = baseUrl + "v1/registration/player"
 let addPlayersUrl = baseUrl + "v1/registration/addplayers"
+let submitRegistrationUrl = baseUrl + "v1/registration/submit"
+let editDeletePlayerUrl = baseUrl + "v1/registration/editplayer"
 
 // Notification
 let notificationListUrl = baseUrl + "v1/notify/list"

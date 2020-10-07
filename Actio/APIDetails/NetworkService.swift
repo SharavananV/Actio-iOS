@@ -50,6 +50,50 @@ class NetworkService {
 			completion(value)
 		}
 	}
+	
+	func post(_ url: String, headers: [String: String]? = nil, parameters: [String: Any]? = nil, onView view: UIView, completion: @escaping ([String: Any])->Void) {
+		actualMethod(url, method: .post, headers: headers, parameters: parameters, onView: view, completion: completion)
+	}
+	
+	private func actualMethod(
+		_ url: String, method: Method,
+		headers: [String: String]? = nil,
+		parameters: [String: Any]? = nil,
+		onView view: UIView,
+		completion: @escaping ([String: Any])->Void)
+	{
+		var allHeaders : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken(), "Content-Type": "application/json"]
+		
+		headers?.forEach { (key, value) in
+			allHeaders.add(name: key, value: value)
+		}
+		
+		ActioSpinner.shared.show(on: view)
+		
+		NetworkRouter.shared.request(url, method: (method == .get ? .get : .post), parameters: parameters, encoding: JSONEncoding.default, headers: allHeaders).responseData { (response) in
+			ActioSpinner.shared.hide()
+			
+			guard let data = response.data else {
+				print("🥶 Error: \(String(describing: response.error))")
+				view.makeToast(String(describing: response.error))
+				
+				return
+			}
+			
+			do {
+				if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+					if json["status"] as? String == "422", let errors = json["errors"] as? [[String: String]], let message = errors.first?["msg"] {
+						view.makeToast(message)
+					}
+					else {
+						completion(json)
+					}
+				}
+			} catch {
+				print("Error decoding data")
+			}
+		}
+	}
 
 	private enum Method {
 		case get, post
@@ -58,8 +102,4 @@ class NetworkService {
 
 protocol ResponseType: Codable {
 	var status: String? { get }
-}
-
-struct ResponseHolder: ResponseType {
-	var status: String?
 }

@@ -16,11 +16,10 @@ class EventRegistrationViewController: UIViewController {
 	let service = DependencyProvider.shared.networkService
 	var masterData: EventMaster?
 	fileprivate var formData: [FormCellType]?
-	let addEventModel = EventDetailsRegisterModel()
+	var addEventModel = EventDetailsRegisterModel()
 	var eventDetails: EventDetail?
 	var registrationId: Int?
-	
-	var countryName, stateName: String?
+	var fromController: FromViewController = .detail
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,13 +31,14 @@ class EventRegistrationViewController: UIViewController {
 		
 		self.title = "Event Registration"
 		
-		self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Proceed", style: .done, target: self, action: #selector(self.proceedTapped))
+		let proceedTitle = fromController == .detail ? "Proceed" : "Update"
+		self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: proceedTitle, style: .done, target: self, action: #selector(self.proceedTapped))
 		self.navigationItem.rightBarButtonItem?.tintColor = .white
 		
 		IQKeyboardManager.shared().previousNextDisplayMode = .alwaysHide
 		addEventModel.eventID = String(eventDetails?.id ?? 0)
 		
-        fetchMasterData()
+		fetchMasterData(countryId: addEventModel.countryID, stateId: addEventModel.stateID)
     }
 	
 	deinit {
@@ -53,6 +53,11 @@ class EventRegistrationViewController: UIViewController {
 			else if let msg = response.msg {
 				self.view.makeToast(msg)
 				
+				if self.fromController == .summary {
+					self.navigationController?.popViewController(animated: true)
+					
+					return
+				}
 				if let vc = self.storyboard?.instantiateViewController(withIdentifier: "AddPlayersViewController") as? AddPlayersViewController {
 					vc.eventDetails = self.eventDetails
 					vc.registrationId = Int(response.registrationID ?? "0")
@@ -103,9 +108,17 @@ class EventRegistrationViewController: UIViewController {
 			return country.country ?? ""
 		}) ?? []
 		
+		let selectedCountry = self.masterData?.country?.first(where: {
+			String($0.id ?? 0) == self.addEventModel.countryID
+		})
+		
 		let states = self.masterData?.state?.map({ (state) -> String in
 			return state.state ?? ""
 		}) ?? []
+		
+		let selectedState = self.masterData?.state?.first(where: {
+			String($0.id ?? 0) == self.addEventModel.stateID
+		})
 		
 		let cities = self.masterData?.city?.map({ (city) -> String in
 			return city.city ?? ""
@@ -124,8 +137,8 @@ class EventRegistrationViewController: UIViewController {
 			.textPicker(TextPickerModel(key: "ageGroup", textValue: selectedAgeGroup?.groupName, allValues: ageGroups, contextText: "Age Group", placeHolder: "Select Age Group")),
 			.textEdit(TextEditModel(key: "teamName", textValue: addEventModel.teamName, contextText: "Team Name", placeHolder: "Team name allows a-z,0-9,_,.")),
 			.toggle(ToggleViewModel(key: "isCoach", contextText: isCoachString, defaultValue: (addEventModel.isCoach == true))),
-			.textPicker(TextPickerModel(key: "country", textValue: countryName, allValues: countries, contextText: "Country", placeHolder: "Select Country")),
-			.textPicker(TextPickerModel(key: "state", textValue: stateName, allValues: states, contextText: "State", placeHolder: "Select State")),
+			.textPicker(TextPickerModel(key: "country", textValue: selectedCountry?.country, allValues: countries, contextText: "Country", placeHolder: "Select Country")),
+			.textPicker(TextPickerModel(key: "state", textValue: selectedState?.state, allValues: states, contextText: "State", placeHolder: "Select State")),
 			.textPicker(TextPickerModel(key: "cityID", textValue: selectedCity?.city, allValues: cities, contextText: "City", placeHolder: "Select City"))
 		]
 		
@@ -223,14 +236,14 @@ extension EventRegistrationViewController: CellDataFetchProtocol, TextPickerDele
 			if self.masterData?.country?.isEmpty == false, let countryId = self.masterData?.country?[index].id {
 				fetchMasterData(countryId: String(countryId))
 				
-				countryName = self.masterData?.country?[index].country
+				addEventModel.countryID = String(self.masterData?.country?[index].id ?? 0)
 			}
 			
 		case "state":
 			if self.masterData?.state?.isEmpty == false, let countryId = self.masterData?.state?[index].countryID, let stateId = self.masterData?.state?[index].id {
 				fetchMasterData(countryId: String(countryId), stateId: String(stateId))
 				
-				stateName = self.masterData?.state?[index].state
+				addEventModel.stateID = String(self.masterData?.state?[index].id ?? 0)
 			}
 			
 		case "cityID":
@@ -274,6 +287,12 @@ extension EventRegistrationViewController: CellDataFetchProtocol, TextPickerDele
 			
 			prepareFormData()
 		}
+	}
+}
+
+extension EventRegistrationViewController {
+	enum FromViewController {
+		case detail, summary
 	}
 }
 

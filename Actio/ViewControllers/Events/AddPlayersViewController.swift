@@ -17,10 +17,19 @@ class AddPlayersViewController: UIViewController {
 	fileprivate var formData: [FormCellType]?
 	private var masterData: EventMaster?
 	private var currentPlayer: Player? = Player()
-	private var allPlayers: [CDPlayer]? = [CDPlayer]()
-	var eventDetails: EventDetail?
+	private var coreDataPlayers: [CDPlayer]? = [CDPlayer]()
 	var registrationId: Int?
 	var updateMode: Bool = false
+	var eventDetails: EventDetail?
+	
+	// Summary properties
+	var summaryPlayers: [PlayerSummary]?
+	var fromController: FromViewController = .part1
+	var updatingPlayer: PlayerSummary? {
+		didSet {
+			self.currentPlayer = Player(self.updatingPlayer)
+		}
+	}
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,8 +48,13 @@ class AddPlayersViewController: UIViewController {
 		tableView.separatorStyle = .none
 		tableView.delegate = self
 		
-		self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Proceed", style: .done, target: self, action: #selector(self.proceedTapped))
-		self.navigationItem.rightBarButtonItem?.tintColor = .white
+		self.title = "Add Players"
+		
+		if fromController != .summaryUpdate {
+			let proceedTitle = fromController == .summaryUpdate ? "Update" : "Proceed"
+			self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: proceedTitle, style: .done, target: self, action: #selector(self.proceedTapped))
+			self.navigationItem.rightBarButtonItem?.tintColor = .white
+		}
 		
 		fetchMasterData()
 		fetchPlayers()
@@ -49,12 +63,12 @@ class AddPlayersViewController: UIViewController {
 	@objc func proceedTapped() {
 		var players = [[String: Any]]()
 		
-		allPlayers?.forEach({ (player) in
+		coreDataPlayers?.forEach({ (player) in
 			players.append(player.parameters())
 		})
-		let parameters: [String : Any] = ["registrationID":  registrationId ?? 0,
-						  "players" : players]
-		service.post(addPlayersUrl, parameters: parameters, onView: view) { (response: ResponseHolder) in
+		
+		let parameters: [String : Any] = ["registrationID":  registrationId ?? 0, "players" : players]
+		service.post(addPlayersUrl, parameters: parameters, onView: view) { (response: [String: Any]) in
 			if let vc = self.storyboard?.instantiateViewController(withIdentifier: "EventSummaryViewController") as? EventSummaryViewController {
 				vc.eventDetails = self.eventDetails
 				self.navigationController?.pushViewController(vc, animated: true)
@@ -130,7 +144,7 @@ extension AddPlayersViewController: UITableViewDataSource, UITableViewDelegate {
 		if section == 0 {
 			return formData?.count ?? 0
 		} else {
-			return allPlayers?.count ?? 0
+			return coreDataPlayers?.count ?? 0
 		}
 	}
 	
@@ -141,7 +155,7 @@ extension AddPlayersViewController: UITableViewDataSource, UITableViewDelegate {
 		case 0:
 			cell = getCell(forIndexPath: indexPath)
 		case 1:
-			guard let player = allPlayers?[indexPath.row], let playerCell = tableView.dequeueReusableCell(withIdentifier: EventAddPlayerTableViewCell.reuseId, for: indexPath) as? EventAddPlayerTableViewCell else {
+			guard let player = coreDataPlayers?[indexPath.row], let playerCell = tableView.dequeueReusableCell(withIdentifier: EventAddPlayerTableViewCell.reuseId, for: indexPath) as? EventAddPlayerTableViewCell else {
 				return UITableViewCell()
 			}
 			
@@ -158,7 +172,7 @@ extension AddPlayersViewController: UITableViewDataSource, UITableViewDelegate {
 	}
 	
 	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		return section == 1 && allPlayers?.isEmpty == false ? "Players" : nil
+		return section == 1 && coreDataPlayers?.isEmpty == false ? "Players" : nil
 	}
 	
 	func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -232,7 +246,7 @@ extension AddPlayersViewController: UITableViewDataSource, UITableViewDelegate {
 		var configuration = UISwipeActionsConfiguration()
 		
 		let deleteAction = UIContextualAction(style: .destructive, title: nil) { _, _, complete in
-			guard let player = self.allPlayers?[indexPath.row] else { return }
+			guard let player = self.coreDataPlayers?[indexPath.row] else { return }
 			
 			let alert = UIAlertController(title: nil, message: "Are you sure want to delete this player?", preferredStyle: .alert)
 			
@@ -241,7 +255,7 @@ extension AddPlayersViewController: UITableViewDataSource, UITableViewDelegate {
 			alert.addAction(cancel)
 			let ok = UIAlertAction(title: "OK", style: .default, handler: { action in
 				PersistentContainer.context.delete(player)
-				self.allPlayers?.remove(at: indexPath.row)
+				self.coreDataPlayers?.remove(at: indexPath.row)
 				tableView.deleteRows(at: [indexPath], with: .fade)
 				
 				PersistentContainer.saveContext()
@@ -253,7 +267,7 @@ extension AddPlayersViewController: UITableViewDataSource, UITableViewDelegate {
 			})
 		}
 		let editAction = UIContextualAction(style: .normal, title: nil) { _, _, complete in
-			guard let player = self.allPlayers?[indexPath.row] else { return }
+			guard let player = self.coreDataPlayers?[indexPath.row] else { return }
 			
 			self.currentPlayer = Player(player)
 			self.updateMode = true
@@ -282,38 +296,58 @@ extension AddPlayersViewController: UserSelectionProtocol, CellDataFetchProtocol
 	func footnoteButtonCallback(_ title: String) {
 		view.endEditing(true)
 		
-		if updateMode {
-			do {
-				guard let playerId = currentPlayer?.id else { return }
-				if let cdPlayer = try PersistentContainer.context.fetch(CDPlayer.fetchRequest(withID: playerId, eventId: (self.eventDetails?.id ?? 0), subscriberId: (registrationId ?? 0))).first {
-					cdPlayer.eventId = Int64(eventDetails?.id ?? 0)
-					cdPlayer.subscriberId = Int64(registrationId ?? 0)
-					cdPlayer.dob = currentPlayer?.dob
-					cdPlayer.email = currentPlayer?.email
-					cdPlayer.gender = Int16(currentPlayer?.gender ?? 0)
-					cdPlayer.isdCode = currentPlayer?.isdCode
-					cdPlayer.mobileNumber = currentPlayer?.mobileNumber
-					cdPlayer.name = currentPlayer?.name
-					cdPlayer.position = currentPlayer?.position
-					
-					PersistentContainer.saveContext()
-					fetchPlayers()
-					currentPlayer = Player()
-					updateMode = false
-					
-					prepareFormData()
-				}
-			} catch let error as NSError {
-				print("Could not fetch. \(error), \(error.userInfo)")
-			}
+		// Edit player from Summary
+		if fromController == .summaryUpdate {
+			self.updateExistingSummaryPlayer()
+			return
+		} else if updateMode {	// Edit player but from Part1 page
+			self.editCoreDataPlayer()
 		} else {
-			if let playerCount = allPlayers?.count, playerCount >= (eventDetails?.maxMemberPerTeam ?? 0) {
+			// Simple Add player
+			let playerCount = ((summaryPlayers?.count ?? 0) + (coreDataPlayers?.count ?? 0))
+			if playerCount >= (eventDetails?.maxMemberPerTeam ?? 0) {
 				view.makeToast("Can add minimum \(eventDetails?.minMemberPerTeam ?? 0) and maximum \(eventDetails?.maxMemberPerTeam ?? 0) players only")
 			} else {
 				guard let player = currentPlayer else { return }
 				
 				addPlayerToCoreData(player)
 			}
+		}
+	}
+	
+	private func updateExistingSummaryPlayer() {
+		service.post(editDeletePlayerUrl, parameters: currentPlayer?.parameters(), onView: view) { (response) in
+			if let msg = response["msg"] as? String {
+				self.view.makeToast(msg)
+				
+				self.navigationController?.popViewController(animated: true)
+			}
+		}
+	}
+	
+	private func editCoreDataPlayer() {
+		do {
+			guard let playerId = currentPlayer?.id else { return }
+			if let cdPlayer = try PersistentContainer.context.fetch(CDPlayer.fetchRequest(withID: playerId, eventId: (self.eventDetails?.id ?? 0), subscriberId: (registrationId ?? 0))).first {
+				cdPlayer.eventId = Int64(eventDetails?.id ?? 0)
+				cdPlayer.registrationId = Int64(registrationId ?? 0)
+				cdPlayer.dob = currentPlayer?.dob
+				cdPlayer.email = currentPlayer?.email
+				cdPlayer.gender = Int16(currentPlayer?.gender ?? 0)
+				cdPlayer.isdCode = currentPlayer?.isdCode
+				cdPlayer.mobileNumber = currentPlayer?.mobileNumber
+				cdPlayer.name = currentPlayer?.name
+				cdPlayer.position = currentPlayer?.position
+				
+				PersistentContainer.saveContext()
+				fetchPlayers()
+				currentPlayer = Player()
+				updateMode = false
+				
+				prepareFormData()
+			}
+		} catch let error as NSError {
+			print("Could not fetch. \(error), \(error.userInfo)")
 		}
 	}
 	
@@ -399,7 +433,7 @@ extension AddPlayersViewController {
 			
 			cdPlayer.id = Int64(Date().uniqueId)
 			cdPlayer.eventId = Int64(eventDetails?.id ?? 0)
-			cdPlayer.subscriberId = Int64(registrationId ?? 0)
+			cdPlayer.registrationId = Int64(registrationId ?? 0)
 			cdPlayer.dob = player.dob
 			cdPlayer.email = player.email
 			cdPlayer.gender = Int16(player.gender ?? 0)
@@ -409,7 +443,7 @@ extension AddPlayersViewController {
 			cdPlayer.position = player.position
 			
 			PersistentContainer.saveContext()
-			allPlayers?.append(cdPlayer)
+			coreDataPlayers?.append(cdPlayer)
 			currentPlayer = Player()
 			
 			prepareFormData()
@@ -420,8 +454,11 @@ extension AddPlayersViewController {
 	}
 	
 	private func fetchPlayers() {
+		// Only fetch core data values if not from Summary
+		guard fromController == .part1 else { return }
+		
 		do {
-			self.allPlayers = try PersistentContainer.context.fetch(CDPlayer.fetchRequest())
+			self.coreDataPlayers = try PersistentContainer.context.fetch(CDPlayer.fetchRequest())
 			
 			self.tableView.reloadData()
 		} catch let error as NSError {
@@ -462,6 +499,12 @@ extension AddPlayersViewController {
 	}
 }
 
+extension AddPlayersViewController {
+	enum FromViewController {
+		case part1, summaryAdd, summaryUpdate
+	}
+}
+
 private enum FormCellType {
 	case searchPlayer
 	case date(DatePickerModel)
@@ -475,7 +518,7 @@ fileprivate class Player: Codable {
 	internal init() { }
 	
 	var name: String?
-	var id, gender, eventId, subscriberId: Int?
+	var id, gender, eventId, registrationId, subscriberID: Int?
 	var dob, isdCode, mobileNumber, email: String?
 	var position: String?
 	
@@ -489,6 +532,34 @@ fileprivate class Player: Codable {
 		self.email = player.email
 		self.position = player.position
 		self.eventId = Int(player.eventId)
-		self.subscriberId = Int(player.subscriberId)
+		self.registrationId = Int(player.registrationId)
+	}
+	
+	init(_ player: PlayerSummary?) {
+		self.id = player?.playerID
+		self.name = player?.fullName
+		self.gender = player?.genderID
+		self.dob = player?.dob
+		self.isdCode = player?.isdCode
+		self.mobileNumber = String(player?.mobileNumber ?? 0)
+		self.email = player?.emailID
+		self.position = String(player?.positionID ?? 0)
+		self.subscriberID = player?.subscriberID
+	}
+	
+	func parameters() -> [String: Any] {
+		// TODO: Gender ID should be checked
+		return [
+			"registrationID": self.registrationId ?? 0,
+			"playerID": self.id ?? 0,
+			"subscriberID": self.subscriberID ?? 0,
+			"name": self.name ?? "",
+			"dob": self.dob ?? "",
+			"gender": self.gender ?? 0,
+			"isdCode": self.isdCode ?? "",
+			"mobileNumber": self.mobileNumber ?? "",
+			"email": self.email ?? "",
+			"position": self.position ?? ""
+		]
 	}
 }

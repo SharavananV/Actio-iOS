@@ -54,6 +54,7 @@ class EventAddPlayerTableViewCell: UITableViewCell {
 		dobLabel.text = player.dob
 		
 		containerView.applyGradient(colours: [AppColor.OrangeColor(),AppColor.RedColor()])
+		containerView.setNeedsLayout()
 	}
 	
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
