@@ -23,6 +23,7 @@
 		18435587252B2F4E00DECA90 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18435586252B2F4E00DECA90 /* LoginModel.swift */; };
 		1843558B252B419200DECA90 /* ResetAlertForgotPaaswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1843558A252B419200DECA90 /* ResetAlertForgotPaaswordViewController.swift */; };
 		1843558E252B503900DECA90 /* ForgotModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1843558D252B503900DECA90 /* ForgotModel.swift */; };
+		18455F8A252DAC75000CA7CA /* SegmentControlTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18455F89252DAC75000CA7CA /* SegmentControlTableViewCell.swift */; };
 		184DD1E4252C52B90014ABB5 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184DD1E3252C52B90014ABB5 /* ResetPasswordViewController.swift */; };
 		1880B020251364C2006BE848 /* NetworkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1880B01F251364C2006BE848 /* NetworkRouter.swift */; };
 		188B699D25231138000F6030 /* AddEditFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188B699C25231137000F6030 /* AddEditFeedViewController.swift */; };
@@ -161,6 +162,7 @@
 		18435586252B2F4E00DECA90 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		1843558A252B419200DECA90 /* ResetAlertForgotPaaswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetAlertForgotPaaswordViewController.swift; sourceTree = "<group>"; };
 		1843558D252B503900DECA90 /* ForgotModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotModel.swift; sourceTree = "<group>"; };
+		18455F89252DAC75000CA7CA /* SegmentControlTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentControlTableViewCell.swift; sourceTree = "<group>"; };
 		184DD1E3252C52B90014ABB5 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		1880B01F251364C2006BE848 /* NetworkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRouter.swift; sourceTree = "<group>"; };
 		188B699C25231137000F6030 /* AddEditFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditFeedViewController.swift; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 				183384C924B4A94C009911A8 /* JustTextTableViewCell.swift */,
 				183384CB24B4A9BF009911A8 /* SwitchTableViewCell.swift */,
 				8DF77D4E252B1C090065720A /* UserSelectionTableViewCell.swift */,
+				18455F89252DAC75000CA7CA /* SegmentControlTableViewCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -904,6 +907,7 @@
 				8DCBAB5D24BF3ADC009E8B7F /* TabBarViewController.swift in Sources */,
 				8D833034252C97C7001CDE81 /* CDPlayer+CoreDataProperties.swift in Sources */,
 				18C6B0202510C17300B7162E /* NotificationHelper.swift in Sources */,
+				18455F8A252DAC75000CA7CA /* SegmentControlTableViewCell.swift in Sources */,
 				8D673A622514C86A00585AF9 /* TournamentPrizesTableViewCell.swift in Sources */,
 				8DE6B64924B335630010A3EC /* AppFonts.swift in Sources */,
 				18435580252B233200DECA90 /* ForgotUsernameSubscriberIDViewController.swift in Sources */,

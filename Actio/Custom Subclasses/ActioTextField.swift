@@ -14,6 +14,9 @@ class ActioTextField: UITextField {
         didSet {
             if self.isSecureTextEntry {
                 makeFieldSecure()
+            } else {
+                rightView = nil
+                rightViewMode = .never
             }
         }
     }

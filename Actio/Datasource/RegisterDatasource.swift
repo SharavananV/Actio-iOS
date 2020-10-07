@@ -154,6 +154,7 @@ enum UserStatus {
 struct MasterData: Codable {
     let country: [Country]
     let proof: [Proof]
+    let gender: [RegistrationGender]
     let status: String
 }
 
@@ -177,18 +178,25 @@ struct Proof: Codable {
     let id: Int
     let proof: String
 }
+// MARK: - Gender
+struct RegistrationGender: Codable {
+    let id: Int?
+    let gender: String?
+}
+
 
 // MARK: - RegisterUser
 class RegisterUser {
     var fullName, isdCode, isdCodeDisplay, mobileNumber, emailID: String
     var dob, idType, idNumber, userName: String
+    var gender, userType: Int
     var password, confirmPassword, mode, deviceToken: String
     var frontImage, backImage: Data?
     
     var termsAccepted: Bool
 
     enum CodingKeys: String, CodingKey {
-        case fullName, isdCode, mobileNumber, emailID, dob, idType, idNumber, userName, password, confirmPassword
+        case fullName, isdCode, mobileNumber, emailID, dob, idType, idNumber, userName, password, confirmPassword,gender,userType
         case mode = "Mode"
         case deviceToken
         case frontImage, backImage
@@ -205,6 +213,8 @@ class RegisterUser {
         self.idNumber = ""
         self.userName = ""
         self.password = ""
+        self.gender = 0
+        self.userType = 0
         self.confirmPassword = ""
         self.mode = "3" // Constant for iOS
         self.deviceToken = ""
@@ -221,6 +231,8 @@ class RegisterUser {
     func parameters() -> [String: Any] {
         return [
             CodingKeys.fullName.rawValue: fullName,
+            CodingKeys.gender.rawValue: gender,
+            CodingKeys.userType.rawValue: userType,
             CodingKeys.isdCode.rawValue: isdCode,
             CodingKeys.mobileNumber.rawValue: mobileNumber,
             CodingKeys.emailID.rawValue: emailID,
@@ -235,7 +247,7 @@ class RegisterUser {
         ]
     }
     
-    func validate() -> ValidType {
+    func validate(isIndividual: Bool) -> ValidType {
         if Validator.isValidFullName(self.fullName) != .valid {
             return Validator.isValidFullName(self.fullName)
         }
@@ -248,7 +260,10 @@ class RegisterUser {
         if Validator.isValidEmail(self.emailID) != .valid {
             return Validator.isValidEmail(self.emailID)
         }
-        if Validator.isValidDob(self.dob) != .valid {
+        if Validator.isValidGender(String(self.gender)) != .valid {
+            return Validator.isValidGender(String(self.gender))
+        }
+        if isIndividual, Validator.isValidDob(self.dob) != .valid {
             return Validator.isValidDob(self.dob)
         }
         if Validator.isValidUsername(self.userName) != .valid {
@@ -260,17 +275,8 @@ class RegisterUser {
         if Validator.isValidConfirmPassword(self.password, confirmPassword: self.confirmPassword) != .valid {
             return Validator.isValidConfirmPassword(self.password, confirmPassword: self.confirmPassword)
         }
-        if Validator.isValidIdType(self.idType) != .valid {
-            return Validator.isValidIdType(self.idType)
-        }
-        if Validator.isValidIdNumber(self.idNumber) != .valid {
-            return Validator.isValidIdNumber(self.idNumber)
-        }
         if termsAccepted == false {
             return .invalid(message: "Please accept the terms and conditions")
-        }
-        if frontImage == nil || backImage == nil {
-            return .invalid(message: "Please upload the ID images")
         }
         
         return .valid

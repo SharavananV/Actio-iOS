@@ -25,7 +25,7 @@ class TextEditTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var textField: UITextField = {
+    private lazy var textField: ActioTextField = {
         let textField = ActioTextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = AppFont.PoppinsMedium(size: 17)

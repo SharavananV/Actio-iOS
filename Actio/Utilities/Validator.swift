@@ -67,6 +67,14 @@ struct Validator {
             return .invalid(message: "Enter a valid fullname")
         }
     }
+    static func isValidGender(_ gender: String) -> ValidType {
+        if !gender.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            return .valid
+        } else {
+            return .invalid(message: "Select a valid Gender")
+        }
+    }
+ 
     
     static func isValidPassword(_ password: String) -> ValidType {
         if !password.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {

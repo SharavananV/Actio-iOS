@@ -32,6 +32,7 @@ class SignupViewController: UIViewController {
         tableView.register(ImagePickerTableViewCell.self, forCellReuseIdentifier: ImagePickerTableViewCell.reuseId)
         tableView.register(JustTextTableViewCell.self, forCellReuseIdentifier: JustTextTableViewCell.reuseId)
         tableView.register(SwitchTableViewCell.self, forCellReuseIdentifier: SwitchTableViewCell.reuseId)
+        tableView.register(SegmentControlTableViewCell.self, forCellReuseIdentifier: SegmentControlTableViewCell.reuseId)
         
         self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         self.formData = prepareFormData()
@@ -43,7 +44,6 @@ class SignupViewController: UIViewController {
         super.viewWillAppear(true)
         
         self.navigationController?.setNavigationBarHidden(false, animated: false)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelTapped))
     }
     
     @objc func cancelTapped() {
@@ -54,7 +54,9 @@ class SignupViewController: UIViewController {
     private func prepareFormData() -> [FormCellType] {
         var allCountries = [String]()
         var allIDCards = [String]()
-        
+        var allGender = [String]()
+        var genderString = ""
+
         if let masterData = registerDatasource.masterData {
             allCountries = masterData.country.map({
                 return "(\($0.alias)) \($0.code)"
@@ -63,6 +65,13 @@ class SignupViewController: UIViewController {
             allIDCards = masterData.proof.map({
                 return $0.proof
             })
+            allGender = masterData.gender.map({
+                return ($0.gender ?? "")
+            })
+            
+            genderString = masterData.gender.first(where: {
+                $0.id == registerUserModel.gender
+            })?.gender ?? ""
         }
         
         if self.registerUserModel.isdCode.isEmpty, allCountries.count > 0 {
@@ -83,9 +92,11 @@ class SignupViewController: UIViewController {
         
         let formData: [FormCellType] = [
             .attrText(startedText, .center),
-            .textEdit(TextEditModel(key: "fullName", textValue: registerUserModel.fullName, contextText: "Full Name", placeHolder: "Full Name")),
+            .segment,
+            .textEdit(TextEditModel(key: "fullName", textValue: registerUserModel.fullName, contextText: "Full Name", placeHolder: "Full Name", isSecure: false)),
             .textPicker(TextPickerModel(key: "isdCode", textValue: registerUserModel.isdCodeDisplay, allValues: allCountries, contextText: "Country Code")),
             .textEdit(TextEditModel(key: "mobileNumber", textValue: registerUserModel.mobileNumber, contextText: "Mobile Number", placeHolder: "Mobile Number", keyboardType: .phonePad, isSecure: false)),
+            .textPicker(TextPickerModel(key: "gender", textValue: genderString, allValues: allGender, contextText: "Gender", placeHolder: "Select Gender")),
             .textEdit(TextEditModel(key: "emailID", textValue: registerUserModel.emailID, contextText: "Email ID", placeHolder: "Email ID", keyboardType: .emailAddress, isSecure: false)),
             .date(DatePickerModel(key: "dob", minDate: nil, maxDate: Date(), dateValue: registerUserModel.dateOfBirth, contextText: "Date of Birth (dd-mm-yyyy)")),
             .textEdit(TextEditModel(key: "userName", textValue: registerUserModel.userName, contextText: "Username", placeHolder: "Username allows a-z,0-9,_,.")),
@@ -205,6 +216,13 @@ extension SignupViewController: UITableViewDataSource, UITableViewDelegate {
             
             toggleCell.configure(model, delegate: self)
             cell = toggleCell
+            
+        case .segment:
+            guard let toggleCell = tableView.dequeueReusableCell(withIdentifier: SegmentControlTableViewCell.reuseId, for: indexPath) as? SegmentControlTableViewCell else {
+                return UITableViewCell()
+            }
+            toggleCell.delegate = self
+            cell = toggleCell
         }
         
         cell?.selectionStyle = .none
@@ -213,7 +231,11 @@ extension SignupViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-extension SignupViewController: FootnoteButtonDelegate, CellDataFetchProtocol, ImagePickerCellDelegate, TextPickerDelegate, SwitchCellDelegate {
+extension SignupViewController: FootnoteButtonDelegate, CellDataFetchProtocol, ImagePickerCellDelegate, TextPickerDelegate, SwitchCellDelegate, SegmentCellDelegate {
+    func segmentTapped(_ index: Int) {
+        registerUserModel.userType = index + 1
+    }
+    
     func toggleValueChanged(_ key: String, value: Bool) {
         self.registerUserModel.termsAccepted = value
         updateCellFormData(key: key, value: value == true ? "true" : "false")
@@ -237,6 +259,11 @@ extension SignupViewController: FootnoteButtonDelegate, CellDataFetchProtocol, I
             if let idType = registerDatasource.masterData?.proof[index] {
                 self.registerUserModel.idType = String(idType.id)
                 updateCellFormData(key: key, value: idType.proof)
+            }
+        case .gender:
+            if let genderType = registerDatasource.masterData?.gender[index] {
+                self.registerUserModel.gender = genderType.id ?? 0
+                updateCellFormData(key: key, value: genderType.gender ?? "")
             }
             
         default:
@@ -310,7 +337,7 @@ extension SignupViewController: FootnoteButtonDelegate, CellDataFetchProtocol, I
     func footnoteButtonCallback(_ key: String) {
         self.view.endEditing(true)
         
-        let isValid = registerUserModel.validate()
+        let isValid = registerUserModel.validate(isIndividual: registerUserModel.userType == 1)
         
         switch isValid {
         case .invalid(let message):
@@ -368,4 +395,5 @@ private enum FormCellType {
     case text(String, NSTextAlignment)
     case attrText(NSAttributedString, NSTextAlignment)
     case toggle(ToggleViewModel)
+    case segment
 }
