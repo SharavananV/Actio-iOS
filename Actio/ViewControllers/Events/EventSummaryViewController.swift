@@ -282,7 +282,7 @@ extension EventSummaryViewController: UITableViewDelegate, EditRegistrationDeleg
 	}
 	
 	func clearCoreData() {
-		let fetchRequest = CDPlayer.fetchRequest(eventId: (eventDetails?.id ?? 0), registrationID: (eventSummary?.view?.registrationID ?? 0))
+		let fetchRequest = CDPlayer.fetchRequest(eventId: (eventDetails?.id ?? 0))
 		let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
 		deleteRequest.resultType = .resultTypeObjectIDs
 		

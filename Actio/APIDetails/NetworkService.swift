@@ -48,8 +48,12 @@ class NetworkService {
 				return
 			}
 			
-			if handleError, value.status == "422", let errorMessage = value.errors?.first?.msg {
-				view.makeToast(errorMessage)
+			if handleError, value.status == "422" {
+				if let errorMessage = value.errors?.first?.msg {
+					view.makeToast(errorMessage)
+				} else if let errorMessage = value.msg {
+					view.makeToast(errorMessage)
+				}
 			}
 			else {
 				completion(value)
@@ -111,6 +115,7 @@ class NetworkService {
 protocol ResponseType: Codable {
 	var status: String? { get }
 	var errors: [ActioError]? { get }
+	var msg: String? { get }
 }
 
 // MARK: - ErrorElement

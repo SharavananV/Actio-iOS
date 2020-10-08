@@ -23,9 +23,9 @@ extension CDPlayer {
 		return fetchRequest
 	}
 	
-	@nonobjc public class func fetchRequest(eventId: Int, registrationID: Int) -> NSFetchRequest<NSFetchRequestResult> {
+	@nonobjc public class func fetchRequest(eventId: Int) -> NSFetchRequest<NSFetchRequestResult> {
 		let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CDPlayer")
-		fetchRequest.predicate = NSPredicate(format: "eventId == %lld AND registrationId == %lld", eventId, registrationID)
+		fetchRequest.predicate = NSPredicate(format: "eventId == %lld", eventId)
 		
 		return fetchRequest
 	}

@@ -10,6 +10,7 @@ import Foundation
 
 // MARK: - NotificationResponse
 struct NotificationResponse: ResponseType {
+	var msg: String?
 	let errors: [ActioError]?
 	let status, logID: String?
 	let notification: [NotificationModel]?
@@ -44,6 +45,7 @@ struct Message: Codable {
 
 // MARK: - Update seen response
 struct UpdateSeenResponse: ResponseType {
+	var msg: String?
 	let errors: [ActioError]?
 	var status: String?
 }

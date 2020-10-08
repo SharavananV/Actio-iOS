@@ -118,6 +118,7 @@ class TextPickerTableViewCell: UITableViewCell {
         textField.text = model.textValue
         contentLabel.text = model.contextText
         textField.placeholder = model.placeHolder
+		textField.isUserInteractionEnabled = model.isEnabled
     }
 }
 
@@ -166,12 +167,14 @@ class TextPickerModel {
     
     var allValues: [String]?
     var contextText: String?
+	var isEnabled: Bool = true
     
-    init(key: String, textValue: String? = nil, allValues: [String], contextText: String, placeHolder: String? = nil) {
+    init(key: String, textValue: String? = nil, allValues: [String], contextText: String, placeHolder: String? = nil, isEnabled: Bool = true) {
         self.key = key
         self.textValue = textValue
         self.allValues = allValues
         self.contextText = contextText
         self.placeHolder = placeHolder
+		self.isEnabled = isEnabled
     }
 }

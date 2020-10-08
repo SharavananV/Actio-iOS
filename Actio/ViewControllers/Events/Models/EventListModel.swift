@@ -10,6 +10,7 @@ import UIKit
 
 // MARK: - EventCategoryResponse
 struct EventCategoryResponse: ResponseType {
+	var msg: String?
 	let errors: [ActioError]?
     let status: String?
     let eventCategory: [EventCategory]?

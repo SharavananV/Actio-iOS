@@ -112,6 +112,7 @@ class DatePickerTableViewCell: UITableViewCell {
 		} else {
 			textField.text = nil
 		}
+		textField.isUserInteractionEnabled = model.isEnabled
     }
     
     func clearData() {
@@ -140,17 +141,19 @@ class DatePickerModel {
     var maxDate: Date?
     
     var contextText: String?
+	var isEnabled: Bool = true
     
-    init(key: String, minDate: Date? = nil, maxDate: Date? = nil, dateValue: Date? = nil, contextText: String) {
+    init(key: String, minDate: Date? = nil, maxDate: Date? = nil, dateValue: Date? = nil, contextText: String, isEnabled: Bool = true) {
         self.key = key
         self.minDate = minDate
         self.maxDate = maxDate
         self.dateValue = dateValue
         self.contextText = contextText
+		self.isEnabled = isEnabled
     }
     
-    convenience init(key: String, dateString: String? = nil, contextText: String) {
+	convenience init(key: String, dateString: String? = nil, contextText: String, isEnabled: Bool = true) {
         let date = dateString?.toDate
-        self.init(key: key, dateValue: date, contextText: contextText)
+        self.init(key: key, dateValue: date, contextText: contextText, isEnabled: isEnabled)
     }
 }

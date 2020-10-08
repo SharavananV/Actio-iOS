@@ -83,6 +83,7 @@ class AddPlayersViewController: UIViewController {
 			
 			if let vc = self.storyboard?.instantiateViewController(withIdentifier: "EventSummaryViewController") as? EventSummaryViewController {
 				vc.eventDetails = self.eventDetails
+				self.clearCoreData()
 				self.navigationController?.pushViewController(vc, animated: true)
 			}
 		}
@@ -101,12 +102,10 @@ class AddPlayersViewController: UIViewController {
 	private func prepareFormData(_ shouldReload: Bool = true) {
 		guard let eventDetails = eventDetails else { return }
 		
-		let allGenders = self.masterData?.gender?.map({ (gender) -> String in
-			return gender.gender ?? ""
-		}) ?? []
+		let shouldAllowEditing = (self.currentPlayer?.subscriberID == nil)
 		
 		let gender = self.masterData?.gender?.first(where: {
-			$0.id == self.currentPlayer?.gender
+			$0.id == self.eventDetails?.playerTypeID
 		})
 		
 		let isdCodes = self.masterData?.country?.map({ (country) -> String in
@@ -130,12 +129,12 @@ class AddPlayersViewController: UIViewController {
 		let formData: [FormCellType] = [
 			.attrText(startedText, .right),
 			.searchPlayer,
-			.textEdit(TextEditModel(key: "playerName", textValue: currentPlayer?.name, contextText: "Player Name", placeHolder: "Player Name")),
-			.textPicker(TextPickerModel(key: "gender", textValue: gender?.gender, allValues: allGenders, contextText: "Gender", placeHolder: "Select Gender")),
-			.date(DatePickerModel(key: "dob", minDate: nil, maxDate: Date(), dateValue: currentPlayer?.dob?.toDate, contextText: "DOB (dd-mm-yyyy)")),
-			.textPicker(TextPickerModel(key: "isdCode", textValue: currentPlayer?.isdCode, allValues: isdCodes, contextText: "Country", placeHolder: "Select Country")),
-			.textEdit(TextEditModel(key: "mobileNumber", textValue: currentPlayer?.mobileNumber, contextText: "Mobile Number", placeHolder: "Mobile Number", keyboardType: .phonePad, isSecure: false)),
-			.textEdit(TextEditModel(key: "emailID", textValue: currentPlayer?.email, contextText: "Email ID", placeHolder: "Email ID", keyboardType: .emailAddress, isSecure: false)),
+			.textEdit(TextEditModel(key: "playerName", textValue: currentPlayer?.name, contextText: "Player Name", placeHolder: "Player Name", enabled: shouldAllowEditing)),
+			.textEdit(TextEditModel(key: "gender", textValue: gender?.gender, contextText: "Gender", placeHolder: "Select Gender", enabled: false)),
+			.date(DatePickerModel(key: "dob", minDate: nil, maxDate: Date(), dateValue: currentPlayer?.dob?.toDate, contextText: "DOB (dd-mm-yyyy)", isEnabled: shouldAllowEditing)),
+			.textPicker(TextPickerModel(key: "isdCode", textValue: currentPlayer?.isdCode, allValues: isdCodes, contextText: "Country", placeHolder: "Select Country", isEnabled: shouldAllowEditing)),
+			.textEdit(TextEditModel(key: "mobileNumber", textValue: currentPlayer?.mobileNumber, contextText: "Mobile Number", placeHolder: "Mobile Number", keyboardType: .phonePad, isSecure: false, enabled: shouldAllowEditing)),
+			.textEdit(TextEditModel(key: "emailID", textValue: currentPlayer?.email, contextText: "Email ID", placeHolder: "Email ID", keyboardType: .emailAddress, isSecure: false, enabled: shouldAllowEditing)),
 			.textPicker(TextPickerModel(key: "gamePosition", textValue: position?.position, allValues: allPositions, contextText: "Game Position", placeHolder: "Select Game Position")),
 			.button(buttonTitle)
 		]
@@ -340,48 +339,26 @@ extension AddPlayersViewController: UserSelectionProtocol, CellDataFetchProtocol
 	}
 	
 	private func editCoreDataPlayer() {
-		do {
-			guard let playerId = currentPlayer?.id else { return }
+		guard let playerId = currentPlayer?.id else { return }
+		
+		if let cdPlayer = coreDataPlayers?.first(where: {
+			$0.id == playerId
+		}) {
+			cdPlayer.eventId = Int64(eventDetails?.id ?? 0)
+			cdPlayer.registrationId = Int64(registrationId ?? 0)
+			cdPlayer.dob = currentPlayer?.dob
+			cdPlayer.email = currentPlayer?.email
+			cdPlayer.gender = Int16(currentPlayer?.gender ?? 0)
+			cdPlayer.isdCode = currentPlayer?.isdCode
+			cdPlayer.mobileNumber = currentPlayer?.mobileNumber
+			cdPlayer.name = currentPlayer?.name
+			cdPlayer.position = currentPlayer?.position
 			
-			if let cdPlayer = coreDataPlayers?.first(where: {
-				$0.id == playerId
-			}) {
-				cdPlayer.eventId = Int64(eventDetails?.id ?? 0)
-				cdPlayer.registrationId = Int64(registrationId ?? 0)
-				cdPlayer.dob = currentPlayer?.dob
-				cdPlayer.email = currentPlayer?.email
-				cdPlayer.gender = Int16(currentPlayer?.gender ?? 0)
-				cdPlayer.isdCode = currentPlayer?.isdCode
-				cdPlayer.mobileNumber = currentPlayer?.mobileNumber
-				cdPlayer.name = currentPlayer?.name
-				cdPlayer.position = currentPlayer?.position
-				
-				PersistentContainer.saveContext()
-				currentPlayer = Player()
-				updateMode = false
-				
-				prepareFormData()
-			}
+			PersistentContainer.saveContext()
+			currentPlayer = Player()
+			updateMode = false
 			
-//			if let cdPlayer = try PersistentContainer.context.fetch(CDPlayer.fetchRequest(withID: playerId, eventId: (self.eventDetails?.id ?? 0), registrationID: (registrationId ?? 0))).first {
-//				cdPlayer.eventId = Int64(eventDetails?.id ?? 0)
-//				cdPlayer.registrationId = Int64(registrationId ?? 0)
-//				cdPlayer.dob = currentPlayer?.dob
-//				cdPlayer.email = currentPlayer?.email
-//				cdPlayer.gender = Int16(currentPlayer?.gender ?? 0)
-//				cdPlayer.isdCode = currentPlayer?.isdCode
-//				cdPlayer.mobileNumber = currentPlayer?.mobileNumber
-//				cdPlayer.name = currentPlayer?.name
-//				cdPlayer.position = currentPlayer?.position
-//
-//				PersistentContainer.saveContext()
-//				currentPlayer = Player()
-//				updateMode = false
-//
-//				prepareFormData()
-//			}
-		} catch let error as NSError {
-			print("Could not fetch. \(error), \(error.userInfo)")
+			prepareFormData()
 		}
 	}
 	
@@ -404,11 +381,6 @@ extension AddPlayersViewController: UserSelectionProtocol, CellDataFetchProtocol
 	
 	func didPickText(_ key: String, index: Int) {
 		switch key {
-		case "gender":
-			if let id = self.masterData?.gender?[index].id {
-				currentPlayer?.gender = id
-			}
-			
 		case "isdCode":
 			if let id = self.masterData?.country?[index].code {
 				currentPlayer?.isdCode = id
@@ -437,6 +409,7 @@ extension AddPlayersViewController: UserSelectionProtocol, CellDataFetchProtocol
 			currentPlayer?.gender = player.gender
 			currentPlayer?.isdCode = player.isdCode
 			currentPlayer?.mobileNumber = player.mobileNumber
+			currentPlayer?.subscriberID = player.subscriberID
 			
 			prepareFormData()
 		}
@@ -463,6 +436,11 @@ extension AddPlayersViewController: UserSelectionProtocol, CellDataFetchProtocol
 // MARK: CoreData
 extension AddPlayersViewController {
 	private func addPlayerToCoreData(_ player: Player) {
+		if doPlayerExist() {
+			view.makeToast("Player Already added")
+			return
+		}
+		
 		let validationResult = validatePlayer(player)
 		
 		switch validationResult {
@@ -474,7 +452,7 @@ extension AddPlayersViewController {
 			cdPlayer.registrationId = Int64(registrationId ?? 0)
 			cdPlayer.dob = player.dob
 			cdPlayer.email = player.email
-			cdPlayer.gender = Int16(player.gender ?? 0)
+			cdPlayer.gender = Int16(eventDetails?.playerTypeID ?? 0)
 			cdPlayer.isdCode = player.isdCode
 			cdPlayer.mobileNumber = player.mobileNumber
 			cdPlayer.name = player.name
@@ -499,18 +477,47 @@ extension AddPlayersViewController {
 		do {
 			self.coreDataPlayers = try PersistentContainer.context.fetch(CDPlayer.fetchRequest())
 			
+			self.coreDataPlayers?.removeAll(where: { (player) -> Bool in
+				return self.summaryPlayers?.contains(where: {
+					($0.playerID ?? 0) == player.id
+				}) == true
+			})
+			
 			self.tableView.reloadData()
 		} catch let error as NSError {
 			print("Could not fetch. \(error), \(error.userInfo)")
 		}
 	}
 	
+	func clearCoreData() {
+		let fetchRequest = CDPlayer.fetchRequest(eventId: (eventDetails?.id ?? 0))
+		let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+		deleteRequest.resultType = .resultTypeObjectIDs
+		
+		do {
+			let context = PersistentContainer.context
+			let result = try context.execute(
+				deleteRequest
+			)
+			
+			guard
+				let deleteResult = result as? NSBatchDeleteResult,
+				let ids = deleteResult.result as? [NSManagedObjectID]
+			else { return }
+			
+			let changes = [NSDeletedObjectsKey: ids]
+			NSManagedObjectContext.mergeChanges(
+				fromRemoteContextSave: changes,
+				into: [context]
+			)
+		} catch {
+			print(error as Any)
+		}
+	}
+	
 	private func validatePlayer(_ player: Player) -> ValidType {
 		if Validator.isValidRequiredField(player.name ?? "") != .valid {
 			return .invalid(message: "Enter Player Name")
-		}
-		if Validator.isValidRequiredField(String(player.gender ?? 0)) != .valid {
-			return .invalid(message: "Select Gender")
 		}
 		if Validator.isValidRequiredField(player.dob ?? "") != .valid {
 			return .invalid(message: "Enter Date Of Birth")
@@ -535,6 +542,34 @@ extension AddPlayersViewController {
 		}
 		
 		return .valid
+	}
+	
+	private func doPlayerExist() -> Bool {
+		var playerExist = false
+		
+		for player in summaryPlayers ?? [] {
+			if currentPlayer?.name == player.fullName
+				&& currentPlayer?.mobileNumber == String(player.mobileNumber ?? 0)
+				&& currentPlayer?.dob == player.dob
+				&& currentPlayer?.isdCode == player.isdCode
+				&& currentPlayer?.email == player.emailID {
+				playerExist = true
+				break
+			}
+		}
+		
+		for player in coreDataPlayers ?? [] {
+			if currentPlayer?.name == player.name
+				&& currentPlayer?.mobileNumber == player.mobileNumber
+				&& currentPlayer?.dob == player.dob
+				&& currentPlayer?.isdCode == player.isdCode
+				&& currentPlayer?.email == player.email {
+				playerExist = true
+				break
+			}
+		}
+		
+		return playerExist
 	}
 }
 
