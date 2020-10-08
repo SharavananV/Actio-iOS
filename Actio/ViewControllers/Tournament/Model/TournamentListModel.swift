@@ -9,7 +9,9 @@
 import Foundation
 import UIKit
 
-class TournamentListResponse: Codable {
+class TournamentListResponse: ResponseType {
+    var errors: [ActioError]?
+    
     let status : String?
     let list: TournamentListModel
 }

@@ -41,6 +41,7 @@ let dashboardUrl = baseUrl + "v1/dashboard/count"
 //Tournaments
 let tournamentListUrl = baseUrl + "v1/tournament/list"
 let tournamentDetailsUrl = baseUrl + "v1/tournament/search"
+let tournamentMasterUrl = baseUrl + "v1/admin/master/tournamentDetails"
 
 //Feed
 let feedListUrl = baseUrl + "v1/feed/list"
