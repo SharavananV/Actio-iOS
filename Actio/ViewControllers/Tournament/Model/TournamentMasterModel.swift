@@ -11,7 +11,7 @@ import Foundation
 // MARK: - Welcome
 struct TournamentMasterResponse: ResponseType {
     var errors: [ActioError]?
-    let status: String?
+    let status, msg: String?
     let result: TournamentMaster?
 }
 

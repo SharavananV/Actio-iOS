@@ -11,8 +11,7 @@ import UIKit
 
 class TournamentListResponse: ResponseType {
     var errors: [ActioError]?
-    
-    let status : String?
+    let status, msg: String?
     let list: TournamentListModel
 }
 
