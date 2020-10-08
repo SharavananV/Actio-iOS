@@ -34,15 +34,15 @@ class ActioGradientButton: UIButton {
     }
 
     // MARK: Private
-    private var roundRectLayer: CAShapeLayer?
+    private var roundRectLayer: CALayer?
 
     private func layoutRoundRectLayer() {
         if let existingLayer = roundRectLayer {
             existingLayer.removeFromSuperlayer()
         }
-        let shapeLayer = CAShapeLayer()
-        shapeLayer.path = UIBezierPath(roundedRect: self.bounds, cornerRadius: roundRectCornerRadius).cgPath
-        shapeLayer.fillColor = roundRectColor.cgColor
+        let shapeLayer = CALayer()
+        shapeLayer.backgroundColor = roundRectColor.cgColor
+		shapeLayer.cornerRadius = roundRectCornerRadius
         self.layer.insertSublayer(shapeLayer, at: 0)
         self.roundRectLayer = shapeLayer
         

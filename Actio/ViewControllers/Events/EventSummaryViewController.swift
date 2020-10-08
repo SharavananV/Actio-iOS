@@ -24,12 +24,25 @@ class EventSummaryViewController: UIViewController {
 		
 		self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Submit", style: .done, target: self, action: #selector(self.proceedTapped))
 		self.navigationItem.rightBarButtonItem?.tintColor = .white
+		
+		self.navigationItem.hidesBackButton = true
+		let newBackButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(self.back(sender:)))
+		self.navigationItem.leftBarButtonItem?.tintColor = .white
+		self.navigationItem.leftBarButtonItem = newBackButton
     }
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
 		fetchRegistrationStatus()
+	}
+	
+	@objc func back(sender: UIBarButtonItem) {
+		if let eventDetailsPage = self.navigationController?.viewControllers.first(where: { (controller) -> Bool in
+			return controller is EventDetailViewController
+		}) {
+			self.navigationController?.popToViewController(eventDetailsPage, animated: true)
+		}
 	}
     
 	@objc func proceedTapped() {

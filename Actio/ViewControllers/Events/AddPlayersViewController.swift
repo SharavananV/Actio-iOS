@@ -98,7 +98,7 @@ class AddPlayersViewController: UIViewController {
 		}
 	}
 	
-	private func prepareFormData() {
+	private func prepareFormData(_ shouldReload: Bool = true) {
 		guard let eventDetails = eventDetails else { return }
 		
 		let allGenders = self.masterData?.gender?.map({ (gender) -> String in
@@ -142,7 +142,9 @@ class AddPlayersViewController: UIViewController {
 		
 		self.formData = formData
 		
-		tableView.reloadData()
+		if shouldReload {
+			tableView.reloadData()
+		}
 	}
 }
 
@@ -340,7 +342,10 @@ extension AddPlayersViewController: UserSelectionProtocol, CellDataFetchProtocol
 	private func editCoreDataPlayer() {
 		do {
 			guard let playerId = currentPlayer?.id else { return }
-			if let cdPlayer = try PersistentContainer.context.fetch(CDPlayer.fetchRequest(withID: playerId, eventId: (self.eventDetails?.id ?? 0), registrationID: (registrationId ?? 0))).first {
+			
+			if let cdPlayer = coreDataPlayers?.first(where: {
+				$0.id == playerId
+			}) {
 				cdPlayer.eventId = Int64(eventDetails?.id ?? 0)
 				cdPlayer.registrationId = Int64(registrationId ?? 0)
 				cdPlayer.dob = currentPlayer?.dob
@@ -352,12 +357,29 @@ extension AddPlayersViewController: UserSelectionProtocol, CellDataFetchProtocol
 				cdPlayer.position = currentPlayer?.position
 				
 				PersistentContainer.saveContext()
-				fetchPlayers()
 				currentPlayer = Player()
 				updateMode = false
 				
 				prepareFormData()
 			}
+			
+//			if let cdPlayer = try PersistentContainer.context.fetch(CDPlayer.fetchRequest(withID: playerId, eventId: (self.eventDetails?.id ?? 0), registrationID: (registrationId ?? 0))).first {
+//				cdPlayer.eventId = Int64(eventDetails?.id ?? 0)
+//				cdPlayer.registrationId = Int64(registrationId ?? 0)
+//				cdPlayer.dob = currentPlayer?.dob
+//				cdPlayer.email = currentPlayer?.email
+//				cdPlayer.gender = Int16(currentPlayer?.gender ?? 0)
+//				cdPlayer.isdCode = currentPlayer?.isdCode
+//				cdPlayer.mobileNumber = currentPlayer?.mobileNumber
+//				cdPlayer.name = currentPlayer?.name
+//				cdPlayer.position = currentPlayer?.position
+//
+//				PersistentContainer.saveContext()
+//				currentPlayer = Player()
+//				updateMode = false
+//
+//				prepareFormData()
+//			}
 		} catch let error as NSError {
 			print("Could not fetch. \(error), \(error.userInfo)")
 		}
@@ -376,6 +398,8 @@ extension AddPlayersViewController: UserSelectionProtocol, CellDataFetchProtocol
 		default:
 			break
 		}
+		
+		prepareFormData(false)
 	}
 	
 	func didPickText(_ key: String, index: Int) {
@@ -398,6 +422,8 @@ extension AddPlayersViewController: UserSelectionProtocol, CellDataFetchProtocol
 		default:
 			break
 		}
+		
+		prepareFormData(false)
 	}
 	
 	func selectedPlayer(_ player: SearchUserModel) {
@@ -468,7 +494,7 @@ extension AddPlayersViewController {
 	
 	private func fetchPlayers() {
 		// Only fetch core data values if not from Summary
-		guard fromController == .part1 else { return }
+		guard fromController == .part1 || fromController == .summaryAdd else { return }
 		
 		do {
 			self.coreDataPlayers = try PersistentContainer.context.fetch(CDPlayer.fetchRequest())

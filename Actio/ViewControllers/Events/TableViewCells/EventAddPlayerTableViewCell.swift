@@ -40,10 +40,11 @@ class EventAddPlayerTableViewCell: UITableViewCell {
 	}()
 	
 	private lazy var containerView: UIView = {
-		let view = UIView()
+		let view = UIView(frame: CGRect(x: 0, y: 0, width: self.contentView.frame.width, height: 120))
 		view.translatesAutoresizingMaskIntoConstraints = false
 		view.layer.cornerRadius = 7
 		view.clipsToBounds = true
+		view.backgroundColor = AppColor.RedColor()
 		
 		return view
 	}()
