@@ -10,73 +10,112 @@ import UIKit
 import Alamofire
 import CoreLocation
 
-class TournamentListViewController: UIViewController {
+class TournamentListViewController: UIViewController,filterValueDelegate {
 
     @IBOutlet var nearMeTournamentListTableView: UITableView!
     @IBOutlet var favoriteCollectionView: UICollectionView!
-    
+    @IBOutlet weak var searchBarHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tournamentSearchBar: UISearchBar!
     var locationManager: CLLocationManager = CLLocationManager()
     var currentCoordinates : CLLocationCoordinate2D?
     var tournamentListModel : TournamentListModel?
+    var searching = false
+    var filteredList: [TournamentFavoritesModel]?
+    var filterDetails: TournamentFilterModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        searchBarHeightConstraint.constant = 0
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
         locationManager.startMonitoringSignificantLocationChanges()
-        
+        tournamentSearchBar.delegate = self
         let reload = UIBarButtonItem(image: UIImage(named: "menu-white"), style: .plain, target: self, action: #selector(self.reloadTapped))
         let search = UIBarButtonItem(image: UIImage(named: "menu-white"), style: .plain, target: self, action: #selector(self.searchTapped))
         let filter = UIBarButtonItem(image: UIImage(named: "menu-white"), style: .plain, target: self, action: #selector(self.filterTapped))
         navigationItem.rightBarButtonItems = [filter,search,reload]
-        
         tournamentListApiCall()
-
         self.favoriteCollectionView.delegate = self
         self.favoriteCollectionView.dataSource = self
-        
         self.nearMeTournamentListTableView.delegate = self
         self.nearMeTournamentListTableView.dataSource = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        if let textfield = tournamentSearchBar.value(forKey: "searchField") as? UITextField {
+            textfield.placeholder = "Type Your Search"
+            textfield.font = AppFont.PoppinsRegular(size: 15)
+        }
+
+    }
+      
     @objc func reloadTapped() {
         tournamentListApiCall()
     }
     @objc func searchTapped() {
-    }
-    @objc func filterTapped() {
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "TournamentFilterViewController") as? TournamentFilterViewController {
-            self.navigationController?.pushViewController(vc, animated: false)
+        if searchBarHeightConstraint.constant == 0 {
+            searchBarHeightConstraint.constant = 56
+            UIView.animate(withDuration: 0.5) {
+                self.view.layoutIfNeeded()
+            }
+        } else if searchBarHeightConstraint.constant == 56 {
+            searchBarHeightConstraint.constant = 0
+            self.tournamentSearchBar.text = ""
+            UIView.animate(withDuration: 0.5) {
+                self.view.layoutIfNeeded()
+            }
+            tournamentListApiCall()
         }
-
     }
     
-    func tournamentListApiCall() {
+    @objc func filterTapped() {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "TournamentFilterViewController") as? TournamentFilterViewController {
+            vc.delegate = self
+            self.navigationController?.pushViewController(vc, animated: false)
+        }
+    }
+    
+    func tournamentListApiCall(filterdValues:[String:Any]? = nil) {
         let headers : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"",
                                             "Content-Type": "application/json"]
         
+        var parameters:[String:Any] = ["latitude": "\(currentCoordinates?.latitude ?? 0)", "longitude": "\(currentCoordinates?.longitude ?? 0)","search":self.tournamentSearchBar.text ?? "" ]
+        if filterdValues != nil {
+            parameters["latitude"] = filterdValues?["latitude"]
+            parameters["longitude"] = filterdValues?["longitude"]
+            parameters["price_range_start"] = filterdValues?["price_range_start"]
+            parameters["price_range_end"] = filterdValues?["price_range_end"]
+            parameters["category"] = filterdValues?["category"]
+            parameters["type"] = filterdValues?["type"]
+            parameters["radius"] = filterdValues?["radius"]
+            parameters["sport"] = filterdValues?["sport"]
+            parameters["city"] = filterdValues?["city"]
+        }
         ActioSpinner.shared.show(on: view)
-        
-        NetworkRouter.shared.request(tournamentListUrl, method: .post, parameters: ["latitude": "\(currentCoordinates?.latitude ?? 0)", "longitude": "\(currentCoordinates?.longitude ?? 0)"], encoding: JSONEncoding.default, headers: headers).responseDecodable(of: TournamentListResponse.self, queue: .main) { (response) in
+        NetworkRouter.shared.request(tournamentListUrl, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseDecodable(of: TournamentListResponse.self, queue: .main) { (response) in
             ActioSpinner.shared.hide()
             
             guard let model = response.value,model.status == "200" else {
                 print("🥶 Error on login: \(String(describing: response.error))")
                 return
             }
-            
             self.tournamentListModel = model.list
             self.favoriteCollectionView.reloadData()
             self.nearMeTournamentListTableView.reloadData()
         }
     }
+    
+    func FilterdValues(parameters: [String : Any]) {
+        tournamentListApiCall(filterdValues: parameters)
+    }
+    
 }
 extension TournamentListViewController : UICollectionViewDelegate,UICollectionViewDataSource ,UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.tournamentListModel?.favorites.count ?? 0
+        return self.tournamentListModel?.favorites?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -85,7 +124,7 @@ extension TournamentListViewController : UICollectionViewDelegate,UICollectionVi
             return UICollectionViewCell()
         }
         
-        guard let tournament = self.tournamentListModel?.favorites[indexPath.row] else {
+        guard let tournament = self.tournamentListModel?.favorites?[indexPath.row] else {
             return UICollectionViewCell()
         }
         
@@ -111,7 +150,7 @@ extension TournamentListViewController : UICollectionViewDelegate,UICollectionVi
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        guard let tournament = self.tournamentListModel?.favorites[indexPath.row],
+        guard let tournament = self.tournamentListModel?.favorites?[indexPath.row],
             let vc = storyboard?.instantiateViewController(withIdentifier: "TournamentDetailsViewController") as? TournamentDetailsViewController else {
             return
         }
@@ -123,7 +162,7 @@ extension TournamentListViewController : UICollectionViewDelegate,UICollectionVi
 
 extension TournamentListViewController : UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.tournamentListModel?.nearMe.count ?? 0
+        return self.tournamentListModel?.nearMe?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -131,7 +170,7 @@ extension TournamentListViewController : UITableViewDelegate,UITableViewDataSour
             return UITableViewCell()
         }
         
-        guard let tournament = self.tournamentListModel?.favorites[indexPath.row] else {
+        guard let tournament = self.tournamentListModel?.favorites?[indexPath.row] else {
             return UITableViewCell()
         }
         
@@ -150,7 +189,7 @@ extension TournamentListViewController : UITableViewDelegate,UITableViewDataSour
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let tournament = self.tournamentListModel?.favorites[indexPath.row],
+        guard let tournament = self.tournamentListModel?.favorites?[indexPath.row],
             let vc = storyboard?.instantiateViewController(withIdentifier: "TournamentDetailsViewController") as? TournamentDetailsViewController else {
             return
         }
@@ -169,6 +208,30 @@ extension TournamentListViewController : CLLocationManagerDelegate{
         currentCoordinates = locations.last?.coordinate
     }
     
+}
+
+extension TournamentListViewController : UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searching = true
+        self.nearMeTournamentListTableView.reloadData()
+        self.favoriteCollectionView.reloadData()
+     }
+
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        tournamentSearchBar.resignFirstResponder()
+        tournamentListApiCall()
+    }
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        tournamentSearchBar.resignFirstResponder()
+    }
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searching = false
+        tournamentSearchBar.resignFirstResponder()
+        self.nearMeTournamentListTableView.reloadData()
+        self.favoriteCollectionView.reloadData()
+    }
+
 }
 
 

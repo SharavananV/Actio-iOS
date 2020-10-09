@@ -27,6 +27,7 @@
 		18455F8D252DE556000CA7CA /* TournamentFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18455F8C252DE556000CA7CA /* TournamentFilterViewController.swift */; };
 		184DD1E4252C52B90014ABB5 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184DD1E3252C52B90014ABB5 /* ResetPasswordViewController.swift */; };
 		185D2860252F20E300FD3D81 /* TournamentMasterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185D285F252F20E200FD3D81 /* TournamentMasterModel.swift */; };
+		185D287825307D3A00FD3D81 /* TournamentFilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185D287725307D3900FD3D81 /* TournamentFilterModel.swift */; };
 		1880B020251364C2006BE848 /* NetworkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1880B01F251364C2006BE848 /* NetworkRouter.swift */; };
 		188B699D25231138000F6030 /* AddEditFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188B699C25231137000F6030 /* AddEditFeedViewController.swift */; };
 		18A9750924C04972001B5BB3 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A9750824C04972001B5BB3 /* MenuViewController.swift */; };
@@ -178,6 +179,7 @@
 		18455F8C252DE556000CA7CA /* TournamentFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentFilterViewController.swift; sourceTree = "<group>"; };
 		184DD1E3252C52B90014ABB5 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		185D285F252F20E200FD3D81 /* TournamentMasterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentMasterModel.swift; sourceTree = "<group>"; };
+		185D287725307D3900FD3D81 /* TournamentFilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentFilterModel.swift; sourceTree = "<group>"; };
 		1880B01F251364C2006BE848 /* NetworkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRouter.swift; sourceTree = "<group>"; };
 		188B699C25231137000F6030 /* AddEditFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditFeedViewController.swift; sourceTree = "<group>"; };
 		18A9750824C04972001B5BB3 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
@@ -659,6 +661,7 @@
 				8D9C07A4250B889300514692 /* TournamentNearMeModel.swift */,
 				18C6B02C2512015200B7162E /* TournamentModel.swift */,
 				185D285F252F20E200FD3D81 /* TournamentMasterModel.swift */,
+				185D287725307D3900FD3D81 /* TournamentFilterModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -947,6 +950,7 @@
 				8D673A66251B1A0400585AF9 /* TournamentLocationViewController.swift in Sources */,
 				8DC1BD2E2525A4EF005C55DE /* NetworkService.swift in Sources */,
 				8D9C079C250B53A400514692 /* NearMeTournamentListTableViewCell.swift in Sources */,
+				185D287825307D3A00FD3D81 /* TournamentFilterModel.swift in Sources */,
 				183384CA24B4A94C009911A8 /* JustTextTableViewCell.swift in Sources */,
 				8DDBB761252D912700D74087 /* PlayerHeaderTableViewCell.swift in Sources */,
 				8DDBB75E252D911200D74087 /* RegistrationDetailSummaryCell.swift in Sources */,

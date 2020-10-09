@@ -27,6 +27,7 @@ let updatePasswordUrl = baseUrl + "updatepassword"
 // OTP
 let validateOTPUrl = baseUrl + "validateotp"
 let sendOTPUrl = baseUrl + "sendotp"
+let forgotPasswordResendOtpUrl = baseUrl + "forgotpasswordresendotp"
 
 //Dashboard
 let userStatusUrl = baseUrl + "subscriber/userstatusInfo"

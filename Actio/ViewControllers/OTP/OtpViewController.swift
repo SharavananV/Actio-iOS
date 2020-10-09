@@ -124,7 +124,7 @@ class OtpViewController: UIViewController,VPMOTPViewDelegate {
         }
     }
     func apiSendOtpCall(otp:String) {
-        let url = fromController == .login ? validateOTPUrl : validateForgotPasswordUrl
+        let url = fromController == .login ? validateOTPUrl : forgotPasswordResendOtpUrl
         let headers: HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"",
                                     "Content-Type": "application/json"]
         var parameters = ["otp": otp]

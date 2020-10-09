@@ -12,12 +12,12 @@ import UIKit
 class TournamentListResponse: ResponseType {
     var errors: [ActioError]?
     let status, msg: String?
-    let list: TournamentListModel
+    let list: TournamentListModel?
 }
 
 class TournamentListModel: Codable {
-    let favorites: [TournamentFavoritesModel]
-    let nearMe: [TournamentNearMeModel]
+    let favorites: [TournamentFavoritesModel]?
+    let nearMe: [TournamentNearMeModel]?
     
     enum Status: Int {
         case open = 1, closed = 2, yetToOpen = 3

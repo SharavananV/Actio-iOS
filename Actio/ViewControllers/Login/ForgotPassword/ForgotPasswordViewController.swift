@@ -43,7 +43,7 @@ class ForgotPasswordViewController: UIViewController {
             self.forgotDetails = response
             if let vc = self.storyboard?.instantiateViewController(withIdentifier: "OtpViewController") as? OtpViewController {
                 vc.fromController = .forgotPassword
-                vc.username = self.subscriptionIdTextField.text
+                vc.username = response.username
                 self.navigationController?.pushViewController(vc, animated: false)
             }
         }
