@@ -7,59 +7,58 @@
 //
 
 import Foundation
-import UIKit
-
 
 // Webpage URL
 let termsandConditionUrl = "https://playactio.com/terms.html"
 
-let baseUrl = "http://203.223.191.66:8085/"
+let baseUrl = "http://203.223.191.66:8085/v1/"
 
-let masterUrl = baseUrl + "v1/subscriber/init"
-let loginUrl = baseUrl + "v1/login"
-let registerUrl = baseUrl + "v1/subscriber/register"
-let logoutUrl = baseUrl + "v1/logout"
+let masterUrl = baseUrl + "subscriber/init"
+let loginUrl = baseUrl + "login"
+let registerUrl = baseUrl + "subscriber/register"
+let logoutUrl = baseUrl + "logout"
 
 // Forgot
-let forgotUserNameUrl = baseUrl + "v1/forgotUsername"
-let forgotPasswordUrl = baseUrl + "v1/forgotpassword"
-let validateForgotPasswordUrl = baseUrl + "v1/validateforgotpassword"
-let updatePasswordUrl = baseUrl + "v1/updatepassword"
+let forgotUserNameUrl = baseUrl + "forgotUsername"
+let forgotPasswordUrl = baseUrl + "forgotpassword"
+let validateForgotPasswordUrl = baseUrl + "validateforgotpassword"
+let updatePasswordUrl = baseUrl + "updatepassword"
 
 // OTP
-let validateOTPUrl = baseUrl + "v1/validateotp"
-let sendOTPUrl = baseUrl + "v1/sendotp"
+let validateOTPUrl = baseUrl + "validateotp"
+let sendOTPUrl = baseUrl + "sendotp"
 
 //Dashboard
-let userStatusUrl = baseUrl + "v1/subscriber/userstatusInfo"
-let parentIdUrl = baseUrl + "v1/subscriber/parentID"
-let parentApprovalUrl = baseUrl + "v1/subscriber/parentApproval"
-let parentApprovalInitUrl =  baseUrl + "v1/subscriber/parentApprovalInit"
-let dashboardUrl = baseUrl + "v1/dashboard/count"
+let userStatusUrl = baseUrl + "subscriber/userstatusInfo"
+let parentIdUrl = baseUrl + "subscriber/parentID"
+let parentApprovalUrl = baseUrl + "subscriber/parentApproval"
+let parentApprovalInitUrl =  baseUrl + "subscriber/parentApprovalInit"
+let dashboardUrl = baseUrl + "dashboard/count"
 
 //Tournaments
-let tournamentListUrl = baseUrl + "v1/tournament/list"
-let tournamentDetailsUrl = baseUrl + "v1/tournament/search"
-let tournamentMasterUrl = baseUrl + "v1/admin/master/tournamentDetails"
+let tournamentListUrl = baseUrl + "tournament/list"
+let tournamentDetailsUrl = baseUrl + "tournament/search"
+let tournamentMasterUrl = baseUrl + "admin/master/tournamentDetails"
 
 //Feed
-let feedListUrl = baseUrl + "v1/feed/list"
-let feedUrl = baseUrl + "v1/feed"
+let feedListUrl = baseUrl + "feed/list"
+let feedUrl = baseUrl + "feed"
 
 // Events
-let eventListUrl = baseUrl + "v1/tournament/search/eventcategory"
-let eventDetailUrl = baseUrl + "v1/tournament/search/event"
-let eventMasterUrl = baseUrl + "v1/registration/master"
-let eventRegistrationStatusUrl = baseUrl + "v1/registration/view"
-let eventRegistrationPart1Url = baseUrl + "v1/registration/join"
-let searchPlayerUrl = baseUrl + "v1/registration/player"
-let addPlayersUrl = baseUrl + "v1/registration/addplayers"
-let submitRegistrationUrl = baseUrl + "v1/registration/submit"
-let editDeletePlayerUrl = baseUrl + "v1/registration/editplayer"
+let eventListUrl = baseUrl + "tournament/search/eventcategory"
+let eventDetailUrl = baseUrl + "tournament/search/event"
+let eventMasterUrl = baseUrl + "registration/master"
+let eventRegistrationStatusUrl = baseUrl + "registration/view"
+let eventRegistrationPart1Url = baseUrl + "registration/join"
+let searchPlayerUrl = baseUrl + "registration/player"
+let addPlayersUrl = baseUrl + "registration/addplayers"
+let submitRegistrationUrl = baseUrl + "registration/submit"
+let editDeletePlayerUrl = baseUrl + "registration/editplayer"
 
 // Friends
-let listFriendsUrl = baseUrl + "v1/friend/find"
+let listFriendsUrl = baseUrl + "friend/find"
+let friendActionUrl = baseUrl + "friend/action"
 
 // Notification
-let notificationListUrl = baseUrl + "v1/notify/list"
-let notificationSeenUpdateUrl = baseUrl + "v1/notify/seen"
+let notificationListUrl = baseUrl + "notify/list"
+let notificationSeenUpdateUrl = baseUrl + "notify/seen"

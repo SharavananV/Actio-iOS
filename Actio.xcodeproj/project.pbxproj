@@ -58,6 +58,10 @@
 		8D0C5C3F25249822005B3A4E /* EventDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0C5C3E25249822005B3A4E /* EventDetailModel.swift */; };
 		8D0C5C4125249B66005B3A4E /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0C5C4025249B66005B3A4E /* EventDetailViewController.swift */; };
 		8D0C5C442524A8AE005B3A4E /* EventActionDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0C5C432524A8AE005B3A4E /* EventActionDatasource.swift */; };
+		8D0F749A253046EF00200C2B /* FriendListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F7499253046EF00200C2B /* FriendListViewController.swift */; };
+		8D0F749D2530479800200C2B /* Social.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D0F749C2530479800200C2B /* Social.storyboard */; };
+		8D0F74A325304FAF00200C2B /* FriendListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F74A225304FAF00200C2B /* FriendListTableViewCell.swift */; };
+		8D0F74A82530536200200C2B /* FindFriendModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F74A72530536200200C2B /* FindFriendModel.swift */; };
 		8D1C960D252C2A8C005FE3EC /* EventAddPlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1C960C252C2A8C005FE3EC /* EventAddPlayerTableViewCell.swift */; };
 		8D21855D24B6E383002688A8 /* OtpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D21855C24B6E383002688A8 /* OtpViewController.swift */; };
 		8D21855F24B6ED5F002688A8 /* VPMOTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D21855E24B6ED5F002688A8 /* VPMOTPView.swift */; };
@@ -207,6 +211,10 @@
 		8D0C5C3E25249822005B3A4E /* EventDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailModel.swift; sourceTree = "<group>"; };
 		8D0C5C4025249B66005B3A4E /* EventDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		8D0C5C432524A8AE005B3A4E /* EventActionDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventActionDatasource.swift; sourceTree = "<group>"; };
+		8D0F7499253046EF00200C2B /* FriendListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListViewController.swift; sourceTree = "<group>"; };
+		8D0F749C2530479800200C2B /* Social.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Social.storyboard; sourceTree = "<group>"; };
+		8D0F74A225304FAF00200C2B /* FriendListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListTableViewCell.swift; sourceTree = "<group>"; };
+		8D0F74A72530536200200C2B /* FindFriendModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindFriendModel.swift; sourceTree = "<group>"; };
 		8D1C960C252C2A8C005FE3EC /* EventAddPlayerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventAddPlayerTableViewCell.swift; sourceTree = "<group>"; };
 		8D21855C24B6E383002688A8 /* OtpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpViewController.swift; sourceTree = "<group>"; };
 		8D21855E24B6ED5F002688A8 /* VPMOTPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPMOTPView.swift; sourceTree = "<group>"; };
@@ -409,6 +417,7 @@
 		18F6A07324B5A3FB000ACDF1 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				8D0F7498253046D400200C2B /* Friends */,
 				8D0C5C2E252457CA005B3A4E /* Events */,
 				8D673A70251DF5E500585AF9 /* EventFeed */,
 				8D673A6D251DD6FC00585AF9 /* ProfilePage */,
@@ -454,6 +463,7 @@
 				8D0C5C3B2524901E005B3A4E /* LaunchScreen.storyboard */,
 				8D0C5C2C252451CA005B3A4E /* Events.storyboard */,
 				8D94E07A24AF1D0A00DBC46A /* Main.storyboard */,
+				8D0F749C2530479800200C2B /* Social.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -507,6 +517,32 @@
 				8D0C5C432524A8AE005B3A4E /* EventActionDatasource.swift */,
 			);
 			path = "CollectionView+Datasource";
+			sourceTree = "<group>";
+		};
+		8D0F7498253046D400200C2B /* Friends */ = {
+			isa = PBXGroup;
+			children = (
+				8D0F74A62530534F00200C2B /* Model */,
+				8D0F74A125304F6400200C2B /* TableViewCells */,
+				8D0F7499253046EF00200C2B /* FriendListViewController.swift */,
+			);
+			path = Friends;
+			sourceTree = "<group>";
+		};
+		8D0F74A125304F6400200C2B /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				8D0F74A225304FAF00200C2B /* FriendListTableViewCell.swift */,
+			);
+			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		8D0F74A62530534F00200C2B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8D0F74A72530536200200C2B /* FindFriendModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		8D21855B24B6E283002688A8 /* OTP */ = {
@@ -832,6 +868,7 @@
 				8D8C6A9824B5939700D6DBE3 /* GoogleService-Info.plist in Resources */,
 				8D0C5C3D2524901E005B3A4E /* LaunchScreen.storyboard in Resources */,
 				8DA048AE24B328FF0099D528 /* Poppins-Medium.ttf in Resources */,
+				8D0F749D2530479800200C2B /* Social.storyboard in Resources */,
 				8DA048AA24B328FF0099D528 /* Poppins-ExtraLightItalic.ttf in Resources */,
 				8DA048B324B328FF0099D528 /* Poppins-Regular.ttf in Resources */,
 				8DA048B724B328FF0099D528 /* Poppins-LightItalic.ttf in Resources */,
@@ -903,6 +940,7 @@
 				1841F19424B480680021D131 /* TextPickerTableViewCell.swift in Sources */,
 				8D1C960D252C2A8C005FE3EC /* EventAddPlayerTableViewCell.swift in Sources */,
 				8D0C5C442524A8AE005B3A4E /* EventActionDatasource.swift in Sources */,
+				8D0F74A325304FAF00200C2B /* FriendListTableViewCell.swift in Sources */,
 				18F6A07624B5A4FD000ACDF1 /* RegisterDatasource.swift in Sources */,
 				8D673A6A251B3F4C00585AF9 /* AffiliationsTableViewCell.swift in Sources */,
 				8D673A75251DFF6900585AF9 /* FeedTableViewCell.swift in Sources */,
@@ -914,6 +952,7 @@
 				8DDBB75E252D911200D74087 /* RegistrationDetailSummaryCell.swift in Sources */,
 				188B699D25231138000F6030 /* AddEditFeedViewController.swift in Sources */,
 				8D9C07A5250B889300514692 /* TournamentNearMeModel.swift in Sources */,
+				8D0F74A82530536200200C2B /* FindFriendModel.swift in Sources */,
 				18F6A07224B57D18000ACDF1 /* SelfSizingTextView.swift in Sources */,
 				8DA3055A24BC310D0090142B /* AcceptRejectRequestViewController.swift in Sources */,
 				1843558E252B503900DECA90 /* ForgotModel.swift in Sources */,
@@ -922,6 +961,7 @@
 				1880B020251364C2006BE848 /* NetworkRouter.swift in Sources */,
 				18C6B02D2512015200B7162E /* TournamentModel.swift in Sources */,
 				8DF77D51252B1F680065720A /* AddPlayersViewController.swift in Sources */,
+				8D0F749A253046EF00200C2B /* FriendListViewController.swift in Sources */,
 				1841F19624B480680021D131 /* FootnoteButtonTableViewCell.swift in Sources */,
 				18455F8D252DE556000CA7CA /* TournamentFilterViewController.swift in Sources */,
 				183384CC24B4A9BF009911A8 /* SwitchTableViewCell.swift in Sources */,

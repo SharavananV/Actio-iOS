@@ -140,6 +140,11 @@ extension HomePageViewController: UICollectionViewDelegate,UICollectionViewDataS
                 self.navigationController?.pushViewController(nav, animated: false)
             }
         }
+		if indexPath.row == 2 {
+			if let nav = UIStoryboard(name: "Social", bundle: nil).instantiateViewController(withIdentifier: "FriendListViewController") as? FriendListViewController {
+				self.navigationController?.pushViewController(nav, animated: false)
+			}
+		}
     }
 }
 extension UIView {

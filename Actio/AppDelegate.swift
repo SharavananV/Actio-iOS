@@ -73,7 +73,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func redirect(to view: String, with params: [String: String]) {
-        self.parentID = params["p"] ?? "" 
+        self.parentID = params["p"] ?? ""
         print(self.parentID)
         if let topViewController = self.window?.topViewController() {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
