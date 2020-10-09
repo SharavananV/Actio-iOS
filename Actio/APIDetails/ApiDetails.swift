@@ -11,8 +11,7 @@ import UIKit
 
 
 // Webpage URL
-let termsandConditionUrl = "http://playactio.com/terms.html"
-
+let termsandConditionUrl = "https://playactio.com/terms.html"
 
 let baseUrl = "http://203.223.191.66:8085/"
 
@@ -57,6 +56,9 @@ let searchPlayerUrl = baseUrl + "v1/registration/player"
 let addPlayersUrl = baseUrl + "v1/registration/addplayers"
 let submitRegistrationUrl = baseUrl + "v1/registration/submit"
 let editDeletePlayerUrl = baseUrl + "v1/registration/editplayer"
+
+// Friends
+let listFriendsUrl = baseUrl + "v1/friend/find"
 
 // Notification
 let notificationListUrl = baseUrl + "v1/notify/list"
