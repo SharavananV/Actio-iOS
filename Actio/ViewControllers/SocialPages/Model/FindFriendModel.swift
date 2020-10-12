@@ -15,34 +15,18 @@ struct FindFriendResponse: ResponseType {
     var msg: String?
     let status, logID: String?
     let profile: ProfileData?
-    let find: [User]?
+    let find: [Friend]?
     let list: [List]?
 }
 
 // MARK: - WelcomeProfile
 struct ProfileData: Codable {
-    let profile: User?
-    let list: [User]?
-}
-
-// MARK: - List
-struct List: Codable {
-    let subscriberID: Int?
-    let subscriberDisplayID, fullName, username, emailID: String?
-    let profileImage: String?
-
-    enum CodingKeys: String, CodingKey {
-        case subscriberID = "subscriber_id"
-        case subscriberDisplayID = "subscriber_display_id"
-        case fullName = "full_name"
-        case username
-        case emailID = "email_id"
-        case profileImage = "profile_image"
-    }
+	let profile: User?
+	let list: [Friend]?
 }
 
 // MARK: - Find
-class User: Codable {
+class Friend: Codable {
 	let subscriberID: Int?
 	let subscriberDisplayID, fullName, username, emailID: String?
 	let profileImage: String?

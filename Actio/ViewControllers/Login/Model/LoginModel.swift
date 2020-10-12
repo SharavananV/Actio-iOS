@@ -8,7 +8,8 @@
 
 import Foundation
 
-struct LoginModelResponse: Codable {
+struct LoginModelResponse: ResponseType {
+	var errors: [ActioError]?
     let status, msg, token: String?
     let subscriberSeqID: Int?
     let subscriberID, userStatus, fullName, userName: String?

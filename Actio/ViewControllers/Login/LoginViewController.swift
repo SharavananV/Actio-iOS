@@ -18,9 +18,7 @@ class LoginViewController: UIViewController {
     
     var iconClick = true
     let button = UIButton(type: .custom)
-    var urlString = String()
-    var userNameString = String()
-    
+	var service = DependencyProvider.shared.networkService
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,9 +51,6 @@ class LoginViewController: UIViewController {
         view.backgroundColor = AppColor.OrangeColor()
         
         self.view.addSubview(view)
-        
-        
-        
     }
     
     @objc func dismissKeyboard() {
@@ -94,65 +89,28 @@ class LoginViewController: UIViewController {
     }
     @IBAction func forgotPasswordButtonAction(_ sender: Any) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "ForgotPasswordViewController") as? ForgotPasswordViewController {
-            vc.forgotUserName = self.userNameString
             self.navigationController?.pushViewController(vc, animated: false)
         }
-        
     }
     
     @IBAction func loginButtonAction(_ sender: Any) {
-        
-        apiCall(username: userNameTextField.text!, password: passwordTextField.text!,Mode: "3", deviceToken: UDHelper.getDeviceToken())
-        
-    }
-    
-    func apiCall(username: String,password: String,Mode: String,deviceToken:String) {
-        urlString = loginUrl
-        NetworkRouter.shared.request(urlString, method: .post, parameters: ["username": username,"password": password,"Mode": Mode,"deviceToken": deviceToken],encoding:JSONEncoding.default, headers: nil).responseJSON {
-            response in
-            switch response.result {
-            case .success (let data):
-                print(response,"fgfgfgfsg")
-                
-                if let resultDict = data as? [String: Any], let successText = resultDict["status"] as? String, successText == "200"{
-                    
-                    if (resultDict["userStatus"] as? String) == "1" {
-                        if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomeAlertViewController") as? WelcomeAlertViewController {
-                            self.userNameString = resultDict["fullName"] as? String ?? ""
-                            controller.loggedUserName = self.userNameString
-                            
-                            controller.modalPresentationStyle = .fullScreen
-                            
-                            self.present(controller, animated: false, completion: nil)
-                        }
-                        
-                    }
-                    
-                    UDHelper.setAuthToken(resultDict["token"] as? String ?? "")
-                    UDHelper.setUserId(resultDict["subscriberID"] as? String ?? "")
-                    UDHelper.setUserLoggedIn(true)
-                    self.navigateBasedOnStatus(resultDict["userStatus"] as? String ?? "")
-                }
-                else if let resultDict = data as? [String: Any], let invalidText = resultDict["msg"] as? String {
-                    self.view.makeToast(invalidText)
-                }
-                else {
-                    let resultDict = data as? [String: Any]
-                    if let status = resultDict!["status"] as? String, status == "422", let errors = resultDict!["errors"] as? [[String: Any]] {
-                        if let firstError = errors.first, let msg = firstError["msg"] as? String {
-                            self.view.makeToast(msg)
-                            
-                        }
-                        
-                    }
-                }
-                
-            case .failure(_):
-                print("JSON")
-            }
-            
-        }
-        
+		if let username = userNameTextField.text, let password = passwordTextField.text {
+			service.post(loginUrl, parameters: ["username": username,"password": password, "Mode": "3", "deviceToken": UDHelper.getDeviceToken()], onView: view) { (response: LoginModelResponse) in
+				UDHelper.setAuthToken(response.token ?? "")
+				UDHelper.setData(for: .loggedInUser, data: response)
+				
+				if response.userStatus == "1" {
+					if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WelcomeAlertViewController") as? WelcomeAlertViewController {
+						controller.loggedUserName = response.userName ?? ""
+						controller.modalPresentationStyle = .fullScreen
+						
+						self.present(controller, animated: false, completion: nil)
+					}
+				}
+				
+				self.navigateBasedOnStatus(response.userStatus ?? "")
+			}
+		}
     }
     
     private func navigateBasedOnStatus(_ status: String) {

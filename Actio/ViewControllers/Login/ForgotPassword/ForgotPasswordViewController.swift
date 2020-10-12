@@ -15,7 +15,6 @@ class ForgotPasswordViewController: UIViewController {
     @IBOutlet weak var subscriptionIdTextField: UITextField!
     private let service = DependencyProvider.shared.networkService
     var forgotDetails: ForgotPasswordModel?
-    var forgotUserName: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()

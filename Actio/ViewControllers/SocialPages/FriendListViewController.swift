@@ -14,7 +14,7 @@ class FriendListViewController: UIViewController {
 	@IBOutlet var tableView: UITableView!
 	
 	private let service = DependencyProvider.shared.networkService
-	private var allUsers: [User]?
+	private var allUsers: [Friend]?
 	
 	private func listFriends(_ searchText: String) {
 		service.post(listFriendsUrl, parameters: ["search": searchText.lowercased()], onView: view) { (response: FindFriendResponse) in

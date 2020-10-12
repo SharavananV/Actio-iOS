@@ -32,63 +32,44 @@ class UDHelper: NSObject,XMLParserDelegate
         UserDefaults.standard.set(AuthDeviceToken, forKey: "DEVICE_AUTHTOKEN")
         UserDefaults.standard.synchronize()
     }
-    
-    // MARK: UserId
-    class func getUserId()-> String {
-        let getUserId =  UserDefaults.standard.object(forKey: "USER_ID")
-        return getUserId != nil ? getUserId as! String : ""
-    }
-    class func setUserId(_ userId:String)-> Void
-    {
-        UserDefaults.standard.set(userId, forKey: "USER_ID")
-        UserDefaults.standard.synchronize()
-    }
-    
-    // MARK: UserLoggedIn
-    class func getUserLoggedIn()-> Bool {
-        let getUserIogged =  UserDefaults.standard.object(forKey: "USER_LOGGEDIN")
-        return (getUserIogged != nil)
-    }
-    class func setUserLoggedIn(_ userLoggedIn:Bool)-> Void
-    {
-        UserDefaults.standard.set(userLoggedIn, forKey: "USER_LOGGEDIN")
-        UserDefaults.standard.synchronize()
-    }
 
-
-    
-    // MARK: User Status
-    class func getUserStatus()-> String {
-        let getUserStatus =  UserDefaults.standard.object(forKey: "USER_STATUS")
-        return getUserStatus != nil ? getUserStatus as! String : ""
-    }
-    class func setUserStatus(_ status: String)-> Void
-    {
-        UserDefaults.standard.set(status, forKey: "USER_STATUS")
-        UserDefaults.standard.synchronize()
-    }
-	
-	class func setEventDetails(_ details: EventDetail?) {
-		if let details = details, let encoded = try? JSONEncoder().encode(details) {
-			UserDefaults.standard.set(encoded, forKey: "CurrentEventDetail")
+	// MARK: For all models
+	class func setData<E: Encodable>(for type: DefaultsType, data: E?) {
+		if let details = data, let encoded = try? JSONEncoder().encode(details) {
+			UserDefaults.standard.set(encoded, forKey: type.rawValue)
 		}
 	}
 	
-	class func getEventDetails() -> EventDetail? {
-		if let savedDetails = UserDefaults.standard.object(forKey: "CurrentEventDetail") as? Data {
-			if let eventDetail = try? JSONDecoder().decode(EventDetail.self, from: savedDetails) {
-				return eventDetail
+	class func getData<E: Decodable>(for type: DefaultsType) -> E? {
+		if let savedDetails = UserDefaults.standard.object(forKey: type.rawValue) as? Data {
+			if let data = try? JSONDecoder().decode(E.self, from: savedDetails) {
+				return data
 			}
 		}
 		
 		return nil
 	}
-    
+
+    // MARK: User Status
+    class func getUserStatus()-> String {
+        let getUserStatus =  UserDefaults.standard.object(forKey: "USER_STATUS")
+        return getUserStatus != nil ? getUserStatus as! String : ""
+    }
+	
+    class func setUserStatus(_ status: String)-> Void {
+        UserDefaults.standard.set(status, forKey: "USER_STATUS")
+        UserDefaults.standard.synchronize()
+    }
+	
     class func resetUserStuff() {
         setAuthToken("")
         setUserStatus("")
-        setUserId("")
-        setUserLoggedIn(false)
+		DefaultsType.allCases.forEach { (type) in
+			UserDefaults.standard.setValue(nil, forKey: type.rawValue)
+		}
     }
+	
+	enum DefaultsType: String, CaseIterable {
+		case loggedInUser, currentEvent
+	}
 }
-    

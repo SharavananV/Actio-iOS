@@ -23,7 +23,7 @@ class FriendListTableViewCell: UITableViewCell {
 	@IBOutlet var addFriendButton: UIButton!
 	
 	weak var delegate: FriendListDelegate?
-	private var userDetails: User?
+	private var userDetails: Friend?
 	
 	override func layoutSubviews() {
 		super.layoutSubviews()
@@ -32,7 +32,7 @@ class FriendListTableViewCell: UITableViewCell {
 		profileImageView.layer.cornerRadius = height / 2
 	}
 	
-	func configure(_ user: User?) {
+	func configure(_ user: Friend?) {
 		userNameLabel.text = user?.username
 		actualNameLabel.text = user?.fullName
 		profileImageView.image = UIImage(named: user?.profileImage ?? "userplaceholder")

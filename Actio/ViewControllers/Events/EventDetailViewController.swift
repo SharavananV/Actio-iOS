@@ -49,7 +49,7 @@ class EventDetailViewController: UIViewController {
 		service.post(eventDetailUrl,
 					 parameters: ["eventID": eventId ?? 0],
 					 onView: self.view) { (response: EventDetailResponse) in
-			UDHelper.setEventDetails(response.event)
+			UDHelper.setData(for: .currentEvent, data: response.event)
 			self.eventDetails = response.event
 			self.updateUI()
 		}
