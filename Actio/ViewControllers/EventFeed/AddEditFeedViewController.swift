@@ -31,6 +31,10 @@ class AddEditFeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        feedTypeTextField.setBorderColor(width: 1.0, color: AppColor.TextFieldBorderColor())
+        feedTitleTextField.setBorderColor(width: 1.0, color: AppColor.TextFieldBorderColor())
+        feedShortDescriptionTextField.setBorderColor(width: 1.0, color: AppColor.TextFieldBorderColor())
+        
         self.feedDescriptionTextView.layer.borderColor = AppColor.TextFieldBorderColor().cgColor
         self.feedDescriptionTextView.layer.borderWidth = 1
         self.feedDescriptionTextView.delegate = self
