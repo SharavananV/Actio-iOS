@@ -13,7 +13,7 @@ class ActioGradientButton: UIButton {
 
     /// Corner radius of the background rectangle
     @IBInspectable
-    public var roundRectCornerRadius: CGFloat = 8 {
+    public var roundRectCornerRadius: CGFloat = 7 {
         didSet {
             self.setNeedsLayout()
         }
@@ -40,13 +40,15 @@ class ActioGradientButton: UIButton {
         if let existingLayer = roundRectLayer {
             existingLayer.removeFromSuperlayer()
         }
-        let shapeLayer = CALayer()
-        shapeLayer.backgroundColor = roundRectColor.cgColor
-		shapeLayer.cornerRadius = roundRectCornerRadius
-        self.layer.insertSublayer(shapeLayer, at: 0)
-        self.roundRectLayer = shapeLayer
-        
-        self.applyGradient(colours: [AppColor.OrangeColor(),AppColor.RedColor()])
-    }
+		
+		let gradient: CAGradientLayer = CAGradientLayer()
+		gradient.frame = self.bounds
+		gradient.colors = [#colorLiteral(red: 1, green: 0.3411764706, blue: 0.2, alpha: 1), #colorLiteral(red: 0.7803921569, green: 0, blue: 0.2235294118, alpha: 1)].map { $0.cgColor }
+		gradient.startPoint = CGPoint(x: 0, y: 0)
+		gradient.endPoint = CGPoint(x: 1, y: 0)
+		gradient.cornerRadius = roundRectCornerRadius
+		self.layer.insertSublayer(gradient, at: 0)
+		self.roundRectLayer = gradient
+	}
 
 }

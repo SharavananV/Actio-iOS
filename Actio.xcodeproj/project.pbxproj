@@ -419,10 +419,9 @@
 		18F6A07324B5A3FB000ACDF1 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				8D0F7498253046D400200C2B /* Friends */,
+				8D0F7498253046D400200C2B /* SocialPages */,
 				8D0C5C2E252457CA005B3A4E /* Events */,
 				8D673A70251DF5E500585AF9 /* EventFeed */,
-				8D673A6D251DD6FC00585AF9 /* ProfilePage */,
 				8DA5D450250A45F4003EAB6B /* Tournament */,
 				8DCBAB5724BF2D05009E8B7F /* DashBoard */,
 				8DF7863A24B846B000062261 /* Subscriber */,
@@ -521,14 +520,15 @@
 			path = "CollectionView+Datasource";
 			sourceTree = "<group>";
 		};
-		8D0F7498253046D400200C2B /* Friends */ = {
+		8D0F7498253046D400200C2B /* SocialPages */ = {
 			isa = PBXGroup;
 			children = (
 				8D0F74A62530534F00200C2B /* Model */,
 				8D0F74A125304F6400200C2B /* TableViewCells */,
 				8D0F7499253046EF00200C2B /* FriendListViewController.swift */,
+				8D673A6E251DD72400585AF9 /* ProfilePageViewController.swift */,
 			);
-			path = Friends;
+			path = SocialPages;
 			sourceTree = "<group>";
 		};
 		8D0F74A125304F6400200C2B /* TableViewCells */ = {
@@ -565,14 +565,6 @@
 				8D673A69251B3F4C00585AF9 /* AffiliationsTableViewCell.swift */,
 			);
 			path = TableViewCell;
-			sourceTree = "<group>";
-		};
-		8D673A6D251DD6FC00585AF9 /* ProfilePage */ = {
-			isa = PBXGroup;
-			children = (
-				8D673A6E251DD72400585AF9 /* ProfilePageViewController.swift */,
-			);
-			path = ProfilePage;
 			sourceTree = "<group>";
 		};
 		8D673A70251DF5E500585AF9 /* EventFeed */ = {
