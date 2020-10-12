@@ -1130,7 +1130,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="850"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7nA-mO-Uvf" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="844.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="844"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h6G-d0-ZGu">
                                                 <rect key="frame" x="10" y="24" width="384" height="21"/>
@@ -1254,8 +1254,8 @@
                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rjq-KA-Vxl">
-                                                <rect key="frame" x="116" y="692.5" width="186" height="47"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rjq-KA-Vxl" customClass="ActioGradientButton" customModule="Actio" customModuleProvider="target">
+                                                <rect key="frame" x="152.5" y="673" width="109" height="47"/>
                                                 <color key="backgroundColor" name="YetToOpenColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="47" id="uub-m7-84j"/>
@@ -1275,13 +1275,13 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k1c-WC-oan">
-                                                <rect key="frame" x="10" y="307" width="90" height="18.5"/>
+                                                <rect key="frame" x="10" y="307" width="120" height="18.5"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="13"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RAI-0y-280">
-                                                <rect key="frame" x="312" y="307" width="90" height="18.5"/>
+                                                <rect key="frame" x="342" y="307" width="90" height="18.5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="90" id="c50-dB-DFM"/>
                                                 </constraints>
@@ -1290,7 +1290,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="umj-7w-Eru" customClass="RangeSlider" customModule="SwiftRangeSlider">
-                                                <rect key="frame" x="10" y="259" width="384" height="3"/>
+                                                <rect key="frame" x="10" y="259" width="364" height="3"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="3" id="oYl-dT-eG1"/>
                                                 </constraints>
@@ -1324,6 +1324,7 @@
                                             <constraint firstItem="5Cd-5i-Sqo" firstAttribute="leading" secondItem="rkf-HB-pj8" secondAttribute="leading" id="3wH-Cj-htP"/>
                                             <constraint firstItem="r74-bP-P56" firstAttribute="leading" secondItem="7nA-mO-Uvf" secondAttribute="leading" constant="10" id="44I-kj-abe"/>
                                             <constraint firstItem="QgB-9W-bD3" firstAttribute="leading" secondItem="r74-bP-P56" secondAttribute="leading" constant="-2" id="4vJ-SV-c6v"/>
+                                            <constraint firstItem="rjq-KA-Vxl" firstAttribute="top" secondItem="Q8m-cD-1fu" secondAttribute="bottom" constant="20" id="87G-fM-Omp"/>
                                             <constraint firstItem="umj-7w-Eru" firstAttribute="leading" secondItem="BaO-ap-pqD" secondAttribute="leading" id="8ZX-Rm-PgC"/>
                                             <constraint firstItem="QgB-9W-bD3" firstAttribute="top" secondItem="r74-bP-P56" secondAttribute="bottom" constant="20" id="9Dd-ko-FoL"/>
                                             <constraint firstAttribute="trailing" secondItem="r74-bP-P56" secondAttribute="trailing" constant="20" id="AHQ-qr-iG1"/>
@@ -1347,6 +1348,7 @@
                                             <constraint firstItem="x5d-mV-x5Z" firstAttribute="leading" secondItem="QgB-9W-bD3" secondAttribute="leading" id="g6H-LB-tqt"/>
                                             <constraint firstItem="rkf-HB-pj8" firstAttribute="leading" secondItem="Yla-Z8-ZwK" secondAttribute="leading" id="gEz-2T-9rM"/>
                                             <constraint firstItem="Yla-Z8-ZwK" firstAttribute="top" secondItem="h6G-d0-ZGu" secondAttribute="bottom" constant="20" id="gpS-lQ-PgS"/>
+                                            <constraint firstItem="rjq-KA-Vxl" firstAttribute="centerX" secondItem="7nA-mO-Uvf" secondAttribute="centerX" id="i8A-YN-KE1"/>
                                             <constraint firstItem="Q8m-cD-1fu" firstAttribute="leading" secondItem="gyT-fR-aq0" secondAttribute="leading" id="jc0-6Z-fhf"/>
                                             <constraint firstItem="k1c-WC-oan" firstAttribute="top" secondItem="umj-7w-Eru" secondAttribute="bottom" constant="45" id="jou-95-Mm1"/>
                                             <constraint firstItem="Yla-Z8-ZwK" firstAttribute="leading" secondItem="h6G-d0-ZGu" secondAttribute="leading" id="mIv-s6-Auh"/>
@@ -3833,6 +3835,9 @@
         </designable>
         <designable name="GoX-8E-Ihn">
             <size key="intrinsicContentSize" width="48" height="30"/>
+        </designable>
+        <designable name="rjq-KA-Vxl">
+            <size key="intrinsicContentSize" width="109" height="36"/>
         </designable>
         <designable name="vfv-GZ-7Ab">
             <size key="intrinsicContentSize" width="51" height="30"/>
