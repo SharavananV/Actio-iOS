@@ -59,7 +59,12 @@ let editDeletePlayerUrl = baseUrl + "registration/editplayer"
 // Friends
 let listFriendsUrl = baseUrl + "friend/find"
 let friendActionUrl = baseUrl + "friend/action"
+let friendListUrl = baseUrl + "friend/list"
 
 // Notification
 let notificationListUrl = baseUrl + "notify/list"
 let notificationSeenUpdateUrl = baseUrl + "notify/seen"
+
+// Profile
+let myProfileUrl = baseUrl + "profile/myprofile"
+

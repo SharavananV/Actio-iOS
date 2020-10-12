@@ -13,7 +13,8 @@ struct FindFriendResponse: ResponseType {
 	var errors: [ActioError]?
 	var msg: String?
 	let status: String?
-	let find: [User]?
+    let find: [User]?
+    let profile: User?
 }
 
 // MARK: - Find

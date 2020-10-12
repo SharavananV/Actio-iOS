@@ -34,8 +34,7 @@ class NotificationListViewController: UIViewController {
 	
 	private func fetchNotifications() {
 		service.post(notificationListUrl, parameters: nil, onView: self.view) { [weak self] (response: NotificationResponse) in
-			self?.notificationList = response.notification
-			
+			self?.notificationList = response.notification			
 			self?.tableView.reloadData()
 		}
 	}

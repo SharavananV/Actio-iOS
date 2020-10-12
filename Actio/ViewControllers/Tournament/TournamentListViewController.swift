@@ -31,9 +31,9 @@ class TournamentListViewController: UIViewController,filterValueDelegate {
         locationManager.startUpdatingLocation()
         locationManager.startMonitoringSignificantLocationChanges()
         tournamentSearchBar.delegate = self
-        let reload = UIBarButtonItem(image: UIImage(named: "menu-white"), style: .plain, target: self, action: #selector(self.reloadTapped))
-        let search = UIBarButtonItem(image: UIImage(named: "menu-white"), style: .plain, target: self, action: #selector(self.searchTapped))
-        let filter = UIBarButtonItem(image: UIImage(named: "menu-white"), style: .plain, target: self, action: #selector(self.filterTapped))
+        let reload = UIBarButtonItem(image: UIImage(named: "Icon material-refresh"), style: .plain, target: self, action: #selector(self.reloadTapped))
+        let search = UIBarButtonItem(image: UIImage(named: "Icon map-search"), style: .plain, target: self, action: #selector(self.searchTapped))
+        let filter = UIBarButtonItem(image: UIImage(named: "Icon awesome-filter"), style: .plain, target: self, action: #selector(self.filterTapped))
         navigationItem.rightBarButtonItems = [filter,search,reload]
         tournamentListApiCall()
         self.favoriteCollectionView.delegate = self
