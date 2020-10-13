@@ -128,7 +128,7 @@ extension TournamentListViewController : UICollectionViewDelegate,UICollectionVi
             return UICollectionViewCell()
         }
         
-        if let logo = tournament.tournamentLogo,let imagePath = URL(string:  baseUrl + logo) {
+        if let logo = tournament.tournamentLogo,let imagePath = URL(string:  baseImageUrl + logo) {
             cell.tournamentFavImageView.load(url: imagePath)
         }
         

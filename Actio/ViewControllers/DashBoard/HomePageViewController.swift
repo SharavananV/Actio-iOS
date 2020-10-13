@@ -119,11 +119,12 @@ extension HomePageViewController: UICollectionViewDelegate,UICollectionViewDataS
             let eachCellList = dashboardModules[indexPath.row]
             cell.homeCellLabel.text = (eachCellList["name"] as? String) ?? ""
             
-            if let imageUrl = eachCellList["image"] as? String, let imagePath = URL(string:  baseUrl + imageUrl) {
+            if let imageUrl = eachCellList["image"] as? String, let imagePath = URL(string:  baseImageUrl + imageUrl) {
+                print(imagePath)
                 cell.homeBackgroundImageView.load(url: imagePath)
             }
             
-            if let iconUrl = eachCellList["icon"] as? String, let iconPath = URL(string:  baseUrl + iconUrl) {
+            if let iconUrl = eachCellList["icon"] as? String, let iconPath = URL(string:  baseImageUrl + iconUrl) {
                 cell.homeCellImage.load(url: iconPath)
             }
         }

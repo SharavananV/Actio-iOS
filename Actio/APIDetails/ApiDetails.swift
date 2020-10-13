@@ -11,6 +11,7 @@ import Foundation
 // Webpage URL
 let termsandConditionUrl = "https://playactio.com/terms.html"
 
+let baseImageUrl = "http://203.223.191.66:8085/"
 let baseUrl = "http://203.223.191.66:8085/v1/"
 
 let masterUrl = baseUrl + "subscriber/init"

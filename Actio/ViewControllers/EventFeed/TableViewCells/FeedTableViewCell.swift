@@ -12,8 +12,10 @@ class FeedTableViewCell: UITableViewCell {
 
     @IBOutlet var cellBackgroundView: UIView!
         
-    @IBOutlet var feedImageView: UIImageView!
-    
+    @IBOutlet weak var feedTitleLabel: UILabel!
+    @IBOutlet weak var feedNameLabel: UILabel!
+    @IBOutlet var feedProfileImageView: UIImageView!
+    @IBOutlet weak var feedImageView: UIImageView!
     @IBOutlet var feedTimeLabel: UILabel!
     
     @IBOutlet var feedDescriptionLabel: UILabel!

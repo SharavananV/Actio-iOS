@@ -82,14 +82,25 @@ extension FeedListViewController : UITableViewDelegate,UITableViewDataSource,UIS
             return UITableViewCell()
         }
         if feed.profileImage != nil {
-            if let imagePath = URL(string:  baseUrl + feed.profileImage!) {
+            if let imagePath = URL(string:  baseImageUrl + feed.profileImage!) {
+                cell.feedProfileImageView.load(url: imagePath)
+            }
+        }else {
+            cell.feedProfileImageView.image = #imageLiteral(resourceName: "205383133115.jpg")
+        }
+        cell.feedProfileImageView.layer.cornerRadius = cell.feedProfileImageView.frame.height/2
+        cell.feedProfileImageView.clipsToBounds = true
+        cell.feedDescriptionLabel.text = feed.listDescription
+        cell.feedNameLabel.text = feed.fullName
+        cell.feedTitleLabel.text = feed.title
+        self.subscriberID = feed.subscriberID
+        if feed.images != nil {
+            if let imagePath = URL(string:  baseImageUrl + feed.images!) {
                 cell.feedImageView.load(url: imagePath)
             }
         }else {
             cell.feedImageView.image = #imageLiteral(resourceName: "205383133115.jpg")
         }
-        cell.feedDescriptionLabel.text = feed.shortDescription
-        self.subscriberID = feed.subscriberID
         
         let feedDateFormatter = DateFormatter()
         feedDateFormatter.dateFormat = "MMM dd,yyyy hh:mm:ss a"
@@ -183,7 +194,7 @@ extension FeedListViewController : UITableViewDelegate,UITableViewDataSource,UIS
             self.filteredList = self.feedList
         } else if let list = self.feedList {
             self.filteredList = list.filter { (model) -> Bool in
-                model.title?.contains(searchText) ?? false || model.shortDescription?.contains(searchText) ?? false
+                model.title?.contains(searchText) ?? false || model.listDescription?.contains(searchText) ?? false
             }
         }
         searching = true
@@ -210,7 +221,6 @@ extension FeedListViewController : UITableViewDelegate,UITableViewDataSource,UIS
                                      "Content-type": "multipart/form-data",
                                      "Content-Disposition" : "form-data"]
         let params = ["title" : feed.title,
-                      "shortDescription" : feed.shortDescription,
                       "description" : feed.listDescription,
                       "isRemove": true,
                       "categoryID":1,

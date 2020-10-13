@@ -62,7 +62,7 @@ class EventDetailViewController: UIViewController {
 		
 		if let eventBanner = eventDetails?.eventBanner {
 			let bannerUrls = eventBanner.map {
-				URL(string:  baseUrl + $0)
+				URL(string:  baseImageUrl + $0)
 			}
 			
 			vc.previewUrl = bannerUrls[index]
@@ -175,7 +175,7 @@ extension EventDetailViewController {
 	private func updateUI() {
 		guard let event = self.eventDetails else { return }
 		
-		if let logo = event.eventLogo,let imagePath = URL(string:  baseUrl + logo) {
+		if let logo = event.eventLogo,let imagePath = URL(string:  baseImageUrl + logo) {
 			bannerImageView.load(url: imagePath)
 		}
 		eventNameLabel.text = event.eventName
@@ -199,7 +199,7 @@ extension EventDetailViewController {
 		
 		if let eventBanner = event.eventBanner {
 			let bannerUrls = eventBanner.map {
-				URL(string:  baseUrl + $0)
+				URL(string:  baseImageUrl + $0)
 			}
 			
 			self.galleryDatasource = TournamentGalleryDatasource(self, galleryUrls: bannerUrls)

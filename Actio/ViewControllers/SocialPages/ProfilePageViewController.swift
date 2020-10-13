@@ -58,7 +58,7 @@ extension ProfilePageViewController : UICollectionViewDelegate,UICollectionViewD
         guard let friendsList = self.friendsListModel?[indexPath.row] else {
             return UICollectionViewCell()
         }
-        if let profileImage = friendsList.profileImage,let imagePath = URL(string:  baseUrl + profileImage) {
+        if let profileImage = friendsList.profileImage,let imagePath = URL(string:  baseImageUrl + profileImage) {
             cell.friendsProfileImageView.load(url: imagePath)
         }
         cell.friendsProfileImageView.layer.cornerRadius = cell.friendsProfileImageView.frame.height/2

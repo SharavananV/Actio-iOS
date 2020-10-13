@@ -21,7 +21,7 @@ class EventListTableViewCell: UITableViewCell {
     @IBOutlet var venueLabel: UILabel!
     
 	func configure(_ event: Event) {
-		if let eventLogo = event.eventLogo, let imageUrl = URL(string: baseUrl + eventLogo) {
+		if let eventLogo = event.eventLogo, let imageUrl = URL(string: baseImageUrl + eventLogo) {
 			self.eventImageView.load(url: imageUrl)
 		}
 		

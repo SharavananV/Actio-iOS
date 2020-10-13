@@ -27,7 +27,7 @@ class FriendsProfilePageViewController: UIViewController {
         self.friendsProfileImageView.clipsToBounds = true
         self.friendsEmailLabel.text = friendsEmail
         self.friendsProfileNameLabel.text = friendsName
-        if let image = friendsProfileImage, let url = URL(string: baseUrl + image) {
+        if let image = friendsProfileImage, let url = URL(string: baseImageUrl + image) {
             friendsProfileImageView.load(url: url)
         }
         friendsListCall()
@@ -55,7 +55,7 @@ extension FriendsProfilePageViewController : UICollectionViewDelegate,UICollecti
         guard let friendsList = self.friendsListModel?[indexPath.row] else {
             return UICollectionViewCell()
         }
-        if let profileImage = friendsList.profileImage,let imagePath = URL(string:  baseUrl + profileImage) {
+        if let profileImage = friendsList.profileImage,let imagePath = URL(string:  baseImageUrl + profileImage) {
             cell.friendsProfileImageView.load(url: imagePath)
         }
         cell.friendsProfileImageView.layer.cornerRadius = cell.friendsProfileImageView.frame.height/2

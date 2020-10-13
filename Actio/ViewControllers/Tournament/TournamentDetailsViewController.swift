@@ -84,7 +84,7 @@ class TournamentDetailsViewController: UIViewController, UIViewControllerPreview
         
         if let tournamentBanner = tournamentDetails?.tournamentBanner {
             let bannerUrls = tournamentBanner.map {
-                URL(string:  baseUrl + $0)
+                URL(string:  baseImageUrl + $0)
             }
             vc.previewUrl = bannerUrls[index]
         }
@@ -121,7 +121,7 @@ extension TournamentDetailsViewController: TournamentActionProtocol, TournamentG
     private func updateUI() {
         guard let tournament = self.tournamentDetails else { return }
         
-        if let logo = tournament.tournamentLogo,let imagePath = URL(string:  baseUrl + logo) {
+        if let logo = tournament.tournamentLogo,let imagePath = URL(string:  baseImageUrl + logo) {
             bannerImageView.load(url: imagePath)
         }
         tournamentNameLabel.text = tournament.tournamentName
@@ -145,7 +145,7 @@ extension TournamentDetailsViewController: TournamentActionProtocol, TournamentG
         
         if let tournamentBanner = tournament.tournamentBanner {
             let bannerUrls = tournamentBanner.map {
-                URL(string:  baseUrl + $0)
+                URL(string:  baseImageUrl + $0)
             }
             self.galleryDatasource = TournamentGalleryDatasource(self, galleryUrls: bannerUrls)
         }

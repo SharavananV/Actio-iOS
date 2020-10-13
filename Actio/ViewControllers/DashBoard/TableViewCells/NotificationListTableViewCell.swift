@@ -21,7 +21,7 @@ class NotificationListTableViewCell: UITableViewCell {
 		
 		titleLabel.text = data.message?.msg
 		
-		if let image = data.message?.icon, let url = URL(string: baseUrl + image) {
+		if let image = data.message?.icon, let url = URL(string: baseImageUrl + image) {
 			notificationImageView.load(url: url)
 		} else {
 			notificationImageView.image = nil

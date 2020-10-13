@@ -11,12 +11,8 @@ import Alamofire
 
 class AddEditFeedViewController: UIViewController {
 
-    @IBOutlet weak var feedTypeTextField: UITextField!
-    
     @IBOutlet weak var feedTitleTextField: UITextField!
-    
-    @IBOutlet weak var feedShortDescriptionTextField: UITextField!
-    
+        
     @IBOutlet weak var feedDescriptionTextView: UITextView!
     
     @IBOutlet weak var feedImageView: UIImageView!
@@ -31,9 +27,7 @@ class AddEditFeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        feedTypeTextField.setBorderColor(width: 1.0, color: AppColor.TextFieldBorderColor())
         feedTitleTextField.setBorderColor(width: 1.0, color: AppColor.TextFieldBorderColor())
-        feedShortDescriptionTextField.setBorderColor(width: 1.0, color: AppColor.TextFieldBorderColor())
         
         self.feedDescriptionTextView.layer.borderColor = AppColor.TextFieldBorderColor().cgColor
         self.feedDescriptionTextView.layer.borderWidth = 1
@@ -51,9 +45,8 @@ class AddEditFeedViewController: UIViewController {
         if let feedDetail = self.feedModel {
             feedTitleTextField.text = feedDetail.title
             feedDescriptionTextView.text = feedDetail.listDescription
-            feedShortDescriptionTextField.text = feedDetail.shortDescription
             title = "Update"
-            if let image = feedDetail.images, let url = URL(string: baseUrl + image) {
+            if let image = feedDetail.images, let url = URL(string: baseImageUrl + image) {
                 feedImageView.load(url: url)
             }
         }
@@ -81,7 +74,6 @@ class AddEditFeedViewController: UIViewController {
                                      "Content-type": "multipart/form-data",
                                      "Content-Disposition" : "form-data"]
         var params = ["title" : self.feedTitleTextField.text ?? "",
-                      "shortDescription" : self.feedShortDescriptionTextField.text ?? "",
                       "description" : self.feedDescriptionTextView.text ?? "",
                       "isRemove":false,
                       "categoryID":1
@@ -111,9 +103,7 @@ class AddEditFeedViewController: UIViewController {
                         if let successStatus = parsedData?["status"] as? String, successStatus == "200" ,let successText = parsedData?["msg"] as? String{
                             self.view.makeToast(successText)
                             
-                            self.feedTypeTextField.text = nil
                             self.feedTitleTextField.text = nil
-                            self.feedShortDescriptionTextField.text = nil
                             self.feedDescriptionTextView.text = nil
                             self.feedImageView.image = nil
                             
