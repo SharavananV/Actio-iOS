@@ -14,6 +14,7 @@ struct FindFriendResponse: ResponseType {
 	var msg: String?
 	let status: String?
     let find: [User]?
+    let list: [User]?
     let profile: User?
 }
 

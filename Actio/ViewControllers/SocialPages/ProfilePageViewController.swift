@@ -39,13 +39,13 @@ class ProfilePageViewController: UIViewController {
             self.userDetails = response.profile
             self.profileEmailLabel.text = self.userDetails?.emailID
             self.profileNameLabel.text = self.userDetails?.fullName
- 
+
         }
     }
    
      func listFriends() {
         service.post(friendListUrl, parameters: ["friendID": 3413], onView: view) { (response: FindFriendResponse) in
-            self.friendsListModel = response.find
+            self.friendsListModel = response.list
             self.friendsListCollectionView.reloadData()
         }
     }
