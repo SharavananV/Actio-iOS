@@ -2206,7 +2206,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="829"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2yV-gE-BwR" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="346.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="301.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pH1-uV-fyg">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="136.5"/>
@@ -2231,42 +2231,6 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Y3T-nC-hnM">
-                                                <rect key="frame" x="106.5" y="296.5" width="201" height="30"/>
-                                                <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DTW-kH-OaX">
-                                                        <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="30" id="dIz-VI-T3C"/>
-                                                            <constraint firstAttribute="width" constant="30" id="eLA-hc-bow"/>
-                                                        </constraints>
-                                                        <state key="normal" image="Icon-Chat"/>
-                                                        <connections>
-                                                            <action selector="chatAction:" destination="0KT-jF-xpw" eventType="touchUpInside" id="UzC-Ik-7ne"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6aO-Sp-fRg" customClass="ActioGradientButton" customModule="Actio" customModuleProvider="target">
-                                                        <rect key="frame" x="40" y="0.0" width="60" height="30"/>
-                                                        <state key="normal" title="Unfriend">
-                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </state>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vfv-GZ-7Ab" customClass="ActioGradientButton" customModule="Actio" customModuleProvider="target">
-                                                        <rect key="frame" x="110" y="0.0" width="51" height="30"/>
-                                                        <state key="normal" title="Friends">
-                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </state>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v1x-g6-2ND">
-                                                        <rect key="frame" x="171" y="0.0" width="30" height="30"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="30" id="VK7-Ax-SrP"/>
-                                                            <constraint firstAttribute="height" constant="30" id="oNW-hH-eF1"/>
-                                                        </constraints>
-                                                        <state key="normal" image="Icon awesome-share-alt"/>
-                                                    </button>
-                                                </subviews>
-                                            </stackView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -2274,24 +2238,19 @@
                                             <constraint firstItem="M0L-cM-yoM" firstAttribute="top" secondItem="nCc-eM-LSW" secondAttribute="bottom" constant="19" id="53p-Wi-rNJ"/>
                                             <constraint firstItem="n3U-xp-BT1" firstAttribute="top" secondItem="M0L-cM-yoM" secondAttribute="bottom" constant="10" id="ADf-bJ-6nC"/>
                                             <constraint firstAttribute="trailing" secondItem="pH1-uV-fyg" secondAttribute="trailing" id="ALC-B7-KFW"/>
-                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Y3T-nC-hnM" secondAttribute="trailing" constant="10" id="CfP-Nc-zld"/>
                                             <constraint firstItem="pH1-uV-fyg" firstAttribute="leading" secondItem="2yV-gE-BwR" secondAttribute="leading" id="Fy1-y3-NTb"/>
-                                            <constraint firstItem="Y3T-nC-hnM" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="2yV-gE-BwR" secondAttribute="leading" constant="10" id="Rop-rq-9vF"/>
-                                            <constraint firstItem="Y3T-nC-hnM" firstAttribute="centerX" secondItem="2yV-gE-BwR" secondAttribute="centerX" id="SLD-zO-sQ1"/>
                                             <constraint firstItem="nCc-eM-LSW" firstAttribute="centerX" secondItem="pH1-uV-fyg" secondAttribute="centerX" id="T1a-5t-q88"/>
                                             <constraint firstAttribute="trailing" secondItem="n3U-xp-BT1" secondAttribute="trailing" constant="10" id="Tvw-LF-gnl"/>
-                                            <constraint firstItem="Y3T-nC-hnM" firstAttribute="top" secondItem="n3U-xp-BT1" secondAttribute="bottom" constant="20" id="XXk-eo-3uN"/>
                                             <constraint firstItem="pH1-uV-fyg" firstAttribute="height" secondItem="nCc-eM-LSW" secondAttribute="height" id="aKl-Im-j8R"/>
                                             <constraint firstItem="pH1-uV-fyg" firstAttribute="top" secondItem="2yV-gE-BwR" secondAttribute="top" id="bGC-Eu-yXv"/>
                                             <constraint firstItem="n3U-xp-BT1" firstAttribute="leading" secondItem="2yV-gE-BwR" secondAttribute="leading" constant="10" id="bZd-ib-BjI"/>
                                             <constraint firstItem="nCc-eM-LSW" firstAttribute="width" secondItem="pH1-uV-fyg" secondAttribute="width" multiplier="0.33" id="diz-eh-ars"/>
                                             <constraint firstItem="M0L-cM-yoM" firstAttribute="leading" secondItem="2yV-gE-BwR" secondAttribute="leading" constant="10" id="flY-t2-pex"/>
                                             <constraint firstAttribute="trailing" secondItem="M0L-cM-yoM" secondAttribute="trailing" constant="10" id="hcb-BS-44y"/>
-                                            <constraint firstAttribute="bottom" secondItem="Y3T-nC-hnM" secondAttribute="bottom" constant="20" id="oRZ-ke-bkc"/>
                                         </constraints>
                                     </view>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="bgm-FL-Gy6">
-                                        <rect key="frame" x="0.0" y="348" width="414" height="128"/>
+                                        <rect key="frame" x="0.0" y="303" width="414" height="128"/>
                                         <color key="backgroundColor" name="LightOrangeBackground"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="128" id="nMl-Os-1Kd"/>
@@ -2303,7 +2262,7 @@
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FriendsListCollectionViewCell" id="Xwi-ZH-Dl7" customClass="FriendsListCollectionViewCell" customModule="Actio" customModuleProvider="target">
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProfileFriendsListCollectionViewCell" id="Xwi-ZH-Dl7" customClass="ProfileFriendsListCollectionViewCell" customModule="Actio" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="4" width="95" height="120.5"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="nU0-3g-mEY">
@@ -2345,6 +2304,7 @@
                                 <constraints>
                                     <constraint firstItem="bgm-FL-Gy6" firstAttribute="leading" secondItem="gcT-WN-GP0" secondAttribute="leading" id="AKX-A3-W7h"/>
                                     <constraint firstAttribute="trailing" secondItem="bgm-FL-Gy6" secondAttribute="trailing" id="IQi-RE-duH"/>
+                                    <constraint firstItem="bgm-FL-Gy6" firstAttribute="top" secondItem="n3U-xp-BT1" secondAttribute="bottom" constant="26.5" id="b7P-wn-Nqc"/>
                                     <constraint firstItem="2yV-gE-BwR" firstAttribute="top" secondItem="4H9-Bm-QZc" secondAttribute="top" id="i65-yg-Kg5"/>
                                     <constraint firstItem="2yV-gE-BwR" firstAttribute="bottom" secondItem="4H9-Bm-QZc" secondAttribute="bottom" id="jVq-HQ-dUo"/>
                                     <constraint firstItem="2yV-gE-BwR" firstAttribute="trailing" secondItem="4H9-Bm-QZc" secondAttribute="trailing" id="pRe-Rb-TeF"/>
@@ -2368,8 +2328,8 @@
                     <navigationItem key="navigationItem" id="axR-1E-ame"/>
                     <size key="freeformSize" width="414" height="1000"/>
                     <connections>
-                        <outlet property="friendsListCollectionView" destination="bgm-FL-Gy6" id="JRP-wZ-7qA"/>
                         <outlet property="profileEmailLabel" destination="n3U-xp-BT1" id="6zR-fH-Zk3"/>
+                        <outlet property="profileFriendsListCollectionView" destination="bgm-FL-Gy6" id="JRP-wZ-7qA"/>
                         <outlet property="profileImageView" destination="nCc-eM-LSW" id="MTu-Ib-PRo"/>
                         <outlet property="profileNameLabel" destination="M0L-cM-yoM" id="XTT-bP-YIz"/>
                     </connections>
@@ -3859,16 +3819,197 @@
             </objects>
             <point key="canvasLocation" x="5783" y="-494"/>
         </scene>
+        <!--Friends Profile Page View Controller-->
+        <scene sceneID="oK8-72-GlG">
+            <objects>
+                <viewController storyboardIdentifier="FriendsProfilePageViewController" id="g00-PE-ON6" customClass="FriendsProfilePageViewController" customModule="Actio" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SBn-Eh-MLc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HPc-yS-3c2">
+                                <rect key="frame" x="0.0" y="44" width="414" height="922"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0sN-Uo-I60" userLabel="Content View">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="346.5"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="peD-Lc-fy3">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="136.5"/>
+                                                <color key="backgroundColor" red="1" green="0.3411764706" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            </view>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userimage" translatesAutoresizingMaskIntoConstraints="NO" id="aLB-nA-ezH">
+                                                <rect key="frame" x="138.5" y="68.5" width="137" height="136.5"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="aLB-nA-ezH" secondAttribute="height" multiplier="1:1" id="zqg-44-Sh7"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brito John" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="og7-zG-Rmv">
+                                                <rect key="frame" x="10" y="224" width="394" height="23.5"/>
+                                                <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="britojohn@mail.com" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mJY-Dd-k3I">
+                                                <rect key="frame" x="10" y="257.5" width="394" height="19"/>
+                                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="6Qh-39-moR">
+                                                <rect key="frame" x="106.5" y="296.5" width="201" height="30"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ayc-G8-7jK">
+                                                        <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="30" id="BGU-mF-auO"/>
+                                                            <constraint firstAttribute="width" constant="30" id="gHW-fG-wPP"/>
+                                                        </constraints>
+                                                        <state key="normal" image="Icon-Chat"/>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yfb-lY-1Ot" customClass="ActioGradientButton" customModule="Actio" customModuleProvider="target">
+                                                        <rect key="frame" x="40" y="0.0" width="60" height="30"/>
+                                                        <state key="normal" title="Unfriend">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uVT-Pp-0nX" customClass="ActioGradientButton" customModule="Actio" customModuleProvider="target">
+                                                        <rect key="frame" x="110" y="0.0" width="51" height="30"/>
+                                                        <state key="normal" title="Friends">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XnW-Ct-0i7">
+                                                        <rect key="frame" x="171" y="0.0" width="30" height="30"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="30" id="BpF-D7-GAJ"/>
+                                                            <constraint firstAttribute="width" constant="30" id="ZuZ-uC-hfP"/>
+                                                        </constraints>
+                                                        <state key="normal" image="Icon awesome-share-alt"/>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="6Qh-39-moR" firstAttribute="centerX" secondItem="0sN-Uo-I60" secondAttribute="centerX" id="1KN-ZR-bof"/>
+                                            <constraint firstItem="6Qh-39-moR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0sN-Uo-I60" secondAttribute="leading" constant="10" id="1XR-Rs-u0k"/>
+                                            <constraint firstItem="mJY-Dd-k3I" firstAttribute="top" secondItem="og7-zG-Rmv" secondAttribute="bottom" constant="10" id="HJg-a6-m9C"/>
+                                            <constraint firstItem="og7-zG-Rmv" firstAttribute="leading" secondItem="0sN-Uo-I60" secondAttribute="leading" constant="10" id="Hjr-dE-aiN"/>
+                                            <constraint firstItem="aLB-nA-ezH" firstAttribute="centerX" secondItem="peD-Lc-fy3" secondAttribute="centerX" id="JQO-sh-yiv"/>
+                                            <constraint firstAttribute="trailing" secondItem="peD-Lc-fy3" secondAttribute="trailing" id="LNE-g6-KEg"/>
+                                            <constraint firstItem="6Qh-39-moR" firstAttribute="top" secondItem="mJY-Dd-k3I" secondAttribute="bottom" constant="20" id="PIa-p7-D77"/>
+                                            <constraint firstItem="og7-zG-Rmv" firstAttribute="top" secondItem="aLB-nA-ezH" secondAttribute="bottom" constant="19" id="SQb-ez-mLL"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6Qh-39-moR" secondAttribute="trailing" constant="10" id="Uyi-aX-d3n"/>
+                                            <constraint firstAttribute="trailing" secondItem="mJY-Dd-k3I" secondAttribute="trailing" constant="10" id="Xn7-km-ffq"/>
+                                            <constraint firstItem="peD-Lc-fy3" firstAttribute="leading" secondItem="0sN-Uo-I60" secondAttribute="leading" id="Y6T-Xk-zyc"/>
+                                            <constraint firstItem="mJY-Dd-k3I" firstAttribute="leading" secondItem="0sN-Uo-I60" secondAttribute="leading" constant="10" id="aic-um-70j"/>
+                                            <constraint firstItem="aLB-nA-ezH" firstAttribute="centerY" secondItem="peD-Lc-fy3" secondAttribute="bottom" id="hCD-xg-7uh"/>
+                                            <constraint firstItem="peD-Lc-fy3" firstAttribute="height" secondItem="aLB-nA-ezH" secondAttribute="height" id="hLJ-Vt-GBO"/>
+                                            <constraint firstAttribute="trailing" secondItem="og7-zG-Rmv" secondAttribute="trailing" constant="10" id="htd-ht-pNy"/>
+                                            <constraint firstItem="aLB-nA-ezH" firstAttribute="width" secondItem="peD-Lc-fy3" secondAttribute="width" multiplier="0.33" id="kSn-yL-Ln0"/>
+                                            <constraint firstAttribute="bottom" secondItem="6Qh-39-moR" secondAttribute="bottom" constant="20" id="x6W-nc-3UW"/>
+                                            <constraint firstItem="peD-Lc-fy3" firstAttribute="top" secondItem="0sN-Uo-I60" secondAttribute="top" id="zKY-N4-k0n"/>
+                                        </constraints>
+                                    </view>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="3dM-do-phd">
+                                        <rect key="frame" x="0.0" y="348" width="414" height="128"/>
+                                        <color key="backgroundColor" name="LightOrangeBackground"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="128" id="2Rd-Ph-aDQ"/>
+                                        </constraints>
+                                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="o1C-pZ-9oy">
+                                            <size key="itemSize" width="128" height="128"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FriendsListCollectionViewCell" id="EaK-UM-45b" customClass="FriendsListCollectionViewCell" customModule="Actio" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="4" width="95" height="120.5"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="f9Q-xk-xAp">
+                                                    <rect key="frame" x="0.0" y="0.0" width="95" height="120.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userimage" translatesAutoresizingMaskIntoConstraints="NO" id="E2Y-9E-xHx">
+                                                            <rect key="frame" x="10" y="10" width="75" height="75"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="75" id="Jf3-UH-R0d"/>
+                                                                <constraint firstAttribute="height" constant="75" id="rcl-N6-J6y"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vh9-8Q-i99">
+                                                            <rect key="frame" x="10" y="95" width="75" height="15.5"/>
+                                                            <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="13"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="E2Y-9E-xHx" secondAttribute="trailing" constant="10" id="HEW-e0-6cq"/>
+                                                        <constraint firstItem="Vh9-8Q-i99" firstAttribute="leading" secondItem="f9Q-xk-xAp" secondAttribute="leading" constant="10" id="L0S-l3-Ebx"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Vh9-8Q-i99" secondAttribute="bottom" constant="10" id="Vv4-ty-jop"/>
+                                                        <constraint firstItem="E2Y-9E-xHx" firstAttribute="top" secondItem="f9Q-xk-xAp" secondAttribute="top" constant="10" id="YnV-GV-NSh"/>
+                                                        <constraint firstItem="E2Y-9E-xHx" firstAttribute="leading" secondItem="f9Q-xk-xAp" secondAttribute="leading" constant="10" id="Zrb-53-x29"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Vh9-8Q-i99" secondAttribute="trailing" constant="10" id="acU-kW-Uvf"/>
+                                                        <constraint firstItem="Vh9-8Q-i99" firstAttribute="top" secondItem="E2Y-9E-xHx" secondAttribute="bottom" constant="10" id="qa2-yx-ANS"/>
+                                                    </constraints>
+                                                </collectionViewCellContentView>
+                                                <connections>
+                                                    <outlet property="friendsNameLabel" destination="Vh9-8Q-i99" id="rtT-Ys-BNH"/>
+                                                    <outlet property="friendsProfileImageView" destination="E2Y-9E-xHx" id="075-0e-M5H"/>
+                                                </connections>
+                                            </collectionViewCell>
+                                        </cells>
+                                    </collectionView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="0sN-Uo-I60" firstAttribute="bottom" secondItem="OVj-Qh-HV6" secondAttribute="bottom" id="09y-Kp-qix"/>
+                                    <constraint firstItem="0sN-Uo-I60" firstAttribute="leading" secondItem="OVj-Qh-HV6" secondAttribute="leading" id="3jg-nA-VtS"/>
+                                    <constraint firstItem="3dM-do-phd" firstAttribute="leading" secondItem="HPc-yS-3c2" secondAttribute="leading" id="FIG-R8-4j8"/>
+                                    <constraint firstItem="0sN-Uo-I60" firstAttribute="width" secondItem="X3i-kO-nwh" secondAttribute="width" id="J3t-nj-7Hx"/>
+                                    <constraint firstAttribute="trailing" secondItem="3dM-do-phd" secondAttribute="trailing" id="Yzk-3v-hjf"/>
+                                    <constraint firstItem="0sN-Uo-I60" firstAttribute="trailing" secondItem="OVj-Qh-HV6" secondAttribute="trailing" id="n2r-eo-Qta"/>
+                                    <constraint firstItem="0sN-Uo-I60" firstAttribute="top" secondItem="OVj-Qh-HV6" secondAttribute="top" id="nGy-9S-sL5"/>
+                                    <constraint firstItem="3dM-do-phd" firstAttribute="top" secondItem="0sN-Uo-I60" secondAttribute="bottom" constant="1.5" id="uIN-yY-ap9"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="OVj-Qh-HV6"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="X3i-kO-nwh"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ify-BO-hXu"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="HPc-yS-3c2" firstAttribute="leading" secondItem="ify-BO-hXu" secondAttribute="leading" id="4pw-Uw-H3v"/>
+                            <constraint firstItem="HPc-yS-3c2" firstAttribute="top" secondItem="ify-BO-hXu" secondAttribute="top" id="IKK-N7-Khj"/>
+                            <constraint firstItem="ify-BO-hXu" firstAttribute="trailing" secondItem="HPc-yS-3c2" secondAttribute="trailing" id="Ysc-Sl-6XX"/>
+                            <constraint firstItem="ify-BO-hXu" firstAttribute="bottom" secondItem="HPc-yS-3c2" secondAttribute="bottom" id="qSF-qa-hL2"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="d3y-g1-aF9"/>
+                    <size key="freeformSize" width="414" height="1000"/>
+                    <connections>
+                        <outlet property="friendsEmailLabel" destination="mJY-Dd-k3I" id="d6R-Zl-p8R"/>
+                        <outlet property="friendsListCollectionView" destination="3dM-do-phd" id="Q7X-Dp-U21"/>
+                        <outlet property="friendsProfileImageView" destination="aLB-nA-ezH" id="BbH-fE-9yu"/>
+                        <outlet property="friendsProfileNameLabel" destination="og7-zG-Rmv" id="CK9-6W-HVq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dlf-iZ-cu8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4386" y="2484"/>
+        </scene>
     </scenes>
     <designables>
-        <designable name="6aO-Sp-fRg">
-            <size key="intrinsicContentSize" width="60" height="30"/>
-        </designable>
         <designable name="GoX-8E-Ihn">
             <size key="intrinsicContentSize" width="48" height="30"/>
         </designable>
-        <designable name="vfv-GZ-7Ab">
+        <designable name="uVT-Pp-0nX">
             <size key="intrinsicContentSize" width="51" height="30"/>
+        </designable>
+        <designable name="yfb-lY-1Ot">
+            <size key="intrinsicContentSize" width="60" height="30"/>
         </designable>
     </designables>
     <inferredMetricsTieBreakers>

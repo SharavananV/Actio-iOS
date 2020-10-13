@@ -2,13 +2,13 @@
 //  FriendsListCollectionViewCell.swift
 //  Actio
 //
-//  Created by apple on 13/10/20.
+//  Created by apple on 12/10/20.
 //  Copyright © 2020 Knila. All rights reserved.
 //
 
 import UIKit
 
-class FriendsListCollectionViewCell: UICollectionViewCell {
+class ProfileFriendsListCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var friendsProfileImageView: UIImageView!
     @IBOutlet weak var friendsNameLabel: UILabel!

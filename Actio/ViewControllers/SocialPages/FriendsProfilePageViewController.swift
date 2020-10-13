@@ -1,58 +1,55 @@
 //
-//  ProfilePageViewController.swift
+//  FriendsProfilePageViewController.swift
 //  Actio
 //
-//  Created by senthil on 25/09/20.
+//  Created by apple on 13/10/20.
 //  Copyright © 2020 Knila. All rights reserved.
 //
 
 import UIKit
-import Alamofire
 
-class ProfilePageViewController: UIViewController {
+class FriendsProfilePageViewController: UIViewController {
 
-    @IBOutlet var profileEmailLabel: UILabel!
-    @IBOutlet var profileNameLabel: UILabel!
-    @IBOutlet var profileImageView: UIImageView!
-    @IBOutlet weak var profileFriendsListCollectionView: UICollectionView!
+    @IBOutlet weak var friendsProfileImageView: UIImageView!
+    @IBOutlet weak var friendsEmailLabel: UILabel!
+    @IBOutlet weak var friendsProfileNameLabel: UILabel!
+    @IBOutlet weak var friendsListCollectionView: UICollectionView!
     private let service = DependencyProvider.shared.networkService
-    var userDetails: User?
-    var friendsListModel : [User]?
+    var friendsListModel : [List]?
+    var friendID: Int?
+    var friendsEmail: String?
+    var friendsName: String?
+    var friendsProfileImage: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        myProfileCall()
-        self.profileImageView.layer.cornerRadius = self.profileImageView.frame.height/2
-        self.profileImageView.clipsToBounds = true
-        profileFriendsListCollectionView.delegate = self
-        profileFriendsListCollectionView.dataSource = self
-    }
-    
-    func myProfileCall() {
-        service.post(myProfileUrl, parameters: nil, onView: view) { (response: FindFriendResponse) in
-            self.userDetails = response.profile?.profile
-            self.profileEmailLabel.text = self.userDetails?.emailID
-            self.profileNameLabel.text = self.userDetails?.fullName
-            if let url = URL(string: self.userDetails?.profileImage ?? "") {
-                self.profileImageView.load(url: url)
-            }
-            self.friendsListModel = response.profile?.list
-            self.profileFriendsListCollectionView.reloadData()
+        self.friendsProfileImageView.layer.cornerRadius = self.friendsProfileImageView.frame.height/2
+        self.friendsProfileImageView.clipsToBounds = true
+        self.friendsEmailLabel.text = friendsEmail
+        self.friendsProfileNameLabel.text = friendsName
+        if let image = friendsProfileImage, let url = URL(string: baseUrl + image) {
+            friendsProfileImageView.load(url: url)
         }
+        friendsListCall()
+        friendsListCollectionView.delegate = self
+        friendsListCollectionView.dataSource = self
     }
-   
-	@IBAction func chatAction(_ sender: Any) {
-		
-	}
-}
-extension ProfilePageViewController : UICollectionViewDelegate,UICollectionViewDataSource {
     
+    func friendsListCall() {
+        let parameters:[String:Any] = ["friendID": friendID ?? 0]
+           service.post(friendListUrl, parameters: parameters , onView: view) { (response: FindFriendResponse) in
+           self.friendsListModel = response.list
+           self.friendsListCollectionView.reloadData()
+       }
+   }
+}
+extension FriendsProfilePageViewController : UICollectionViewDelegate,UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.friendsListModel?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:"ProfileFriendsListCollectionViewCell", for: indexPath) as? ProfileFriendsListCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:"FriendsListCollectionViewCell", for: indexPath) as? FriendsListCollectionViewCell else {
             return UICollectionViewCell()
         }
         guard let friendsList = self.friendsListModel?[indexPath.row] else {
