@@ -10,6 +10,7 @@ import UIKit
 
 class FriendsProfilePageViewController: UIViewController {
 
+    @IBOutlet weak var friendsPageBackgroundView: UIView!
     @IBOutlet weak var friendsProfileImageView: UIImageView!
     @IBOutlet weak var friendsEmailLabel: UILabel!
     @IBOutlet weak var friendsProfileNameLabel: UILabel!
@@ -23,6 +24,8 @@ class FriendsProfilePageViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        friendsPageBackgroundView.applyGradient(colours: [AppColor.OrangeColor(),AppColor.RedColor()])
         self.friendsProfileImageView.layer.cornerRadius = self.friendsProfileImageView.frame.height/2
         self.friendsProfileImageView.clipsToBounds = true
         self.friendsEmailLabel.text = friendsEmail

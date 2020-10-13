@@ -11,6 +11,7 @@ import Alamofire
 
 class ProfilePageViewController: UIViewController {
 
+    @IBOutlet weak var profileBackgroundView: UIView!
     @IBOutlet var profileEmailLabel: UILabel!
     @IBOutlet var profileNameLabel: UILabel!
     @IBOutlet var profileImageView: UIImageView!
@@ -21,6 +22,8 @@ class ProfilePageViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        profileBackgroundView.applyGradient(colours: [AppColor.OrangeColor(),AppColor.RedColor()])
         myProfileCall()
         self.profileImageView.layer.cornerRadius = self.profileImageView.frame.height/2
         self.profileImageView.clipsToBounds = true
