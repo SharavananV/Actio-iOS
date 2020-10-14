@@ -16,12 +16,12 @@ struct FindFriendResponse: ResponseType {
     let status, logID: String?
     let profile: ProfileData?
     let find: [Friend]?
-    let list: [List]?
+    let list: [Friend]?
 }
 
 // MARK: - WelcomeProfile
 struct ProfileData: Codable {
-	let profile: User?
+	let profile: Friend?
 	let list: [Friend]?
 }
 

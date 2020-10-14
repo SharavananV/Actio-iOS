@@ -17,7 +17,7 @@ class ProfilePageViewController: UIViewController {
     @IBOutlet var profileImageView: UIImageView!
     @IBOutlet weak var profileFriendsListCollectionView: UICollectionView!
     private let service = DependencyProvider.shared.networkService
-    var friendsListModel : [User]?
+    var friendsListModel : [Friend]?
 	var userDetails: Friend?
 	
     override func viewDidLoad() {

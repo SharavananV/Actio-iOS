@@ -16,7 +16,7 @@ class FriendsProfilePageViewController: UIViewController {
     @IBOutlet weak var friendsProfileNameLabel: UILabel!
     @IBOutlet weak var friendsListCollectionView: UICollectionView!
     private let service = DependencyProvider.shared.networkService
-    var friendsListModel : [List]?
+    var friendsListModel : [Friend]?
     var friendID: Int?
     var friendsEmail: String?
     var friendsName: String?
@@ -41,8 +41,8 @@ class FriendsProfilePageViewController: UIViewController {
     func friendsListCall() {
         let parameters:[String:Any] = ["friendID": friendID ?? 0]
            service.post(friendListUrl, parameters: parameters , onView: view) { (response: FindFriendResponse) in
-           self.friendsListModel = response.list
-           self.friendsListCollectionView.reloadData()
+			self.friendsListModel = response.list
+			self.friendsListCollectionView.reloadData()
        }
    }
 }
