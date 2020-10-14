@@ -25,12 +25,15 @@ class SocketIOManager {
 		}
 	}
 	
-	func closeConnection(){
+	func closeConnection() {
+		socket.off("receiveMessage")
+		socket.off(clientEvent: .connect)
+		
 		socket.disconnect()
 	}
 	
 	func connectUser(fromId: String, toId: String) {
-		if !isConnected() {
+		if shouldConnect() {
 			socket.on("receiveMessage") {[weak self] data, ack in
 				guard let data = data[0] as? [String: Any] else { return }
 				
@@ -68,6 +71,10 @@ class SocketIOManager {
 	
 	func isConnected() -> Bool {
 		return socket.status == .connected
+	}
+	
+	func shouldConnect() -> Bool {
+		return !(socket.status == .connecting || socket.status == .connected)
 	}
 	
 	deinit {

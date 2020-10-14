@@ -27,13 +27,6 @@ class NotificationListTableViewCell: UITableViewCell {
 			notificationImageView.image = nil
 		}
 		
-		let feedDateFormatter = DateFormatter()
-		feedDateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-		if let createdDate = feedDateFormatter.date(from: data.dateTime ?? ""), Calendar.current.isDateInToday(createdDate) {
-			let timeDiff = abs(createdDate.timeIntervalSince(Date()))
-			timeLabel.text = timeDiff.displayString + " ago"
-		} else {
-			timeLabel.text = data.dateTime
-		}
+		timeLabel.text = data.dateTime?.chatTime()
 	}
 }

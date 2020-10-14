@@ -69,6 +69,9 @@
 		8D0F74BE25342E6E00200C2B /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F74BD25342E6E00200C2B /* ChatViewController.swift */; };
 		8D0F75C725346A1300200C2B /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F75C625346A1300200C2B /* SocketManager.swift */; };
 		8D0F75CA2534701E00200C2B /* ChatItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F75C92534701E00200C2B /* ChatItem.swift */; };
+		8D0F75E72536CE8600200C2B /* ConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F75E62536CE8600200C2B /* ConversationTableViewCell.swift */; };
+		8D0F75EA2536CF7D00200C2B /* ChatHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F75E92536CF7D00200C2B /* ChatHistoryViewController.swift */; };
+		8D0F75ED2536D0EB00200C2B /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F75EC2536D0EB00200C2B /* Conversation.swift */; };
 		8D1C960D252C2A8C005FE3EC /* EventAddPlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1C960C252C2A8C005FE3EC /* EventAddPlayerTableViewCell.swift */; };
 		8D21855D24B6E383002688A8 /* OtpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D21855C24B6E383002688A8 /* OtpViewController.swift */; };
 		8D21855F24B6ED5F002688A8 /* VPMOTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D21855E24B6ED5F002688A8 /* VPMOTPView.swift */; };
@@ -229,6 +232,9 @@
 		8D0F74BD25342E6E00200C2B /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		8D0F75C625346A1300200C2B /* SocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
 		8D0F75C92534701E00200C2B /* ChatItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatItem.swift; sourceTree = "<group>"; };
+		8D0F75E62536CE8600200C2B /* ConversationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTableViewCell.swift; sourceTree = "<group>"; };
+		8D0F75E92536CF7D00200C2B /* ChatHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHistoryViewController.swift; sourceTree = "<group>"; };
+		8D0F75EC2536D0EB00200C2B /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		8D1C960C252C2A8C005FE3EC /* EventAddPlayerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventAddPlayerTableViewCell.swift; sourceTree = "<group>"; };
 		8D21855C24B6E383002688A8 /* OtpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpViewController.swift; sourceTree = "<group>"; };
 		8D21855E24B6ED5F002688A8 /* VPMOTPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPMOTPView.swift; sourceTree = "<group>"; };
@@ -551,6 +557,7 @@
 				8D0F7499253046EF00200C2B /* FriendListViewController.swift */,
 				1858E5E82535911E00436E5D /* FriendsProfilePageViewController.swift */,
 				8D673A6E251DD72400585AF9 /* ProfilePageViewController.swift */,
+				8D0F75E92536CF7D00200C2B /* ChatHistoryViewController.swift */,
 				8D0F74BD25342E6E00200C2B /* ChatViewController.swift */,
 			);
 			path = SocialPages;
@@ -560,6 +567,7 @@
 			isa = PBXGroup;
 			children = (
 				8D0F74A225304FAF00200C2B /* FriendListTableViewCell.swift */,
+				8D0F75E62536CE8600200C2B /* ConversationTableViewCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -569,6 +577,7 @@
 			children = (
 				8D0F74A72530536200200C2B /* FindFriendModel.swift */,
 				8D0F75C92534701E00200C2B /* ChatItem.swift */,
+				8D0F75EC2536D0EB00200C2B /* Conversation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -969,6 +978,7 @@
 				8D673A75251DFF6900585AF9 /* FeedTableViewCell.swift in Sources */,
 				8D673A66251B1A0400585AF9 /* TournamentLocationViewController.swift in Sources */,
 				8DC1BD2E2525A4EF005C55DE /* NetworkService.swift in Sources */,
+				8D0F75E72536CE8600200C2B /* ConversationTableViewCell.swift in Sources */,
 				8D9C079C250B53A400514692 /* NearMeTournamentListTableViewCell.swift in Sources */,
 				185D287825307D3A00FD3D81 /* TournamentFilterModel.swift in Sources */,
 				183384CA24B4A94C009911A8 /* JustTextTableViewCell.swift in Sources */,
@@ -1015,6 +1025,7 @@
 				18BBAC7D24B5B99900306A8F /* ActioImagePicker.swift in Sources */,
 				8D0C5C33252465EE005B3A4E /* EventListTableViewCell.swift in Sources */,
 				8D673A6F251DD72400585AF9 /* ProfilePageViewController.swift in Sources */,
+				8D0F75ED2536D0EB00200C2B /* Conversation.swift in Sources */,
 				8DC1BD342525DD9C005C55DE /* EventRegistrationModel.swift in Sources */,
 				184DD1E4252C52B90014ABB5 /* ResetPasswordViewController.swift in Sources */,
 				8D833033252C97C7001CDE81 /* CDPlayer+CoreDataClass.swift in Sources */,
@@ -1061,6 +1072,7 @@
 				1858E5ED2535917C00436E5D /* FriendsListCollectionViewCell.swift in Sources */,
 				18F2F9C024C1C367007CBBC0 /* BeforeApprovalViewController.swift in Sources */,
 				8D8C6A9624B591F400D6DBE3 /* ApiDetails.swift in Sources */,
+				8D0F75EA2536CF7D00200C2B /* ChatHistoryViewController.swift in Sources */,
 				8DC1BD322525DC25005C55DE /* EventMasterModel.swift in Sources */,
 				18435587252B2F4E00DECA90 /* LoginModel.swift in Sources */,
 				8D673A5B2513884000585AF9 /* TournamentContactDetailsViewController.swift in Sources */,

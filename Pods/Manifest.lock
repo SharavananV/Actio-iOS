@@ -70,7 +70,12 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (6.7.2):
     - GoogleUtilities/Logger
+  - InputBarAccessoryView (5.1.0):
+    - InputBarAccessoryView/Core (= 5.1.0)
+  - InputBarAccessoryView/Core (5.1.0)
   - IQKeyboardManager (6.5.6)
+  - MessageKit (3.3.0):
+    - InputBarAccessoryView (~> 5.1.0)
   - nanopb (1.30906.0):
     - nanopb/decode (= 1.30906.0)
     - nanopb/encode (= 1.30906.0)
@@ -90,6 +95,7 @@ DEPENDENCIES:
   - Firebase/Analytics
   - FirebaseMessaging
   - IQKeyboardManager
+  - MessageKit (~> 3.3.0)
   - SideMenu
   - Socket.IO-Client-Swift (~> 15.2.0)
   - SwiftRangeSlider
@@ -108,7 +114,9 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
+    - InputBarAccessoryView
     - IQKeyboardManager
+    - MessageKit
     - nanopb
     - PromisesObjC
     - Protobuf
@@ -130,7 +138,9 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: a6a3a066369828db64eda428cb2856dc1cdc7c4e
   GoogleDataTransport: 445302b7da4216da63071a4c29e7023f47192e5a
   GoogleUtilities: 7f2f5a07f888cdb145101d6042bc4422f57e70b3
+  InputBarAccessoryView: 19953f486a23e846e9487099f92bbe3456e46ce5
   IQKeyboardManager: 2a6e97afdafc7becf0cb17a9a8d795e3a980717f
+  MessageKit: 1f07618183be6d92b648ba7a384aafa097362a00
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
   Protobuf: 3dac39b34a08151c6d949560efe3f86134a3f748
@@ -140,6 +150,6 @@ SPEC CHECKSUMS:
   SwiftRangeSlider: f86e3b637c961120158fa1a89277c8343845cbe4
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 8776da37e0a6fed5a3f250ff1b081027b35d9707
+PODFILE CHECKSUM: 99742c10315dcb01300843798b3bb2e33bef43e8
 
 COCOAPODS: 1.9.3

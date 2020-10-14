@@ -20,7 +20,7 @@ struct NotificationResponse: ResponseType {
 struct NotificationModel: Codable {
 	let fullName: String?
 	let notificationID: Int?
-	let message: Message?
+	let message: NotificationContent?
 	let seenStatus, fromID, toID: Int?
 	let dateTime: String?
 	
@@ -35,8 +35,8 @@ struct NotificationModel: Codable {
 	}
 }
 
-// MARK: - Message
-struct Message: Codable {
+// MARK: - NotificationContent
+struct NotificationContent: Codable {
 	let msg: String?
 	let icon: String?
 	let type: String?

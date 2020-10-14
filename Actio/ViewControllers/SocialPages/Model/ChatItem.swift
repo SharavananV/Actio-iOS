@@ -7,8 +7,10 @@
 //
 
 import Foundation
+import MessageKit
 
 class ChatItem {
+	var senderId, senderName: String?
 	var message, time, refId, type, imageUrl, position: String?
 	var status: Int?
 	
@@ -20,5 +22,11 @@ class ChatItem {
 		self.imageUrl = data["imgURL"] as? String
 		self.position = data["position"] as? String
 		self.status = data["status"] as? Int
+	}
+	
+	func convertIntoMessage() -> ChatMessage {
+		let sender = Sender(senderId: senderId ?? "", displayName: senderName ?? "")
+		
+		return ChatMessage(sender: sender, messageId: "", sentDate: time?.toDate ?? Date(), kind: .text(self.message ?? ""))
 	}
 }

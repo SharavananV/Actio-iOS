@@ -52,6 +52,17 @@ extension String {
                       locale: locale ?? .current)?
                .nsRange(in: self)
        }
+	
+	func chatTime() -> String {
+		let feedDateFormatter = DateFormatter()
+		feedDateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+		if let createdDate = feedDateFormatter.date(from: self), Calendar.current.isDateInToday(createdDate) {
+			let timeDiff = abs(createdDate.timeIntervalSince(Date()))
+			return timeDiff.displayString + " ago"
+		} else {
+			return self
+		}
+	}
 }
 
 extension Date {
@@ -89,6 +100,13 @@ extension Date {
 		default:
 			return "th"
 		}
+	}
+	
+	func justTime() -> String {
+		let feedDateFormatter = DateFormatter()
+		feedDateFormatter.dateFormat = "HH:mm a"
+		
+		return feedDateFormatter.string(from: self)
 	}
 }
 
