@@ -8,12 +8,10 @@
 
 import Foundation
 
-// Webpage URL
-let termsandConditionUrl = "https://playactio.com/terms.html"
-
 let baseImageUrl = "http://203.223.191.66:8085/"
 let baseUrl = "http://203.223.191.66:8085/v1/"
 
+// Login
 let masterUrl = baseUrl + "subscriber/init"
 let loginUrl = baseUrl + "login"
 let registerUrl = baseUrl + "subscriber/register"
@@ -69,3 +67,8 @@ let notificationSeenUpdateUrl = baseUrl + "notify/seen"
 // Profile
 let myProfileUrl = baseUrl + "profile/myprofile"
 
+// Socket URL
+let socketUrl = "http://203.223.191.66:8085"
+
+// Webpage URL
+let termsandConditionUrl = "https://playactio.com/terms.html"

@@ -67,6 +67,8 @@
 		8D0F74A325304FAF00200C2B /* FriendListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F74A225304FAF00200C2B /* FriendListTableViewCell.swift */; };
 		8D0F74A82530536200200C2B /* FindFriendModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F74A72530536200200C2B /* FindFriendModel.swift */; };
 		8D0F74BE25342E6E00200C2B /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F74BD25342E6E00200C2B /* ChatViewController.swift */; };
+		8D0F75C725346A1300200C2B /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F75C625346A1300200C2B /* SocketManager.swift */; };
+		8D0F75CA2534701E00200C2B /* ChatItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F75C92534701E00200C2B /* ChatItem.swift */; };
 		8D1C960D252C2A8C005FE3EC /* EventAddPlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1C960C252C2A8C005FE3EC /* EventAddPlayerTableViewCell.swift */; };
 		8D21855D24B6E383002688A8 /* OtpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D21855C24B6E383002688A8 /* OtpViewController.swift */; };
 		8D21855F24B6ED5F002688A8 /* VPMOTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D21855E24B6ED5F002688A8 /* VPMOTPView.swift */; };
@@ -225,6 +227,8 @@
 		8D0F74A225304FAF00200C2B /* FriendListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListTableViewCell.swift; sourceTree = "<group>"; };
 		8D0F74A72530536200200C2B /* FindFriendModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindFriendModel.swift; sourceTree = "<group>"; };
 		8D0F74BD25342E6E00200C2B /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		8D0F75C625346A1300200C2B /* SocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
+		8D0F75C92534701E00200C2B /* ChatItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatItem.swift; sourceTree = "<group>"; };
 		8D1C960C252C2A8C005FE3EC /* EventAddPlayerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventAddPlayerTableViewCell.swift; sourceTree = "<group>"; };
 		8D21855C24B6E383002688A8 /* OtpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpViewController.swift; sourceTree = "<group>"; };
 		8D21855E24B6ED5F002688A8 /* VPMOTPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPMOTPView.swift; sourceTree = "<group>"; };
@@ -362,6 +366,7 @@
 				18DC39BC24B608EB008708FC /* ActioSpinner.swift */,
 				18C6B01D2510BDE200B7162E /* LocationFetcher.swift */,
 				18C6B01F2510C17300B7162E /* NotificationHelper.swift */,
+				8D0F75C625346A1300200C2B /* SocketManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -563,6 +568,7 @@
 			isa = PBXGroup;
 			children = (
 				8D0F74A72530536200200C2B /* FindFriendModel.swift */,
+				8D0F75C92534701E00200C2B /* ChatItem.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -950,6 +956,7 @@
 			files = (
 				18196CF824B4727E00DBECCA /* ActioTextField.swift in Sources */,
 				8D94E07524AF1D0A00DBC46A /* AppDelegate.swift in Sources */,
+				8D0F75C725346A1300200C2B /* SocketManager.swift in Sources */,
 				183384C824B4A561009911A8 /* ImagePickerTableViewCell.swift in Sources */,
 				8DA5D452250A464E003EAB6B /* TournamentListViewController.swift in Sources */,
 				1841F19424B480680021D131 /* TextPickerTableViewCell.swift in Sources */,
@@ -1025,6 +1032,7 @@
 				8DDBB75B252D90F000D74087 /* EventDetailSummaryCell.swift in Sources */,
 				8DC1BD2C2525A0E6005C55DE /* NotificationModel.swift in Sources */,
 				8D99566624C9515D006C3616 /* WelcomeAlertViewController.swift in Sources */,
+				8D0F75CA2534701E00200C2B /* ChatItem.swift in Sources */,
 				1841F19924B480F10021D131 /* UIKitExtensions.swift in Sources */,
 				8DDBB758252D81AC00D74087 /* EventSummaryViewController.swift in Sources */,
 				8D0C5C4125249B66005B3A4E /* EventDetailViewController.swift in Sources */,

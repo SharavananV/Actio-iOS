@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="s89-BV-Lpt">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -140,15 +140,28 @@
             </objects>
             <point key="canvasLocation" x="360.86956521739131" y="27.455357142857142"/>
         </scene>
-        <!--View Controller-->
+        <!--Chat View Controller-->
         <scene sceneID="gpj-q5-0lH">
             <objects>
-                <viewController id="s89-BV-Lpt" sceneMemberID="viewController">
+                <viewController id="s89-BV-Lpt" customClass="ChatViewController" customModule="Actio" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aGU-HB-wgu">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n9T-hM-AVU">
+                                <rect key="frame" x="150.5" y="433" width="113" height="30"/>
+                                <state key="normal" title="Send a message"/>
+                                <connections>
+                                    <action selector="sendMessage:" destination="s89-BV-Lpt" eventType="touchUpInside" id="dSS-aN-ZF9"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="h6t-pT-f1l"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="n9T-hM-AVU" firstAttribute="centerX" secondItem="aGU-HB-wgu" secondAttribute="centerX" id="Vnk-3g-b6A"/>
+                            <constraint firstItem="n9T-hM-AVU" firstAttribute="centerY" secondItem="aGU-HB-wgu" secondAttribute="centerY" id="Xpl-2D-KHc"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RyY-aY-AQw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

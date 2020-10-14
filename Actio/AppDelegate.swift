@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let storyboard = UIStoryboard(name: "Social", bundle: nil)
         let vc = storyboard.instantiateInitialViewController()
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = vc
@@ -78,9 +78,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let topViewController = self.window?.topViewController() {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
            if let vc = storyboard.instantiateViewController(withIdentifier: "AcceptRejectRequestViewController") as? AcceptRejectRequestViewController {
-            if UDHelper.getUserLoggedIn() == true {
+			if let loggedInUser: LoginModelResponse = UDHelper.getData(for: .loggedInUser) {
                 if parentID != "" {
-                    if parentID == UDHelper.getUserId() {
+					if parentID == loggedInUser.subscriberID {
                         vc.apiParentInitCall(childID: "7354")
                         vc.modalPresentationStyle = .fullScreen
                         topViewController.present(vc, animated: false, completion: nil)

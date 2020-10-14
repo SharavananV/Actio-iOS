@@ -14,6 +14,6 @@ pod 'IQKeyboardManager'
 pod 'Toast-Swift', '~> 5.0.1'
 pod 'SideMenu'
 pod ‘SwiftRangeSlider’
-
+pod 'Socket.IO-Client-Swift', '~> 15.2.0'
 
 end

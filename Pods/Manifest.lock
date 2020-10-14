@@ -79,6 +79,9 @@ PODS:
   - PromisesObjC (1.2.11)
   - Protobuf (3.13.0)
   - SideMenu (6.4.9)
+  - Socket.IO-Client-Swift (15.2.0):
+    - Starscream (~> 3.1)
+  - Starscream (3.1.1)
   - SwiftRangeSlider (2.0.0)
   - Toast-Swift (5.0.1)
 
@@ -88,6 +91,7 @@ DEPENDENCIES:
   - FirebaseMessaging
   - IQKeyboardManager
   - SideMenu
+  - Socket.IO-Client-Swift (~> 15.2.0)
   - SwiftRangeSlider
   - Toast-Swift (~> 5.0.1)
 
@@ -109,6 +113,8 @@ SPEC REPOS:
     - PromisesObjC
     - Protobuf
     - SideMenu
+    - Socket.IO-Client-Swift
+    - Starscream
     - SwiftRangeSlider
     - Toast-Swift
 
@@ -129,9 +135,11 @@ SPEC CHECKSUMS:
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
   Protobuf: 3dac39b34a08151c6d949560efe3f86134a3f748
   SideMenu: 8ef57a3cfc024a2d3fc1c036c7fe98537baec9e0
+  Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
+  Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
   SwiftRangeSlider: f86e3b637c961120158fa1a89277c8343845cbe4
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 8aa63c13665e7dd0b9b88337cf3eb50609f7b3db
+PODFILE CHECKSUM: 8776da37e0a6fed5a3f250ff1b081027b35d9707
 
 COCOAPODS: 1.9.3
