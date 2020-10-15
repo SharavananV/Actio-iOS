@@ -16,6 +16,11 @@ class ChatViewController: MessagesViewController {
 	private let socketManager = SocketIOManager()
 	private var messages: [ChatMessage] = []
 	var conversation: Conversation?
+	var friendsModel: Friend? {
+		didSet {
+			self.conversation = friendsModel?.convertToConversation()
+		}
+	}
 	private var loggedInUser: LoginModelResponse?
 	private lazy var imagePicker = ActioImagePicker(presentationController: self, delegate: self)
 	

@@ -555,8 +555,8 @@
 				8D0F74A62530534F00200C2B /* Model */,
 				8D0F74A125304F6400200C2B /* TableViewCells */,
 				8D0F7499253046EF00200C2B /* FriendListViewController.swift */,
-				1858E5E82535911E00436E5D /* FriendsProfilePageViewController.swift */,
 				8D673A6E251DD72400585AF9 /* ProfilePageViewController.swift */,
+				1858E5E82535911E00436E5D /* FriendsProfilePageViewController.swift */,
 				8D0F75E92536CF7D00200C2B /* ChatHistoryViewController.swift */,
 				8D0F74BD25342E6E00200C2B /* ChatViewController.swift */,
 			);

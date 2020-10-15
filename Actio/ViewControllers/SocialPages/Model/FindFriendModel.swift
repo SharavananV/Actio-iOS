@@ -52,6 +52,10 @@ class Friend: Codable {
 			return "user-simple"
 		}
 	}
+	
+	func convertToConversation() -> Conversation {
+		return Conversation(subscriberID: subscriberID, subscriberDisplayID: subscriberDisplayID, fullName: fullName, username: username, emailID: emailID, profileImage: profileImage, chatID: nil, message: nil, unseen: nil)
+	}
 }
 
 

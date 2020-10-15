@@ -72,10 +72,7 @@ extension ProfilePageViewController : UICollectionViewDelegate,UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
        let friendsList = self.friendsListModel?[indexPath.row]
         if let nav = storyboard?.instantiateViewController(withIdentifier: "FriendsProfilePageViewController") as? FriendsProfilePageViewController {
-            nav.friendID = friendsList?.subscriberID
-            nav.friendsEmail = friendsList?.emailID
-            nav.friendsName = friendsList?.fullName
-            nav.friendsProfileImage = friendsList?.profileImage
+            nav.currentFriend = friendsList
             self.navigationController?.pushViewController(nav, animated: false)
         }
     }
