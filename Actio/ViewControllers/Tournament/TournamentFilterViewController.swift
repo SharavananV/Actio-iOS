@@ -89,7 +89,6 @@ class TournamentFilterViewController: UIViewController {
         buttonCornerRadius()
         getTournamentMasterDetails()
         textFieldPickerView()
-        
     }
     @objc func applyFilterAction(){
         applyFilterListCall()
@@ -235,9 +234,6 @@ class TournamentFilterViewController: UIViewController {
         self.below10Button.applyGradient(colours: [AppColor.OrangeColor(),AppColor.RedColor()])
         clickedButtonTitle = self.below10Button.titleLabel?.text
         clickedButtonTitle = clickedButtonTitle?.replacingOccurrences(of: "<", with: "", options: NSString.CompareOptions.literal, range: nil)
-
-
-
     }
     @IBAction func below15ButtonAction(_ sender: Any) {
         self.below15Button.applyGradient(colours: [AppColor.OrangeColor(),AppColor.RedColor()])

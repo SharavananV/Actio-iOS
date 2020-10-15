@@ -35,11 +35,12 @@ class TournamentListViewController: UIViewController,filterValueDelegate {
         let search = UIBarButtonItem(image: UIImage(named: "Icon map-search"), style: .plain, target: self, action: #selector(self.searchTapped))
         let filter = UIBarButtonItem(image: UIImage(named: "Icon awesome-filter"), style: .plain, target: self, action: #selector(self.filterTapped))
         navigationItem.rightBarButtonItems = [filter,search,reload]
-        tournamentListApiCall()
         self.favoriteCollectionView.delegate = self
         self.favoriteCollectionView.dataSource = self
         self.nearMeTournamentListTableView.delegate = self
         self.nearMeTournamentListTableView.dataSource = self
+        tournamentListApiCall()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -102,8 +103,8 @@ class TournamentListViewController: UIViewController,filterValueDelegate {
                 return
             }
             self.tournamentListModel = model.list
-            self.favoriteCollectionView.reloadData()
             self.nearMeTournamentListTableView.reloadData()
+            self.favoriteCollectionView.reloadData()
         }
     }
     
@@ -170,11 +171,11 @@ extension TournamentListViewController : UITableViewDelegate,UITableViewDataSour
             return UITableViewCell()
         }
         
-        guard let tournament = self.tournamentListModel?.favorites?[indexPath.row] else {
+        guard let tournament = self.tournamentListModel?.nearMe?[indexPath.row] else {
             return UITableViewCell()
         }
         
-        if let logo = tournament.tournamentLogo,let imagePath = URL(string:  baseUrl + logo) {
+        if let logo = tournament.tournamentLogo,let imagePath = URL(string:  baseImageUrl + logo) {
             cell.nearMeTournamentImage.load(url: imagePath)
         }
      
@@ -182,14 +183,14 @@ extension TournamentListViewController : UITableViewDelegate,UITableViewDataSour
         cell.nearMeDateLabel.text = (tournament.tournamentStartRange ?? "") + " - " + (tournament.tournamentEndRange ?? "")
         cell.nearMeTournamentRegistrationStatusLabel.text = tournament.registrationStatus.displayString
         cell.nearMeTournamentRegistrationStatusLabel.backgroundColor = tournament.registrationStatus.backgroundColor
-        cell.nearMeLocationLabel.text = tournament.venue
+        cell.nearMeLocationLabel.text = tournament.tournamentVenue
         cell.nearMeCalenderImage.image = UIImage(named: "Icon-awesome-calendar-alt")
         cell.nearMeLocationImage.image = UIImage(named: "Icon-material-location-on")
 
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let tournament = self.tournamentListModel?.favorites?[indexPath.row],
+        guard let tournament = self.tournamentListModel?.nearMe?[indexPath.row],
             let vc = storyboard?.instantiateViewController(withIdentifier: "TournamentDetailsViewController") as? TournamentDetailsViewController else {
             return
         }

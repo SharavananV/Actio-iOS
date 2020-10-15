@@ -19,7 +19,7 @@ class ConversationTableViewCell: UITableViewCell {
 	@IBOutlet var unreadCountLabel: PaddingLabel!
 	
 	func configure(_ data: Conversation) {
-		if let profileImage = data.profileImage, let url = URL(string: baseUrl + profileImage) {
+		if let profileImage = data.profileImage, let url = URL(string: baseImageUrl + profileImage) {
 			self.userImageView.load(url: url)
 		}
 		
