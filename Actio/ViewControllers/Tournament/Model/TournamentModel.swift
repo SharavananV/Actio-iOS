@@ -8,9 +8,11 @@
 
 import Foundation
 
-struct TournamentResponse: Codable {
+struct TournamentResponse: ResponseType {
+	var errors: [ActioError]?
+	var msg: String?
     let status : String?
-    let tournament: Tournament
+    let tournament: Tournament?
 }
 
 // MARK: - Tournament

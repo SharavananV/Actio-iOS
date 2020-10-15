@@ -35,6 +35,8 @@ class ConversationTableViewCell: UITableViewCell {
 		
 		if data.unseen == "0" {
 			unreadCountLabel.isHidden = true
+		} else {
+			unreadCountLabel.isHidden = false
 		}
 		
 		self.contentView.backgroundColor = data.unseen == "0" ? .white : #colorLiteral(red: 0.9882352941, green: 0.9411764706, blue: 0.9176470588, alpha: 1)

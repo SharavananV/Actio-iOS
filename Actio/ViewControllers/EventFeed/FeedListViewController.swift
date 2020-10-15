@@ -14,12 +14,13 @@ class FeedListViewController: UIViewController {
     @IBOutlet var addFeedButton: UIButton!
     @IBOutlet var searchBar: UISearchBar!
     @IBOutlet var feedTableView: UITableView!
+	
+	private let service = DependencyProvider.shared.networkService
     var feedList: [FeedDetailModel]?
     var filteredList: [FeedDetailModel]?
     var searching = false
     var deletePlanetIndexPath: NSIndexPath? = nil
     var subscriberID :Int?
-    var feedID: Int?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,21 +49,18 @@ class FeedListViewController: UIViewController {
     }
 
     func feedListApiCall() {
-        
-        let headers : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"",
-                                            "Content-Type": "application/json"]
-        ActioSpinner.shared.show(on: view)
-        
-        NetworkRouter.shared.request(feedListUrl, method: .post, parameters: ["feed_id": feedID ?? 0], encoding: JSONEncoding.default, headers: headers).responseDecodable(of: EventFeedResponse.self, queue: .main) { (response) in
-            ActioSpinner.shared.hide()
-            
-            guard let model = response.value,model.status == "200" else {
-                print("🥶 Error on login: \(String(describing: response.error))")
-                return
-            }
-            self.feedList = model.list
-            self.feedTableView.reloadData()
-        }
+		service.post(feedListUrl, parameters: nil, onView: view) { (response: EventFeedResponse) in
+			guard let detail = response.list else { return }
+			
+			switch detail {
+			case .list(let values):
+				self.feedList = values
+			case .detail(_):
+				break
+			}
+			
+			self.feedTableView.reloadData()
+		}
     }
 
 }
@@ -104,7 +102,7 @@ extension FeedListViewController : UITableViewDelegate,UITableViewDataSource,UIS
         
         let feedDateFormatter = DateFormatter()
         feedDateFormatter.dateFormat = "MMM dd,yyyy hh:mm:ss a"
-        if let createdDate = feedDateFormatter.date(from: "\(feed.createdDate) \(feed.createdTime)"), Calendar.current.isDateInToday(createdDate) {
+        if let createdDate = feedDateFormatter.date(from: "\(feed.createdDate ?? "") \(feed.createdTime ?? "")"), Calendar.current.isDateInToday(createdDate) {
             let timeDiff = createdDate.timeIntervalSince(Date())
             cell.feedTimeLabel.text = timeDiff.displayString + " ago"
         }

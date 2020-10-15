@@ -129,6 +129,7 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 		messagesCollectionView.messagesDataSource = self
 		messagesCollectionView.messagesLayoutDelegate = self
 		messagesCollectionView.messagesDisplayDelegate = self
+		messagesCollectionView.messageCellDelegate = self
 		messagesCollectionView.backgroundColor = .clear
 		scrollsToBottomOnKeyboardBeginsEditing = true
 		maintainPositionOnKeyboardFrameChanged = true
@@ -138,6 +139,44 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 			layout.textMessageSizeCalculator.incomingAvatarSize = .zero
 			layout.setMessageIncomingMessageBottomLabelAlignment(LabelAlignment(textAlignment: .left, textInsets: UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)))
 			layout.setMessageOutgoingMessageBottomLabelAlignment(LabelAlignment(textAlignment: .right, textInsets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)))
+		}
+	}
+}
+
+// MARK: Message Cell Delegate
+extension ChatViewController: MessageCellDelegate {
+	func didTapMessage(in cell: MessageCollectionViewCell) {
+		guard let indexPath = messagesCollectionView.indexPath(for: cell),
+			  let message = messagesCollectionView.messagesDataSource?.messageForItem(at: indexPath, in: messagesCollectionView) as? ChatMessage else {
+			print("Failed to identify message when audio cell receive tap gesture")
+			return
+		}
+		
+		let refId = message.message?.refID
+		switch message.message?.type {
+		case "Feed":
+			guard let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FeedDetailsViewController") as? FeedDetailsViewController else {
+				return
+			}
+			vc.feedId = Int(refId ?? "0")
+			self.navigationController?.pushViewController(vc, animated: false)
+			
+		case "Event":
+			guard let vc = UIStoryboard(name: "Events", bundle: nil).instantiateViewController(withIdentifier: "EventDetailViewController") as? EventDetailViewController else {
+				return
+			}
+			vc.eventId = Int(refId ?? "0")
+			self.navigationController?.pushViewController(vc, animated: true)
+			
+		case "Tournament":
+			guard let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TournamentDetailsViewController") as? TournamentDetailsViewController else {
+				return
+			}
+			vc.tournamentId = Int(refId ?? "0")
+			self.navigationController?.pushViewController(vc, animated: false)
+			
+		default:
+			break
 		}
 	}
 }

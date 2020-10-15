@@ -35,6 +35,7 @@ class TournamentDetailsViewController: UIViewController, UIViewControllerPreview
     private lazy var actionDataSource = TournamentActionDatasource(self)
     private var galleryDatasource: TournamentGalleryDatasource?
     private var affliationsDatasource: TournamentSponserDatasource?
+	private let service = DependencyProvider.shared.networkService
     
     var tournamentId: Int?
     
@@ -48,21 +49,10 @@ class TournamentDetailsViewController: UIViewController, UIViewControllerPreview
     }
     
     private func getTournamentDetails() {
-         let headers : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken(), "Content-Type": "application/json"]
-        
-        ActioSpinner.shared.show(on: view)
-        
-        NetworkRouter.shared.request(tournamentDetailsUrl, method: .post, parameters: ["tournamentID": tournamentId ?? 0], encoding: JSONEncoding.default, headers: headers).responseDecodable(of: TournamentResponse.self, queue: .main) { (response) in
-            ActioSpinner.shared.hide()
-            
-            guard let result = response.value, result.status == "200" else {
-                print("🥶 Error: \(String(describing: response.error))")
-                return
-            }
-            
-            self.tournamentDetails = result.tournament
-            self.updateUI()
-        }
+        service.post(tournamentDetailsUrl, parameters: ["tournamentID": tournamentId ?? 0], onView: view) { (response: TournamentResponse) in
+			self.tournamentDetails = response.tournament
+			self.updateUI()
+		}
     }
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {

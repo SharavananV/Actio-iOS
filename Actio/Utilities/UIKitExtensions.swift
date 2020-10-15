@@ -56,9 +56,18 @@ extension String {
 	func chatTime() -> String {
 		let feedDateFormatter = DateFormatter()
 		feedDateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-		if let createdDate = feedDateFormatter.date(from: self), Calendar.current.isDateInToday(createdDate) {
-			let timeDiff = abs(createdDate.timeIntervalSince(Date()))
-			return timeDiff.displayString + " ago"
+		if let createdDate = feedDateFormatter.date(from: self) {
+			if (Calendar.current.isDateInToday(createdDate)) {
+				let timeDiff = abs(createdDate.timeIntervalSince(Date()))
+				return timeDiff.displayString + " ago"
+			} else if (Calendar.current.isDateInYesterday(createdDate)) {
+				return "yesterday"
+			} else {
+				let simpleDateFormatter = DateFormatter()
+				simpleDateFormatter.dateFormat = "dd MMM yyyy"
+				
+				return simpleDateFormatter.string(from: createdDate)
+			}
 		} else {
 			return self
 		}
@@ -103,10 +112,10 @@ extension Date {
 	}
 	
 	func justTime() -> String {
-		let feedDateFormatter = DateFormatter()
-		feedDateFormatter.dateFormat = "HH:mm a"
+		let justTimeFormatter = DateFormatter()
+		justTimeFormatter.dateFormat = "HH:mm a"
 		
-		return feedDateFormatter.string(from: self)
+		return justTimeFormatter.string(from: self)
 	}
 }
 
@@ -202,14 +211,14 @@ extension TimeInterval {
         
         var value = ""
         if let hour = components.hour, hour > 0 {
-            value += components.hour == 1 ? "\(hour) hour" : "\(hour) hours"
+            value += "\(hour) h"
             
             if let minute = components.minute, minute > 0 {
-                value += " and \(minute) minutes"
+                value += ", \(minute) m"
             }
         }
         else if let minute = components.minute, minute > 0 {
-            value += "\(minute) minutes"
+            value += "\(minute) m"
         }
         
         return value

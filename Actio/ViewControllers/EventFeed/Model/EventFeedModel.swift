@@ -7,13 +7,49 @@
 //
 
 import Foundation
-import Alamofire
 
-// MARK: - Welcome
-struct EventFeedResponse: Codable {
+// MARK: - EventFeedResponse
+struct EventFeedResponse: ResponseType {
+	var errors: [ActioError]?
+	var msg: String?
     let status, logID: String?
-    let master: [Master]
-    let list: [FeedDetailModel]
+    let master: [Master]?
+	var list: DetailOrList?
+}
+
+enum DetailOrList: Codable {
+	case list([FeedDetailModel]), detail(FeedDetailModel)
+	
+	enum CodingKeys: CodingKey {
+		case list, detail
+	}
+	
+	init(from decoder: Decoder) throws {
+		let container = try decoder.singleValueContainer()
+		if let list = try? container.decode([FeedDetailModel].self) {
+			self = .list(list)
+			return
+		} else if let detail = try? container.decode(FeedDetailModel.self) {
+			self = .detail(detail)
+			return
+		} else {
+			throw EncodingError.dataCorrupted("Error in decoding feed details")
+		}
+	}
+	
+	func encode(to encoder: Encoder) throws {
+		var container = encoder.container(keyedBy: CodingKeys.self)
+		switch self {
+		case .list(let values):
+			try container.encode(values, forKey: .list)
+		case .detail(let value):
+			try container.encode(value, forKey: .detail)
+		}
+	}
+}
+
+enum EncodingError: Swift.Error {
+	case dataCorrupted(String)
 }
 
 // MARK: - List

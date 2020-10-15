@@ -19,7 +19,18 @@ class NotificationListTableViewCell: UITableViewCell {
 	func configure(_ data: NotificationModel) {
 		self.contentView.backgroundColor = data.seenStatus == 0 ? #colorLiteral(red: 0.9882352941, green: 0.9411764706, blue: 0.9176470588, alpha: 1) : .white
 		
-		titleLabel.text = data.message?.msg
+		var messageText: String = data.message?.msg ?? ""
+		switch data.message?.type{
+		case "friend_request":
+			messageText += " from " + (data.fullName ?? "")
+
+		case "accept_request", "parent_submit", "parent_reject", "parent_approve":
+			messageText = (data.fullName ?? "") + " " + (data.message?.msg ?? "")
+
+		default:
+			break;
+		}
+		titleLabel.text = messageText
 		
 		if let image = data.message?.icon, let url = URL(string: baseImageUrl + image) {
 			notificationImageView.load(url: url)

@@ -38,7 +38,7 @@ class AffiliationsViewController: UIViewController {
                 print("🥶 Error: \(String(describing: response.error))")
                 return
             }
-            self.affiliations = result.tournament.affliations
+			self.affiliations = result.tournament?.affliations
             self.affiliationsTableView.reloadData()
         }
     }
