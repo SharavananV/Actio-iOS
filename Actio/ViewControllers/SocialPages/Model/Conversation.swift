@@ -70,7 +70,7 @@ struct History: Codable {
 			messageKind = .text(message?.msg ?? "")
 		}
 		
-		return ChatMessage(sender: sender, messageId: String(id ?? 0), sentDate: message?.date?.toDate ?? Date(), kind: messageKind, message: self.message)
+		return ChatMessage(sender: sender, messageId: String(id ?? 0), sentDate: message?.date?.toDate ?? Date(), kind: messageKind, message: self.message, status: self.status, position: self.position)
 	}
 }
 
@@ -92,4 +92,5 @@ public struct ChatMessage: MessageType {
 	public var sentDate: Date
 	public var kind: MessageKind
 	var message: MessageContent?
+	var status, position: Int?
 }

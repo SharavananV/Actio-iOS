@@ -66,19 +66,16 @@ class ChatViewController: MessagesViewController {
 
 extension ChatViewController: SocketIODelegate {
 	func receivedChat(_ chatItem: ChatItem) {
-		if let toId = conversation?.subscriberID, toId != Int(loggedInUser?.subscriberID ?? "0") {
-			chatItem.senderId = String(toId)
-			chatItem.senderName = conversation?.fullName
-			
-			let chatMessage = chatItem.convertIntoMessage()
-			messages.append(chatMessage)
-			
-			messagesCollectionView.reloadData()
-			messagesCollectionView.scrollToBottom()
-			
-			if messageInputBar.sendButton.isAnimating {
-				messageInputBar.sendButton.stopAnimating()
-			}
+		guard let message = chatItem.message, message.isEmpty == false else { return }
+		
+		let chatMessage = chatItem.convertIntoMessage()
+		messages.append(chatMessage)
+		
+		messagesCollectionView.reloadData()
+		messagesCollectionView.scrollToBottom()
+		
+		if messageInputBar.sendButton.isAnimating {
+			messageInputBar.sendButton.stopAnimating()
 		}
 	}
 }
@@ -115,8 +112,27 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 	}
 	
 	func messageBottomLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
-		let name = message.sentDate.justTime()
-		return NSAttributedString(string: name, attributes: [NSAttributedString.Key.font: AppFont.PoppinsRegular(size: 10)])
+		let name = message.sentDate.justTime() + " "
+		var imageName = "sending"
+		
+		let fullString = NSMutableAttributedString(string: name, attributes: [NSAttributedString.Key.font: AppFont.PoppinsRegular(size: 10)])
+		
+		if message.sender.senderId == String(loggedInUser?.subscriberSeqID ?? 0) {
+			if let obj = message as? ChatMessage, obj.position == 1 {
+				if obj.status == 1 {
+					imageName = "sent"
+				} else {
+					imageName = "read"
+				}
+			}
+			
+			let image1Attachment = ChatTextAttachment()
+			image1Attachment.image = UIImage(named: imageName)			
+			let imageString = NSAttributedString(attachment: image1Attachment)
+			fullString.append(imageString)
+		}
+		
+		return fullString
 	}
 	
 	func messageBottomLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {

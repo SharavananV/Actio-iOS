@@ -113,7 +113,7 @@ extension Date {
 	
 	func justTime() -> String {
 		let justTimeFormatter = DateFormatter()
-		justTimeFormatter.dateFormat = "HH:mm a"
+		justTimeFormatter.dateFormat = "HH:mm"
 		
 		return justTimeFormatter.string(from: self)
 	}
@@ -277,5 +277,12 @@ enum DoubleType: Codable {
 		case .double(let value):
 			return value
 		}
+	}
+}
+
+class ChatTextAttachment: NSTextAttachment {
+	override func attachmentBounds(for textContainer: NSTextContainer?, proposedLineFragment lineFrag: CGRect, glyphPosition position: CGPoint, characterIndex charIndex: Int) -> CGRect {
+		let returnBounds = CGRect(x: 0, y: -3, width: 12, height: 12)
+		return returnBounds
 	}
 }
