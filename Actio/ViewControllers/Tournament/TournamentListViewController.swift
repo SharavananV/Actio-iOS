@@ -12,6 +12,10 @@ import CoreLocation
 
 class TournamentListViewController: UIViewController,filterValueDelegate {
 
+    @IBOutlet weak var nearMeTableViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var favoriteCollectionViewHeightConstarint: NSLayoutConstraint!
+    @IBOutlet weak var nearMeLabelHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var myFavLabelHeightConstraint: NSLayoutConstraint!
     @IBOutlet var nearMeTournamentListTableView: UITableView!
     @IBOutlet var favoriteCollectionView: UICollectionView!
     @IBOutlet weak var searchBarHeightConstraint: NSLayoutConstraint!
@@ -26,6 +30,7 @@ class TournamentListViewController: UIViewController,filterValueDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBarHeightConstraint.constant = 0
+        heightConstraints()
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
@@ -51,8 +56,17 @@ class TournamentListViewController: UIViewController,filterValueDelegate {
         }
 
     }
+    
+    func heightConstraints() {
+        nearMeTableViewHeightConstraint.constant = 431
+        nearMeLabelHeightConstraint.constant = 40
+        favoriteCollectionViewHeightConstarint.constant = 239
+        myFavLabelHeightConstraint.constant = 40
+        nearMeLabelHeightConstraint.constant = 40
+    }
       
     @objc func reloadTapped() {
+        heightConstraints()
         tournamentListApiCall()
     }
     @objc func searchTapped() {
@@ -68,6 +82,8 @@ class TournamentListViewController: UIViewController,filterValueDelegate {
                 self.view.layoutIfNeeded()
             }
             tournamentListApiCall()
+            heightConstraints()
+
         }
     }
     
@@ -109,7 +125,14 @@ class TournamentListViewController: UIViewController,filterValueDelegate {
     }
     
     func FilterdValues(parameters: [String : Any]) {
-        tournamentListApiCall(filterdValues: parameters)
+        
+        if myFavLabelHeightConstraint.constant == 40 && favoriteCollectionViewHeightConstarint.constant == 239 {
+            myFavLabelHeightConstraint.constant = 0
+            favoriteCollectionViewHeightConstarint.constant = 0
+            nearMeLabelHeightConstraint.constant = 0
+            tournamentListApiCall(filterdValues: parameters)
+            
+        }
     }
     
 }
