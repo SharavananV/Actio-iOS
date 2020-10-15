@@ -44,7 +44,7 @@ class FriendsProfilePageViewController: UIViewController {
 	}
 	
 	@IBAction func chatAction(_ sender: Any) {
-		if let vc = self.storyboard?.instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController {
+		if let vc = UIStoryboard(name: "Social", bundle: nil).instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController {
 			vc.friendsModel = self.currentFriend
 			
 			self.navigationController?.pushViewController(vc, animated: true)
