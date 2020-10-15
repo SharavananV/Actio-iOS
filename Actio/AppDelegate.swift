@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     let gcmMessageIDKey = "gcm.message_id"
     var parentID = String()
+    var childID = String()
 
 
     
@@ -74,14 +75,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func redirect(to view: String, with params: [String: String]) {
         self.parentID = params["p"] ?? ""
-        print(self.parentID)
+        self.childID = params["c"] ?? ""
         if let topViewController = self.window?.topViewController() {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
            if let vc = storyboard.instantiateViewController(withIdentifier: "AcceptRejectRequestViewController") as? AcceptRejectRequestViewController {
 			if let loggedInUser: LoginModelResponse = UDHelper.getData(for: .loggedInUser) {
                 if parentID != "" {
-					if parentID == loggedInUser.subscriberID {
-                        vc.apiParentInitCall(childID: "7354")
+                    if parentID == String(loggedInUser.subscriberSeqID ?? 0) {
+                        vc.childID = self.childID
+                        vc.apiParentInitCall(childID: self.childID)
                         vc.modalPresentationStyle = .fullScreen
                         topViewController.present(vc, animated: false, completion: nil)
                         
@@ -162,6 +164,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "pushNotKey"), object: nil)
         
         Messaging.messaging().apnsToken = deviceToken
+        print(deviceToken,"appdelegate devicetoken")
     }
 	
 	func applicationWillTerminate(_ application: UIApplication) {

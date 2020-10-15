@@ -52,7 +52,6 @@ class AcceptRejectRequestViewController: UIViewController {
         self.rejectButton.applyGradient(colours: [AppColor.OrangeColor(),AppColor.RedColor()])
         self.acceptButton.applyGradient(colours: [AppColor.OrangeColor(),AppColor.RedColor()])
         self.arHeaderView.applyGradient(colours: [AppColor.OrangeColor(),AppColor.RedColor()])
-        apiParentInitCall(childID: "7354")
         addRelationArray = []
         
         let bottomLine = CALayer()
@@ -72,7 +71,7 @@ class AcceptRejectRequestViewController: UIViewController {
     }
     
     @IBAction func acceptButtonAction(_ sender: Any) {
-        //performSegue(withIdentifier: "showBeforeApproval", sender: sender)
+       // performSegue(withIdentifier: "showBeforeApproval", sender: sender)
         apiCall(childID: self.childID, Mode: self.Mode, relationID: self.relationID, Status: 1)
         
     }
@@ -86,6 +85,7 @@ class AcceptRejectRequestViewController: UIViewController {
             case .success (let data):
                 if let resultDict = data as? [String: Any], let successText = resultDict["status"] as? String, successText == "200"{
                     print(response)
+                    self.dismiss(animated: false, completion: nil)
                 }
                 else if let resultDict = data as? [String: Any], let invalidText = resultDict["msg"] as? String {
                     self.view.makeToast(invalidText)
@@ -97,7 +97,6 @@ class AcceptRejectRequestViewController: UIViewController {
                             self.view.makeToast(msg)
                             
                         }
-                        
                     }
                 }
             case .failure(_):
@@ -112,8 +111,7 @@ class AcceptRejectRequestViewController: UIViewController {
     func apiParentInitCall(childID: String) {
         let headers : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"",
                                      "Content-Type": "application/json"]
-        urlString = parentApprovalInitUrl
-        NetworkRouter.shared.request(urlString, method: .post, parameters: ["childID": childID],encoding:JSONEncoding.default, headers: headers).responseJSON {
+        NetworkRouter.shared.request(parentApprovalInitUrl, method: .post, parameters: ["childID": childID],encoding:JSONEncoding.default, headers: headers).responseJSON {
             response in
             switch response.result {
             case .success (let data):
