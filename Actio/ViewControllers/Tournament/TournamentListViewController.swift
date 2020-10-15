@@ -131,7 +131,6 @@ class TournamentListViewController: UIViewController,filterValueDelegate {
             favoriteCollectionViewHeightConstarint.constant = 0
             nearMeLabelHeightConstraint.constant = 0
             tournamentListApiCall(filterdValues: parameters)
-            
         }
     }
     
@@ -151,11 +150,11 @@ extension TournamentListViewController : UICollectionViewDelegate,UICollectionVi
         guard let tournament = self.tournamentListModel?.favorites?[indexPath.row] else {
             return UICollectionViewCell()
         }
-        
+    
         if let logo = tournament.tournamentLogo,let imagePath = URL(string:  baseImageUrl + logo) {
             cell.tournamentFavImageView.load(url: imagePath)
         }
-        
+                
         cell.tournamentFavSportsNameLabel.text = tournament.tournamentName
         cell.tournamentFavLocationLabel.text = tournament.venue
         cell.setDateText(tournament.tournamentStartDate ?? "", month: tournament.tournamentStartMonth ?? "", year: tournament.tournamentStartYear ?? "")

@@ -33,6 +33,7 @@
 		185D287825307D3A00FD3D81 /* TournamentFilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185D287725307D3900FD3D81 /* TournamentFilterModel.swift */; };
 		1880B020251364C2006BE848 /* NetworkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1880B01F251364C2006BE848 /* NetworkRouter.swift */; };
 		188B699D25231138000F6030 /* AddEditFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188B699C25231137000F6030 /* AddEditFeedViewController.swift */; };
+		18A4A11D25388616004C81BC /* FeedWithoutImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A4A11C25388616004C81BC /* FeedWithoutImageTableViewCell.swift */; };
 		18A9750924C04972001B5BB3 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A9750824C04972001B5BB3 /* MenuViewController.swift */; };
 		18BBAC7D24B5B99900306A8F /* ActioImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BBAC7C24B5B99900306A8F /* ActioImagePicker.swift */; };
 		18BBAC7F24B5E90A00306A8F /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BBAC7E24B5E90A00306A8F /* Validator.swift */; };
@@ -194,6 +195,7 @@
 		185D287725307D3900FD3D81 /* TournamentFilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentFilterModel.swift; sourceTree = "<group>"; };
 		1880B01F251364C2006BE848 /* NetworkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRouter.swift; sourceTree = "<group>"; };
 		188B699C25231137000F6030 /* AddEditFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditFeedViewController.swift; sourceTree = "<group>"; };
+		18A4A11C25388616004C81BC /* FeedWithoutImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedWithoutImageTableViewCell.swift; sourceTree = "<group>"; };
 		18A9750824C04972001B5BB3 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		18B569F324BF005900D6A520 /* Actio.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Actio.entitlements; sourceTree = "<group>"; };
 		18B569F524C03F7800D6A520 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
@@ -618,6 +620,7 @@
 			isa = PBXGroup;
 			children = (
 				8D673A74251DFF6900585AF9 /* FeedTableViewCell.swift */,
+				18A4A11C25388616004C81BC /* FeedWithoutImageTableViewCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -1079,6 +1082,7 @@
 				18C253D12512403F0043D20F /* TournamentSponserDatasource.swift in Sources */,
 				8D673A6C251DB02000585AF9 /* ImagePreviewViewController.swift in Sources */,
 				8DCBAB5A24BF2D37009E8B7F /* HomePageViewController.swift in Sources */,
+				18A4A11D25388616004C81BC /* FeedWithoutImageTableViewCell.swift in Sources */,
 				8D69C318252B32EE00C186F4 /* SearchPlayerResponse.swift in Sources */,
 				8DF77D4F252B1C090065720A /* UserSelectionTableViewCell.swift in Sources */,
 				8DF77D4D252B09500065720A /* EventRegistrationStatus.swift in Sources */,
