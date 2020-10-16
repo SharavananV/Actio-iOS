@@ -9,6 +9,7 @@
 import UIKit
 import MessageKit
 import InputBarAccessoryView
+import Alamofire
 
 class ChatViewController: MessagesViewController {
 
@@ -111,6 +112,12 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 		}
 	}
 	
+	func configureMediaMessageImageView(_ imageView: UIImageView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
+		if case MessageKind.photo(let media) = message.kind, let imageURL = media.url {
+			imageView.load(url: imageURL)
+		}
+	}
+	
 	func messageBottomLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
 		let name = message.sentDate.justTime() + " "
 		var imageName = "sending"
@@ -153,6 +160,8 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 		if let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout {
 			layout.textMessageSizeCalculator.outgoingAvatarSize = .zero
 			layout.textMessageSizeCalculator.incomingAvatarSize = .zero
+			layout.photoMessageSizeCalculator.outgoingAvatarSize = .zero
+			layout.photoMessageSizeCalculator.incomingAvatarSize = .zero
 			layout.setMessageIncomingMessageBottomLabelAlignment(LabelAlignment(textAlignment: .left, textInsets: UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)))
 			layout.setMessageOutgoingMessageBottomLabelAlignment(LabelAlignment(textAlignment: .right, textInsets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)))
 		}
@@ -189,6 +198,24 @@ extension ChatViewController: MessageCellDelegate {
 				return
 			}
 			vc.tournamentId = Int(refId ?? "0")
+			self.navigationController?.pushViewController(vc, animated: false)
+			
+		default:
+			break
+		}
+	}
+	
+	func didTapImage(in cell: MessageCollectionViewCell) {
+		guard let indexPath = messagesCollectionView.indexPath(for: cell),
+			  let message = messagesCollectionView.messagesDataSource?.messageForItem(at: indexPath, in: messagesCollectionView) as? ChatMessage else {
+			print("Failed to identify message when audio cell receive tap gesture")
+			return
+		}
+		
+		switch message.kind {
+		case .photo(let media):
+			let vc = ImageZoomViewController()
+			vc.imageUrl = media.url
 			self.navigationController?.pushViewController(vc, animated: false)
 			
 		default:
@@ -249,6 +276,67 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 
 extension ChatViewController: ActioPickerDelegate {
 	func didSelect(url: URL?, type: String) {
+		uploadChatImage(imageUrl: url)
+	}
+	
+	func didCaptureImage(_ image: UIImage) {
+		uploadChatImage(image: image)
+	}
+	
+	// TODO: Move this call to the network router class
+	func uploadChatImage(image: UIImage? = nil, imageUrl: URL? = nil) {
+		messageInputBar.sendButton.startAnimating()
 		
+		let headers : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"",
+									 "Content-type": "multipart/form-data",
+									 "Content-Disposition" : "form-data"]
+		
+		AF.upload(multipartFormData: { (multipartFormData) in
+			if let imgData = image?.jpegData(compressionQuality: 1) {
+				multipartFormData.append(imgData, withName: "image", fileName: "images.jpg", mimeType: "image/jpeg")
+			}
+			else if let imageUrl = imageUrl {
+				do {
+					let mediaData = try Data(contentsOf: imageUrl)
+					
+					multipartFormData.append(mediaData, withName: "image", fileName: imageUrl.lastPathComponent, mimeType: "image/*")
+				}
+				catch {
+					print("Error when converting media to data")
+				}
+			}
+			
+		},to: chatUploadUrl, usingThreshold: UInt64.init(),
+		method: .post,
+		headers: headers).response{ [weak self] response in
+			self?.messageInputBar.sendButton.stopAnimating()
+			
+			if(response.value != nil){
+				do{
+					if let jsonData = response.data{
+						let parsedData = try JSONSerialization.jsonObject(with: jsonData) as? Dictionary<String, AnyObject>
+						
+						if let successStatus = parsedData?["status"] as? String, successStatus == "200" {
+							if let fromId = self?.loggedInUser?.subscriberSeqID, let toId = self?.conversation?.subscriberID {
+								let imageURL: String = parsedData?["path"] as? String ?? ""
+								let message: String = parsedData?["message"] as? String ?? ""
+								
+								self?.socketManager.sendImage(fromId: String(fromId), toId: String(toId), message: message, imageUrl: imageURL)
+							}
+						}
+						else if let json = parsedData, json["status"] as? String == "422", let errors = json["errors"] as? [[String: Any]], let message = errors.first?["msg"] as? String {
+							self?.view.makeToast(message)
+							
+							return
+						}
+					}
+				}catch{
+					print(response.error ?? "")
+					self?.view.makeToast("Please try again later")
+				}
+			}else{
+				self?.view.makeToast("Please try again later")
+			}
+		}
 	}
 }

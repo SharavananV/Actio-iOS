@@ -71,6 +71,7 @@ let myProfileUrl = baseUrl + "profile/myprofile"
 
 // Socket URL
 let socketUrl = "http://203.223.191.66:8085"
+let chatUploadUrl = socketUrl + "/v1/chat/upload"
 
 // Webpage URL
 let termsandConditionUrl = "https://playactio.com/terms.html"

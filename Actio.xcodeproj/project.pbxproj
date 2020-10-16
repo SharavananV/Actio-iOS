@@ -78,6 +78,10 @@
 		8D21855D24B6E383002688A8 /* OtpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D21855C24B6E383002688A8 /* OtpViewController.swift */; };
 		8D21855F24B6ED5F002688A8 /* VPMOTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D21855E24B6ED5F002688A8 /* VPMOTPView.swift */; };
 		8D21856124B6ED75002688A8 /* VPMOTPTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D21856024B6ED75002688A8 /* VPMOTPTextField.swift */; };
+		8D47F0E625397FC30013900C /* ZoomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D47F0E525397FC30013900C /* ZoomImageView.swift */; };
+		8D47F0EB2539805F0013900C /* ImageZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D47F0EA2539805F0013900C /* ImageZoomViewController.swift */; };
+		8D47F0EF2539844C0013900C /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D47F0EE2539844C0013900C /* ImageCache.swift */; };
+		8D47F0F3253984760013900C /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D47F0F2253984760013900C /* ImageLoader.swift */; };
 		8D673A5B2513884000585AF9 /* TournamentContactDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D673A5A2513884000585AF9 /* TournamentContactDetailsViewController.swift */; };
 		8D673A5E2514840D00585AF9 /* TournamentContactDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D673A5D2514840D00585AF9 /* TournamentContactDetailsTableViewCell.swift */; };
 		8D673A602514C28600585AF9 /* TournamentPrizesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D673A5F2514C28600585AF9 /* TournamentPrizesViewController.swift */; };
@@ -243,6 +247,10 @@
 		8D21855C24B6E383002688A8 /* OtpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpViewController.swift; sourceTree = "<group>"; };
 		8D21855E24B6ED5F002688A8 /* VPMOTPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPMOTPView.swift; sourceTree = "<group>"; };
 		8D21856024B6ED75002688A8 /* VPMOTPTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPMOTPTextField.swift; sourceTree = "<group>"; };
+		8D47F0E525397FC30013900C /* ZoomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomImageView.swift; sourceTree = "<group>"; };
+		8D47F0EA2539805F0013900C /* ImageZoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageZoomViewController.swift; sourceTree = "<group>"; };
+		8D47F0EE2539844C0013900C /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		8D47F0F2253984760013900C /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		8D673A5A2513884000585AF9 /* TournamentContactDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentContactDetailsViewController.swift; sourceTree = "<group>"; };
 		8D673A5D2514840D00585AF9 /* TournamentContactDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentContactDetailsTableViewCell.swift; sourceTree = "<group>"; };
 		8D673A5F2514C28600585AF9 /* TournamentPrizesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentPrizesViewController.swift; sourceTree = "<group>"; };
@@ -344,6 +352,7 @@
 				183384C524B49CDD009911A8 /* ActioGradientButton.swift */,
 				18F6A07124B57D18000ACDF1 /* SelfSizingTextView.swift */,
 				18C6B0212511C95E00B7162E /* PaddingLabel.swift */,
+				8D47F0E525397FC30013900C /* ZoomImageView.swift */,
 			);
 			path = "Custom Subclasses";
 			sourceTree = "<group>";
@@ -367,6 +376,7 @@
 		1841F19724B480DA0021D131 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				8D47F0ED253984350013900C /* Image Cache */,
 				8DE6B64A24B3366B0010A3EC /* Colors */,
 				8DE6B64724B3352C0010A3EC /* Fonts */,
 				8D8C6A9224B591B200D6DBE3 /* UDHelper.swift */,
@@ -451,6 +461,7 @@
 		18F6A07324B5A3FB000ACDF1 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				8D47F0E92539804C0013900C /* Common */,
 				8D0F7498253046D400200C2B /* SocialPages */,
 				8D0C5C2E252457CA005B3A4E /* Events */,
 				8D673A70251DF5E500585AF9 /* EventFeed */,
@@ -595,6 +606,23 @@
 				8D21856024B6ED75002688A8 /* VPMOTPTextField.swift */,
 			);
 			path = OTP;
+			sourceTree = "<group>";
+		};
+		8D47F0E92539804C0013900C /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				8D47F0EA2539805F0013900C /* ImageZoomViewController.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		8D47F0ED253984350013900C /* Image Cache */ = {
+			isa = PBXGroup;
+			children = (
+				8D47F0EE2539844C0013900C /* ImageCache.swift */,
+				8D47F0F2253984760013900C /* ImageLoader.swift */,
+			);
+			path = "Image Cache";
 			sourceTree = "<group>";
 		};
 		8D673A5C251483D800585AF9 /* TableViewCell */ = {
@@ -1012,6 +1040,7 @@
 				18196CFC24B47BF900DBECCA /* SignupViewController.swift in Sources */,
 				18C6B01E2510BDE200B7162E /* LocationFetcher.swift in Sources */,
 				18C6B0252511F38800B7162E /* TournamentDetailsViewController.swift in Sources */,
+				8D47F0EF2539844C0013900C /* ImageCache.swift in Sources */,
 				8D21855F24B6ED5F002688A8 /* VPMOTPView.swift in Sources */,
 				8DCBAB5D24BF3ADC009E8B7F /* TabBarViewController.swift in Sources */,
 				8D833034252C97C7001CDE81 /* CDPlayer+CoreDataProperties.swift in Sources */,
@@ -1019,12 +1048,15 @@
 				18455F8A252DAC75000CA7CA /* SegmentControlTableViewCell.swift in Sources */,
 				8D673A622514C86A00585AF9 /* TournamentPrizesTableViewCell.swift in Sources */,
 				8DE6B64924B335630010A3EC /* AppFonts.swift in Sources */,
+				8D47F0EB2539805F0013900C /* ImageZoomViewController.swift in Sources */,
 				18435580252B233200DECA90 /* ForgotUsernameSubscriberIDViewController.swift in Sources */,
 				8DC1BD372525FA7B005C55DE /* PersistentContainer.swift in Sources */,
+				8D47F0E625397FC30013900C /* ZoomImageView.swift in Sources */,
 				8D673A7A2521E83B00585AF9 /* EventFeedModel.swift in Sources */,
 				8D94E07F24AF1D0A00DBC46A /* Actio.xcdatamodeld in Sources */,
 				8DC1BD2625259A8F005C55DE /* NotificationListViewController.swift in Sources */,
 				8D21855D24B6E383002688A8 /* OtpViewController.swift in Sources */,
+				8D47F0F3253984760013900C /* ImageLoader.swift in Sources */,
 				8DCBAB5B24BF2D37009E8B7F /* HomePageCollectionViewCell.swift in Sources */,
 				1841F19524B480680021D131 /* TextEditTableViewCell.swift in Sources */,
 				8D21856124B6ED75002688A8 /* VPMOTPTextField.swift in Sources */,

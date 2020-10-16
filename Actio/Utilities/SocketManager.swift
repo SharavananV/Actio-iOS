@@ -69,6 +69,23 @@ class SocketIOManager {
 		}
 	}
 	
+	func sendImage(fromId: String, toId: String, message: String?, imageUrl: String) {
+		if !isConnected() {
+			establishConnection()
+			
+			socket.on(clientEvent: .connect) { [weak self] (data, ack) in
+				self?.socket.emitWithAck("sendMessage", ["fromID": fromId, "toID": toId, "message": message ?? "", "imageURL": imageUrl, "type": "image"]).timingOut(after: 0, callback: { (data) in
+					print(data)
+				})
+			}
+		}
+		else {
+			self.socket.emitWithAck("sendMessage", ["fromID": fromId, "toID": toId, "message": message ?? "", "imageURL": imageUrl, "type": "image"]).timingOut(after: 0, callback: { (data) in
+				print(data)
+			})
+		}
+	}
+	
 	func isConnected() -> Bool {
 		return socket.status == .connected
 	}

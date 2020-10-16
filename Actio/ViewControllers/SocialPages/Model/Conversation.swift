@@ -64,8 +64,14 @@ struct History: Codable {
 		
 		let messageKind: MessageKind
 		switch message?.type {
-		case "text":
-			messageKind = .text(message?.msg ?? "")
+		case "image":
+			if let url = URL(string: socketUrl+"/"+(message?.imgURL ?? "")), let placeHolder = UIImage(named: "placeholder") {
+				let media = ChatPhoto(url: url, image: nil, placeholderImage: placeHolder, size: CGSize(width: 300, height: 300))
+				messageKind = .photo(media)
+			} else {
+				fallthrough
+			}
+			
 		default:
 			messageKind = .text(message?.msg ?? "")
 		}
@@ -93,4 +99,11 @@ public struct ChatMessage: MessageType {
 	public var kind: MessageKind
 	var message: MessageContent?
 	var status, position: Int?
+}
+
+public struct ChatPhoto: MediaItem {
+	public var url: URL?
+	public var image: UIImage?
+	public var placeholderImage: UIImage
+	public var size: CGSize
 }

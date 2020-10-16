@@ -29,6 +29,12 @@ class ChatItem {
 	func convertIntoMessage() -> ChatMessage {
 		let sender = Sender(senderId: fromId ?? "0", displayName: senderName ?? "")
 		
-		return ChatMessage(sender: sender, messageId: "", sentDate: time?.toDate ?? Date(), kind: .text(self.message ?? ""), status: Int(status ?? "0"), position: Int(position ?? "0"))
+		if type == "image", let url = URL(string: socketUrl+"/"+(imageUrl ?? "")), let placeHolder = UIImage(named: "placeholder") {
+			let media = ChatPhoto(url: url, image: nil, placeholderImage: placeHolder, size: CGSize(width: 300, height: 300))
+			return ChatMessage(sender: sender, messageId: "", sentDate: time?.toDate ?? Date(), kind: .photo(media), status: Int(status ?? "0"), position: Int(position ?? "0"))
+		}
+		else {
+			return ChatMessage(sender: sender, messageId: "", sentDate: time?.toDate ?? Date(), kind: .text(self.message ?? ""), status: Int(status ?? "0"), position: Int(position ?? "0"))
+		}
 	}
 }
