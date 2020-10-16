@@ -21,7 +21,7 @@ class ImageZoomViewController: UIViewController {
 		didSet {
 			guard let url = self.imageUrl else { return }
 			
-			ImageLoader.shared.loadImage(from: url, completion: { [weak self] (image) in
+			ImageLoader.shared.loadImage(from: url, true, completion: { [weak self] (image) in
 				self?.zoomImageView.image = image
 			})
 		}

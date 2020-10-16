@@ -22,9 +22,11 @@ public final class ImageLoader {
 		self.cache = cache
 	}
 	
-	public func loadImage(from url: URL, completion: @escaping (UIImage) -> Void) {
+	public func loadImage(from url: URL, _ sendPlaceHolder: Bool, completion: @escaping (UIImage) -> Void) {
 		if let image = cache[url] {
 			return completion(image)
+		} else if let image = UIImage(named: "placeholder") {
+			completion(image)
 		}
 		
 		DispatchQueue.global().async {
@@ -40,8 +42,8 @@ public final class ImageLoader {
 }
 
 extension UIImageView {
-	func load(url: URL) {
-		ImageLoader.shared.loadImage(from: url) { [weak self] (image) in
+	func load(url: URL, sendPlaceHolder: Bool = true) {
+		ImageLoader.shared.loadImage(from: url, sendPlaceHolder) { [weak self] (image) in
 			self?.image = image
 		}
 	}
