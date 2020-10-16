@@ -86,6 +86,32 @@ class TournamentDetailsViewController: UIViewController, UIViewControllerPreview
     }
     
     @IBAction func shareButtonAction(_ sender: Any) {
+		let actionSheet = UIAlertController(title: "Share Tournament", message: nil, preferredStyle: .actionSheet)
+		
+		let internalShare = UIAlertAction(title: "Internal Share", style: .default) { [weak self] (action) in
+			if let vc = UIStoryboard(name: "Social", bundle: nil).instantiateViewController(withIdentifier: "ContactsListViewController") as? ContactsListViewController {
+				vc.message = "Actio Application, Let me recommend you this tournament \(self?.tournamentDetails?.tournamentName ?? "")"
+				vc.shareType = "Tournament"
+				vc.referenceId = String(self?.tournamentId ?? 0)
+				
+				self?.navigationController?.pushViewController(vc, animated: true)
+			}
+		}
+		actionSheet.addAction(internalShare)
+		
+		let externalShare = UIAlertAction(title: "External Share", style: .default) { (action) in
+			guard let tournamentId = self.tournamentId else {
+				return
+			}
+			let shareLink = "Actio Application, Let me recommend you this tournament \n\nhttp://playactio.com/x?f=" + String(tournamentId) + "&screen=T"
+			let activityController = UIActivityViewController(activityItems: [shareLink], applicationActivities: nil)
+			self.present(activityController, animated: true, completion: nil)
+		}
+		actionSheet.addAction(externalShare)
+		
+		actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+		
+		self.present(actionSheet, animated: true, completion: nil)
     }
     @IBAction func readMoreSelected(_ sender: Any) {
         if isDescriptionExpanded {

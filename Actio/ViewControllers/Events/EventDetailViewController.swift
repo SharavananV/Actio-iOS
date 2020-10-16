@@ -77,8 +77,14 @@ class EventDetailViewController: UIViewController {
 	@IBAction func shareButtonAction(_ sender: Any) {
 		let actionSheet = UIAlertController(title: "Share Event", message: nil, preferredStyle: .actionSheet)
 		
-		let internalShare = UIAlertAction(title: "Internal Share", style: .default) { (action) in
-			// TODO: Open Contacts list and send a message
+		let internalShare = UIAlertAction(title: "Internal Share", style: .default) { [weak self] (action) in
+			if let vc = UIStoryboard(name: "Social", bundle: nil).instantiateViewController(withIdentifier: "ContactsListViewController") as? ContactsListViewController {
+				vc.message = "Actio Application , Let me recommend you this event \(self?.eventDetails?.eventName ?? "")"
+				vc.shareType = "Event"
+				vc.referenceId = String(self?.eventDetails?.id ?? 0)
+				
+				self?.navigationController?.pushViewController(vc, animated: true)
+			}
 		}
 		actionSheet.addAction(internalShare)
 		
@@ -86,7 +92,7 @@ class EventDetailViewController: UIViewController {
 			guard let eventId = self.eventDetails?.id else {
 				return
 			}
-			let shareLink = "Actio Application, Let me recommend you this event \n\nhttps://actiosport.com/x?f=" + String(eventId) + "&screen=E"
+			let shareLink = "Actio Application, Let me recommend you this event \n\nhttp://playactio.com/x?f=" + String(eventId) + "&screen=E"
 			let activityController = UIActivityViewController(activityItems: [shareLink], applicationActivities: nil)
 			self.present(activityController, animated: true, completion: nil)
 		}

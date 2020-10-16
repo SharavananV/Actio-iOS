@@ -28,13 +28,11 @@ public final class ImageLoader {
 		}
 		
 		DispatchQueue.global().async {
-			if let data = try? Data(contentsOf: url) {
-				if let image = UIImage(data: data) {
-					DispatchQueue.main.async { [weak self] in
-						self?.cache[url] = image
-						
-						completion(image)
-					}
+			if let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
+				DispatchQueue.main.async { [weak self] in
+					self?.cache[url] = image
+					
+					completion(image)
 				}
 			}
 		}

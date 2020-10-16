@@ -31,6 +31,7 @@ class Friend: Codable {
 	let subscriberDisplayID, fullName, username, emailID: String?
 	let profileImage: String?
 	var friendsStatus: Int?
+	var isSelected: Bool = false
 	
 	enum CodingKeys: String, CodingKey {
 		case subscriberID = "subscriber_id"

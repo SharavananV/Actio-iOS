@@ -82,6 +82,9 @@
 		8D47F0EB2539805F0013900C /* ImageZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D47F0EA2539805F0013900C /* ImageZoomViewController.swift */; };
 		8D47F0EF2539844C0013900C /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D47F0EE2539844C0013900C /* ImageCache.swift */; };
 		8D47F0F3253984760013900C /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D47F0F2253984760013900C /* ImageLoader.swift */; };
+		8D47F0F625399F980013900C /* ContactsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D47F0F525399F980013900C /* ContactsListViewController.swift */; };
+		8D47F0FB2539A5610013900C /* ChatList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D47F0FA2539A5610013900C /* ChatList.swift */; };
+		8D47F1002539ABCF0013900C /* ContactListShareCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D47F0FF2539ABCF0013900C /* ContactListShareCell.swift */; };
 		8D673A5B2513884000585AF9 /* TournamentContactDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D673A5A2513884000585AF9 /* TournamentContactDetailsViewController.swift */; };
 		8D673A5E2514840D00585AF9 /* TournamentContactDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D673A5D2514840D00585AF9 /* TournamentContactDetailsTableViewCell.swift */; };
 		8D673A602514C28600585AF9 /* TournamentPrizesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D673A5F2514C28600585AF9 /* TournamentPrizesViewController.swift */; };
@@ -251,6 +254,9 @@
 		8D47F0EA2539805F0013900C /* ImageZoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageZoomViewController.swift; sourceTree = "<group>"; };
 		8D47F0EE2539844C0013900C /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		8D47F0F2253984760013900C /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		8D47F0F525399F980013900C /* ContactsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsListViewController.swift; sourceTree = "<group>"; };
+		8D47F0FA2539A5610013900C /* ChatList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatList.swift; sourceTree = "<group>"; };
+		8D47F0FF2539ABCF0013900C /* ContactListShareCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListShareCell.swift; sourceTree = "<group>"; };
 		8D673A5A2513884000585AF9 /* TournamentContactDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentContactDetailsViewController.swift; sourceTree = "<group>"; };
 		8D673A5D2514840D00585AF9 /* TournamentContactDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentContactDetailsTableViewCell.swift; sourceTree = "<group>"; };
 		8D673A5F2514C28600585AF9 /* TournamentPrizesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentPrizesViewController.swift; sourceTree = "<group>"; };
@@ -567,8 +573,8 @@
 			isa = PBXGroup;
 			children = (
 				1856B140253440B3000C1D17 /* CollectionViewCells */,
-				8D0F74A62530534F00200C2B /* Model */,
 				8D0F74A125304F6400200C2B /* TableViewCells */,
+				8D0F74A62530534F00200C2B /* Model */,
 				8D0F7499253046EF00200C2B /* FriendListViewController.swift */,
 				8D673A6E251DD72400585AF9 /* ProfilePageViewController.swift */,
 				1858E5E82535911E00436E5D /* FriendsProfilePageViewController.swift */,
@@ -611,7 +617,10 @@
 		8D47F0E92539804C0013900C /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				8D47F0F92539A5500013900C /* TableViewCells */,
+				8D47F0F82539A54B0013900C /* Model */,
 				8D47F0EA2539805F0013900C /* ImageZoomViewController.swift */,
+				8D47F0F525399F980013900C /* ContactsListViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -623,6 +632,22 @@
 				8D47F0F2253984760013900C /* ImageLoader.swift */,
 			);
 			path = "Image Cache";
+			sourceTree = "<group>";
+		};
+		8D47F0F82539A54B0013900C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8D47F0FA2539A5610013900C /* ChatList.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8D47F0F92539A5500013900C /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				8D47F0FF2539ABCF0013900C /* ContactListShareCell.swift */,
+			);
+			path = TableViewCells;
 			sourceTree = "<group>";
 		};
 		8D673A5C251483D800585AF9 /* TableViewCell */ = {
@@ -1046,6 +1071,7 @@
 				8D833034252C97C7001CDE81 /* CDPlayer+CoreDataProperties.swift in Sources */,
 				18C6B0202510C17300B7162E /* NotificationHelper.swift in Sources */,
 				18455F8A252DAC75000CA7CA /* SegmentControlTableViewCell.swift in Sources */,
+				8D47F1002539ABCF0013900C /* ContactListShareCell.swift in Sources */,
 				8D673A622514C86A00585AF9 /* TournamentPrizesTableViewCell.swift in Sources */,
 				8DE6B64924B335630010A3EC /* AppFonts.swift in Sources */,
 				8D47F0EB2539805F0013900C /* ImageZoomViewController.swift in Sources */,
@@ -1112,6 +1138,8 @@
 				18F2F9C024C1C367007CBBC0 /* BeforeApprovalViewController.swift in Sources */,
 				8D8C6A9624B591F400D6DBE3 /* ApiDetails.swift in Sources */,
 				8D0F75EA2536CF7D00200C2B /* ChatHistoryViewController.swift in Sources */,
+				8D47F0F625399F980013900C /* ContactsListViewController.swift in Sources */,
+				8D47F0FB2539A5610013900C /* ChatList.swift in Sources */,
 				8DC1BD322525DC25005C55DE /* EventMasterModel.swift in Sources */,
 				18435587252B2F4E00DECA90 /* LoginModel.swift in Sources */,
 				8D673A5B2513884000585AF9 /* TournamentContactDetailsViewController.swift in Sources */,

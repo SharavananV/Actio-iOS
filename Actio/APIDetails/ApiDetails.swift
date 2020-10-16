@@ -61,6 +61,7 @@ let friendActionUrl = baseUrl + "friend/action"
 let friendListUrl = baseUrl + "friend/list"
 let allConversationUrl = baseUrl + "chat/conversation"
 let chatHistoryUrl = baseUrl + "chat/history"
+let contactsListUrl = baseUrl + "chat/friends"
 
 // Notification
 let notificationListUrl = baseUrl + "notify/list"

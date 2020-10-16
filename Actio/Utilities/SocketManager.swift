@@ -26,9 +26,7 @@ class SocketIOManager {
 	}
 	
 	func closeConnection() {
-		socket.off("receiveMessage")
-		socket.off(clientEvent: .connect)
-		
+		socket.removeAllHandlers()
 		socket.disconnect()
 	}
 	
@@ -45,6 +43,8 @@ class SocketIOManager {
 			
 			socket.on(clientEvent: .connect) { [weak self] (data, ack) in
 				self?.socket.emit("connectUser", ["fromID": fromId, "toID": toId])
+				
+				self?.socket.off(clientEvent: .connect)
 			}
 		}
 		else {
@@ -60,6 +60,8 @@ class SocketIOManager {
 				self?.socket.emitWithAck("sendMessage", ["fromID": fromId, "toID": toId, "message": message, "type": "text"]).timingOut(after: 0, callback: { (data) in
 					print(data)
 				})
+				
+				self?.socket.off(clientEvent: .connect)
 			}
 		}
 		else {
@@ -77,10 +79,30 @@ class SocketIOManager {
 				self?.socket.emitWithAck("sendMessage", ["fromID": fromId, "toID": toId, "message": message ?? "", "imageURL": imageUrl, "type": "image"]).timingOut(after: 0, callback: { (data) in
 					print(data)
 				})
+				
+				self?.socket.off(clientEvent: .connect)
+			}
+		}
+		
+		self.socket.emitWithAck("sendMessage", ["fromID": fromId, "toID": toId, "message": message ?? "", "imageURL": imageUrl, "type": "image"]).timingOut(after: 0, callback: { (data) in
+			print(data)
+		})
+	}
+	
+	func shareTextMessage(fromId: String, toIds: [String], message: String, refId: String, type: String) {
+		if !isConnected() {
+			establishConnection()
+			
+			socket.on(clientEvent: .connect) { [weak self] (data, ack) in
+				self?.socket.emitWithAck("shareMessage", ["fromID": fromId, "toID": toIds, "msg": message, "type": type, "refID": refId]).timingOut(after: 0, callback: { (data) in
+					print(data)
+				})
+				
+				self?.socket.off(clientEvent: .connect)
 			}
 		}
 		else {
-			self.socket.emitWithAck("sendMessage", ["fromID": fromId, "toID": toId, "message": message ?? "", "imageURL": imageUrl, "type": "image"]).timingOut(after: 0, callback: { (data) in
+			self.socket.emitWithAck("shareMessage", ["fromID": fromId, "toID": toIds, "msg": message, "type": type, "refID": refId]).timingOut(after: 0, callback: { (data) in
 				print(data)
 			})
 		}
@@ -95,7 +117,7 @@ class SocketIOManager {
 	}
 	
 	deinit {
-		socket.disconnect()
+		closeConnection()
 	}
 }
 
