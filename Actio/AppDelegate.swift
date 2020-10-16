@@ -18,11 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     let gcmMessageIDKey = "gcm.message_id"
-    var parentID = String()
-    var childID = String()
 
-
-    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateInitialViewController()
@@ -62,56 +58,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         if let url = userActivity.webpageURL {
-            let view = url.lastPathComponent
             var parameters: [String: String] = [:]
             URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems?.forEach {
                 parameters[$0.name] = $0.value
             }
             
-            redirect(to: view, with: parameters)
+			RedirectionHandler.shared.redirect(with: parameters)
         }
         return true
     }
-    
-    private func redirect(to view: String, with params: [String: String]) {
-        self.parentID = params["p"] ?? ""
-        self.childID = params["c"] ?? ""
-        if let topViewController = self.window?.topViewController() {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-           if let vc = storyboard.instantiateViewController(withIdentifier: "AcceptRejectRequestViewController") as? AcceptRejectRequestViewController {
-			if let loggedInUser: LoginModelResponse = UDHelper.getData(for: .loggedInUser) {
-                if parentID != "" {
-                    if parentID == String(loggedInUser.subscriberSeqID ?? 0) {
-                        vc.childID = self.childID
-                        vc.apiParentInitCall(childID: self.childID)
-                        vc.modalPresentationStyle = .fullScreen
-                        topViewController.present(vc, animated: false, completion: nil)
-                        
-                    }
-                    else {
-                        
-                        if let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChildLogoutWarningViewController") as? ChildLogoutWarningViewController {
-                            controller.modalPresentationStyle = .fullScreen
-                            topViewController.present(controller, animated: false, completion: nil)
-                        }
-                        
-                    }
-                }
-            }
-            else {
-                print("Login Page")
-                if let topViewController = self.window?.topViewController() {
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    if let loginVc = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
-                        loginVc.modalPresentationStyle = .fullScreen
-                        topViewController.present(loginVc, animated: false, completion: nil)
-                        
-                    }
-                }
-        }
-    }
-    }
-    }
+	
     private func displayAlert(message: String, buttonTitle: String, vc: UIViewController)
     {
         let alertController = UIAlertController(title: "", message: message, preferredStyle: .alert)

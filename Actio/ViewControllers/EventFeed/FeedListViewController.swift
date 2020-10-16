@@ -132,7 +132,7 @@ extension FeedListViewController : UITableViewDelegate,UITableViewDataSource,UIS
             
             let feedDateFormatter = DateFormatter()
             feedDateFormatter.dateFormat = "MMM dd,yyyy hh:mm:ss a"
-            if let createdDate = feedDateFormatter.date(from: "\(feed.createdDate) \(feed.createdTime)"), Calendar.current.isDateInToday(createdDate) {
+            if let createdDate = feedDateFormatter.date(from: "\(feed.createdDate ?? "") \(feed.createdTime ?? "")"), Calendar.current.isDateInToday(createdDate) {
                 let timeDiff = createdDate.timeIntervalSince(Date())
                 cell2.feedTimeLabel.text = timeDiff.displayString + " ago"
             }
@@ -191,6 +191,7 @@ extension FeedListViewController : UITableViewDelegate,UITableViewDataSource,UIS
                 }
             }
             let shareAction = UIContextualAction(style: .normal, title: nil) { _, _, complete in
+				self.shareFeed(feed)
             }
             
             shareAction.backgroundColor = .white
@@ -244,16 +245,42 @@ extension FeedListViewController : UITableViewDelegate,UITableViewDataSource,UIS
         searchBar.resignFirstResponder()
         self.feedTableView.reloadData()
     }
+	
+	func shareFeed(_ feed: FeedDetailModel?) {
+		let actionSheet = UIAlertController(title: "Share Event", message: nil, preferredStyle: .actionSheet)
+		
+		let internalShare = UIAlertAction(title: "Internal Share", style: .default) { [weak self] (action) in
+			if let vc = UIStoryboard(name: "Social", bundle: nil).instantiateViewController(withIdentifier: "ContactsListViewController") as? ContactsListViewController {
+				vc.message = "Actio Application, Let me recommend you this feed post \(feed?.fullName ?? "")"
+				vc.shareType = "Feed"
+				vc.referenceId = String(feed?.feedID ?? 0)
+				
+				self?.navigationController?.pushViewController(vc, animated: true)
+			}
+		}
+		actionSheet.addAction(internalShare)
+		
+		let externalShare = UIAlertAction(title: "External Share", style: .default) { (action) in
+			let shareLink = "Actio Application, Let me recommend you this event \n\nhttp://playactio.com/x?f=" + String(feed?.feedID ?? 0) + "&screen=F"
+			let activityController = UIActivityViewController(activityItems: [shareLink], applicationActivities: nil)
+			self.present(activityController, animated: true, completion: nil)
+		}
+		actionSheet.addAction(externalShare)
+		
+		actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+		
+		self.present(actionSheet, animated: true, completion: nil)
+	}
     
     func deleteFeed(_ feed: FeedDetailModel, completion: @escaping (Bool)-> Void) {
         let headers : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"",
                                      "Content-type": "multipart/form-data",
                                      "Content-Disposition" : "form-data"]
-        let params = ["title" : feed.title,
-                      "description" : feed.listDescription,
+        let params = ["title" : feed.title ?? "",
+                      "description" : feed.listDescription ?? "",
                       "isRemove": true,
                       "categoryID":1,
-                      "feedID": feed.feedID
+                      "feedID": feed.feedID ?? 0
         ] as [String : Any]
         
         AF.upload(multipartFormData: { (multipartFormData) in

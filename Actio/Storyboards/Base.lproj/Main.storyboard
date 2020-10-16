@@ -1505,7 +1505,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="tWm-x1-hoz">
-                                <rect key="frame" x="10" y="108" width="394" height="734"/>
+                                <rect key="frame" x="10" y="108" width="394" height="685"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="nLu-3K-BbP">
                                     <size key="itemSize" width="170" height="170"/>
@@ -4252,7 +4252,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="Cd1-lU-7aD"/>
+        <segue reference="65c-BC-yB6"/>
         <segue reference="Y5Q-sF-ehq"/>
         <segue reference="b20-Lc-qVC"/>
         <segue reference="2KU-G2-0an"/>

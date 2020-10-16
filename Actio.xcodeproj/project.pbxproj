@@ -85,6 +85,8 @@
 		8D47F0F625399F980013900C /* ContactsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D47F0F525399F980013900C /* ContactsListViewController.swift */; };
 		8D47F0FB2539A5610013900C /* ChatList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D47F0FA2539A5610013900C /* ChatList.swift */; };
 		8D47F1002539ABCF0013900C /* ContactListShareCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D47F0FF2539ABCF0013900C /* ContactListShareCell.swift */; };
+		8D47F1062539D26D0013900C /* RedirectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D47F1052539D26D0013900C /* RedirectionHandler.swift */; };
+		8D47F1092539D7E70013900C /* RedirectContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D47F1082539D7E70013900C /* RedirectContainerViewController.swift */; };
 		8D673A5B2513884000585AF9 /* TournamentContactDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D673A5A2513884000585AF9 /* TournamentContactDetailsViewController.swift */; };
 		8D673A5E2514840D00585AF9 /* TournamentContactDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D673A5D2514840D00585AF9 /* TournamentContactDetailsTableViewCell.swift */; };
 		8D673A602514C28600585AF9 /* TournamentPrizesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D673A5F2514C28600585AF9 /* TournamentPrizesViewController.swift */; };
@@ -257,6 +259,8 @@
 		8D47F0F525399F980013900C /* ContactsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsListViewController.swift; sourceTree = "<group>"; };
 		8D47F0FA2539A5610013900C /* ChatList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatList.swift; sourceTree = "<group>"; };
 		8D47F0FF2539ABCF0013900C /* ContactListShareCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListShareCell.swift; sourceTree = "<group>"; };
+		8D47F1052539D26D0013900C /* RedirectionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedirectionHandler.swift; sourceTree = "<group>"; };
+		8D47F1082539D7E70013900C /* RedirectContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedirectContainerViewController.swift; sourceTree = "<group>"; };
 		8D673A5A2513884000585AF9 /* TournamentContactDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentContactDetailsViewController.swift; sourceTree = "<group>"; };
 		8D673A5D2514840D00585AF9 /* TournamentContactDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentContactDetailsTableViewCell.swift; sourceTree = "<group>"; };
 		8D673A5F2514C28600585AF9 /* TournamentPrizesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentPrizesViewController.swift; sourceTree = "<group>"; };
@@ -393,6 +397,7 @@
 				18C6B01D2510BDE200B7162E /* LocationFetcher.swift */,
 				18C6B01F2510C17300B7162E /* NotificationHelper.swift */,
 				8D0F75C625346A1300200C2B /* SocketManager.swift */,
+				8D47F1052539D26D0013900C /* RedirectionHandler.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -621,6 +626,7 @@
 				8D47F0F82539A54B0013900C /* Model */,
 				8D47F0EA2539805F0013900C /* ImageZoomViewController.swift */,
 				8D47F0F525399F980013900C /* ContactsListViewController.swift */,
+				8D47F1082539D7E70013900C /* RedirectContainerViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1024,6 +1030,7 @@
 			files = (
 				18196CF824B4727E00DBECCA /* ActioTextField.swift in Sources */,
 				8D94E07524AF1D0A00DBC46A /* AppDelegate.swift in Sources */,
+				8D47F1092539D7E70013900C /* RedirectContainerViewController.swift in Sources */,
 				8D0F75C725346A1300200C2B /* SocketManager.swift in Sources */,
 				183384C824B4A561009911A8 /* ImagePickerTableViewCell.swift in Sources */,
 				8DA5D452250A464E003EAB6B /* TournamentListViewController.swift in Sources */,
@@ -1054,6 +1061,7 @@
 				8DF7863C24B846E900062261 /* SubscriberIDViewController.swift in Sources */,
 				8D0C5C30252457EC005B3A4E /* EventListViewController.swift in Sources */,
 				1880B020251364C2006BE848 /* NetworkRouter.swift in Sources */,
+				8D47F1062539D26D0013900C /* RedirectionHandler.swift in Sources */,
 				18C6B02D2512015200B7162E /* TournamentModel.swift in Sources */,
 				8DF77D51252B1F680065720A /* AddPlayersViewController.swift in Sources */,
 				8D0F749A253046EF00200C2B /* FriendListViewController.swift in Sources */,
