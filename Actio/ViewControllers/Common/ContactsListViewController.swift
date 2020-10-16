@@ -84,6 +84,10 @@ class ContactsListViewController: UIViewController {
 				refId: referenceId ?? "",
 				type: shareType ?? ""
 			)
+			
+			view.makeToast("Shared successfully") { [weak self] _ in
+				self?.navigationController?.popViewController(animated: true)
+			}
 		} else {
 			view.makeToast("Select atleast one contact")
 		}
