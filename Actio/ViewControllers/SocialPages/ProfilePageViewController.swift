@@ -10,7 +10,9 @@ import UIKit
 import Alamofire
 
 class ProfilePageViewController: UIViewController {
-
+    
+    @IBOutlet weak var changePasswordButton: UIButton!
+    @IBOutlet weak var editProfileButton: UIButton!
     @IBOutlet weak var profileBackgroundView: UIView!
     @IBOutlet var profileEmailLabel: UILabel!
     @IBOutlet var profileNameLabel: UILabel!
@@ -19,10 +21,10 @@ class ProfilePageViewController: UIViewController {
     private let service = DependencyProvider.shared.networkService
     var friendsListModel : [Friend]?
 	var userDetails: Friend?
+    var userName: String?
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         profileBackgroundView.applyGradient(colours: [AppColor.OrangeColor(),AppColor.RedColor()])
         myProfileCall()
         self.profileImageView.layer.cornerRadius = self.profileImageView.frame.height/2
@@ -31,6 +33,14 @@ class ProfilePageViewController: UIViewController {
         profileFriendsListCollectionView.dataSource = self
     }
     
+    @IBAction func editProfileButtonAction(_ sender: Any) {
+    }
+    @IBAction func changePasswordButtonAction(_ sender: Any) {
+        if let nav = storyboard?.instantiateViewController(withIdentifier: "ChangePasswordViewController") as? ChangePasswordViewController {
+            nav.userName = self.userName
+            self.navigationController?.pushViewController(nav, animated: false)
+        }
+    }
     func myProfileCall() {
         service.post(myProfileUrl, parameters: nil, onView: view) { (response: FindFriendResponse) in
             self.userDetails = response.profile?.profile
@@ -39,14 +49,11 @@ class ProfilePageViewController: UIViewController {
             if let url = URL(string: self.userDetails?.profileImage ?? "") {
                 self.profileImageView.load(url: url)
             }
+            self.userName = self.userDetails?.username
             self.friendsListModel = response.profile?.list
             self.profileFriendsListCollectionView.reloadData()
         }
     }
-   
-	@IBAction func chatAction(_ sender: Any) {
-		
-	}
 }
 extension ProfilePageViewController : UICollectionViewDelegate,UICollectionViewDataSource {
     
