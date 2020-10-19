@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Alamofire
 
 class TournamentDetailsViewController: UIViewController, UIViewControllerPreviewingDelegate {
 
@@ -199,7 +198,7 @@ extension TournamentDetailsViewController: TournamentActionProtocol, TournamentG
         switch action {
         case .organiser:
             if let organiserVc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TournamentContactDetailsViewController") as? TournamentContactDetailsViewController {
-                organiserVc.tournamentId = tournamentDetails?.id
+                organiserVc.allContacts = tournamentDetails?.directorsOrganizers
                 self.navigationController?.pushViewController(organiserVc, animated: true)
             }
         case .eventCategory:
@@ -221,7 +220,6 @@ extension TournamentDetailsViewController: TournamentActionProtocol, TournamentG
             }
         case .affillations:
             if let affiliationsVc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AffiliationsViewController") as? AffiliationsViewController {
-                affiliationsVc.tournamentId = tournamentDetails?.id
                 affiliationsVc.affiliations = tournamentDetails?.affliations
                 self.navigationController?.pushViewController(affiliationsVc, animated: true)
             }

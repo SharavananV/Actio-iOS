@@ -45,11 +45,9 @@ class TournamentPrizesViewController: UIViewController {
         tournamentPrizesTableView.delegate = self
         tournamentPrizesTableView.dataSource = self
         tournamentPrizesTableView.tableFooterView = UIView()
-
-
     }
-
 }
+
 extension TournamentPrizesViewController : UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4

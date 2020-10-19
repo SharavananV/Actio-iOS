@@ -58,18 +58,19 @@ class SignupViewController: UIViewController {
         var genderString = ""
 
         if let masterData = registerDatasource.masterData {
-            allCountries = masterData.country.map({
-                return "(\($0.alias)) \($0.code)"
-            })
+			allCountries = masterData.country?.compactMap({
+                return "(\($0.alias ?? "")) \($0.code ?? "")"
+			}) ?? []
             
-            allIDCards = masterData.proof.map({
-                return $0.proof
-            })
-            allGender = masterData.gender.map({
+            allIDCards = masterData.proof?.map({
+                return $0.proof ?? ""
+            }) ?? []
+			
+            allGender = masterData.gender?.map({
                 return ($0.gender ?? "")
-            })
+            }) ?? []
             
-            genderString = masterData.gender.first(where: {
+            genderString = masterData.gender?.first(where: {
                 $0.id == registerUserModel.gender
             })?.gender ?? ""
         }
@@ -77,7 +78,7 @@ class SignupViewController: UIViewController {
         if self.registerUserModel.isdCode.isEmpty, allCountries.count > 0 {
             // Select India by default
             self.registerUserModel.isdCodeDisplay = allCountries[0]
-            self.registerUserModel.isdCode = registerDatasource.masterData?.country[0].code ?? ""
+            self.registerUserModel.isdCode = registerDatasource.masterData?.country?[0].code ?? ""
         }
         
         let startedText = NSMutableAttributedString(string:"Let's get\n", attributes: [NSAttributedString.Key.font: AppFont.PoppinsMedium(size: 26), NSAttributedString.Key.foregroundColor : AppColor.PurpleColor()])
@@ -87,7 +88,6 @@ class SignupViewController: UIViewController {
         startedText.append(tempString)
         
         let termsString = NSMutableAttributedString(string: "By clicking Let's Go, you agree to the Privacy Policy and Our Terms and Conditions", attributes: [NSAttributedString.Key.font : AppFont.PoppinsRegular(size: 15)])
-		// TODO: Change link
         termsString.addAttribute(.link, value: termsandConditionUrl, range: NSRange(location: 34, length: 48))
         
         let formData: [FormCellType] = [
@@ -246,9 +246,9 @@ extension SignupViewController: FootnoteButtonDelegate, CellDataFetchProtocol, I
         
         switch codingKey {
         case .isdCode:
-            if let country = registerDatasource.masterData?.country[index] {
-                self.registerUserModel.isdCodeDisplay = "(\(country.alias)) \(country.code)"
-                self.registerUserModel.isdCode = country.code
+			if let country = registerDatasource.masterData?.country?[index] {
+				self.registerUserModel.isdCodeDisplay = "(\(country.alias ?? "")) \(country.code ?? "")"
+				self.registerUserModel.isdCode = country.code ?? ""
                 
                 self.registerDatasource.prepareMasterData(with: country.id, presentAlertOn: self) { (_) in
                     self.formData = self.prepareFormData()
@@ -256,12 +256,12 @@ extension SignupViewController: FootnoteButtonDelegate, CellDataFetchProtocol, I
             }
             
         case .idType:
-            if let idType = registerDatasource.masterData?.proof[index] {
-                self.registerUserModel.idType = String(idType.id)
-                updateCellFormData(key: key, value: idType.proof)
+			if let idType = registerDatasource.masterData?.proof?[index] {
+				self.registerUserModel.idType = String(idType.id ?? 0)
+				updateCellFormData(key: key, value: idType.proof ?? "")
             }
         case .gender:
-            if let genderType = registerDatasource.masterData?.gender[index] {
+			if let genderType = registerDatasource.masterData?.gender?[index] {
                 self.registerUserModel.gender = genderType.id ?? 0
                 updateCellFormData(key: key, value: genderType.gender ?? "")
             }
@@ -347,15 +347,15 @@ extension SignupViewController: FootnoteButtonDelegate, CellDataFetchProtocol, I
             registerDatasource.registerUser(registerUserModel: self.registerUserModel, presentAlertOn: self, progressHandler: { (progress) in
                 // Handle progress
             }) { (user) in
-                self.view.makeToast("Registration successful")
-                
                 // Reset fields
                 self.registerUserModel = RegisterUser()
                 UDHelper.setAuthToken(user.token ?? "")
                 self.formData = self.prepareFormData()
                 self.tableView.reloadData()
-                
-                // TODO: Move to next controller
+				
+				self.view.makeToast("Registration successful") { [weak self] _ in
+					self?.navigationController?.popViewController(animated: true)
+				}
             }
         }
     }

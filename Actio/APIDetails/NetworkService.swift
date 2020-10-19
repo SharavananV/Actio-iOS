@@ -14,12 +14,8 @@ class NetworkService {
 	
 	private init() {}
 	
-	func get<E: ResponseType>(_ url: String, headers: [String: String]? = nil, parameters: [String: Any]? = nil, onView view: UIView, handleError: Bool = true, completion: @escaping (E)->Void) {
-		actualMethod(url, method: .get, headers: headers, parameters: parameters, onView: view, handleError: handleError, completion: completion)
-	}
-	
-	func post<E: ResponseType>(_ url: String, headers: [String: String]? = nil, parameters: [String: Any]? = nil, onView view: UIView, handleError: Bool = true, completion: @escaping (E)->Void) {
-		actualMethod(url, method: .post, headers: headers, parameters: parameters, onView: view, handleError: handleError, completion: completion)
+	func post<E: ResponseType>(_ url: String, headers: [String: String]? = nil, parameters: [String: Any]? = nil, onView view: UIView, handleError: Bool = true, shouldAddDefaultHeaders: Bool = true, completion: @escaping (E)->Void) {
+		actualMethod(url, method: .post, headers: headers, parameters: parameters, onView: view, handleError: handleError, shouldAddDefaultHeaders: shouldAddDefaultHeaders, completion: completion)
 	}
 	
 	private func actualMethod<E: ResponseType>(
@@ -28,9 +24,10 @@ class NetworkService {
 		parameters: [String: Any]? = nil,
 		onView view: UIView,
 		handleError: Bool = true,
+		shouldAddDefaultHeaders: Bool = true,
 		completion: @escaping (E)->Void)
 	{
-		var allHeaders : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken(), "Content-Type": "application/json"]
+		var allHeaders : HTTPHeaders = shouldAddDefaultHeaders ? ["Authorization" : "Bearer "+UDHelper.getAuthToken(), "Content-Type": "application/json"] : [:]
 		
 		headers?.forEach { (key, value) in
 			allHeaders.add(name: key, value: value)
@@ -61,8 +58,8 @@ class NetworkService {
 		}
 	}
 	
-	func post(_ url: String, headers: [String: String]? = nil, parameters: [String: Any]? = nil, onView view: UIView, handleError: Bool = true, completion: @escaping ([String: Any])->Void) {
-		actualMethod(url, method: .post, headers: headers, parameters: parameters, onView: view, handleError: handleError, completion: completion)
+	func post(_ url: String, headers: [String: String]? = nil, parameters: [String: Any]? = nil, onView view: UIView, handleError: Bool = true, shouldAddDefaultHeaders: Bool = true, completion: @escaping ([String: Any])->Void) {
+		actualMethod(url, method: .post, headers: headers, parameters: parameters, onView: view, handleError: handleError, shouldAddDefaultHeaders: shouldAddDefaultHeaders, completion: completion)
 	}
 	
 	private func actualMethod(
@@ -71,9 +68,10 @@ class NetworkService {
 		parameters: [String: Any]? = nil,
 		onView view: UIView,
 		handleError: Bool = true,
+		shouldAddDefaultHeaders: Bool = true,
 		completion: @escaping ([String: Any])->Void)
 	{
-		var allHeaders : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken(), "Content-Type": "application/json"]
+		var allHeaders: HTTPHeaders = shouldAddDefaultHeaders ? ["Authorization" : "Bearer "+UDHelper.getAuthToken(), "Content-Type": "application/json"] : [:]
 		
 		headers?.forEach { (key, value) in
 			allHeaders.add(name: key, value: value)

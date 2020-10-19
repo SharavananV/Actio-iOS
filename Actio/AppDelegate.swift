@@ -85,7 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       // TODO: Handle data of notification
 
       // With swizzling disabled you must let Messaging know about the message, for Analytics
-      // Messaging.messaging().appDidReceiveMessage(userInfo)
+      Messaging.messaging().appDidReceiveMessage(userInfo)
 
       // Print message ID.
       if let messageID = userInfo[gcmMessageIDKey] {
@@ -102,7 +102,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       // TODO: Handle data of notification
 
       // With swizzling disabled you must let Messaging know about the message, for Analytics
-      // Messaging.messaging().appDidReceiveMessage(userInfo)
+      Messaging.messaging().appDidReceiveMessage(userInfo)
 
       // Print message ID.
       if let messageID = userInfo[gcmMessageIDKey] {

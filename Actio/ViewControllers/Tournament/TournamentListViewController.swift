@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Alamofire
 import CoreLocation
 
 class TournamentListViewController: UIViewController,filterValueDelegate {
@@ -26,6 +25,7 @@ class TournamentListViewController: UIViewController,filterValueDelegate {
     var searching = false
     var filteredList: [TournamentFavoritesModel]?
     var filterDetails: TournamentFilterModel?
+	private let service = DependencyProvider.shared.networkService
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,9 +95,6 @@ class TournamentListViewController: UIViewController,filterValueDelegate {
     }
     
     func tournamentListApiCall(filterdValues:[String:Any]? = nil) {
-        let headers : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"",
-                                            "Content-Type": "application/json"]
-        
         var parameters:[String:Any] = ["latitude": "\(currentCoordinates?.latitude ?? 0)", "longitude": "\(currentCoordinates?.longitude ?? 0)","search":self.tournamentSearchBar.text ?? "" ]
         if filterdValues != nil {
             parameters["latitude"] = filterdValues?["latitude"]
@@ -110,22 +107,15 @@ class TournamentListViewController: UIViewController,filterValueDelegate {
             parameters["sport"] = filterdValues?["sport"]
             parameters["city"] = filterdValues?["city"]
         }
-        ActioSpinner.shared.show(on: view)
-        NetworkRouter.shared.request(tournamentListUrl, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseDecodable(of: TournamentListResponse.self, queue: .main) { (response) in
-            ActioSpinner.shared.hide()
-            
-            guard let model = response.value,model.status == "200" else {
-                print("🥶 Error on login: \(String(describing: response.error))")
-                return
-            }
-            self.tournamentListModel = model.list
-            self.nearMeTournamentListTableView.reloadData()
-            self.favoriteCollectionView.reloadData()
-        }
+
+		service.post(tournamentListUrl, parameters: parameters, onView: view) { (response: TournamentListResponse) in
+			self.tournamentListModel = response.list
+			self.nearMeTournamentListTableView.reloadData()
+			self.favoriteCollectionView.reloadData()
+		}
     }
     
-    func FilterdValues(parameters: [String : Any]) {
-        
+    func filteredValues(parameters: [String : Any]) {
         if myFavLabelHeightConstraint.constant == 40 && favoriteCollectionViewHeightConstarint.constant == 239 {
             myFavLabelHeightConstraint.constant = 0
             favoriteCollectionViewHeightConstarint.constant = 0

@@ -7,12 +7,11 @@
 //
 
 import UIKit
-import Alamofire
 
 class ChildLogoutWarningViewController: UIViewController {
-    let dependencyProvider = DependencyProvider.shared
+    private let dependencyProvider = DependencyProvider.shared
+	private let service = DependencyProvider.shared.networkService
     weak var delegate: LogoutDelegate?
-
 
     @IBOutlet var okButton: UIButton!
     @IBOutlet var cancelButton: UIButton!
@@ -31,18 +30,15 @@ class ChildLogoutWarningViewController: UIViewController {
         
         self.alertView.layer.cornerRadius = 5.0
         self.alertView.clipsToBounds = true
-        
-
-
-
     }
     
     @IBAction func cancelButtonAction(_ sender: Any) {
         self.dismiss(animated: false, completion: nil)
 
     }
+	
     @IBAction func okButtonAction(_ sender: Any) {
-        self.dependencyProvider.registerDatasource.logout { (message) in
+		self.dependencyProvider.registerDatasource.logout(presentAlertOn: self) { (message) in
             UDHelper.resetUserStuff()
 
             self.view.makeToast(message)
@@ -58,33 +54,8 @@ class ChildLogoutWarningViewController: UIViewController {
         
     }
     func logout(completion: @escaping ((String) -> Void)) {
-        
-        let headers : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"",
-                                     "Content-Type": "application/json"]
-        NetworkRouter.shared.request(logoutUrl,method: .post, parameters: ["Mode":"1", "deviceToken": UDHelper.getDeviceToken()], encoding: JSONEncoding.default, headers: headers).responseJSON {
-            response in
-            switch response.result {
-            case .success (let data):
-                if let resultDict = data as? [String: Any] {
-                    if let status = resultDict["status"] as? String, status == "200", let message = resultDict["msg"] as? String {
-                        UDHelper.resetUserStuff()
-                        
-                        completion(message)
-                    }
-                    else if let status = resultDict["status"] as? String, status == "422", let errors = resultDict["errors"] as? [[String: Any]] {
-                        if let firstError = errors.first, let msg = firstError["msg"] as? String {
-                            completion(msg)
-                        }
-                    }
-                    else {
-                        completion("Network error, couldn't logout")
-                    }
-                }
-            case .failure(_):
-                completion("Network error, couldn't logout")
-            }
-        }
-        
-    }
-
+		service.post(logoutUrl, parameters: ["Mode":"1", "deviceToken": UDHelper.getDeviceToken()], onView: view) { (response) in
+			UDHelper.resetUserStuff()
+		}
+	}
 }

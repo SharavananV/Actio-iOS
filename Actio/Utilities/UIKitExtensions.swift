@@ -135,6 +135,30 @@ extension CGFloat {
     static let kInternalPadding: CGFloat = 10
 }
 
+extension UIView {
+	func dropShadow(color: UIColor, opacity: Float = 0.16, offSet: CGSize, radius: CGFloat = 10.0, scale: Bool = true) {
+		layer.masksToBounds = false
+		layer.shadowColor = color.cgColor
+		layer.shadowOpacity = opacity
+		layer.shadowOffset = offSet
+		layer.shadowRadius = radius
+		
+		layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
+		layer.shouldRasterize = true
+		layer.rasterizationScale = scale ? UIScreen.main.scale : 1
+	}
+}
+
+extension UIImage {
+	func alpha(_ value:CGFloat) -> UIImage {
+		UIGraphicsBeginImageContextWithOptions(size, false, scale)
+		draw(at: CGPoint.zero, blendMode: .normal, alpha: value)
+		let newImage = UIGraphicsGetImageFromCurrentImageContext()
+		UIGraphicsEndImageContext()
+		return newImage!
+	}
+}
+
 extension NSLayoutAnchor {
     @objc func constraint(equalTo anchor: NSLayoutAnchor<AnchorType>, constant: CGFloat = 0, priority: UILayoutPriority) -> NSLayoutConstraint {
         let constraint = self.constraint(equalTo: anchor, constant: constant)

@@ -8,12 +8,11 @@
 
 import UIKit
 import SideMenu
-import Alamofire
 
 class HomePageViewController: UIViewController, LogoutDelegate {
     
     @IBOutlet var homeCollectionView: UICollectionView!
-    
+	private let service = DependencyProvider.shared.networkService
     var dashboardModules: [[String: Any]] = [[String: Any]]()
     
     override func viewDidLoad() {
@@ -68,36 +67,15 @@ class HomePageViewController: UIViewController, LogoutDelegate {
         }
     }
     
-    
-    func dashboardApiCall() {
-       let headers : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"",
-                                            "Content-Type": "application/json"]
-      
-        
-        NetworkRouter.shared.request(dashboardUrl, method: .post, parameters: nil, headers: headers).responseJSON { (response) in
-            switch response.result {
-            case .success (let data):
-                if let resultDict = data as? [String: Any], let successText = resultDict["status"] as? String, successText == "200" {
-                    self.dashboardModules = resultDict["modules"] as! [[String : Any]]
-                    self.homeCollectionView.reloadData()
-                }
-                else if let resultDict = data as? [String: Any], let invalidText = resultDict["msg"] as? String{
-                    self.view.makeToast(invalidText)
-                }
-                else {
-                }
-
-            case .failure(let error):
-                print(error)
-                self.view.makeToast(error.errorDescription ?? "")
-            }
-
-        }
-
-    }
-        
-    
-   
+	func dashboardApiCall() {
+		service.post(dashboardUrl, parameters: nil, onView: view) { (response) in
+			if let dashboardModules = response["modules"] as? [[String : Any]] {
+				self.dashboardModules = dashboardModules
+			}
+			
+			self.homeCollectionView.reloadData()
+		}
+	}
 }
 
 extension HomePageViewController: UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
@@ -110,7 +88,6 @@ extension HomePageViewController: UICollectionViewDelegate,UICollectionViewDataS
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:"HomePageCollectionViewCell", for: indexPath) as? HomePageCollectionViewCell else {
             return UICollectionViewCell()
         }
-
         
         cell.homeBackgroundImageView.layer.cornerRadius = 5.0
         cell.homeBackgroundImageView.clipsToBounds = true
@@ -153,28 +130,3 @@ extension HomePageViewController: UICollectionViewDelegate,UICollectionViewDataS
 		}
     }
 }
-extension UIView {
-    func dropShadow(color: UIColor, opacity: Float = 0.16, offSet: CGSize, radius: CGFloat = 10.0, scale: Bool = true) {
-        layer.masksToBounds = false
-        layer.shadowColor = color.cgColor
-        layer.shadowOpacity = opacity
-        layer.shadowOffset = offSet
-        layer.shadowRadius = radius
-        
-        layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
-        layer.shouldRasterize = true
-        layer.rasterizationScale = scale ? UIScreen.main.scale : 1
-    }
-}
-extension UIImage {
-    
-    func alpha(_ value:CGFloat) -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(size, false, scale)
-        draw(at: CGPoint.zero, blendMode: .normal, alpha: value)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return newImage!
-    }
-}
-
-

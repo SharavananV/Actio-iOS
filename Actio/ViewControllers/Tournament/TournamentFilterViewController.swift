@@ -11,7 +11,7 @@ import SwiftRangeSlider
 import CoreLocation
 
 protocol filterValueDelegate: class {
-    func FilterdValues(parameters:[String:Any])
+    func filteredValues(parameters:[String:Any])
 }
 
 class TournamentFilterViewController: UIViewController {
@@ -219,7 +219,7 @@ class TournamentFilterViewController: UIViewController {
                           "type":selectedTournamentTypeId ?? "",
                           "city":selectedCityId ?? ""]
         
-        self.delegate?.FilterdValues(parameters: parameters)
+        self.delegate?.filteredValues(parameters: parameters)
         self.navigationController?.popViewController(animated: true)
 
     }

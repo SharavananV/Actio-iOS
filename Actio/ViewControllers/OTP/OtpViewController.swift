@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import Toast_Swift
-import Alamofire
 
 class OtpViewController: UIViewController,VPMOTPViewDelegate {
     var stringOtp = String()
@@ -79,84 +77,38 @@ class OtpViewController: UIViewController,VPMOTPViewDelegate {
     
     func validateApiCall(otp:String) {
         let url = fromController == .login ? validateOTPUrl : validateForgotPasswordUrl
-        let headers: HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"",
-                                    "Content-Type": "application/json"]
         
         var parameters = ["otp": otp]
         if fromController == .forgotPassword {
             parameters["username"] = (username ?? "")
         }
         
-        NetworkRouter.shared.request(url,method: .post ,parameters: parameters, encoding: JSONEncoding.default,headers: headers).responseJSON {
-            response in
-            switch response.result {
-            case .success (let data):
-                if let resultDict = data as? [String: Any], let successText = resultDict["status"] as? String, successText == "200" {
-                    if url == validateOTPUrl {
-                        if let dashController = self.storyboard?.instantiateViewController(withIdentifier: "TabBarViewController") {
-                            dashController.modalPresentationStyle = .fullScreen
-                            self.present(dashController, animated: true, completion: nil)
-                        }
-                    }else {
-                        if let vc = self.storyboard?.instantiateViewController(withIdentifier: "ResetPasswordViewController") as? ResetPasswordViewController {
-                            vc.userName = self.username
-                            self.navigationController?.pushViewController(vc, animated: true)
-                         }
-                    }
-                }
-                else if let resultDict = data as? [String: Any], let invalidText = resultDict["msg"] as? String{
-                    self.view.makeToast(invalidText)
-                }
-                else {
-                    let resultDict = data as? [String: Any]
-                    if let status = resultDict!["status"] as? String, status == "422", let errors = resultDict!["errors"] as? [[String: Any]] {
-                        if let firstError = errors.first, let msg = firstError["msg"] as? String {
-                            self.view.makeToast(msg)
-                            
-                        }
-                    }
-                }
-                
-            case .failure(let error):
-                self.view.makeToast(error.errorDescription ?? "")
-            }
-            
-        }
+		service.post(url, parameters: parameters, onView: view) { _ in
+			if url == validateOTPUrl {
+				if let dashController = self.storyboard?.instantiateViewController(withIdentifier: "TabBarViewController") {
+					dashController.modalPresentationStyle = .fullScreen
+					self.present(dashController, animated: true, completion: nil)
+				}
+			} else {
+				if let vc = self.storyboard?.instantiateViewController(withIdentifier: "ResetPasswordViewController") as? ResetPasswordViewController {
+					vc.userName = self.username
+					self.navigationController?.pushViewController(vc, animated: true)
+				}
+			}
+		}
     }
+	
     func apiSendOtpCall(otp:String) {
         let url = fromController == .login ? validateOTPUrl : forgotPasswordResendOtpUrl
-        let headers: HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"",
-                                    "Content-Type": "application/json"]
+		
         var parameters = ["otp": otp]
         if fromController == .forgotPassword {
             parameters["username"] = (username ?? "")
         }
-
-        NetworkRouter.shared.request(url, method: .post,parameters: parameters,encoding: JSONEncoding.default,headers: headers).responseJSON {
-            response in
-            switch response.result {
-            case .success (let data):
-                if let resultDict = data as? [String: Any], let successText = resultDict["status"] as? String, successText == "200" {
-                    print(resultDict)
-                }
-                else if let resultDict = data as? [String: Any], let invalidText = resultDict["msg"] as? String{
-                    self.view.makeToast(invalidText)
-                }
-                else {
-                    let resultDict = data as? [String: Any]
-                    if let status = resultDict!["status"] as? String, status == "422", let errors = resultDict!["errors"] as? [[String: Any]] {
-                        if let firstError = errors.first, let msg = firstError["msg"] as? String {
-                            self.view.makeToast(msg)
-                            
-                        }
-                    }
-                }
-                
-            case .failure(let error):
-                self.view.makeToast(error.errorDescription ?? "")
-            }
-            
-        }
+		
+		service.post(url, parameters: parameters, onView: view) { _ in
+			self.view.makeToast("OTP sent successfully")
+		}
     }
 
     

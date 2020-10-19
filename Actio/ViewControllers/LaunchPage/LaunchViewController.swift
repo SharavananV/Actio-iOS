@@ -34,7 +34,7 @@ class LaunchViewController: UIViewController {
             }
         }
         else {
-            dependencyProvider.registerDatasource.getUserStatus { (status) in
+			dependencyProvider.registerDatasource.getUserStatus(presentAlertOn: self) { (status) in
                 switch status {
                 case .success(let status):
                     self.navigateBasedOnStatus(status)

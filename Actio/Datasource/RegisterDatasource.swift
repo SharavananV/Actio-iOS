@@ -16,6 +16,7 @@ class RegisterDatasource {
     var currentUser: RegisterUserResponse?
     var masterData: MasterData?
     var registerUserUpload: UploadRequest?
+	private lazy var service = DependencyProvider.shared.networkService
     
     func prepareMasterData(with countryCode: Int?, presentAlertOn controller: UIViewController, completion: ((MasterData)->Void)? = nil) {
         
@@ -23,22 +24,10 @@ class RegisterDatasource {
         if let code = countryCode {
             parameters = ["countryID": code]
         }
-        
-        ActioSpinner.shared.show(on: controller.view, showBlur: false)
-        
-        NetworkRouter.shared.request(masterUrl, method: .post, parameters: parameters)
-            .validate()
-            .responseDecodable(of: MasterData.self) { (response) in
-                switch response.result {
-                case .success(let masterData):
-                    self.masterData = masterData
-                    completion?(masterData)
-                case .failure(let error):
-                    controller.presentAlert(withTitle: "Network Error", message: error.errorDescription)
-                }
-                
-                ActioSpinner.shared.hide()
-        }
+		
+		service.post(masterUrl, parameters: parameters, onView: controller.view, shouldAddDefaultHeaders: false) { (response: MasterData) in
+			self.masterData = response
+		}
     }
     
     func registerUser(registerUserModel: RegisterUser, presentAlertOn controller: UIViewController, progressHandler: @escaping (Progress)->Void, completion: @escaping (RegisterUserResponse)->Void) {
@@ -84,59 +73,23 @@ class RegisterDatasource {
         }
     }
     
-    func getUserStatus(completion: @escaping ((UserStatus) -> Void)) {
-        let headers : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"",
-                                     "Content-Type": "application/json"]
-        NetworkRouter.shared.request(userStatusUrl,method: .post, parameters: [:], encoding: JSONEncoding.default, headers: headers).responseJSON {
-            response in
-            switch response.result {
-            case .success (let data):
-                if let resultDict = data as? [String: Any] {
-                    if let status = resultDict["status"] as? String, status == "200", let currentUserStatus = resultDict["currentUserStatus"] as? String, let intStatus = Int(currentUserStatus) {
-                        UDHelper.setUserStatus(currentUserStatus)
-                        completion(.success(intStatus))
-                    }
-                    else if let status = resultDict["status"] as? String, status == "422", let errors = resultDict["errors"] as? [[String: Any]] {
-                        if let firstError = errors.first, let msg = firstError["msg"] as? String {
-                            completion(.failure(msg))
-                        }
-                    }
-                    else {
-                        completion(.failure("Network error"))
-                    }
-                 }
-            case .failure(_):
-                completion(.failure("Network error"))
-            }
-        }
+    func getUserStatus(presentAlertOn controller: UIViewController, completion: @escaping ((UserStatus) -> Void)) {
+		
+		service.post(userStatusUrl, parameters: nil, onView: controller.view) { (response) in
+			if let currentUserStatus = response["currentUserStatus"] as? String, let intStatus = Int(currentUserStatus) {
+				UDHelper.setUserStatus(currentUserStatus)
+				completion(.success(intStatus))
+			}
+		}
     }
     
-    func logout(completion: @escaping ((String) -> Void)) {
-        let headers : HTTPHeaders = ["Authorization" : "Bearer "+UDHelper.getAuthToken()+"",
-                                     "Content-Type": "application/json"]
-        NetworkRouter.shared.request(logoutUrl,method: .post, parameters: ["Mode":"1", "deviceToken": UDHelper.getDeviceToken()], encoding: JSONEncoding.default, headers: headers).responseJSON {
-            response in
-            switch response.result {
-            case .success (let data):
-                if let resultDict = data as? [String: Any] {
-                    if let status = resultDict["status"] as? String, status == "200", let message = resultDict["msg"] as? String {
-                        UDHelper.resetUserStuff()
-                        
-                        completion(message)
-                    }
-                    else if let status = resultDict["status"] as? String, status == "422", let errors = resultDict["errors"] as? [[String: Any]] {
-                        if let firstError = errors.first, let msg = firstError["msg"] as? String {
-                            completion(msg)
-                        }
-                    }
-                    else {
-                        completion("Network error, couldn't logout")
-                    }
-                 }
-            case .failure(_):
-                completion("Network error, couldn't logout")
-            }
-        }
+    func logout(presentAlertOn controller: UIViewController, completion: @escaping ((String) -> Void)) {
+		service.post(logoutUrl, parameters: ["Mode":"1", "deviceToken": UDHelper.getDeviceToken()], onView: controller.view) { (response) in
+			if let message = response["msg"] as? String {
+				UDHelper.resetUserStuff()
+				completion(message)
+			}
+		}
     }
     
     func cancelRegisterUpload() {
@@ -151,19 +104,22 @@ enum UserStatus {
 }
 
 // MARK: - MasterData
-struct MasterData: Codable {
-    let country: [Country]
-    let proof: [Proof]
-    let gender: [RegistrationGender]
-    let status: String
+struct MasterData: ResponseType {
+	var status: String?
+	var errors: [ActioError]?
+	var msg: String?
+	
+    let country: [Country]?
+    let proof: [Proof]?
+    let gender: [RegistrationGender]?
 }
 
 // MARK: - Country
 struct Country: Codable {
-    let id: Int
-    let code, name, alias, minAge: String
-    let createdAt: String
-    let createdBy: Int
+    let id: Int?
+    let code, name, alias, minAge: String?
+    let createdAt: String?
+    let createdBy: Int?
 
     enum CodingKeys: String, CodingKey {
         case id, code, name, alias
@@ -175,8 +131,8 @@ struct Country: Codable {
 
 // MARK: - Proof
 struct Proof: Codable {
-    let id: Int
-    let proof: String
+    let id: Int?
+    let proof: String?
 }
 // MARK: - Gender
 struct RegistrationGender: Codable {
