@@ -27,12 +27,12 @@ class ForgotPasswordViewController: UIViewController {
     @IBAction func submitButtonAction(_ sender: Any) {
         getForgotDetails()
     }
+	
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
         self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
-
     
     private func getForgotDetails() {
         service.post(forgotPasswordUrl,

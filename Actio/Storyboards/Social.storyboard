@@ -142,7 +142,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lul-DZ-xJ8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="360.86956521739131" y="27.455357142857142"/>
+            <point key="canvasLocation" x="335" y="27"/>
         </scene>
         <!--Chat History View Controller-->
         <scene sceneID="IID-Wg-HMu">
@@ -400,6 +400,53 @@
             </objects>
             <point key="canvasLocation" x="336" y="713"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="Vhz-pa-R1P">
+            <objects>
+                <viewController storyboardIdentifier="InternetConnectionView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NB2-Qn-BUf" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ojf-gR-ETP">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="sgu-By-RZS">
+                                <rect key="frame" x="0.0" y="198" width="414" height="500.5"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_internet" translatesAutoresizingMaskIntoConstraints="NO" id="R8j-9E-TQ2">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="R8j-9E-TQ2" secondAttribute="height" multiplier="1:1" id="Ngg-Or-asf"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Internet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WEt-yr-oUc">
+                                        <rect key="frame" x="0.0" y="429" width="414" height="31"/>
+                                        <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="22"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please check your internet connection" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qMb-Pu-Z6o">
+                                        <rect key="frame" x="0.0" y="475" width="414" height="25.5"/>
+                                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="woF-UZ-FLq"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="sgu-By-RZS" secondAttribute="bottom" id="9w1-Ya-PWz"/>
+                            <constraint firstItem="sgu-By-RZS" firstAttribute="leading" secondItem="woF-UZ-FLq" secondAttribute="leading" id="Quj-8C-atP"/>
+                            <constraint firstAttribute="trailing" secondItem="sgu-By-RZS" secondAttribute="trailing" id="TmZ-gP-VuG"/>
+                            <constraint firstItem="sgu-By-RZS" firstAttribute="centerY" secondItem="ojf-gR-ETP" secondAttribute="centerY" id="kKq-2R-8Ei"/>
+                            <constraint firstItem="sgu-By-RZS" firstAttribute="top" relation="greaterThanOrEqual" secondItem="woF-UZ-FLq" secondAttribute="top" id="u06-c6-SOR"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rK2-yF-Ul3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="334.78260869565219" y="1413.6160714285713"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="fT4-vL-blW">
             <objects>
@@ -421,6 +468,7 @@
     </scenes>
     <resources>
         <image name="chat_background" width="430" height="673"/>
+        <image name="no_internet" width="696" height="696"/>
         <image name="sent" width="24" height="24"/>
         <image name="userplaceholder" width="136" height="136"/>
         <namedColor name="Orange Color">

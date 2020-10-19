@@ -27,22 +27,6 @@ class LaunchViewController: UIViewController {
         
         attributedString1.append(attributedString2)
         self.welcomeLabel.attributedText = attributedString1
-        
-        if UDHelper.getAuthToken().isEmpty {
-            dependencyProvider.registerDatasource.prepareMasterData(with: nil, presentAlertOn: self) { (_) in
-                self.performSegue(withIdentifier: "LoginPage", sender: self)
-            }
-        }
-        else {
-			dependencyProvider.registerDatasource.getUserStatus(presentAlertOn: self) { (status) in
-                switch status {
-                case .success(let status):
-                    self.navigateBasedOnStatus(status)
-                case .failure(let message):
-                    self.view.makeToast(message)
-                }
-            }
-        }
     }
     
     private func navigateBasedOnStatus(_ status: Int) {
@@ -63,5 +47,21 @@ class LaunchViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+		
+		if UDHelper.getAuthToken().isEmpty {
+			dependencyProvider.registerDatasource.prepareMasterData(with: nil, presentAlertOn: self) { (_) in
+				self.performSegue(withIdentifier: "LoginPage", sender: self)
+			}
+		}
+		else {
+			dependencyProvider.registerDatasource.getUserStatus(presentAlertOn: self) { (status) in
+				switch status {
+				case .success(let status):
+					self.navigateBasedOnStatus(status)
+				case .failure(let message):
+					self.view.makeToast(message)
+				}
+			}
+		}
     }
 }

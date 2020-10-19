@@ -11,8 +11,20 @@ import Alamofire
 
 class NetworkService {
 	static let shared = NetworkService()
+	private let manager = NetworkReachabilityManager(host: "www.google.com")
 	
-	private init() {}
+	private init() {
+		manager?.startListening(onQueue: DispatchQueue.main, onUpdatePerforming: { (status) in
+			switch status {
+			case .notReachable:
+				self.showNoNetworkAvailableLabel()
+			case .reachable(_):
+				self.removeNoNetworkController()
+			default:
+				return
+			}
+		})
+	}
 	
 	func post<E: ResponseType>(_ url: String, headers: [String: String]? = nil, parameters: [String: Any]? = nil, onView view: UIView, handleError: Bool = true, shouldAddDefaultHeaders: Bool = true, completion: @escaping (E)->Void) {
 		actualMethod(url, method: .post, headers: headers, parameters: parameters, onView: view, handleError: handleError, shouldAddDefaultHeaders: shouldAddDefaultHeaders, completion: completion)
@@ -50,6 +62,8 @@ class NetworkService {
 					view.makeToast(errorMessage)
 				} else if let errorMessage = value.msg {
 					view.makeToast(errorMessage)
+				} else {
+					view.makeToast("Something went wrong!")
 				}
 			}
 			else {
@@ -91,8 +105,16 @@ class NetworkService {
 			
 			do {
 				if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-					if handleError, json["status"] as? String == "422", let errors = json["errors"] as? [[String: Any]], let message = errors.first?["msg"] as? String {
-						view.makeToast(message)
+					if handleError, json["status"] as? String == "422" {
+						if let errors = json["errors"] as? [[String: Any]], let message = errors.first?["msg"] as? String {
+							view.makeToast(message)
+						}
+						else if let message = json["msg"] as? String {
+							view.makeToast(message)
+						}
+						else {
+							view.makeToast("Something went wrong!")
+						}
 						
 						return
 					} else {
@@ -102,6 +124,20 @@ class NetworkService {
 			} catch {
 				print("Error decoding data")
 			}
+		}
+	}
+	
+	private func showNoNetworkAvailableLabel() {
+		if let window = UIApplication.shared.delegate?.window, let currentController = window?.topViewController() {
+			let vc = UIStoryboard(name: "Social", bundle: nil).instantiateViewController(withIdentifier: "InternetConnectionView")
+			vc.modalPresentationStyle = .fullScreen
+			currentController.present(vc, animated: false, completion: nil)
+		}
+	}
+	
+	private func removeNoNetworkController() {
+		if let window = UIApplication.shared.delegate?.window, let currentController = window?.topViewController(), currentController.restorationIdentifier == "InternetConnectionView" {
+			currentController.dismiss(animated: false, completion: nil)
 		}
 	}
 

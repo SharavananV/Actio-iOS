@@ -14,7 +14,6 @@ class ForgotUsernameSubscriberIDViewController: UIViewController {
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var emailIdTextField: UITextField!
     private let service = DependencyProvider.shared.networkService
-    var forgotDetails: ForgotUsernameModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,12 +39,13 @@ class ForgotUsernameSubscriberIDViewController: UIViewController {
         service.post(forgotUserNameUrl,
                      parameters: ["mobileNumber": self.mobileNumberTextField.text ?? "","emailID": self.emailIdTextField.text ?? ""],
                      onView: self.view) { (response: ForgotUsernameResponse) in
-            self.forgotDetails = response.result
-            if let vc = self.storyboard?.instantiateViewController(withIdentifier: "ResetAlertForgotPaaswordViewController") as? ResetAlertForgotPaaswordViewController {
-                vc.resetUserName = self.forgotDetails?.username
-                vc.resetSubscriptionId = self.forgotDetails?.subscriberID
+			if let forgotDetails = response.result, let vc = self.storyboard?.instantiateViewController(withIdentifier: "ResetAlertForgotPaaswordViewController") as? ResetAlertForgotPaaswordViewController {
+                vc.resetUserName = forgotDetails.username
+                vc.resetSubscriptionId = forgotDetails.subscriberID
                 self.navigationController?.pushViewController(vc, animated: false)
-            }
+			} else {
+				self.view.makeToast(response.msg)
+			}
         }
     }
 

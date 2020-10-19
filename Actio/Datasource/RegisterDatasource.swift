@@ -27,6 +27,8 @@ class RegisterDatasource {
 		
 		service.post(masterUrl, parameters: parameters, onView: controller.view, shouldAddDefaultHeaders: false) { (response: MasterData) in
 			self.masterData = response
+			
+			completion?(response)
 		}
     }
     
