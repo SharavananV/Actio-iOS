@@ -31,6 +31,10 @@
 		1857D89225396CBA00F1C447 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1857D89125396CBA00F1C447 /* ChangePasswordViewController.swift */; };
 		1858E5E92535911E00436E5D /* FriendsProfilePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1858E5E82535911E00436E5D /* FriendsProfilePageViewController.swift */; };
 		1858E5ED2535917C00436E5D /* FriendsListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1858E5EC2535917C00436E5D /* FriendsListCollectionViewCell.swift */; };
+		185A9679253EAFB6009566E9 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185A9678253EAFB6009566E9 /* EditProfileViewController.swift */; };
+		185A967C253EE853009566E9 /* SportsPlayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185A967B253EE853009566E9 /* SportsPlayTableViewCell.swift */; };
+		185A967F253EE869009566E9 /* SportsCoachTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185A967E253EE869009566E9 /* SportsCoachTableViewCell.swift */; };
+		185A9682253EE8BA009566E9 /* AcademicYearTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185A9681253EE8BA009566E9 /* AcademicYearTableViewCell.swift */; };
 		185D2860252F20E300FD3D81 /* TournamentMasterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185D285F252F20E200FD3D81 /* TournamentMasterModel.swift */; };
 		185D287825307D3A00FD3D81 /* TournamentFilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185D287725307D3900FD3D81 /* TournamentFilterModel.swift */; };
 		1880B020251364C2006BE848 /* NetworkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1880B01F251364C2006BE848 /* NetworkRouter.swift */; };
@@ -204,6 +208,10 @@
 		1857D89125396CBA00F1C447 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		1858E5E82535911E00436E5D /* FriendsProfilePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsProfilePageViewController.swift; sourceTree = "<group>"; };
 		1858E5EC2535917C00436E5D /* FriendsListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsListCollectionViewCell.swift; sourceTree = "<group>"; };
+		185A9678253EAFB6009566E9 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		185A967B253EE853009566E9 /* SportsPlayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsPlayTableViewCell.swift; sourceTree = "<group>"; };
+		185A967E253EE869009566E9 /* SportsCoachTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsCoachTableViewCell.swift; sourceTree = "<group>"; };
+		185A9681253EE8BA009566E9 /* AcademicYearTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcademicYearTableViewCell.swift; sourceTree = "<group>"; };
 		185D285F252F20E200FD3D81 /* TournamentMasterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentMasterModel.swift; sourceTree = "<group>"; };
 		185D287725307D3900FD3D81 /* TournamentFilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentFilterModel.swift; sourceTree = "<group>"; };
 		1880B01F251364C2006BE848 /* NetworkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRouter.swift; sourceTree = "<group>"; };
@@ -588,6 +596,7 @@
 				1858E5E82535911E00436E5D /* FriendsProfilePageViewController.swift */,
 				8D0F75E92536CF7D00200C2B /* ChatHistoryViewController.swift */,
 				8D0F74BD25342E6E00200C2B /* ChatViewController.swift */,
+				185A9678253EAFB6009566E9 /* EditProfileViewController.swift */,
 				1857D89125396CBA00F1C447 /* ChangePasswordViewController.swift */,
 			);
 			path = SocialPages;
@@ -598,6 +607,9 @@
 			children = (
 				8D0F74A225304FAF00200C2B /* FriendListTableViewCell.swift */,
 				8D0F75E62536CE8600200C2B /* ConversationTableViewCell.swift */,
+				185A967B253EE853009566E9 /* SportsPlayTableViewCell.swift */,
+				185A967E253EE869009566E9 /* SportsCoachTableViewCell.swift */,
+				185A9681253EE8BA009566E9 /* AcademicYearTableViewCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -1075,6 +1087,8 @@
 				18A9750924C04972001B5BB3 /* MenuViewController.swift in Sources */,
 				18435583252B234A00DECA90 /* ForgotPasswordViewController.swift in Sources */,
 				18196CFC24B47BF900DBECCA /* SignupViewController.swift in Sources */,
+				185A9679253EAFB6009566E9 /* EditProfileViewController.swift in Sources */,
+				185A967C253EE853009566E9 /* SportsPlayTableViewCell.swift in Sources */,
 				18C6B01E2510BDE200B7162E /* LocationFetcher.swift in Sources */,
 				18C6B0252511F38800B7162E /* TournamentDetailsViewController.swift in Sources */,
 				8D47F0EF2539844C0013900C /* ImageCache.swift in Sources */,
@@ -1088,6 +1102,7 @@
 				8DE6B64924B335630010A3EC /* AppFonts.swift in Sources */,
 				8D47F0EB2539805F0013900C /* ImageZoomViewController.swift in Sources */,
 				18435580252B233200DECA90 /* ForgotUsernameSubscriberIDViewController.swift in Sources */,
+				185A9682253EE8BA009566E9 /* AcademicYearTableViewCell.swift in Sources */,
 				8DC1BD372525FA7B005C55DE /* PersistentContainer.swift in Sources */,
 				8D47F0E625397FC30013900C /* ZoomImageView.swift in Sources */,
 				8D673A7A2521E83B00585AF9 /* EventFeedModel.swift in Sources */,
@@ -1100,6 +1115,7 @@
 				8D21856124B6ED75002688A8 /* VPMOTPTextField.swift in Sources */,
 				8D9C07A1250B886100514692 /* TournamentListModel.swift in Sources */,
 				18BBAC7D24B5B99900306A8F /* ActioImagePicker.swift in Sources */,
+				185A967F253EE869009566E9 /* SportsCoachTableViewCell.swift in Sources */,
 				8D0C5C33252465EE005B3A4E /* EventListTableViewCell.swift in Sources */,
 				8D673A6F251DD72400585AF9 /* ProfilePageViewController.swift in Sources */,
 				8D0F75ED2536D0EB00200C2B /* Conversation.swift in Sources */,

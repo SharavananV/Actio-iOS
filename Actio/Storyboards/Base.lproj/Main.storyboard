@@ -4244,7 +4244,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dlf-iZ-cu8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4385.507246376812" y="2483.7053571428569"/>
+            <point key="canvasLocation" x="4548" y="2469"/>
         </scene>
         <!--Change Password View Controller-->
         <scene sceneID="68U-Ln-OB9">
@@ -4372,6 +4372,365 @@
             </objects>
             <point key="canvasLocation" x="6562" y="-494"/>
         </scene>
+        <!--Edit Profile View Controller-->
+        <scene sceneID="xsG-sH-AUB">
+            <objects>
+                <viewController storyboardIdentifier="EditProfileViewController" id="3Dd-4O-cdi" customClass="EditProfileViewController" customModule="Actio" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9ZV-Ar-mC0">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="1500"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Az5-Vs-Mnb">
+                                <rect key="frame" x="-0.5" y="-0.5" width="415" height="137"/>
+                                <color key="backgroundColor" red="1" green="0.3411764706" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userimage" translatesAutoresizingMaskIntoConstraints="NO" id="2fL-IQ-9pQ">
+                                <rect key="frame" x="138.5" y="68" width="137" height="137"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="2fL-IQ-9pQ" secondAttribute="height" multiplier="1:1" id="HsN-hK-6UU"/>
+                                </constraints>
+                            </imageView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="FDf-rH-HPi">
+                                <rect key="frame" x="45" y="229.5" width="326" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="94C-Ls-Vae"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="INFO"/>
+                                    <segment title="MY ROLES"/>
+                                </segments>
+                            </segmentedControl>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sYT-KK-BOO">
+                                <rect key="frame" x="0.0" y="269.5" width="414" height="1197.5"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AcademicYearTableViewCell" rowHeight="92" id="5Zy-tQ-5Be" customClass="AcademicYearTableViewCell" customModule="Actio" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="92"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5Zy-tQ-5Be" id="SRm-0q-6Wv">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="92"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Academic Year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HEw-PZ-6sb">
+                                                    <rect key="frame" x="20" y="11" width="67" height="19"/>
+                                                    <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="10"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="From Year" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="emF-pd-E2H">
+                                                    <rect key="frame" x="20" y="38" width="145" height="34"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="145" id="eiI-bz-bGc"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="To Year" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HKt-jK-vpv">
+                                                    <rect key="frame" x="186" y="38" width="148" height="34"/>
+                                                    <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6h1-vF-DHJ">
+                                                    <rect key="frame" x="170" y="44" width="8" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="6h1-vF-DHJ" secondAttribute="bottom" constant="27" id="0Vg-3U-HU0"/>
+                                                <constraint firstItem="HKt-jK-vpv" firstAttribute="leading" secondItem="6h1-vF-DHJ" secondAttribute="trailing" constant="8" symbolic="YES" id="4KR-J9-KDG"/>
+                                                <constraint firstAttribute="trailing" secondItem="HKt-jK-vpv" secondAttribute="trailing" constant="80" id="5KF-E7-3U9"/>
+                                                <constraint firstItem="6h1-vF-DHJ" firstAttribute="leading" secondItem="emF-pd-E2H" secondAttribute="trailing" constant="5" id="97L-js-z3r"/>
+                                                <constraint firstAttribute="bottom" secondItem="emF-pd-E2H" secondAttribute="bottom" constant="20" symbolic="YES" id="B2u-fR-9gh"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="HEw-PZ-6sb" secondAttribute="trailing" constant="20" symbolic="YES" id="KvQ-Yi-Z4B"/>
+                                                <constraint firstItem="HEw-PZ-6sb" firstAttribute="top" secondItem="SRm-0q-6Wv" secondAttribute="top" constant="11" id="Miv-yJ-xU7"/>
+                                                <constraint firstItem="6h1-vF-DHJ" firstAttribute="top" secondItem="HEw-PZ-6sb" secondAttribute="bottom" constant="14" id="NAo-cA-vm0"/>
+                                                <constraint firstItem="HEw-PZ-6sb" firstAttribute="leading" secondItem="SRm-0q-6Wv" secondAttribute="leading" constant="20" symbolic="YES" id="cXY-s3-pRY"/>
+                                                <constraint firstItem="HKt-jK-vpv" firstAttribute="top" secondItem="SRm-0q-6Wv" secondAttribute="top" constant="38" id="hLL-ZD-lNn"/>
+                                                <constraint firstAttribute="bottom" secondItem="HKt-jK-vpv" secondAttribute="bottom" constant="20" symbolic="YES" id="iaa-A2-BXG"/>
+                                                <constraint firstItem="emF-pd-E2H" firstAttribute="leading" secondItem="SRm-0q-6Wv" secondAttribute="leading" constant="20" symbolic="YES" id="lQl-XP-JQH"/>
+                                                <constraint firstItem="emF-pd-E2H" firstAttribute="top" secondItem="HEw-PZ-6sb" secondAttribute="bottom" constant="8" symbolic="YES" id="tqB-cR-l37"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="fromYearTextField" destination="emF-pd-E2H" id="5jc-vq-0al"/>
+                                            <outlet property="toYearTextField" destination="HKt-jK-vpv" id="fv4-dm-m1t"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SportsPlayTableViewCell" rowHeight="274" id="xXy-xm-JPW" customClass="SportsPlayTableViewCell" customModule="Actio" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="120" width="414" height="274"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xXy-xm-JPW" id="OYt-rf-vhF">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="274"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y2c-TI-bXe">
+                                                    <rect key="frame" x="20" y="11" width="374" height="257"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sports you Play" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mhS-2j-amb">
+                                                            <rect key="frame" x="128" y="15" width="106" height="17.5"/>
+                                                            <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="15"/>
+                                                            <color key="textColor" name="label"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Academic Year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f15-ih-GcW">
+                                                            <rect key="frame" x="10" y="34.5" width="354" height="12"/>
+                                                            <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="10"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Select Sport" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jTu-an-rW9">
+                                                            <rect key="frame" x="10" y="56.5" width="356" height="40"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="40" id="V1d-s7-uXA"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Playing Since(Year Only)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nNa-rU-afL">
+                                                            <rect key="frame" x="10" y="106.5" width="356" height="12"/>
+                                                            <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="10"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Enter player since" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="czK-y1-29X">
+                                                            <rect key="frame" x="10" y="128.5" width="358" height="40"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="40" id="9BC-B2-Vhm"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How many hours in a week do you practice?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B9e-m5-aYy">
+                                                            <rect key="frame" x="10" y="178.5" width="358" height="12"/>
+                                                            <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="10"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Enter Practice hours" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hu4-XJ-lmD">
+                                                            <rect key="frame" x="10" y="200.5" width="360" height="40"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="40" id="Inf-fY-3dG"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                    </subviews>
+                                                    <color key="backgroundColor" name="LightOrangeBackground"/>
+                                                    <constraints>
+                                                        <constraint firstItem="czK-y1-29X" firstAttribute="top" secondItem="nNa-rU-afL" secondAttribute="bottom" constant="10" id="0Ka-v5-3xZ"/>
+                                                        <constraint firstItem="czK-y1-29X" firstAttribute="leading" secondItem="nNa-rU-afL" secondAttribute="leading" id="2JE-M7-WcQ"/>
+                                                        <constraint firstItem="Hu4-XJ-lmD" firstAttribute="top" secondItem="B9e-m5-aYy" secondAttribute="bottom" constant="10" id="602-V1-Awm"/>
+                                                        <constraint firstItem="Hu4-XJ-lmD" firstAttribute="trailing" secondItem="B9e-m5-aYy" secondAttribute="trailing" constant="2" id="9V3-ui-Lyr"/>
+                                                        <constraint firstItem="B9e-m5-aYy" firstAttribute="trailing" secondItem="czK-y1-29X" secondAttribute="trailing" id="BmH-kb-eKR"/>
+                                                        <constraint firstItem="B9e-m5-aYy" firstAttribute="leading" secondItem="czK-y1-29X" secondAttribute="leading" id="GZr-sF-UBL"/>
+                                                        <constraint firstItem="czK-y1-29X" firstAttribute="trailing" secondItem="nNa-rU-afL" secondAttribute="trailing" constant="2" id="OF1-6K-V5D"/>
+                                                        <constraint firstItem="mhS-2j-amb" firstAttribute="leading" secondItem="Y2c-TI-bXe" secondAttribute="leading" constant="128" id="PeG-dk-2jg"/>
+                                                        <constraint firstItem="Hu4-XJ-lmD" firstAttribute="leading" secondItem="B9e-m5-aYy" secondAttribute="leading" id="TDf-KA-Qmd"/>
+                                                        <constraint firstItem="f15-ih-GcW" firstAttribute="leading" secondItem="Y2c-TI-bXe" secondAttribute="leading" constant="10" id="eJJ-hL-Hsd"/>
+                                                        <constraint firstItem="jTu-an-rW9" firstAttribute="top" secondItem="f15-ih-GcW" secondAttribute="bottom" constant="10" id="f3n-qw-BVB"/>
+                                                        <constraint firstItem="nNa-rU-afL" firstAttribute="top" secondItem="jTu-an-rW9" secondAttribute="bottom" constant="10" id="jHp-Lp-1pj"/>
+                                                        <constraint firstItem="B9e-m5-aYy" firstAttribute="top" secondItem="czK-y1-29X" secondAttribute="bottom" constant="10" id="kC4-xC-Nt8"/>
+                                                        <constraint firstItem="jTu-an-rW9" firstAttribute="trailing" secondItem="f15-ih-GcW" secondAttribute="trailing" constant="2" id="lCV-d0-Gls"/>
+                                                        <constraint firstItem="f15-ih-GcW" firstAttribute="top" secondItem="mhS-2j-amb" secondAttribute="bottom" constant="2" id="meo-7c-P9f"/>
+                                                        <constraint firstAttribute="trailing" secondItem="f15-ih-GcW" secondAttribute="trailing" constant="10" id="nnw-hP-csP"/>
+                                                        <constraint firstItem="nNa-rU-afL" firstAttribute="trailing" secondItem="jTu-an-rW9" secondAttribute="trailing" id="oOv-74-RGT"/>
+                                                        <constraint firstItem="jTu-an-rW9" firstAttribute="leading" secondItem="f15-ih-GcW" secondAttribute="leading" id="q4N-S0-iUz"/>
+                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mhS-2j-amb" secondAttribute="trailing" constant="20" symbolic="YES" id="qmr-hl-egn"/>
+                                                        <constraint firstItem="nNa-rU-afL" firstAttribute="leading" secondItem="jTu-an-rW9" secondAttribute="leading" id="uae-Fb-INS"/>
+                                                        <constraint firstItem="mhS-2j-amb" firstAttribute="top" secondItem="Y2c-TI-bXe" secondAttribute="top" constant="15" id="wjF-KL-rFI"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="Y2c-TI-bXe" secondAttribute="trailing" constant="20" id="6Hz-TZ-iAD"/>
+                                                <constraint firstItem="Y2c-TI-bXe" firstAttribute="leading" secondItem="OYt-rf-vhF" secondAttribute="leading" constant="20" id="MW2-jH-cHj"/>
+                                                <constraint firstItem="Y2c-TI-bXe" firstAttribute="top" secondItem="OYt-rf-vhF" secondAttribute="top" constant="11" id="bG0-48-GXb"/>
+                                                <constraint firstAttribute="bottom" secondItem="Y2c-TI-bXe" secondAttribute="bottom" constant="6" id="ds1-YX-z9I"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="playerSinceTextField" destination="czK-y1-29X" id="zgD-1J-hlw"/>
+                                            <outlet property="practiceHoursTextField" destination="Hu4-XJ-lmD" id="XqT-vV-4FN"/>
+                                            <outlet property="selectSportTextField" destination="jTu-an-rW9" id="vtf-KR-LtV"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SportsCoachTableViewCell" rowHeight="446" id="fu2-to-PiA" customClass="SportsCoachTableViewCell" customModule="Actio" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="394" width="414" height="446"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fu2-to-PiA" id="95a-bY-KsP">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="446"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zhb-5e-Qa3">
+                                                    <rect key="frame" x="20" y="11" width="374" height="418"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sports you Coach" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cU1-Iv-1hm">
+                                                            <rect key="frame" x="128" y="15" width="121.5" height="17.5"/>
+                                                            <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="15"/>
+                                                            <color key="textColor" name="label"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sport" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CaX-zt-c5I">
+                                                            <rect key="frame" x="10" y="34.5" width="354" height="12"/>
+                                                            <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="10"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Select Sport" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y2H-Op-IBd">
+                                                            <rect key="frame" x="10" y="56.5" width="356" height="40"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="40" id="JQj-hb-f3f"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="State" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LV1-0N-S1Q">
+                                                            <rect key="frame" x="10" y="106.5" width="356" height="12"/>
+                                                            <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="10"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Select State" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tC2-TF-oJN">
+                                                            <rect key="frame" x="10" y="128.5" width="358" height="40"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="40" id="0Vs-y4-THr"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aiv-zL-VE6">
+                                                            <rect key="frame" x="10" y="178.5" width="358" height="12"/>
+                                                            <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="10"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Select City" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ux5-9f-D9f">
+                                                            <rect key="frame" x="10" y="200.5" width="360" height="40"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="40" id="3ij-Ev-4lG"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Locality" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QLw-bJ-usq">
+                                                            <rect key="frame" x="10" y="250.5" width="360" height="12"/>
+                                                            <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="10"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Select Locality" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mjk-VA-tsf">
+                                                            <rect key="frame" x="10" y="272.5" width="362" height="40"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="40" id="chF-W5-obY"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About Coaching" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ao-cq-sMC">
+                                                            <rect key="frame" x="10" y="322.5" width="362" height="12"/>
+                                                            <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="10"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="About Coaching" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zIU-ea-wBB">
+                                                            <rect key="frame" x="10" y="344.5" width="364" height="40"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="40" id="07g-18-cjs"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                    </subviews>
+                                                    <color key="backgroundColor" name="LightOrangeBackground"/>
+                                                    <constraints>
+                                                        <constraint firstItem="tC2-TF-oJN" firstAttribute="leading" secondItem="LV1-0N-S1Q" secondAttribute="leading" id="2MD-AW-JoD"/>
+                                                        <constraint firstItem="y2H-Op-IBd" firstAttribute="top" secondItem="CaX-zt-c5I" secondAttribute="bottom" constant="10" id="2af-cn-ID8"/>
+                                                        <constraint firstItem="QLw-bJ-usq" firstAttribute="trailing" secondItem="ux5-9f-D9f" secondAttribute="trailing" id="3QY-Yt-0ud"/>
+                                                        <constraint firstItem="QLw-bJ-usq" firstAttribute="top" secondItem="ux5-9f-D9f" secondAttribute="bottom" constant="10" id="61U-hl-kkI"/>
+                                                        <constraint firstItem="1Ao-cq-sMC" firstAttribute="trailing" secondItem="mjk-VA-tsf" secondAttribute="trailing" id="7NG-tU-5bh"/>
+                                                        <constraint firstItem="zIU-ea-wBB" firstAttribute="trailing" secondItem="1Ao-cq-sMC" secondAttribute="trailing" constant="2" id="8dj-Bm-t1D"/>
+                                                        <constraint firstItem="mjk-VA-tsf" firstAttribute="trailing" secondItem="QLw-bJ-usq" secondAttribute="trailing" constant="2" id="9aL-61-Ule"/>
+                                                        <constraint firstItem="zIU-ea-wBB" firstAttribute="leading" secondItem="1Ao-cq-sMC" secondAttribute="leading" id="D2f-aQ-TLz"/>
+                                                        <constraint firstItem="ux5-9f-D9f" firstAttribute="trailing" secondItem="aiv-zL-VE6" secondAttribute="trailing" constant="2" id="Dog-E3-HwW"/>
+                                                        <constraint firstItem="mjk-VA-tsf" firstAttribute="leading" secondItem="QLw-bJ-usq" secondAttribute="leading" id="J1b-uG-dIt"/>
+                                                        <constraint firstItem="aiv-zL-VE6" firstAttribute="trailing" secondItem="tC2-TF-oJN" secondAttribute="trailing" id="KW8-HX-BVg"/>
+                                                        <constraint firstItem="tC2-TF-oJN" firstAttribute="trailing" secondItem="LV1-0N-S1Q" secondAttribute="trailing" constant="2" id="Nrp-ah-XQ5"/>
+                                                        <constraint firstItem="mjk-VA-tsf" firstAttribute="top" secondItem="QLw-bJ-usq" secondAttribute="bottom" constant="10" id="Q1j-QJ-J0W"/>
+                                                        <constraint firstItem="y2H-Op-IBd" firstAttribute="leading" secondItem="CaX-zt-c5I" secondAttribute="leading" id="R1N-yo-ZkJ"/>
+                                                        <constraint firstAttribute="trailing" secondItem="CaX-zt-c5I" secondAttribute="trailing" constant="10" id="axe-Ub-IqE"/>
+                                                        <constraint firstItem="aiv-zL-VE6" firstAttribute="top" secondItem="tC2-TF-oJN" secondAttribute="bottom" constant="10" id="c65-Yb-3wp"/>
+                                                        <constraint firstItem="ux5-9f-D9f" firstAttribute="leading" secondItem="aiv-zL-VE6" secondAttribute="leading" id="cyo-n9-I7a"/>
+                                                        <constraint firstItem="1Ao-cq-sMC" firstAttribute="leading" secondItem="mjk-VA-tsf" secondAttribute="leading" id="dMU-Zn-22V"/>
+                                                        <constraint firstItem="ux5-9f-D9f" firstAttribute="top" secondItem="aiv-zL-VE6" secondAttribute="bottom" constant="10" id="eAT-X4-lvZ"/>
+                                                        <constraint firstItem="cU1-Iv-1hm" firstAttribute="leading" secondItem="Zhb-5e-Qa3" secondAttribute="leading" constant="128" id="eNU-Pg-KQn"/>
+                                                        <constraint firstItem="1Ao-cq-sMC" firstAttribute="top" secondItem="mjk-VA-tsf" secondAttribute="bottom" constant="10" id="ecs-7X-UIy"/>
+                                                        <constraint firstItem="cU1-Iv-1hm" firstAttribute="top" secondItem="Zhb-5e-Qa3" secondAttribute="top" constant="15" id="gkp-wv-27t"/>
+                                                        <constraint firstItem="tC2-TF-oJN" firstAttribute="top" secondItem="LV1-0N-S1Q" secondAttribute="bottom" constant="10" id="h2V-mf-JL4"/>
+                                                        <constraint firstItem="LV1-0N-S1Q" firstAttribute="leading" secondItem="y2H-Op-IBd" secondAttribute="leading" id="h5c-rz-QMz"/>
+                                                        <constraint firstItem="zIU-ea-wBB" firstAttribute="top" secondItem="1Ao-cq-sMC" secondAttribute="bottom" constant="10" id="jqF-Pn-Oig"/>
+                                                        <constraint firstItem="LV1-0N-S1Q" firstAttribute="trailing" secondItem="y2H-Op-IBd" secondAttribute="trailing" id="kse-Gt-6D8"/>
+                                                        <constraint firstItem="QLw-bJ-usq" firstAttribute="leading" secondItem="ux5-9f-D9f" secondAttribute="leading" id="oya-xT-xEt"/>
+                                                        <constraint firstItem="CaX-zt-c5I" firstAttribute="leading" secondItem="Zhb-5e-Qa3" secondAttribute="leading" constant="10" id="piE-V1-Fhi"/>
+                                                        <constraint firstItem="y2H-Op-IBd" firstAttribute="trailing" secondItem="CaX-zt-c5I" secondAttribute="trailing" constant="2" id="qj4-RX-8Lr"/>
+                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="cU1-Iv-1hm" secondAttribute="trailing" constant="20" symbolic="YES" id="spm-db-BaR"/>
+                                                        <constraint firstItem="CaX-zt-c5I" firstAttribute="top" secondItem="cU1-Iv-1hm" secondAttribute="bottom" constant="2" id="tqN-b9-Er1"/>
+                                                        <constraint firstItem="aiv-zL-VE6" firstAttribute="leading" secondItem="tC2-TF-oJN" secondAttribute="leading" id="wCA-eY-A26"/>
+                                                        <constraint firstItem="LV1-0N-S1Q" firstAttribute="top" secondItem="y2H-Op-IBd" secondAttribute="bottom" constant="10" id="xZy-vc-umM"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="Zhb-5e-Qa3" secondAttribute="trailing" constant="20" id="MFr-u2-CQR"/>
+                                                <constraint firstItem="Zhb-5e-Qa3" firstAttribute="top" secondItem="95a-bY-KsP" secondAttribute="top" constant="11" id="heV-ib-IAx"/>
+                                                <constraint firstAttribute="bottom" secondItem="Zhb-5e-Qa3" secondAttribute="bottom" constant="17" id="kSv-Nv-D5V"/>
+                                                <constraint firstItem="Zhb-5e-Qa3" firstAttribute="leading" secondItem="95a-bY-KsP" secondAttribute="leading" constant="20" id="mpx-9P-qPc"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="aboutCoachingTextField" destination="zIU-ea-wBB" id="EQf-6r-NAK"/>
+                                            <outlet property="cityTextField" destination="ux5-9f-D9f" id="GHd-fL-Zpd"/>
+                                            <outlet property="coachSelectSportTextField" destination="y2H-Op-IBd" id="Uwo-TQ-oIW"/>
+                                            <outlet property="localityTextField" destination="mjk-VA-tsf" id="ecS-l7-k2q"/>
+                                            <outlet property="stateTextField" destination="tC2-TF-oJN" id="sHh-1V-tvu"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Ize-Hr-gx3"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="2fL-IQ-9pQ" firstAttribute="centerX" secondItem="Az5-Vs-Mnb" secondAttribute="centerX" id="3Kg-zB-xr9"/>
+                            <constraint firstItem="FDf-rH-HPi" firstAttribute="leading" secondItem="Ize-Hr-gx3" secondAttribute="leading" constant="45" id="6Bf-1M-DdD"/>
+                            <constraint firstItem="sYT-KK-BOO" firstAttribute="leading" secondItem="Ize-Hr-gx3" secondAttribute="leading" id="6dl-P1-3Pl"/>
+                            <constraint firstItem="sYT-KK-BOO" firstAttribute="top" secondItem="FDf-rH-HPi" secondAttribute="bottom" constant="10" id="9qM-2f-xoI"/>
+                            <constraint firstItem="2fL-IQ-9pQ" firstAttribute="centerY" secondItem="Az5-Vs-Mnb" secondAttribute="bottom" id="AXr-ix-Vdi"/>
+                            <constraint firstItem="2fL-IQ-9pQ" firstAttribute="width" secondItem="Az5-Vs-Mnb" secondAttribute="width" multiplier="0.33" id="DwZ-1N-X1Y"/>
+                            <constraint firstItem="Ize-Hr-gx3" firstAttribute="trailing" secondItem="FDf-rH-HPi" secondAttribute="trailing" constant="43" id="enM-is-iCz"/>
+                            <constraint firstItem="Ize-Hr-gx3" firstAttribute="top" secondItem="Az5-Vs-Mnb" secondAttribute="top" constant="44.5" id="hN8-j3-w5N"/>
+                            <constraint firstItem="Ize-Hr-gx3" firstAttribute="trailing" secondItem="sYT-KK-BOO" secondAttribute="trailing" id="kR2-Dj-MAL"/>
+                            <constraint firstItem="FDf-rH-HPi" firstAttribute="top" secondItem="2fL-IQ-9pQ" secondAttribute="bottom" constant="24.5" id="lNh-6k-2II"/>
+                            <constraint firstItem="Ize-Hr-gx3" firstAttribute="bottom" secondItem="sYT-KK-BOO" secondAttribute="bottom" constant="-1" id="q6Q-sN-C7r"/>
+                            <constraint firstItem="2fL-IQ-9pQ" firstAttribute="leading" secondItem="Ize-Hr-gx3" secondAttribute="leading" constant="138.5" id="vf9-06-Maf"/>
+                            <constraint firstItem="2fL-IQ-9pQ" firstAttribute="top" secondItem="Ize-Hr-gx3" secondAttribute="top" constant="24" id="wkK-e1-VXd"/>
+                            <constraint firstItem="Az5-Vs-Mnb" firstAttribute="height" secondItem="2fL-IQ-9pQ" secondAttribute="height" id="xaz-bx-0KV"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="eax-XB-aUf"/>
+                    <size key="freeformSize" width="414" height="1500"/>
+                    <connections>
+                        <outlet property="editProfileImage" destination="2fL-IQ-9pQ" id="UYc-fp-Y9j"/>
+                        <outlet property="editProfileTableView" destination="sYT-KK-BOO" id="4xw-Ym-lBC"/>
+                        <outlet property="profileSegmentControl" destination="FDf-rH-HPi" id="LZt-TU-pTy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZAs-zL-Huy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5298.5507246376819" y="2635.7142857142858"/>
+        </scene>
     </scenes>
     <designables>
         <designable name="GoX-8E-Ihn">
@@ -4425,6 +4784,9 @@
         </namedColor>
         <namedColor name="YetToOpenColor">
             <color red="1" green="0.53700000047683716" blue="0.23899999260902405" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="label">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -33,7 +33,11 @@ class ProfilePageViewController: UIViewController {
     }
     
     @IBAction func editProfileButtonAction(_ sender: Any) {
+        if let nav = storyboard?.instantiateViewController(withIdentifier: "EditProfileViewController") as? EditProfileViewController {
+            self.navigationController?.pushViewController(nav, animated: false)
+        }
     }
+    
     @IBAction func changePasswordButtonAction(_ sender: Any) {
         if let nav = storyboard?.instantiateViewController(withIdentifier: "ChangePasswordViewController") as? ChangePasswordViewController {
             nav.userName = self.userName
