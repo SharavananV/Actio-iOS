@@ -54,6 +54,7 @@ class EditProfileViewController: UIViewController {
         let formData: [FormCellType] = [
             .toggle(ToggleViewModel(key: "student", contextText: studentString, defaultValue: false)),
             .textPicker(TextPickerModel(key: "institution", textValue:"", allValues: allInstitution, contextText: "I am studying at",placeHolder: "Select Institution")),
+            .academic,
             .textPicker(TextPickerModel(key: "class", textValue:"", allValues: allClass, contextText: "Class",placeHolder: "Select Class")),
             .textPicker(TextPickerModel(key: "stream", textValue:"", allValues: allStream, contextText: "Stream",placeHolder: "Select Stream")),
             .textPicker(TextPickerModel(key: "divison", textValue:"", allValues: allDivision, contextText: "Divison",placeHolder: "Select Divison")),
@@ -61,12 +62,12 @@ class EditProfileViewController: UIViewController {
             .textPicker(TextPickerModel(key: "state", textValue:"", allValues: allState, contextText: "State",placeHolder: "Select State")),
             .textPicker(TextPickerModel(key: "city", textValue:"", allValues: allCity, contextText: "City",placeHolder: "Select City")),
             .textEdit(TextEditModel(key: "postalcode", textValue: "", contextText: "Postal Code", placeHolder: "Postal Code", isSecure: false)),
-            .button("+ Add Another sport you play"),
             .sportsCoach,
-            .sportsPlay,
+            .button("+ Add Another sport you play"),
             .toggle(ToggleViewModel(key: "coach", contextText: coachingString, defaultValue: false)),
             .toggle(ToggleViewModel(key: "sponser", contextText: sponserString, defaultValue: false)),
             .toggle(ToggleViewModel(key: "organize", contextText: organizeString, defaultValue: false)),
+            .sportsPlay
         
             
           ]
@@ -134,6 +135,11 @@ extension EditProfileViewController :  UITableViewDataSource, UITableViewDelegat
                 return UITableViewCell()
             }
             cell = coachCell
+        case .academic:
+            guard let academicCell = tableView.dequeueReusableCell(withIdentifier: AcademicYearTableViewCell.reuseId, for: indexPath) as? AcademicYearTableViewCell else {
+                return UITableViewCell()
+            }
+            cell = academicCell
         }
         
         cell?.selectionStyle = .none
@@ -173,12 +179,13 @@ extension EditProfileViewController : FootnoteButtonDelegate, CellDataFetchProto
 }
 
 private enum FormCellType {
+    case academic
+    case sportsPlay
+    case sportsCoach
     case textEdit(TextEditModel)
     case textPicker(TextPickerModel)
     case button(String)
     case toggle(ToggleViewModel)
-    case sportsPlay
-    case sportsCoach
 }
 
 
