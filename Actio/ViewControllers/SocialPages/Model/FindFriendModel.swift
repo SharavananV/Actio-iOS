@@ -40,18 +40,28 @@ struct ProfileData: Codable {
 class Friend: Codable {
 	let subscriberID: Int?
 	let subscriberDisplayID, fullName, username, emailID: String?
-	let profileImage: String?
+    var mobileNumber, isdCode, userType, idType: String?
+    let proofID, frontImage, backImage, gender: String?
+    let dob, profileImage: String?
 	var friendsStatus: Int?
 	var isSelected: Bool = false
 	
 	enum CodingKeys: String, CodingKey {
-		case subscriberID = "subscriber_id"
-		case subscriberDisplayID = "subscriber_display_id"
-		case fullName = "full_name"
-		case username
-		case emailID = "email_id"
-		case profileImage = "profile_image"
-		case friendsStatus = "friends_status"
+        case subscriberID = "subscriber_id"
+        case subscriberDisplayID = "subscriber_display_id"
+        case fullName = "full_name"
+        case username
+        case emailID = "email_id"
+        case mobileNumber = "mobile_number"
+        case isdCode = "isd_code"
+        case userType = "user_type"
+        case idType = "id_type"
+        case proofID = "proof_id"
+        case frontImage = "front_image"
+        case backImage = "back_image"
+        case gender, dob
+        case profileImage = "profile_image"
+        case friendsStatus = "friends_status"
 	}
 	
 	var userFriendStatusImage: String {

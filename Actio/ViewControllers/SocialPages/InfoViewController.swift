@@ -8,17 +8,21 @@
 
 import UIKit
 
-class InfoViewController: UIViewController {
 
+class InfoViewController: UIViewController {
+    
     @IBOutlet weak var infoTableView: UITableView!
     fileprivate var formData: [FormCellType]?
-    
+    var userDetails: Friend?
+    var masterData: MasterData?
+    private var lastPickedCell: ImagePickerTableViewCell?
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                
         infoTableView.delegate = self
         infoTableView.dataSource = self
-        
+                
         infoTableView.register(SwitchTableViewCell.self, forCellReuseIdentifier: SwitchTableViewCell.reuseId)
         infoTableView.register(TextPickerTableViewCell.self, forCellReuseIdentifier: TextPickerTableViewCell.reuseId)
         infoTableView.register(TextEditTableViewCell.self, forCellReuseIdentifier: TextEditTableViewCell.reuseId)
@@ -33,10 +37,8 @@ class InfoViewController: UIViewController {
         self.infoTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         self.formData = prepareFormData()
         infoTableView.reloadData()
-
-
     }
-    
+     
     private func prepareFormData() -> [FormCellType] {
         var allCountries = [String]()
         var allGender = [String]()
@@ -44,14 +46,30 @@ class InfoViewController: UIViewController {
         var genderString = ""
         var startDate : Date = Date()
         
+        if let masterData = masterData {
+            allCountries = masterData.country?.compactMap({
+                return "(\($0.alias ?? "")) \($0.code ?? "")"
+            }) ?? []
+            
+            allIDCards = masterData.proof?.map({
+                return $0.proof ?? ""
+            }) ?? []
+            
+            allGender = masterData.gender?.map({
+                return ($0.gender ?? "")
+            }) ?? []
+            
+        }
+
+        
         let formData: [FormCellType] = [
-            .textEdit(TextEditModel(key: "fullName", textValue: "", contextText: "Full Name", placeHolder: "Full Name", isSecure: false)),
-            .textPicker(TextPickerModel(key: "isdCode", textValue: "", allValues: allCountries, contextText: "Country Code")),
-            .textEdit(TextEditModel(key: "mobileNumber", textValue: "", contextText: "Mobile Number", placeHolder: "Mobile Number", keyboardType: .phonePad, isSecure: false)),
+            .textEdit(TextEditModel(key: "fullName", textValue: userDetails?.fullName, contextText: "Full Name", placeHolder: "Full Name", isSecure: false)),
+            .textPicker(TextPickerModel(key: "isdCode", textValue: userDetails?.isdCode, allValues: allCountries, contextText: "Country Code")),
+            .textEdit(TextEditModel(key: "mobileNumber", textValue: userDetails?.mobileNumber, contextText: "Mobile Number", placeHolder: "Mobile Number", keyboardType: .phonePad, isSecure: false)),
             .textPicker(TextPickerModel(key: "gender", textValue: genderString, allValues: allGender, contextText: "Gender", placeHolder: "Select Gender")),
-            .textEdit(TextEditModel(key: "emailID", textValue: "", contextText: "Email ID", placeHolder: "Email ID", keyboardType: .emailAddress, isSecure: false)),
+            .textEdit(TextEditModel(key: "emailID", textValue: userDetails?.emailID, contextText: "Email ID", placeHolder: "Email ID", keyboardType: .emailAddress, isSecure: false)),
             .date(DatePickerModel(key: "dob", minDate: nil, maxDate: Date(), dateValue: startDate, contextText: "Date of Birth (dd-mm-yyyy)")),
-            .textEdit(TextEditModel(key: "userName", textValue: "", contextText: "Username", placeHolder: "Username allows a-z,0-9,_,.")),
+            .textEdit(TextEditModel(key: "userName", textValue: userDetails?.username, contextText: "Username", placeHolder: "Username allows a-z,0-9,_,.")),
             .textPicker(TextPickerModel(key: "idType", allValues: allIDCards, contextText: "ID Type", placeHolder: "Select ID Type")),
             .textEdit(TextEditModel(key: "idNumber", contextText: "ID Number", placeHolder: "ID Type Number", keyboardType: .numberPad, isSecure: false)),
             .text("Upload ID", .natural),
@@ -138,35 +156,62 @@ extension InfoViewController : UITableViewDataSource,UITableViewDelegate {
     
 extension InfoViewController : FootnoteButtonDelegate, CellDataFetchProtocol, TextPickerDelegate, SwitchCellDelegate, SegmentCellDelegate,ImagePickerCellDelegate {
     func pickImage(_ key: String, cell: ImagePickerTableViewCell) {
-        print("something")
+        self.lastPickedCell = cell
     }
     
     func footnoteButtonCallback(_ title: String) {
-        print("something")
+        print("footnoteButtonCallback")
     }
     
     func valueChanged(keyValuePair: (key: String, value: String)) {
-        print("something")
+        print("valueChanged")
         
     }
     
     func didPickText(_ key: String, index: Int) {
-        print("something")
-        
     }
     
+    private func updateCellFormData(key: String, value: String) {
+        // Update form data
+        let cellData = self.formData?.first(where: { (cellType) -> Bool in
+            switch cellType {
+            case .textEdit(let model):
+                return model.key == key
+            case .date(let model):
+                return model.key == key
+            case .textPicker(let model):
+                return model.key == key
+            default:
+                return false
+            }
+        })
+        
+        switch cellData {
+        case .textEdit(let model):
+            model.textValue = value
+        case .date(let model):
+            model.dateValue = value.toDate
+        case .textPicker(let model):
+            return model.textValue = value
+        default:
+            break;
+        }
+    }
+
+    
     func toggleValueChanged(_ key: String, value: Bool) {
-        print("something")
+        print("toggleValueChanged xcx")
         
     }
     
     func segmentTapped(_ index: Int) {
-        print("something")
+        print("segmentTapped")
         
     }
     
     
 }
+
 
 private enum FormCellType {
     case textEdit(TextEditModel)

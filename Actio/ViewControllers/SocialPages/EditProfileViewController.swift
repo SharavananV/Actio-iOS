@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EditProfileViewController: UIViewController {
+class EditProfileViewController: UIViewController{
     
     enum TabIndex : Int {
         case infoTab = 0
@@ -19,15 +19,17 @@ class EditProfileViewController: UIViewController {
     @IBOutlet weak var editProfileImage: UIImageView!
     @IBOutlet weak var contentView: UIView!
     var currentViewController: UIViewController?
+    var userDetails: Friend?
     
-    lazy var infoTabVC: UIViewController? = {
-        let firstChildTabVC = self.storyboard?.instantiateViewController(withIdentifier: "InfoViewController")
-        return firstChildTabVC
+    lazy var MyRoleViewController : MyRoleViewController? = {
+        var viewController = self.storyboard?.instantiateViewController(withIdentifier: "MyRoleViewController") as! MyRoleViewController
+        return viewController
     }()
-    lazy var myRoleTabVC : UIViewController? = {
-        let secondChildTabVC = self.storyboard?.instantiateViewController(withIdentifier: "MyRoleViewController")
-        
-        return secondChildTabVC
+    
+    private lazy var InfoViewController: InfoViewController = {
+        var viewController = self.storyboard?.instantiateViewController(withIdentifier: "InfoViewController") as! InfoViewController
+        viewController.userDetails = self.userDetails
+        return viewController
     }()
 
     override func viewDidLoad() {
@@ -70,9 +72,9 @@ class EditProfileViewController: UIViewController {
         var vc: UIViewController?
         switch index {
         case TabIndex.infoTab.rawValue :
-            vc = infoTabVC
+            vc = InfoViewController
         case TabIndex.myRoleTab.rawValue :
-            vc = myRoleTabVC
+            vc = MyRoleViewController
         default:
             return nil
         }

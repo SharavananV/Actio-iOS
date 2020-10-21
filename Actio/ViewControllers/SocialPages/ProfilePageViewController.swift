@@ -34,6 +34,7 @@ class ProfilePageViewController: UIViewController {
     
     @IBAction func editProfileButtonAction(_ sender: Any) {
         if let nav = storyboard?.instantiateViewController(withIdentifier: "EditProfileViewController") as? EditProfileViewController {
+            nav.userDetails = self.userDetails
             self.navigationController?.pushViewController(nav, animated: false)
         }
     }
