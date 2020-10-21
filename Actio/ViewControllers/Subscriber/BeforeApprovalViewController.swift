@@ -35,4 +35,24 @@ class BeforeApprovalViewController: UIViewController {
         stepsHeadingLabel.font = AppFont.PoppinsSemiBold(size: 15)
         actualStepsLabel.font = AppFont.PoppinsRegular(size: 12)
     }
+	
+	@IBAction func logout(_ sender: Any) {
+		DependencyProvider.shared.registerDatasource.logout(presentAlertOn: self) { (message) in
+			self.view.makeToast(message)
+			
+			if message == "Logout Success" {
+				self.presentLogin()
+			}
+		}
+	}
+	
+	private func presentLogin() {
+		self.dismiss(animated: true) {
+			if let topController = UIApplication.shared.keyWindow()?.topViewController() {
+				let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginNavigation")
+				controller.modalPresentationStyle = .fullScreen
+				topController.present(controller, animated: false, completion: nil)
+			}
+		}
+	}
 }

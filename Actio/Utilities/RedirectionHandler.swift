@@ -28,7 +28,6 @@ class RedirectionHandler {
 				if !parentId.isEmpty {
 					if parentId == String(loggedInUser.subscriberSeqID ?? 0), let vc = storyboard.instantiateViewController(withIdentifier: "AcceptRejectRequestViewController") as? AcceptRejectRequestViewController {
 						vc.childID = childId
-						vc.apiParentInitCall(childID: childId)
 						vc.modalPresentationStyle = .fullScreen
 						topViewController?.present(vc, animated: false, completion: nil)
 					}

@@ -57,7 +57,11 @@ extension NotificationListViewController: UITableViewDataSource, UITableViewDele
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		if let notification = notificationList?[indexPath.row] {
-			self.updateSeenStatus(notification, indexPath: indexPath)
+			if notification.seenStatus != 1 {
+				self.updateSeenStatus(notification, indexPath: indexPath)
+			}
+			
+			redirectToController(notification)
 		}
 	}
 	
@@ -66,6 +70,33 @@ extension NotificationListViewController: UITableViewDataSource, UITableViewDele
 			if let cell = self?.tableView.cellForRow(at: indexPath) {
 				cell.contentView.backgroundColor = .white
 			}
+		}
+	}
+	
+	private func redirectToController(_ notification: NotificationModel) {
+		switch notification.message?.type {
+		case "friend_request", "accept_request":
+			if let nav = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FriendsProfilePageViewController") as? FriendsProfilePageViewController {
+				nav.friendId = notification.fromID
+				self.navigationController?.pushViewController(nav, animated: false)
+			}
+			
+		case "parent_submit":
+			if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AcceptRejectRequestViewController") as? AcceptRejectRequestViewController {
+				vc.childID = String(notification.fromID ?? 0)
+				vc.modalPresentationStyle = .fullScreen
+				self.present(vc, animated: false, completion: nil)
+			}
+			
+		case "coach_validate":
+			// TODO: Fill this in when KPI is complete
+			break
+			
+		case "parent_reject", "parent_approve":
+			break
+			
+		default:
+			break
 		}
 	}
 }

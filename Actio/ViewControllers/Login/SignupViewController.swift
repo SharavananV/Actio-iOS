@@ -34,10 +34,13 @@ class SignupViewController: UIViewController {
         tableView.register(SwitchTableViewCell.self, forCellReuseIdentifier: SwitchTableViewCell.reuseId)
         tableView.register(SegmentControlTableViewCell.self, forCellReuseIdentifier: SegmentControlTableViewCell.reuseId)
         
+		self.setObservers()
         self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
-        self.formData = prepareFormData()
-        self.setObservers()
-        tableView.reloadData()
+		registerDatasource.prepareMasterData(with: nil, presentAlertOn: self) { _ in
+			self.formData = self.prepareFormData()
+			
+			self.tableView.reloadData()
+		}
     }
     
     override func viewWillAppear(_ animated: Bool) {

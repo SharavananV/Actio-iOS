@@ -45,7 +45,7 @@ class ProfilePageViewController: UIViewController {
         }
     }
     func myProfileCall() {
-        service.post(myProfileUrl, parameters: nil, onView: view) { (response: FindFriendResponse) in
+        service.post(myProfileUrl, parameters: nil, onView: view) { (response: MyProfileResponse) in
             self.userDetails = response.profile?.profile
             self.profileEmailLabel.text = self.userDetails?.emailID
             self.profileNameLabel.text = self.userDetails?.fullName
@@ -79,12 +79,12 @@ extension ProfilePageViewController : UICollectionViewDelegate,UICollectionViewD
         cell.friendsNameLabel.text = friendsList.fullName
         return cell
     }
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-       let friendsList = self.friendsListModel?[indexPath.row]
-        if let nav = storyboard?.instantiateViewController(withIdentifier: "FriendsProfilePageViewController") as? FriendsProfilePageViewController {
-            nav.currentFriend = friendsList
-            self.navigationController?.pushViewController(nav, animated: false)
-        }
-    }
-    
+	
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		let friendsList = self.friendsListModel?[indexPath.row]
+		if let nav = storyboard?.instantiateViewController(withIdentifier: "FriendsProfilePageViewController") as? FriendsProfilePageViewController {
+			nav.friendId = friendsList?.subscriberID
+			self.navigationController?.pushViewController(nav, animated: false)
+		}
+	}
 }

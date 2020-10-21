@@ -81,6 +81,14 @@ extension FriendListViewController: UITableViewDataSource, UITableViewDelegate, 
 		return cell
 	}
 	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let friendsList = self.allUsers?[indexPath.row]
+		if let nav = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FriendsProfilePageViewController") as? FriendsProfilePageViewController {
+			nav.friendId = friendsList?.subscriberID
+			self.navigationController?.pushViewController(nav, animated: false)
+		}
+	}
+	
 	func addFriendTapped(_ subscriberId: Int?, friendStatus: Int?) {
 		switch friendStatus {
 		case 0:

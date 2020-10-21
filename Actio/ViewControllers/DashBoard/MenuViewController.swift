@@ -26,11 +26,8 @@ class MenuViewController: UIViewController {
     
 
     @IBAction func logoutAction(_ sender: Any) {
-        ActioSpinner.shared.show(on: self.view)
-        
 		self.dependencyProvider.registerDatasource.logout(presentAlertOn: self) { (message) in
             self.view.makeToast(message)
-            ActioSpinner.shared.hide()
             
             if message == "Logout Success" {
                 self.delegate?.presentLogin()

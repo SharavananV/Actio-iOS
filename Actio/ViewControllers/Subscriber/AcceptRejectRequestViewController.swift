@@ -54,6 +54,8 @@ class AcceptRejectRequestViewController: UIViewController {
         bottomLine.backgroundColor = UIColor.black.cgColor
         relationTextfield.borderStyle = UITextField.BorderStyle.none
         relationTextfield.layer.addSublayer(bottomLine)
+		
+		apiParentInitCall(childID: childID)
     }
     
     @IBAction func rejectButtonAction(_ sender: Any) {

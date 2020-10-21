@@ -54,7 +54,6 @@ class TournamentListViewController: UIViewController,filterValueDelegate {
             textfield.placeholder = "Type Your Search"
             textfield.font = AppFont.PoppinsRegular(size: 15)
         }
-
     }
     
     func heightConstraints() {

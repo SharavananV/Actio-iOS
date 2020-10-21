@@ -10,11 +10,20 @@ import Foundation
 
 // MARK: - FindFriendResponse
 
+struct MyProfileResponse: ResponseType {
+	var errors: [ActioError]?
+	var msg: String?
+	let status, logID: String?
+	let profile: ProfileData?
+	let find: [Friend]?
+	let list: [Friend]?
+}
+
 struct FindFriendResponse: ResponseType {
     var errors: [ActioError]?
     var msg: String?
     let status, logID: String?
-    let profile: ProfileData?
+    let profile: Friend?
     let find: [Friend]?
     let list: [Friend]?
 }
