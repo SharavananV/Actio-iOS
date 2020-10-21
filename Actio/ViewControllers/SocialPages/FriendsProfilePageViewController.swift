@@ -27,7 +27,7 @@ class FriendsProfilePageViewController: UIViewController {
 	
 	private let service = DependencyProvider.shared.networkService
 	private var friendsListModel : [Friend]?
-	private var currentFriend: Friend?
+	private var currentFriend: Profile?
 	var friendId: Int?
 	
 	override func viewDidLoad() {
@@ -47,7 +47,7 @@ class FriendsProfilePageViewController: UIViewController {
 	func friendsListCall() {
 		let parameters = ["friendID": friendId ?? 0]
 		
-		service.post(friendListUrl, parameters: parameters , onView: view) { [weak self] (response: FindFriendResponse) in
+		service.post(friendListUrl, parameters: parameters , onView: view) { [weak self] (response: FriendsListResponse) in
 			self?.currentFriend = response.profile
 			self?.friendsListModel = response.list
 			self?.friendsEmailLabel.text = self?.currentFriend?.emailID
@@ -66,7 +66,7 @@ class FriendsProfilePageViewController: UIViewController {
 	
 	@IBAction func chatAction(_ sender: Any) {
 		if let vc = UIStoryboard(name: "Social", bundle: nil).instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController {
-			vc.friendsModel = self.currentFriend
+			vc.conversation = Conversation(subscriberID: self.currentFriend?.subscriberID, subscriberDisplayID: self.currentFriend?.subscriberDisplayID, fullName: self.currentFriend?.fullName, username: self.currentFriend?.username, emailID: self.currentFriend?.emailID, profileImage: self.currentFriend?.profileImage, chatID: nil, message: nil, unseen: nil)
 			
 			self.navigationController?.pushViewController(vc, animated: true)
 		}
@@ -157,7 +157,7 @@ extension FriendsProfilePageViewController : UICollectionViewDelegate,UICollecti
 		if collectionView == self.friendsListCollectionView {
 			let friendsList = self.friendsListModel?[indexPath.row]
 			if let nav = storyboard?.instantiateViewController(withIdentifier: "FriendsProfilePageViewController") as? FriendsProfilePageViewController {
-				nav.currentFriend = friendsList
+				nav.friendId = friendsList?.subscriberID
 				self.navigationController?.pushViewController(nav, animated: false)
 			}
 		}

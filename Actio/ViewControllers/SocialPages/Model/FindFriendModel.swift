@@ -74,12 +74,10 @@ class Friend: Codable {
 
 struct FriendsListResponse: ResponseType {
     var errors: [ActioError]?
-    
     var msg: String?
-    
-    let status, logID: String?
+	let status, logID: String?
     let profile: Profile?
-    let list: [List]?
+    let list: [Friend]?
     let eventAssociated: [EventAssociated]?
 
     enum CodingKeys: String, CodingKey {
@@ -104,22 +102,6 @@ struct EventAssociated: Codable {
         case eventStartYear = "event_start_year"
         case eventAddress = "event_address"
         case status
-    }
-}
-
-// MARK: - List
-struct List: Codable {
-    let subscriberID: Int?
-    let subscriberDisplayID, fullName, username, emailID: String?
-    let profileImage: String?
-
-    enum CodingKeys: String, CodingKey {
-        case subscriberID = "subscriber_id"
-        case subscriberDisplayID = "subscriber_display_id"
-        case fullName = "full_name"
-        case username
-        case emailID = "email_id"
-        case profileImage = "profile_image"
     }
 }
 
