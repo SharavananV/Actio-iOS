@@ -26,6 +26,8 @@
 		18455F8A252DAC75000CA7CA /* SegmentControlTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18455F89252DAC75000CA7CA /* SegmentControlTableViewCell.swift */; };
 		18455F8D252DE556000CA7CA /* TournamentFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18455F8C252DE556000CA7CA /* TournamentFilterViewController.swift */; };
 		184DD1E4252C52B90014ABB5 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184DD1E3252C52B90014ABB5 /* ResetPasswordViewController.swift */; };
+		1850412C254018380053BB2D /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1850412B254018380053BB2D /* InfoViewController.swift */; };
+		1850412F2540185E0053BB2D /* MyRoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1850412E2540185E0053BB2D /* MyRoleViewController.swift */; };
 		18567D7E253D7BCB0034ACE8 /* EventsAssociatedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18567D7D253D7BCA0034ACE8 /* EventsAssociatedCollectionViewCell.swift */; };
 		1856B142253440D6000C1D17 /* ProfileFriendsListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1856B141253440D6000C1D17 /* ProfileFriendsListCollectionViewCell.swift */; };
 		1857D89225396CBA00F1C447 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1857D89125396CBA00F1C447 /* ChangePasswordViewController.swift */; };
@@ -203,6 +205,8 @@
 		18455F89252DAC75000CA7CA /* SegmentControlTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentControlTableViewCell.swift; sourceTree = "<group>"; };
 		18455F8C252DE556000CA7CA /* TournamentFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentFilterViewController.swift; sourceTree = "<group>"; };
 		184DD1E3252C52B90014ABB5 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+		1850412B254018380053BB2D /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		1850412E2540185E0053BB2D /* MyRoleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRoleViewController.swift; sourceTree = "<group>"; };
 		18567D7D253D7BCA0034ACE8 /* EventsAssociatedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsAssociatedCollectionViewCell.swift; sourceTree = "<group>"; };
 		1856B141253440D6000C1D17 /* ProfileFriendsListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFriendsListCollectionViewCell.swift; sourceTree = "<group>"; };
 		1857D89125396CBA00F1C447 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
@@ -592,7 +596,9 @@
 				8D0F74A125304F6400200C2B /* TableViewCells */,
 				8D0F74A62530534F00200C2B /* Model */,
 				8D0F7499253046EF00200C2B /* FriendListViewController.swift */,
+				1850412B254018380053BB2D /* InfoViewController.swift */,
 				8D673A6E251DD72400585AF9 /* ProfilePageViewController.swift */,
+				1850412E2540185E0053BB2D /* MyRoleViewController.swift */,
 				1858E5E82535911E00436E5D /* FriendsProfilePageViewController.swift */,
 				8D0F75E92536CF7D00200C2B /* ChatHistoryViewController.swift */,
 				8D0F74BD25342E6E00200C2B /* ChatViewController.swift */,
@@ -1105,6 +1111,7 @@
 				185A9682253EE8BA009566E9 /* AcademicYearTableViewCell.swift in Sources */,
 				8DC1BD372525FA7B005C55DE /* PersistentContainer.swift in Sources */,
 				8D47F0E625397FC30013900C /* ZoomImageView.swift in Sources */,
+				1850412F2540185E0053BB2D /* MyRoleViewController.swift in Sources */,
 				8D673A7A2521E83B00585AF9 /* EventFeedModel.swift in Sources */,
 				8D94E07F24AF1D0A00DBC46A /* Actio.xcdatamodeld in Sources */,
 				8DC1BD2625259A8F005C55DE /* NotificationListViewController.swift in Sources */,
@@ -1153,6 +1160,7 @@
 				8DA048BB24B331D40099D528 /* AppColors.swift in Sources */,
 				8DDBB767252D919C00D74087 /* AddPlayerButtonViewCell.swift in Sources */,
 				18C253CF2512323E0043D20F /* GalleryCollectionViewCell.swift in Sources */,
+				1850412C254018380053BB2D /* InfoViewController.swift in Sources */,
 				8D94E08C24AF1D3600DBC46A /* LoginViewController.swift in Sources */,
 				8D0C5C3F25249822005B3A4E /* EventDetailModel.swift in Sources */,
 				8D673A5E2514840D00585AF9 /* TournamentContactDetailsTableViewCell.swift in Sources */,
