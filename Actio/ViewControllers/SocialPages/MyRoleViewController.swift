@@ -10,39 +10,56 @@ import UIKit
 
 class MyRoleViewController: UIViewController {
 
-        @IBOutlet weak var editProfileTableView: UITableView!
-        fileprivate var formData: [FormCellType]?
-
+    @IBOutlet weak var editProfileTableView: UITableView!
+    fileprivate var formData: [FormCellType]?
+    var myRoleData: ProfileMaster?
+    var getProfileData: GetProfile?
+    private let service = DependencyProvider.shared.networkService
         
         override func viewDidLoad() {
             super.viewDidLoad()
-            
+            myRoleProfile()
+            self.formData = self.prepareFormData()
             editProfileTableView.delegate = self
             editProfileTableView.dataSource = self
             
             editProfileTableView.register(SwitchTableViewCell.self, forCellReuseIdentifier: SwitchTableViewCell.reuseId)
             editProfileTableView.register(TextPickerTableViewCell.self, forCellReuseIdentifier: TextPickerTableViewCell.reuseId)
             editProfileTableView.register(TextEditTableViewCell.self, forCellReuseIdentifier: TextEditTableViewCell.reuseId)
-            editProfileTableView.register(AcademicYearTableViewCell.self, forCellReuseIdentifier: AcademicYearTableViewCell.reuseId)
-            editProfileTableView.register(SportsPlayTableViewCell.self, forCellReuseIdentifier: SportsPlayTableViewCell.reuseId)
-            editProfileTableView.register(SportsCoachTableViewCell.self, forCellReuseIdentifier: SportsCoachTableViewCell.reuseId)
             editProfileTableView.register(FootnoteButtonTableViewCell.self, forCellReuseIdentifier: FootnoteButtonTableViewCell.reuseId)
             self.editProfileTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
-            self.formData = prepareFormData()
+            editProfileTableView.contentInset = .zero
             editProfileTableView.reloadData()
 
+        }
+    
+        private func getProfile() {
+            service.post(getProfileUrl, parameters: nil, onView: view) { (response: GetProfileDataResponse) in
+                self.getProfileData = response.profile
+                self.editProfileTableView.reloadData()
+            }
+        }
+
+        private func myRoleProfile() {
+            service.post(masterProfileUrl, parameters: nil, onView: view) { (response: ProfileMasterResponse) in
+                self.myRoleData = response.master
+                self.formData = self.prepareFormData()
+                
+            }
         }
         
         private func prepareFormData() -> [FormCellType] {
             
-            var allInstitution = [String]()
-            var allClass = [String]()
-            var allStream = [String]()
-            var allDivision = [String]()
-            var allCountry = [String]()
-            var allState = [String]()
-            var allCity = [String]()
-            var allCoach = [String]()
+            let states = self.myRoleData?.state?.map({ (state) -> String in
+                return state.state ?? ""
+            }) ?? []
+            let institution = self.myRoleData?.institute?.map({ (institute) -> String in
+                return institute.instituteName ?? ""
+            }) ?? []
+            let country = self.myRoleData?.country?.map({ (country) -> String in
+                return country.country ?? ""
+            }) ?? []
+            
 
             let studentString = NSMutableAttributedString(string: "Are you student at school/university?", attributes: [NSAttributedString.Key.font : AppFont.PoppinsRegular(size: 15)])
             let coachingString = NSMutableAttributedString(string: "Do you conduct coaching?", attributes: [NSAttributedString.Key.font : AppFont.PoppinsRegular(size: 15)])
@@ -51,23 +68,21 @@ class MyRoleViewController: UIViewController {
            
             let formData: [FormCellType] = [
                 .toggle(ToggleViewModel(key: "student", contextText: studentString, defaultValue: false)),
-                .textPicker(TextPickerModel(key: "institution", textValue:"", allValues: allInstitution, contextText: "I am studying at",placeHolder: "Select Institution")),
+                .textPicker(TextPickerModel(key: "institute", textValue:"", allValues: institution, contextText: "I am studying at",placeHolder: "Select Institution")),
                 .academic,
-                .textPicker(TextPickerModel(key: "class", textValue:"", allValues: allClass, contextText: "Class",placeHolder: "Select Class")),
-                .textPicker(TextPickerModel(key: "stream", textValue:"", allValues: allStream, contextText: "Stream",placeHolder: "Select Stream")),
-                .textPicker(TextPickerModel(key: "divison", textValue:"", allValues: allDivision, contextText: "Divison",placeHolder: "Select Divison")),
-                .textPicker(TextPickerModel(key: "country", textValue:"", allValues: allCountry, contextText: "Country",placeHolder: "Select Country")),
-                .textPicker(TextPickerModel(key: "state", textValue:"", allValues: allState, contextText: "State",placeHolder: "Select State")),
-                .textPicker(TextPickerModel(key: "city", textValue:"", allValues: allCity, contextText: "City",placeHolder: "Select City")),
+                .textPicker(TextPickerModel(key: "class", textValue:"", allValues: [], contextText: "Class",placeHolder: "Select Class")),
+                .textPicker(TextPickerModel(key: "stream", textValue:"", allValues: [], contextText: "Stream",placeHolder: "Select Stream")),
+                .textPicker(TextPickerModel(key: "divison", textValue:"", allValues: [], contextText: "Divison",placeHolder: "Select Divison")),
+                .textPicker(TextPickerModel(key: "country", textValue:"", allValues: country, contextText: "Country",placeHolder: "Select Country")),
+                .textPicker(TextPickerModel(key: "state", textValue:"", allValues: states, contextText: "State",placeHolder: "Select State")),
+                .textPicker(TextPickerModel(key: "city", textValue:"", allValues: [], contextText: "City",placeHolder: "Select City")),
                 .textEdit(TextEditModel(key: "postalcode", textValue: "", contextText: "Postal Code", placeHolder: "Postal Code", isSecure: false)),
-                .sportsCoach,
+                .sportsPlay,
                 .button("+ Add Another sport you play"),
+                .sportsCoach,
                 .toggle(ToggleViewModel(key: "coach", contextText: coachingString, defaultValue: false)),
                 .toggle(ToggleViewModel(key: "sponser", contextText: sponserString, defaultValue: false)),
                 .toggle(ToggleViewModel(key: "organize", contextText: organizeString, defaultValue: false)),
-                .sportsPlay
-            
-                
               ]
              return formData
         }
@@ -116,13 +131,11 @@ class MyRoleViewController: UIViewController {
                 textPickerCell.delegate = self
                 cell = textPickerCell
                 
-            case .button(let title):
-                guard let buttonCell = tableView.dequeueReusableCell(withIdentifier: FootnoteButtonTableViewCell.reuseId, for: indexPath) as? FootnoteButtonTableViewCell else {
+            case .button( _):
+                guard let addCell = tableView.dequeueReusableCell(withIdentifier: AddAnotherSportTableViewCell.reuseId, for: indexPath) as? AddAnotherSportTableViewCell else {
                     return UITableViewCell()
                 }
-                
-                buttonCell.configure(title: title, delegate: self)
-                cell = buttonCell
+                cell = addCell
             case .sportsPlay:
                 guard let playCell = tableView.dequeueReusableCell(withIdentifier: SportsPlayTableViewCell.reuseId, for: indexPath) as? SportsPlayTableViewCell else {
                     return UITableViewCell()

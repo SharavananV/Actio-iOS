@@ -33,48 +33,50 @@ class InfoViewController: UIViewController {
         infoTableView.register(DatePickerTableViewCell.self, forCellReuseIdentifier: DatePickerTableViewCell.reuseId)
         infoTableView.register(JustTextTableViewCell.self, forCellReuseIdentifier: JustTextTableViewCell.reuseId)
         infoTableView.register(ImagePickerTableViewCell.self, forCellReuseIdentifier: ImagePickerTableViewCell.reuseId)
-
+        self.setObservers()
         self.infoTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         self.formData = prepareFormData()
         infoTableView.reloadData()
     }
+    
+    private func setObservers() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
+    
+    @objc func adjustForKeyboard(notification: Notification) {
+        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+
+        let keyboardScreenEndFrame = keyboardValue.cgRectValue
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+
+        if notification.name == UIResponder.keyboardWillHideNotification {
+            infoTableView.contentInset = .zero
+        } else {
+            infoTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height-view.safeAreaInsets.bottom, right: 0)
+        }
+        
+        infoTableView.scrollIndicatorInsets = infoTableView.contentInset
+    }
+
      
     private func prepareFormData() -> [FormCellType] {
-        var allCountries = [String]()
-        var allGender = [String]()
-        var allIDCards = [String]()
-        var genderString = ""
-        var startDate : Date = Date()
-        
-        if let masterData = masterData {
-            allCountries = masterData.country?.compactMap({
-                return "(\($0.alias ?? "")) \($0.code ?? "")"
-            }) ?? []
-            
-            allIDCards = masterData.proof?.map({
-                return $0.proof ?? ""
-            }) ?? []
-            
-            allGender = masterData.gender?.map({
-                return ($0.gender ?? "")
-            }) ?? []
-            
-        }
-
         
         let formData: [FormCellType] = [
-            .textEdit(TextEditModel(key: "fullName", textValue: userDetails?.fullName, contextText: "Full Name", placeHolder: "Full Name", isSecure: false)),
-            .textPicker(TextPickerModel(key: "isdCode", textValue: userDetails?.isdCode, allValues: allCountries, contextText: "Country Code")),
+            .textEdit(TextEditModel(key: "fullName", textValue: userDetails?.fullName, contextText: "Full Name", placeHolder: "Full Name", isSecure: false,enabled: false)),
+            .textEdit(TextEditModel(key: "isdCode", textValue: userDetails?.isdCode, contextText: "Country Code", placeHolder: "Country Code", isSecure: false,enabled: false)),
             .textEdit(TextEditModel(key: "mobileNumber", textValue: userDetails?.mobileNumber, contextText: "Mobile Number", placeHolder: "Mobile Number", keyboardType: .phonePad, isSecure: false)),
-            .textPicker(TextPickerModel(key: "gender", textValue: genderString, allValues: allGender, contextText: "Gender", placeHolder: "Select Gender")),
+            .textEdit(TextEditModel(key: "gender", textValue: userDetails?.gender, contextText: "Gender", placeHolder: "Select Gender", isSecure: false,enabled: false)),
             .textEdit(TextEditModel(key: "emailID", textValue: userDetails?.emailID, contextText: "Email ID", placeHolder: "Email ID", keyboardType: .emailAddress, isSecure: false)),
-            .date(DatePickerModel(key: "dob", minDate: nil, maxDate: Date(), dateValue: startDate, contextText: "Date of Birth (dd-mm-yyyy)")),
-            .textEdit(TextEditModel(key: "userName", textValue: userDetails?.username, contextText: "Username", placeHolder: "Username allows a-z,0-9,_,.")),
-            .textPicker(TextPickerModel(key: "idType", allValues: allIDCards, contextText: "ID Type", placeHolder: "Select ID Type")),
+            .textEdit(TextEditModel(key: "dob", textValue: userDetails?.dob, contextText: "Date of Birth (dd-mm-yyyy)", placeHolder: "Date of Birth (dd-mm-yyyy)", keyboardType: .emailAddress, isSecure: false,enabled: false)),
+            .textEdit(TextEditModel(key: "userName", textValue: userDetails?.username, contextText: "Username", placeHolder: "Username allows a-z,0-9,_,.",enabled: true)),
+            .textEdit(TextEditModel(key: "idType", textValue: userDetails?.idType, contextText: "ID Type", placeHolder: "Select ID Type", isSecure: false,enabled: false)),
             .textEdit(TextEditModel(key: "idNumber", contextText: "ID Number", placeHolder: "ID Type Number", keyboardType: .numberPad, isSecure: false)),
             .text("Upload ID", .natural),
             .imagePicker(ImagePickerModel(key: "frontImage", titleText: "Click here to upload Front Side Image", contextText: "Front Image")),
             .imagePicker(ImagePickerModel(key: "backImage", titleText: "Click here to upload Back Side Image", contextText: "Back Image")),
+            .button("UPDATE")
         ]
         return formData
 
@@ -151,10 +153,15 @@ extension InfoViewController : UITableViewDataSource,UITableViewDelegate {
         
         return cell ?? UITableViewCell()
     }
+    
+}
 
-    }
     
 extension InfoViewController : FootnoteButtonDelegate, CellDataFetchProtocol, TextPickerDelegate, SwitchCellDelegate, SegmentCellDelegate,ImagePickerCellDelegate {
+    func didPickText(_ key: String, index: Int) {
+        print("did pick text")
+    }
+    
     func pickImage(_ key: String, cell: ImagePickerTableViewCell) {
         self.lastPickedCell = cell
     }
@@ -167,37 +174,6 @@ extension InfoViewController : FootnoteButtonDelegate, CellDataFetchProtocol, Te
         print("valueChanged")
         
     }
-    
-    func didPickText(_ key: String, index: Int) {
-    }
-    
-    private func updateCellFormData(key: String, value: String) {
-        // Update form data
-        let cellData = self.formData?.first(where: { (cellType) -> Bool in
-            switch cellType {
-            case .textEdit(let model):
-                return model.key == key
-            case .date(let model):
-                return model.key == key
-            case .textPicker(let model):
-                return model.key == key
-            default:
-                return false
-            }
-        })
-        
-        switch cellData {
-        case .textEdit(let model):
-            model.textValue = value
-        case .date(let model):
-            model.dateValue = value.toDate
-        case .textPicker(let model):
-            return model.textValue = value
-        default:
-            break;
-        }
-    }
-
     
     func toggleValueChanged(_ key: String, value: Bool) {
         print("toggleValueChanged xcx")

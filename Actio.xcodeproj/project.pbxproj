@@ -39,6 +39,9 @@
 		185A9682253EE8BA009566E9 /* AcademicYearTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185A9681253EE8BA009566E9 /* AcademicYearTableViewCell.swift */; };
 		185D2860252F20E300FD3D81 /* TournamentMasterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185D285F252F20E200FD3D81 /* TournamentMasterModel.swift */; };
 		185D287825307D3A00FD3D81 /* TournamentFilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185D287725307D3900FD3D81 /* TournamentFilterModel.swift */; };
+		186EBF092541765700665E9B /* GetProfileDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186EBF082541765700665E9B /* GetProfileDataModel.swift */; };
+		186EBF0C2541953700665E9B /* AddAnotherSportTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186EBF0B2541953600665E9B /* AddAnotherSportTableViewCell.swift */; };
+		186EBF0F254197C300665E9B /* ProfileMaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186EBF0E254197C300665E9B /* ProfileMaster.swift */; };
 		1880B020251364C2006BE848 /* NetworkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1880B01F251364C2006BE848 /* NetworkRouter.swift */; };
 		188B699D25231138000F6030 /* AddEditFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188B699C25231137000F6030 /* AddEditFeedViewController.swift */; };
 		18A4A11D25388616004C81BC /* FeedWithoutImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A4A11C25388616004C81BC /* FeedWithoutImageTableViewCell.swift */; };
@@ -218,6 +221,9 @@
 		185A9681253EE8BA009566E9 /* AcademicYearTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcademicYearTableViewCell.swift; sourceTree = "<group>"; };
 		185D285F252F20E200FD3D81 /* TournamentMasterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentMasterModel.swift; sourceTree = "<group>"; };
 		185D287725307D3900FD3D81 /* TournamentFilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TournamentFilterModel.swift; sourceTree = "<group>"; };
+		186EBF082541765700665E9B /* GetProfileDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProfileDataModel.swift; sourceTree = "<group>"; };
+		186EBF0B2541953600665E9B /* AddAnotherSportTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAnotherSportTableViewCell.swift; sourceTree = "<group>"; };
+		186EBF0E254197C300665E9B /* ProfileMaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMaster.swift; sourceTree = "<group>"; };
 		1880B01F251364C2006BE848 /* NetworkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRouter.swift; sourceTree = "<group>"; };
 		188B699C25231137000F6030 /* AddEditFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditFeedViewController.swift; sourceTree = "<group>"; };
 		18A4A11C25388616004C81BC /* FeedWithoutImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedWithoutImageTableViewCell.swift; sourceTree = "<group>"; };
@@ -616,6 +622,7 @@
 				185A967B253EE853009566E9 /* SportsPlayTableViewCell.swift */,
 				185A967E253EE869009566E9 /* SportsCoachTableViewCell.swift */,
 				185A9681253EE8BA009566E9 /* AcademicYearTableViewCell.swift */,
+				186EBF0B2541953600665E9B /* AddAnotherSportTableViewCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -624,8 +631,10 @@
 			isa = PBXGroup;
 			children = (
 				8D0F74A72530536200200C2B /* FindFriendModel.swift */,
+				186EBF082541765700665E9B /* GetProfileDataModel.swift */,
 				8D0F75C92534701E00200C2B /* ChatItem.swift */,
 				8D0F75EC2536D0EB00200C2B /* Conversation.swift */,
+				186EBF0E254197C300665E9B /* ProfileMaster.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1076,6 +1085,7 @@
 				188B699D25231138000F6030 /* AddEditFeedViewController.swift in Sources */,
 				8D9C07A5250B889300514692 /* TournamentNearMeModel.swift in Sources */,
 				8D0F74A82530536200200C2B /* FindFriendModel.swift in Sources */,
+				186EBF0F254197C300665E9B /* ProfileMaster.swift in Sources */,
 				18F6A07224B57D18000ACDF1 /* SelfSizingTextView.swift in Sources */,
 				18567D7E253D7BCB0034ACE8 /* EventsAssociatedCollectionViewCell.swift in Sources */,
 				8DA3055A24BC310D0090142B /* AcceptRejectRequestViewController.swift in Sources */,
@@ -1113,6 +1123,7 @@
 				8D47F0E625397FC30013900C /* ZoomImageView.swift in Sources */,
 				1850412F2540185E0053BB2D /* MyRoleViewController.swift in Sources */,
 				8D673A7A2521E83B00585AF9 /* EventFeedModel.swift in Sources */,
+				186EBF092541765700665E9B /* GetProfileDataModel.swift in Sources */,
 				8D94E07F24AF1D0A00DBC46A /* Actio.xcdatamodeld in Sources */,
 				8DC1BD2625259A8F005C55DE /* NotificationListViewController.swift in Sources */,
 				8D21855D24B6E383002688A8 /* OtpViewController.swift in Sources */,
@@ -1139,6 +1150,7 @@
 				8DA5D456250A4AF1003EAB6B /* TournamentFavoriteCollectionViewCell.swift in Sources */,
 				8D0C5C3625246DBB005B3A4E /* EventListModel.swift in Sources */,
 				8D0F74BE25342E6E00200C2B /* ChatViewController.swift in Sources */,
+				186EBF0C2541953700665E9B /* AddAnotherSportTableViewCell.swift in Sources */,
 				8D673A772521A67C00585AF9 /* FeedDetailsViewController.swift in Sources */,
 				8DDBB75B252D90F000D74087 /* EventDetailSummaryCell.swift in Sources */,
 				8DC1BD2C2525A0E6005C55DE /* NotificationModel.swift in Sources */,
