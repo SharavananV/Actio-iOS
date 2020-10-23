@@ -8,16 +8,64 @@
 
 import UIKit
 
-class SportsPlayTableViewCell: UITableViewCell {
+protocol SportsCellDelegate : class {
+    func ValueSelectedChage(sender:SportsPlayTableViewCell ,Id:String ,selectedCell:String)
+}
+
+class SportsPlayTableViewCell: UITableViewCell,UIPickerViewDelegate, UIPickerViewDataSource,UITextFieldDelegate {
 
     @IBOutlet weak var practiceHoursTextField: UITextField!
     @IBOutlet weak var playerSinceTextField: UITextField!
     @IBOutlet weak var selectSportTextField: UITextField!
     static let reuseId = "SportsPlayTableViewCell"
+    var sportArrayValues: [String]?
+    weak var cellDelegate: SportsCellDelegate?
+    var selectedCountry: String?
+    let pickerView = UIPickerView()
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        sportArrayValues = ["one","Two"]
+        
+        practiceHoursTextField.delegate = self
+        playerSinceTextField.delegate = self
+        selectSportTextField.delegate = self
+        selectSportTextField.inputView = pickerView
+
     }
+    
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        if(self.selectSportTextField != nil && self.selectSportTextField == textField) {
+            let sportTextValue = self.selectSportTextField?.text?.isEmpty == false ? self.selectSportTextField?.text : self.sportArrayValues?[0]
+            selectSportTextField.text = sportTextValue
+        }
+        self.pickerView.reloadAllComponents()
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return sportArrayValues?.count ?? 0
+    }
+
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return sportArrayValues?[row]
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        selectedCountry = sportArrayValues?[row]
+        selectSportTextField.text = selectedCountry
+        print(selectedCountry,"selectedCountry")
+    }
+    
 
 }

@@ -16,7 +16,7 @@ struct ProfileMasterResponse: ResponseType {
 }
 
 // MARK: - Master
-struct ProfileMaster: Codable {
+class ProfileMaster: Codable {
     let country: [ProfileCountry]?
     let idTypes: [ProfileIDType]?
     let state: [ProfileState]?
@@ -68,5 +68,44 @@ struct ProfileState: Codable {
         case countryID = "country_id"
         case code
     }
+}
+class ProfileRoleModel: Codable {
+    
+    internal init() {}
+    
+    var fromYear, toYear: String?
+    var instituteID, classID, streamID,divisonID,countryID,stateID,cityID: String?
+    var isStudent: Bool?
+    var isCoach: Bool?
+    var isSponser: Bool?
+    var isOrganizer: Bool?
+    var postalCode: String?
+    
+    enum CodingKeys: String, CodingKey {
+        
+        case fromYear, toYear, instituteID, classID, streamID, divisonID, countryID, stateID, cityID,isStudent, isCoach, isSponser, isOrganizer, postalCode
+    }
+    
+    func parameters() -> [String: Any] {
+        return [
+            CodingKeys.fromYear.rawValue: fromYear ?? "",
+            CodingKeys.toYear.rawValue : toYear ?? "",
+            CodingKeys.instituteID.rawValue : instituteID ?? "",
+            CodingKeys.classID.rawValue : classID ?? "",
+            CodingKeys.streamID.rawValue : streamID ?? "",
+            CodingKeys.divisonID.rawValue : divisonID ?? "",
+            CodingKeys.countryID.rawValue : countryID ?? "",
+            CodingKeys.stateID.rawValue : stateID ?? "",
+            CodingKeys.cityID.rawValue : cityID ?? "",
+            CodingKeys.isStudent.rawValue : isStudent ?? "",
+            CodingKeys.isCoach.rawValue : isCoach ?? "",
+            CodingKeys.isSponser.rawValue : isSponser ?? "",
+            CodingKeys.isOrganizer.rawValue : isOrganizer ?? "",
+            CodingKeys.postalCode.rawValue : postalCode ?? "",
+        ]
+    }
+    
+
+  
 }
 

@@ -15,7 +15,10 @@ class MyRoleViewController: UIViewController {
     var myRoleData: ProfileMaster?
     var getProfileData: GetProfile?
     private let service = DependencyProvider.shared.networkService
-        
+    var sportArrayValues: [String]?
+    var stateArrayValues: [String]?
+    var cityArrayValues: [String]?
+
         override func viewDidLoad() {
             super.viewDidLoad()
             myRoleProfile()
@@ -43,6 +46,9 @@ class MyRoleViewController: UIViewController {
         private func myRoleProfile() {
             service.post(masterProfileUrl, parameters: nil, onView: view) { (response: ProfileMasterResponse) in
                 self.myRoleData = response.master
+                self.sportArrayValues = self.myRoleData?.sports?.map({$0.sports ?? ""})
+                self.stateArrayValues = self.myRoleData?.state?.map({$0.state ?? ""})
+                self.cityArrayValues = self.myRoleData?.city
                 self.formData = self.prepareFormData()
                 
             }
@@ -79,10 +85,12 @@ class MyRoleViewController: UIViewController {
                 .textEdit(TextEditModel(key: "postalcode", textValue: "", contextText: "Postal Code", placeHolder: "Postal Code", isSecure: false)),
                 .sportsPlay,
                 .button("+ Add Another sport you play"),
-                .sportsCoach,
                 .toggle(ToggleViewModel(key: "coach", contextText: coachingString, defaultValue: false)),
+                .sportsCoach,
                 .toggle(ToggleViewModel(key: "sponser", contextText: sponserString, defaultValue: false)),
+                .textEdit(TextEditModel(key: "sponsership", textValue: "", contextText: "About Sponsorship", placeHolder: "Enter about sponsorship", isSecure: false)),
                 .toggle(ToggleViewModel(key: "organize", contextText: organizeString, defaultValue: false)),
+                .textEdit(TextEditModel(key: "organizeEvents", textValue: "", contextText: "About Organizing Events", placeHolder: "Enter about organizing events", isSecure: false)),
               ]
              return formData
         }
@@ -140,11 +148,15 @@ class MyRoleViewController: UIViewController {
                 guard let playCell = tableView.dequeueReusableCell(withIdentifier: SportsPlayTableViewCell.reuseId, for: indexPath) as? SportsPlayTableViewCell else {
                     return UITableViewCell()
                 }
+                playCell.sportArrayValues = self.sportArrayValues
                 cell = playCell
             case .sportsCoach:
                 guard let coachCell = tableView.dequeueReusableCell(withIdentifier: SportsCoachTableViewCell.reuseId, for: indexPath) as? SportsCoachTableViewCell else {
                     return UITableViewCell()
                 }
+                coachCell.sportArrayValues = self.sportArrayValues
+                coachCell.stateArrayValues = self.stateArrayValues
+                coachCell.cityArrayValues = self.cityArrayValues
                 cell = coachCell
             case .academic:
                 guard let academicCell = tableView.dequeueReusableCell(withIdentifier: AcademicYearTableViewCell.reuseId, for: indexPath) as? AcademicYearTableViewCell else {
@@ -157,8 +169,6 @@ class MyRoleViewController: UIViewController {
             
             return cell ?? UITableViewCell()
         }
-        
-        
         
     }
     extension MyRoleViewController : FootnoteButtonDelegate, CellDataFetchProtocol, TextPickerDelegate, SwitchCellDelegate, SegmentCellDelegate {
