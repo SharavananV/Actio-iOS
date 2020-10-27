@@ -20,10 +20,74 @@ class ProfileMaster: Codable {
     let country: [ProfileCountry]?
     let idTypes: [ProfileIDType]?
     let state: [ProfileState]?
-    let city: [ String]?
+    let stateCity: [StateCity]?
     let sports: [Sport]?
     let institute: [ProfileInstitute]?
-    let instituteClass, instituteStream, institutedivision: [String]?
+    let instituteClass : [InstituteClass]?
+    let instituteStream : [InstituteStream]?
+    let institutedivision: [Institutedivision]?
+}
+// MARK: - InstituteClass
+struct InstituteClass: Codable {
+    let id: Int?
+    let instituteClass: String?
+    let instituteID: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case instituteClass = "class"
+        case instituteID = "institute_id"
+    }
+}
+
+// MARK: - InstituteStream
+struct InstituteStream: Codable {
+    let id: Int?
+    let stream: String?
+    let classID: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case id, stream
+        case classID = "class_id"
+    }
+}
+// MARK: - StateCity
+struct StateCity: Codable {
+    let stateID: Int?
+    let stateName: String?
+    let city: [ProfileCity]?
+
+    enum CodingKeys: String, CodingKey {
+        case stateID = "state_id"
+        case stateName = "state_name"
+        case city
+    }
+}
+
+// MARK: - City
+struct ProfileCity: Codable {
+    let cityID: Int?
+    let cityName: String?
+    let stateID: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case cityID = "city_id"
+        case cityName = "city_name"
+        case stateID = "state_id"
+    }
+}
+
+
+// MARK: - Institutedivision
+struct Institutedivision: Codable {
+    let id: Int?
+    let division: String?
+    let streamID: Int?
+
+    enum CodingKeys: String, CodingKey {
+        case id, division
+        case streamID = "stream_id"
+    }
 }
 
 // MARK: - Country
@@ -104,8 +168,5 @@ class ProfileRoleModel: Codable {
             CodingKeys.postalCode.rawValue : postalCode ?? "",
         ]
     }
-    
-
-  
 }
 

@@ -14,18 +14,24 @@ class MyRoleViewController: UIViewController {
     fileprivate var formData: [FormCellType]?
     var myRoleData: ProfileMaster?
     var getProfileData: GetProfile?
+    var masterData : MasterData?
     private let service = DependencyProvider.shared.networkService
     var sportArrayValues: [String]?
     var stateArrayValues: [String]?
     var cityArrayValues: [String]?
+    var selectedArrayValues: String?
+
+    
+    var profileRoleModel = ProfileRoleModel()
+
 
         override func viewDidLoad() {
             super.viewDidLoad()
-            myRoleProfile()
+            getProfile()
+
             self.formData = self.prepareFormData()
             editProfileTableView.delegate = self
             editProfileTableView.dataSource = self
-            
             editProfileTableView.register(SwitchTableViewCell.self, forCellReuseIdentifier: SwitchTableViewCell.reuseId)
             editProfileTableView.register(TextPickerTableViewCell.self, forCellReuseIdentifier: TextPickerTableViewCell.reuseId)
             editProfileTableView.register(TextEditTableViewCell.self, forCellReuseIdentifier: TextEditTableViewCell.reuseId)
@@ -39,60 +45,123 @@ class MyRoleViewController: UIViewController {
         private func getProfile() {
             service.post(getProfileUrl, parameters: nil, onView: view) { (response: GetProfileDataResponse) in
                 self.getProfileData = response.profile
+                self.myRoleProfile()
                 self.editProfileTableView.reloadData()
             }
         }
 
         private func myRoleProfile() {
-            service.post(masterProfileUrl, parameters: nil, onView: view) { (response: ProfileMasterResponse) in
+            let parameters = [ "instituteID":self.getProfileData?.institute?.instituteID ?? "" , "classID": self.getProfileData?.institute?.classID ?? "" , "streamID": self.getProfileData?.institute?.streamID ?? "" ,"countryID":self.getProfileData?.institute?.countryID ?? "" ,"stateID":"","stateCity":true] as [String : Any]
+            service.post(masterProfileUrl, parameters: parameters, onView: view) { (response: ProfileMasterResponse) in
                 self.myRoleData = response.master
                 self.sportArrayValues = self.myRoleData?.sports?.map({$0.sports ?? ""})
                 self.stateArrayValues = self.myRoleData?.state?.map({$0.state ?? ""})
-                self.cityArrayValues = self.myRoleData?.city
+                self.cityArrayValues = self.myRoleData?.stateCity?.map({$0.stateName ?? ""})
                 self.formData = self.prepareFormData()
-                
             }
         }
         
         private func prepareFormData() -> [FormCellType] {
-            
+
             let states = self.myRoleData?.state?.map({ (state) -> String in
                 return state.state ?? ""
             }) ?? []
+            let selectedState = self.myRoleData?.state?.first(where: {
+                String($0.id ?? 0) == self.profileRoleModel.stateID
+            })
+
             let institution = self.myRoleData?.institute?.map({ (institute) -> String in
                 return institute.instituteName ?? ""
             }) ?? []
+            let selectedinstitution = self.myRoleData?.institute?.first(where: {
+                String($0.id ?? 0) == self.profileRoleModel.instituteID
+            })
+            
+            let roleclass = self.myRoleData?.instituteClass?.map({ (instituteClass) -> String in
+                return instituteClass.instituteClass ?? ""
+            }) ?? []
+            let selectedroleclass = self.myRoleData?.instituteClass?.first(where: {
+                String($0.id ?? 0) == self.profileRoleModel.instituteID
+            })
+            
             let country = self.myRoleData?.country?.map({ (country) -> String in
                 return country.country ?? ""
             }) ?? []
             
+            let selectedCountry = self.myRoleData?.country?.first(where: {
+                String($0.id ?? 0) == self.profileRoleModel.countryID
+            })
+            
+            let stateCity = self.myRoleData?.stateCity?.map({ (stateCity) -> String in
+                return stateCity.stateName ?? ""
+            }) ?? []
+            
+            let selectedstateCity = self.myRoleData?.stateCity?.first(where: {
+                String($0.stateID ?? 0) == self.profileRoleModel.stateID
+            })
+            
+            let stream = self.myRoleData?.instituteStream?.map({ (instituteStream) -> String in
+                return instituteStream.stream ?? ""
+            }) ?? []
+            
+            let selectedstream = self.myRoleData?.instituteStream?.first(where: {
+                String($0.id ?? 0) == self.profileRoleModel.streamID
+            })
+            let divison = self.myRoleData?.institutedivision?.map({ (institutedivision) -> String in
+                return institutedivision.division ?? ""
+            }) ?? []
+            
+            let selecteddivison = self.myRoleData?.institutedivision?.first(where: {
+                String($0.id ?? 0) == self.profileRoleModel.divisonID
+            })
 
             let studentString = NSMutableAttributedString(string: "Are you student at school/university?", attributes: [NSAttributedString.Key.font : AppFont.PoppinsRegular(size: 15)])
             let coachingString = NSMutableAttributedString(string: "Do you conduct coaching?", attributes: [NSAttributedString.Key.font : AppFont.PoppinsRegular(size: 15)])
             let sponserString = NSMutableAttributedString(string: "Do you wish to sponser any tournament?", attributes: [NSAttributedString.Key.font : AppFont.PoppinsRegular(size: 15)])
             let organizeString = NSMutableAttributedString(string: "Do you wish to organize Events?", attributes: [NSAttributedString.Key.font : AppFont.PoppinsRegular(size: 15)])
            
-            let formData: [FormCellType] = [
-                .toggle(ToggleViewModel(key: "student", contextText: studentString, defaultValue: false)),
-                .textPicker(TextPickerModel(key: "institute", textValue:"", allValues: institution, contextText: "I am studying at",placeHolder: "Select Institution")),
+            var formData: [FormCellType] = [
+                .toggle(ToggleViewModel(key: "student", contextText: studentString, defaultValue: (profileRoleModel.isStudent == true))),
+                .textPicker(TextPickerModel(key: "institute", textValue:selectedinstitution?.instituteName, allValues: institution, contextText: "I am studying at",placeHolder: "Select Institution")),
                 .academic,
-                .textPicker(TextPickerModel(key: "class", textValue:"", allValues: [], contextText: "Class",placeHolder: "Select Class")),
-                .textPicker(TextPickerModel(key: "stream", textValue:"", allValues: [], contextText: "Stream",placeHolder: "Select Stream")),
-                .textPicker(TextPickerModel(key: "divison", textValue:"", allValues: [], contextText: "Divison",placeHolder: "Select Divison")),
-                .textPicker(TextPickerModel(key: "country", textValue:"", allValues: country, contextText: "Country",placeHolder: "Select Country")),
-                .textPicker(TextPickerModel(key: "state", textValue:"", allValues: states, contextText: "State",placeHolder: "Select State")),
-                .textPicker(TextPickerModel(key: "city", textValue:"", allValues: [], contextText: "City",placeHolder: "Select City")),
+                .textPicker(TextPickerModel(key: "class", textValue:selectedroleclass?.instituteClass, allValues: roleclass, contextText: "Class",placeHolder: "Select Class")),
+                .textPicker(TextPickerModel(key: "stream", textValue:selectedstream?.stream, allValues: stream, contextText: "Stream",placeHolder: "Select Stream")),
+                .textPicker(TextPickerModel(key: "divison", textValue:selecteddivison?.division, allValues: divison, contextText: "Divison",placeHolder: "Select Divison")),
+                .textPicker(TextPickerModel(key: "country", textValue:selectedCountry?.country, allValues: country, contextText: "Country",placeHolder: "Select Country")),
+                .textPicker(TextPickerModel(key: "state", textValue:selectedState?.state, allValues: states, contextText: "State",placeHolder: "Select State")),
+                .textPicker(TextPickerModel(key: "city", textValue:selectedstateCity?.stateName, allValues: stateCity, contextText: "City",placeHolder: "Select City")),
                 .textEdit(TextEditModel(key: "postalcode", textValue: "", contextText: "Postal Code", placeHolder: "Postal Code", isSecure: false)),
                 .sportsPlay,
                 .button("+ Add Another sport you play"),
-                .toggle(ToggleViewModel(key: "coach", contextText: coachingString, defaultValue: false)),
-                .sportsCoach,
-                .toggle(ToggleViewModel(key: "sponser", contextText: sponserString, defaultValue: false)),
-                .textEdit(TextEditModel(key: "sponsership", textValue: "", contextText: "About Sponsorship", placeHolder: "Enter about sponsorship", isSecure: false)),
-                .toggle(ToggleViewModel(key: "organize", contextText: organizeString, defaultValue: false)),
-                .textEdit(TextEditModel(key: "organizeEvents", textValue: "", contextText: "About Organizing Events", placeHolder: "Enter about organizing events", isSecure: false)),
+                .toggle(ToggleViewModel(key: "coach", contextText: coachingString, defaultValue: (profileRoleModel.isCoach == true))),
+                .toggle(ToggleViewModel(key: "sponser", contextText: sponserString, defaultValue: (profileRoleModel.isSponser == true))),
+                .toggle(ToggleViewModel(key: "organize", contextText: organizeString, defaultValue: (profileRoleModel.isOrganizer == true))),
               ]
-             return formData
+            if profileRoleModel.isCoach == true {
+                let coachData: [FormCellType] = [
+                    .sportsCoach,
+                    .button("+ Add Another sport you coach")
+                ]
+                formData.insert(contentsOf: coachData, at: 13)
+            }
+            if profileRoleModel.isSponser == true {
+                let sponserData: [FormCellType] = [
+                    .textEdit(TextEditModel(key: "sponsership", textValue: "", contextText: "About Sponsorship", placeHolder: "Enter about sponsorship", isSecure: false))
+                ]
+                formData.insert(contentsOf: sponserData, at: 16)
+            }
+             if profileRoleModel.isOrganizer == true {
+                let organizerData: [FormCellType] = [
+                    .textEdit(TextEditModel(key: "organizeEvents", textValue: "", contextText: "About Organizing Events", placeHolder: "Enter about organizing events", isSecure: false))
+                ]
+                formData.insert(contentsOf: organizerData, at: 18)
+            }
+            self.formData = formData
+            UIView.setAnimationsEnabled(false)
+            self.editProfileTableView.beginUpdates()
+            self.editProfileTableView.reloadSections(NSIndexSet(index: 0) as IndexSet, with: .none)
+            self.editProfileTableView.endUpdates()
+            return formData
         }
 
     }
@@ -182,15 +251,44 @@ class MyRoleViewController: UIViewController {
         }
         
         func didPickText(_ key: String, index: Int) {
-            print("something")
-            
+            switch key {
+            case "country":
+                if self.myRoleData?.country?.isEmpty == false, let countryId = self.myRoleData?.country?[index].id {
+                    self.profileRoleModel.countryID = String(countryId)
+                }
+            case "state":
+                if self.myRoleData?.state?.isEmpty == false, let stateId = self.myRoleData?.state?[index].id {
+                    self.profileRoleModel.stateID = String(stateId)
+                }
+            case "institute":
+                if self.myRoleData?.institute?.isEmpty == false, let instituteId = self.myRoleData?.institute?[index].id {
+                    self.profileRoleModel.instituteID = String(instituteId)
+                }
+            case "class":
+                if self.myRoleData?.instituteClass?.isEmpty == false, let instituteclassId = self.myRoleData?.instituteClass?[index].id {
+                    self.profileRoleModel.classID = String(instituteclassId)
+                }
+            default:
+                break
+            }
+
         }
         
         func toggleValueChanged(_ key: String, value: Bool) {
-            print("something")
-            
+            if key == "coach" {
+                profileRoleModel.isCoach = value
+                prepareFormData()
+            }
+            else if key == "sponser" {
+                profileRoleModel.isSponser = value
+                prepareFormData()
+
+            }
+            else if key == "organize" {
+                profileRoleModel.isOrganizer = value
+                prepareFormData()
+            }
         }
-        
         func segmentTapped(_ index: Int) {
             print("something")
             

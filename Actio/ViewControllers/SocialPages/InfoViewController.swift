@@ -65,13 +65,13 @@ class InfoViewController: UIViewController {
         
         let formData: [FormCellType] = [
             .textEdit(TextEditModel(key: "fullName", textValue: userDetails?.fullName, contextText: "Full Name", placeHolder: "Full Name", isSecure: false,enabled: false)),
-            .textEdit(TextEditModel(key: "isdCode", textValue: userDetails?.isdCode, contextText: "Country Code", placeHolder: "Country Code", isSecure: false,enabled: false)),
+            .textPicker(TextPickerModel(key: "isdCode", textValue:"", allValues: [], contextText: "Country Code",placeHolder: "Country Code")),
             .textEdit(TextEditModel(key: "mobileNumber", textValue: userDetails?.mobileNumber, contextText: "Mobile Number", placeHolder: "Mobile Number", keyboardType: .phonePad, isSecure: false)),
             .textEdit(TextEditModel(key: "gender", textValue: userDetails?.gender, contextText: "Gender", placeHolder: "Select Gender", isSecure: false,enabled: false)),
             .textEdit(TextEditModel(key: "emailID", textValue: userDetails?.emailID, contextText: "Email ID", placeHolder: "Email ID", keyboardType: .emailAddress, isSecure: false)),
             .textEdit(TextEditModel(key: "dob", textValue: userDetails?.dob, contextText: "Date of Birth (dd-mm-yyyy)", placeHolder: "Date of Birth (dd-mm-yyyy)", keyboardType: .emailAddress, isSecure: false,enabled: false)),
             .textEdit(TextEditModel(key: "userName", textValue: userDetails?.username, contextText: "Username", placeHolder: "Username allows a-z,0-9,_,.",enabled: true)),
-            .textEdit(TextEditModel(key: "idType", textValue: userDetails?.idType, contextText: "ID Type", placeHolder: "Select ID Type", isSecure: false,enabled: false)),
+            .textPicker(TextPickerModel(key: "isdCode", textValue:"", allValues: [], contextText: "ID Type",placeHolder: "Select ID Type")),
             .textEdit(TextEditModel(key: "idNumber", contextText: "ID Number", placeHolder: "ID Type Number", keyboardType: .numberPad, isSecure: false)),
             .text("Upload ID", .natural),
             .imagePicker(ImagePickerModel(key: "frontImage", titleText: "Click here to upload Front Side Image", contextText: "Front Image")),

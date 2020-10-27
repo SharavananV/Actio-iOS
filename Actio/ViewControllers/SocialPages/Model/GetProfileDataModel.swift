@@ -23,7 +23,7 @@ struct GetProfile: Codable {
     let institute: Institute?
     let play: [Play]?
     let isCoach: Bool?
-    let coaching: String?
+    let coaching = [String: String]()
     let isSponsor: Bool?
     let sponsorRemarks: String?
     let isOrganizer: Bool?
