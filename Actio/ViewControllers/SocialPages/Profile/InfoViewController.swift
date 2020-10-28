@@ -14,8 +14,11 @@ class InfoViewController: UIViewController {
     @IBOutlet weak var infoTableView: UITableView!
     fileprivate var formData: [FormCellType]?
     var userDetails: Friend?
-    var masterData: MasterData?
+    var masterData: ProfileMaster?
+    var profileRoleModel = ProfileRoleModel()
+    private lazy var imagePicker = ActioImagePicker(presentationController: self, delegate: self)
     private var lastPickedCell: ImagePickerTableViewCell?
+    private let service = DependencyProvider.shared.networkService
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,10 +37,20 @@ class InfoViewController: UIViewController {
         infoTableView.register(JustTextTableViewCell.self, forCellReuseIdentifier: JustTextTableViewCell.reuseId)
         infoTableView.register(ImagePickerTableViewCell.self, forCellReuseIdentifier: ImagePickerTableViewCell.reuseId)
         self.setObservers()
+        myRoleProfile()
         self.infoTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         self.formData = prepareFormData()
         infoTableView.reloadData()
     }
+    
+    private func myRoleProfile() {
+        
+        service.post(masterProfileUrl, parameters: nil, onView: view) { (response: ProfileMasterResponse) in
+            self.masterData = response.master
+            self.formData = self.prepareFormData()
+        }
+    }
+
     
     private func setObservers() {
         let notificationCenter = NotificationCenter.default
@@ -63,15 +76,22 @@ class InfoViewController: UIViewController {
      
     private func prepareFormData() -> [FormCellType] {
         
+        let allZipCodes = self.masterData?.country?.map({ (country) -> String in
+            return country.code ?? ""
+        }) ?? []
+        let allIdTypes = self.masterData?.idTypes?.map({ (idTypes) -> String in
+            return idTypes.proof ?? ""
+        }) ?? []
+        
         let formData: [FormCellType] = [
             .textEdit(TextEditModel(key: "fullName", textValue: userDetails?.fullName, contextText: "Full Name", placeHolder: "Full Name", isSecure: false,enabled: false)),
-            .textPicker(TextPickerModel(key: "isdCode", textValue:"", allValues: [], contextText: "Country Code",placeHolder: "Country Code")),
+            .textPicker(TextPickerModel(key: "isdCode", textValue:userDetails?.isdCode, allValues: allZipCodes, contextText: "Country Code",placeHolder: "Country Code")),
             .textEdit(TextEditModel(key: "mobileNumber", textValue: userDetails?.mobileNumber, contextText: "Mobile Number", placeHolder: "Mobile Number", keyboardType: .phonePad, isSecure: false)),
             .textEdit(TextEditModel(key: "gender", textValue: userDetails?.gender, contextText: "Gender", placeHolder: "Select Gender", isSecure: false,enabled: false)),
             .textEdit(TextEditModel(key: "emailID", textValue: userDetails?.emailID, contextText: "Email ID", placeHolder: "Email ID", keyboardType: .emailAddress, isSecure: false)),
             .textEdit(TextEditModel(key: "dob", textValue: userDetails?.dob, contextText: "Date of Birth (dd-mm-yyyy)", placeHolder: "Date of Birth (dd-mm-yyyy)", keyboardType: .emailAddress, isSecure: false,enabled: false)),
             .textEdit(TextEditModel(key: "userName", textValue: userDetails?.username, contextText: "Username", placeHolder: "Username allows a-z,0-9,_,.",enabled: true)),
-            .textPicker(TextPickerModel(key: "isdCode", textValue:"", allValues: [], contextText: "ID Type",placeHolder: "Select ID Type")),
+            .textPicker(TextPickerModel(key: "idType", textValue:userDetails?.idType, allValues: allIdTypes, contextText: "ID Type",placeHolder: "Select ID Type")),
             .textEdit(TextEditModel(key: "idNumber", contextText: "ID Number", placeHolder: "ID Type Number", keyboardType: .numberPad, isSecure: false)),
             .text("Upload ID", .natural),
             .imagePicker(ImagePickerModel(key: "frontImage", titleText: "Click here to upload Front Side Image", contextText: "Front Image")),
@@ -157,14 +177,50 @@ extension InfoViewController : UITableViewDataSource,UITableViewDelegate {
 }
 
     
-extension InfoViewController : FootnoteButtonDelegate, CellDataFetchProtocol, TextPickerDelegate, SwitchCellDelegate, SegmentCellDelegate,ImagePickerCellDelegate {
-    func didPickText(_ key: String, index: Int) {
-        print("did pick text")
+extension InfoViewController : FootnoteButtonDelegate, CellDataFetchProtocol, TextPickerDelegate, SwitchCellDelegate, SegmentCellDelegate,ImagePickerCellDelegate,ActioPickerDelegate {
+    func didSelect(url: URL?, type: String) {
+        self.lastPickedCell?.model?.imageUrl = url
+        self.lastPickedCell?.refreshTitleText()
+        
+        guard let key = self.lastPickedCell?.model?.key, let codingKey = RegisterUser.CodingKeys(rawValue: key), let url = url else { return }
+        
+        do {
+            let mediaData = try Data(contentsOf: url)
+            
+            switch codingKey {
+            case .frontImage:
+                self.profileRoleModel.frontImage = mediaData
+            case .backImage:
+                self.profileRoleModel.backImage = mediaData
+            default:
+                break
+            }
+        }
+        catch {
+            print("Error when converting media to data")
+        }
     }
-    
     func pickImage(_ key: String, cell: ImagePickerTableViewCell) {
         self.lastPickedCell = cell
+        imagePicker.present(from: self.view)
     }
+    
+   
+    func didPickText(_ key: String, index: Int) {
+        switch key {
+        case "isdCode":
+            if self.masterData?.country?.isEmpty == false, let countryId = self.masterData?.country?[index].code {
+                self.profileRoleModel.countryID = String(countryId)
+            }
+        case "idType":
+            if self.masterData?.idTypes?.isEmpty == false, let countryId = self.masterData?.idTypes?[index].id {
+            }
+        default:
+            break
+        }
+
+    }
+
     
     func footnoteButtonCallback(_ title: String) {
         print("footnoteButtonCallback")

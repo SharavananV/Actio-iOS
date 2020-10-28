@@ -442,6 +442,17 @@
 			path = ForgotPassword;
 			sourceTree = "<group>";
 		};
+		185355722549A49100D3EEE6 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				8D673A6E251DD72400585AF9 /* ProfilePageViewController.swift */,
+				185A9678253EAFB6009566E9 /* EditProfileViewController.swift */,
+				1850412E2540185E0053BB2D /* MyRoleViewController.swift */,
+				1850412B254018380053BB2D /* InfoViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		1856B140253440B3000C1D17 /* CollectionViewCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -598,17 +609,14 @@
 		8D0F7498253046D400200C2B /* SocialPages */ = {
 			isa = PBXGroup;
 			children = (
+				185355722549A49100D3EEE6 /* Profile */,
 				1856B140253440B3000C1D17 /* CollectionViewCells */,
 				8D0F74A125304F6400200C2B /* TableViewCells */,
 				8D0F74A62530534F00200C2B /* Model */,
 				8D0F7499253046EF00200C2B /* FriendListViewController.swift */,
-				1850412B254018380053BB2D /* InfoViewController.swift */,
-				8D673A6E251DD72400585AF9 /* ProfilePageViewController.swift */,
-				1850412E2540185E0053BB2D /* MyRoleViewController.swift */,
 				1858E5E82535911E00436E5D /* FriendsProfilePageViewController.swift */,
 				8D0F75E92536CF7D00200C2B /* ChatHistoryViewController.swift */,
 				8D0F74BD25342E6E00200C2B /* ChatViewController.swift */,
-				185A9678253EAFB6009566E9 /* EditProfileViewController.swift */,
 				1857D89125396CBA00F1C447 /* ChangePasswordViewController.swift */,
 			);
 			path = SocialPages;

@@ -20,15 +20,12 @@ class MyRoleViewController: UIViewController {
     var stateArrayValues: [String]?
     var cityArrayValues: [String]?
     var selectedArrayValues: String?
-
-    
     var profileRoleModel = ProfileRoleModel()
 
 
         override func viewDidLoad() {
             super.viewDidLoad()
             getProfile()
-
             self.formData = self.prepareFormData()
             editProfileTableView.delegate = self
             editProfileTableView.dataSource = self
@@ -39,7 +36,6 @@ class MyRoleViewController: UIViewController {
             self.editProfileTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
             editProfileTableView.contentInset = .zero
             editProfileTableView.reloadData()
-
         }
     
         private func getProfile() {
@@ -132,15 +128,16 @@ class MyRoleViewController: UIViewController {
                 .textPicker(TextPickerModel(key: "city", textValue:selectedstateCity?.stateName, allValues: stateCity, contextText: "City",placeHolder: "Select City")),
                 .textEdit(TextEditModel(key: "postalcode", textValue: "", contextText: "Postal Code", placeHolder: "Postal Code", isSecure: false)),
                 .sportsPlay,
-                .button("+ Add Another sport you play"),
+                .addCell,
                 .toggle(ToggleViewModel(key: "coach", contextText: coachingString, defaultValue: (profileRoleModel.isCoach == true))),
                 .toggle(ToggleViewModel(key: "sponser", contextText: sponserString, defaultValue: (profileRoleModel.isSponser == true))),
                 .toggle(ToggleViewModel(key: "organize", contextText: organizeString, defaultValue: (profileRoleModel.isOrganizer == true))),
+                .button("Submit")
               ]
             if profileRoleModel.isCoach == true {
                 let coachData: [FormCellType] = [
                     .sportsCoach,
-                    .button("+ Add Another sport you coach")
+                    .addCell
                 ]
                 formData.insert(contentsOf: coachData, at: 13)
             }
@@ -189,6 +186,14 @@ class MyRoleViewController: UIViewController {
                 toggleCell.configure(model, delegate: self)
                 cell = toggleCell
                 
+            case .button(let title):
+                guard let buttonCell = tableView.dequeueReusableCell(withIdentifier: FootnoteButtonTableViewCell.reuseId, for: indexPath) as? FootnoteButtonTableViewCell else {
+                    return UITableViewCell()
+                }
+                
+                buttonCell.configure(title: title, delegate: self)
+                cell = buttonCell
+                
                 
             case .textEdit(let model):
                 guard let textEditCell = tableView.dequeueReusableCell(withIdentifier: TextEditTableViewCell.reuseId, for: indexPath) as? TextEditTableViewCell else {
@@ -208,11 +213,6 @@ class MyRoleViewController: UIViewController {
                 textPickerCell.delegate = self
                 cell = textPickerCell
                 
-            case .button( _):
-                guard let addCell = tableView.dequeueReusableCell(withIdentifier: AddAnotherSportTableViewCell.reuseId, for: indexPath) as? AddAnotherSportTableViewCell else {
-                    return UITableViewCell()
-                }
-                cell = addCell
             case .sportsPlay:
                 guard let playCell = tableView.dequeueReusableCell(withIdentifier: SportsPlayTableViewCell.reuseId, for: indexPath) as? SportsPlayTableViewCell else {
                     return UITableViewCell()
@@ -232,6 +232,11 @@ class MyRoleViewController: UIViewController {
                     return UITableViewCell()
                 }
                 cell = academicCell
+            case .addCell:
+                guard let addCell = tableView.dequeueReusableCell(withIdentifier: AddAnotherSportTableViewCell.reuseId, for: indexPath) as? AddAnotherSportTableViewCell else {
+                    return UITableViewCell()
+                }
+                cell = addCell
             }
             
             cell?.selectionStyle = .none
@@ -239,73 +244,88 @@ class MyRoleViewController: UIViewController {
             return cell ?? UITableViewCell()
         }
         
-    }
-    extension MyRoleViewController : FootnoteButtonDelegate, CellDataFetchProtocol, TextPickerDelegate, SwitchCellDelegate, SegmentCellDelegate {
-        func footnoteButtonCallback(_ title: String) {
-            print("something")
-        }
-        
-        func valueChanged(keyValuePair: (key: String, value: String)) {
-            print("something")
-            
-        }
-        
-        func didPickText(_ key: String, index: Int) {
-            switch key {
-            case "country":
-                if self.myRoleData?.country?.isEmpty == false, let countryId = self.myRoleData?.country?[index].id {
-                    self.profileRoleModel.countryID = String(countryId)
-                }
-            case "state":
-                if self.myRoleData?.state?.isEmpty == false, let stateId = self.myRoleData?.state?[index].id {
-                    self.profileRoleModel.stateID = String(stateId)
-                }
-            case "institute":
-                if self.myRoleData?.institute?.isEmpty == false, let instituteId = self.myRoleData?.institute?[index].id {
-                    self.profileRoleModel.instituteID = String(instituteId)
-                }
-            case "class":
-                if self.myRoleData?.instituteClass?.isEmpty == false, let instituteclassId = self.myRoleData?.instituteClass?[index].id {
-                    self.profileRoleModel.classID = String(instituteclassId)
-                }
-            default:
-                break
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            if (tableView.cellForRow(at: indexPath) as? AddAnotherSportTableViewCell) != nil {
+                print("Yes success")
             }
-
-        }
-        
-        func toggleValueChanged(_ key: String, value: Bool) {
-            if key == "coach" {
-                profileRoleModel.isCoach = value
-                prepareFormData()
-            }
-            else if key == "sponser" {
-                profileRoleModel.isSponser = value
-                prepareFormData()
-
-            }
-            else if key == "organize" {
-                profileRoleModel.isOrganizer = value
-                prepareFormData()
-            }
-        }
-        func segmentTapped(_ index: Int) {
-            print("something")
-            
         }
         
         
     }
-
-    private enum FormCellType {
-        case academic
-        case sportsPlay
-        case sportsCoach
-        case textEdit(TextEditModel)
-        case textPicker(TextPickerModel)
-        case button(String)
-        case toggle(ToggleViewModel)
+extension MyRoleViewController : FootnoteButtonDelegate, CellDataFetchProtocol, TextPickerDelegate, SwitchCellDelegate {
+    func footnoteButtonCallback(_ title: String) {
+        print("something")
+        updateProfileMyRole()
     }
+    
+    private func updateProfileMyRole() {
+        service.post(ProfileUrl, parameters: profileRoleModel.parameters(), onView: view) { (response) in
+            if let msg = response["msg"] as? String {
+                self.view.makeToast(msg)
+                
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+    }
+        
+    func valueChanged(keyValuePair: (key: String, value: String)) {
+        print("something")
+        
+    }
+        
+    func didPickText(_ key: String, index: Int) {
+        switch key {
+        case "country":
+            if self.myRoleData?.country?.isEmpty == false, let countryId = self.myRoleData?.country?[index].id {
+                self.profileRoleModel.countryID = String(countryId)
+            }
+        case "state":
+            if self.myRoleData?.state?.isEmpty == false, let stateId = self.myRoleData?.state?[index].id {
+                self.profileRoleModel.stateID = String(stateId)
+            }
+        case "institute":
+            if self.myRoleData?.institute?.isEmpty == false, let instituteId = self.myRoleData?.institute?[index].id {
+                self.profileRoleModel.instituteID = String(instituteId)
+            }
+        case "class":
+            if self.myRoleData?.instituteClass?.isEmpty == false, let instituteclassId = self.myRoleData?.instituteClass?[index].id {
+                self.profileRoleModel.classID = String(instituteclassId)
+            }
+        default:
+            break
+        }
+
+    }
+    
+    func toggleValueChanged(_ key: String, value: Bool) {
+        if key == "coach" {
+            profileRoleModel.isCoach = value
+            prepareFormData()
+        }
+        else if key == "sponser" {
+            profileRoleModel.isSponser = value
+            prepareFormData()
+
+        }
+        else if key == "organize" {
+            profileRoleModel.isOrganizer = value
+            prepareFormData()
+        }
+    }
+   
+}
+
+private enum FormCellType {
+    case academic
+    case sportsPlay
+    case sportsCoach
+    case addCell
+    case textEdit(TextEditModel)
+    case textPicker(TextPickerModel)
+    case toggle(ToggleViewModel)
+    case button(String)
+
+}
 
 
 

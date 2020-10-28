@@ -144,10 +144,14 @@ class ProfileRoleModel: Codable {
     var isSponser: Bool?
     var isOrganizer: Bool?
     var postalCode: String?
+    var frontImage, backImage: Data?
+    var sportsPlay : String?
+    var coaching : String?
     
     enum CodingKeys: String, CodingKey {
         
-        case fromYear, toYear, instituteID, classID, streamID, divisonID, countryID, stateID, cityID,isStudent, isCoach, isSponser, isOrganizer, postalCode
+        case fromYear, toYear, instituteID, classID, streamID, divisonID, countryID, stateID, cityID,isStudent, isCoach, isSponser, isOrganizer, postalCode,frontImage, backImage,sportsPlay,coaching
+
     }
     
     func parameters() -> [String: Any] {
@@ -161,11 +165,13 @@ class ProfileRoleModel: Codable {
             CodingKeys.countryID.rawValue : countryID ?? "",
             CodingKeys.stateID.rawValue : stateID ?? "",
             CodingKeys.cityID.rawValue : cityID ?? "",
-            CodingKeys.isStudent.rawValue : isStudent ?? "",
-            CodingKeys.isCoach.rawValue : isCoach ?? "",
-            CodingKeys.isSponser.rawValue : isSponser ?? "",
-            CodingKeys.isOrganizer.rawValue : isOrganizer ?? "",
+            CodingKeys.isStudent.rawValue : isStudent ?? false,
+            CodingKeys.isCoach.rawValue : isCoach ?? false,
+            CodingKeys.isSponser.rawValue : isSponser ?? false,
+            CodingKeys.isOrganizer.rawValue : isOrganizer ?? false,
             CodingKeys.postalCode.rawValue : postalCode ?? "",
+            CodingKeys.sportsPlay.rawValue : sportsPlay ?? "",
+            CodingKeys.coaching.rawValue : coaching ?? "",
         ]
     }
 }

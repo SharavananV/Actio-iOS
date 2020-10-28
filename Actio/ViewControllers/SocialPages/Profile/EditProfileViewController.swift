@@ -34,11 +34,11 @@ class EditProfileViewController: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         profileSegmentControl.selectedSegmentIndex = TabIndex.infoTab.rawValue
         displayCurrentTab(TabIndex.infoTab.rawValue)
-
-
+        
+        editProfileImage.layer.cornerRadius = editProfileImage.frame.height/2
+        editProfileImage.clipsToBounds = true
     }
     
     @IBAction func segementedControlAction(_ sender: UISegmentedControl) {
