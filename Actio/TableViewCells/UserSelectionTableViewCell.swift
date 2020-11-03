@@ -38,7 +38,7 @@ class UserSelectionTableViewCell: UITableViewCell {
 		label.translatesAutoresizingMaskIntoConstraints = false
 		label.font = AppFont.PoppinsMedium(size: 13)
 		label.textColor = .darkGray
-		label.text = "Search By"
+		label.text = "Search By Username, Subscription ID or Mobile No"
 		label.numberOfLines = 0
 		label.setContentHuggingPriority(.defaultLow, for: .horizontal)
 		label.setContentHuggingPriority(.required, for: .vertical)
@@ -46,27 +46,6 @@ class UserSelectionTableViewCell: UITableViewCell {
 		self.contentView.addSubview(label)
 		
 		return label
-	}()
-	
-	private lazy var segmentControl: UISegmentedControl = {
-		let segmentControl = UISegmentedControl(items: ["Subscription ID", "Username"])
-		segmentControl.translatesAutoresizingMaskIntoConstraints = false
-		segmentControl.selectedSegmentIndex = -1
-		segmentControl.layer.cornerRadius = 5.0
-		segmentControl.clipsToBounds = true
-		segmentControl.tintColor = #colorLiteral(red: 1, green: 0.3411764706, blue: 0.2, alpha: 1)
-		segmentControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : #colorLiteral(red: 1, green: 0.3411764706, blue: 0.2, alpha: 1)], for: .normal)
-		segmentControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .selected)
-		segmentControl.apportionsSegmentWidthsByContent = true
-		
-		if #available(iOS 13.0, *) {
-			segmentControl.selectedSegmentTintColor = #colorLiteral(red: 1, green: 0.3411764706, blue: 0.2, alpha: 1)
-		}
-		
-		segmentControl.addTarget(self, action: #selector(segmentTapped(sender:)), for: .valueChanged)
-		self.contentView.addSubview(segmentControl)
-		
-		return segmentControl
 	}()
 	
 	private lazy var resetButton: UIButton = {
@@ -88,6 +67,8 @@ class UserSelectionTableViewCell: UITableViewCell {
 		searchBar.placeholder = "Type Your Search"
 		searchBar.delegate = self
 		
+		self.contentView.addSubview(searchBar)
+		
 		return searchBar
 	}()
 	
@@ -105,19 +86,6 @@ class UserSelectionTableViewCell: UITableViewCell {
 		return tableView
 	}()
 	
-	@objc func segmentTapped(sender: UISegmentedControl) {
-		contentView.addSubview(searchBar)
-		
-		NSLayoutConstraint.activate( [
-			searchBar.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .kTableCellPadding),
-			searchBar.topAnchor.constraint(equalTo: contentLabel.bottomAnchor, constant: 10),
-			searchBar.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -10),
-			searchBar.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.kTableCellPadding)
-		])
-		
-		delegate?.reloadHeight()
-	}
-	
 	@objc func buttonTapped(_ sender: UIButton) {
 		delegate?.resetData()
 	}
@@ -129,7 +97,7 @@ extension UserSelectionTableViewCell: UISearchBarDelegate {
 	}
 	
 	func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-		guard let searchText = searchBar.text else { return }
+		guard let searchText = searchBar.text?.lowercased() else { return }
 		
 		delegate?.playerList(forSearchText: searchText, completion: { (users) in
 			if self.searchedUsers == nil || self.searchedUsers?.isEmpty == true {
@@ -180,17 +148,17 @@ extension UserSelectionTableViewCell {
 		let constraints = [
 			contentLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .kTableCellPadding),
 			contentLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: .kTableCellPadding),
-			contentLabel.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -10),
+			contentLabel.bottomAnchor.constraint(equalTo: searchBar.topAnchor, constant: -10),
 			
-			segmentControl.leadingAnchor.constraint(equalTo: contentLabel.trailingAnchor, constant: 10),
-			segmentControl.topAnchor.constraint(equalTo: contentView.topAnchor, constant: .kTableCellPadding),
-			segmentControl.heightAnchor.constraint(equalToConstant: 30),
-			segmentControl.bottomAnchor.constraint(equalTo: contentLabel.bottomAnchor),
-			
-			resetButton.leadingAnchor.constraint(equalTo: segmentControl.trailingAnchor, constant: 10),
+			resetButton.leadingAnchor.constraint(greaterThanOrEqualTo: contentLabel.trailingAnchor, constant: 10),
 			resetButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: .kTableCellPadding),
 			resetButton.bottomAnchor.constraint(equalTo: contentLabel.bottomAnchor),
-			resetButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.kTableCellPadding)
+			resetButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.kTableCellPadding),
+			
+			searchBar.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .kTableCellPadding),
+			searchBar.topAnchor.constraint(equalTo: contentLabel.bottomAnchor, constant: 10),
+			searchBar.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -10),
+			searchBar.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.kTableCellPadding)
 		]
 		
 		NSLayoutConstraint.activate(constraints)

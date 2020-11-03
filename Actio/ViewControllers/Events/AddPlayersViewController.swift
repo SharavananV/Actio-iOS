@@ -104,9 +104,21 @@ class AddPlayersViewController: UIViewController {
 		
 		let shouldAllowEditing = (self.currentPlayer?.subscriberID == nil)
 		
+		var genderType: FormCellType
 		let gender = self.masterData?.gender?.first(where: {
 			$0.id == self.eventDetails?.playerTypeID
 		})
+		
+		let allGenders = self.masterData?.gender?.map({ gender -> String in
+			return gender.gender ?? ""
+		}) ?? []
+		
+		if eventDetails.playerTypeID != 4 {
+			genderType = .textEdit(TextEditModel(key: "gender", textValue: gender?.gender, contextText: "Gender", placeHolder: "Select Gender", enabled: false))
+		} else {
+			genderType = .textPicker(TextPickerModel(key: "gender", allValues: allGenders, contextText: "Gender", placeHolder: "Select Gender"))
+		}
+		
 		
 		let isdCodes = self.masterData?.country?.map({ (country) -> String in
 			return country.code ?? ""
@@ -130,7 +142,7 @@ class AddPlayersViewController: UIViewController {
 			.attrText(startedText, .right),
 			.searchPlayer,
 			.textEdit(TextEditModel(key: "playerName", textValue: currentPlayer?.name, contextText: "Player Name", placeHolder: "Player Name", enabled: shouldAllowEditing)),
-			.textEdit(TextEditModel(key: "gender", textValue: gender?.gender, contextText: "Gender", placeHolder: "Select Gender", enabled: false)),
+			genderType,
 			.date(DatePickerModel(key: "dob", minDate: nil, maxDate: Date(), dateValue: currentPlayer?.dob?.toDate, contextText: "DOB (dd-mm-yyyy)", isEnabled: shouldAllowEditing)),
 			.textPicker(TextPickerModel(key: "isdCode", textValue: currentPlayer?.isdCode, allValues: isdCodes, contextText: "Country", placeHolder: "Select Country", isEnabled: shouldAllowEditing)),
 			.textEdit(TextEditModel(key: "mobileNumber", textValue: currentPlayer?.mobileNumber, contextText: "Mobile Number", placeHolder: "Mobile Number", keyboardType: .phonePad, isSecure: false, enabled: shouldAllowEditing)),
@@ -458,6 +470,7 @@ extension AddPlayersViewController {
 			cdPlayer.name = player.name
 			cdPlayer.position = player.position
 			cdPlayer.createdAt = Date()
+			cdPlayer.subscriberID = String(player.subscriberID ?? 0)
 			
 			PersistentContainer.saveContext()
 			coreDataPlayers?.append(cdPlayer)
@@ -607,6 +620,7 @@ fileprivate class Player: Codable {
 		self.position = player.position
 		self.eventId = Int(player.eventId)
 		self.registrationId = Int(player.registrationId)
+		self.subscriberID = Int(player.subscriberID)
 	}
 	
 	init(_ player: PlayerSummary?) {

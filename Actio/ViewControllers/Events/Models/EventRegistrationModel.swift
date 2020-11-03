@@ -16,11 +16,13 @@ class EventDetailsRegisterModel: Codable {
 	var eventID, registerBy, teamName, ageGroup: String?
 	var countryID, stateID, cityID: String?
 	var isCoach: Bool?
+	var coachId: Int?
 	var coachName, coachIsd, coachMobile, coachEmail: String?
 	var registrationID: String?
 	
 	enum CodingKeys: String, CodingKey {
 		case eventID, registerBy, teamName, ageGroup, cityID, isCoach, coachName, coachIsd, coachMobile, coachEmail, registrationID, countryID, stateID
+		case coachId = "coach_SubscribeId"
 	}
 	
 	func parameters() -> [String: Any] {
@@ -35,7 +37,8 @@ class EventDetailsRegisterModel: Codable {
 			CodingKeys.coachIsd.rawValue: coachIsd ?? "",
 			CodingKeys.coachMobile.rawValue: coachMobile ?? "",
 			CodingKeys.coachEmail.rawValue: coachEmail ?? "",
-			CodingKeys.registrationID.rawValue: registrationID ?? ""
+			CodingKeys.registrationID.rawValue: registrationID ?? "",
+			CodingKeys.coachId.rawValue: coachId ?? ""
 		]
 	}
 	
@@ -53,6 +56,7 @@ class EventDetailsRegisterModel: Codable {
 		self.coachMobile = model?.coachMobileNumber
 		self.coachEmail = model?.coachEmailID
 		self.registrationID = String(model?.registrationID ?? 0)
+		self.coachId = model?.coachId
 	}
 	
 	func validate() -> ValidType {

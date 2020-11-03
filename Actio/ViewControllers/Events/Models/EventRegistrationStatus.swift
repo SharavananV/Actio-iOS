@@ -50,6 +50,7 @@ struct ViewStatus: Codable {
 	var subscriberAllowEdit: Int?
 	var players: [PlayerSummary]?
 	var allowReject: Int?
+	var coachId: Int?
 	
 	enum CodingKeys: String, CodingKey {
 		case registrationID = "registration_id"
@@ -101,6 +102,7 @@ struct ViewStatus: Codable {
 		case subscriberAllowEdit = "subscriber_allow_edit"
 		case players
 		case allowReject = "allow_reject"
+		case coachId = "coach_subscriber_id"
 	}
 }
 

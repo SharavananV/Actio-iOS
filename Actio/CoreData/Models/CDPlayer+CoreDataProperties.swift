@@ -53,5 +53,5 @@ extension CDPlayer {
     @NSManaged public var eventId: Int64
     @NSManaged public var registrationId: Int64
 	@NSManaged public var createdAt: Date?
-
+	@NSManaged public var subscriberID: String
 }

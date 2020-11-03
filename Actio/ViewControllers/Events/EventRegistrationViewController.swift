@@ -28,6 +28,7 @@ class EventRegistrationViewController: UIViewController {
 		tableView.register(TextEditTableViewCell.self, forCellReuseIdentifier: TextEditTableViewCell.reuseId)
 		tableView.register(TextPickerTableViewCell.self, forCellReuseIdentifier: TextPickerTableViewCell.reuseId)
 		tableView.register(SwitchTableViewCell.self, forCellReuseIdentifier: SwitchTableViewCell.reuseId)
+		tableView.register(UserSelectionTableViewCell.self, forCellReuseIdentifier: UserSelectionTableViewCell.reuseId)
 		tableView.separatorStyle = .none
 		
 		self.title = "Event Registration"
@@ -157,10 +158,11 @@ class EventRegistrationViewController: UIViewController {
 			}) ?? []
 			
 			let coachData: [FormCellType] = [
-				.textEdit(TextEditModel(key: "coachName", textValue: addEventModel.coachName, contextText: "Coach Name", placeHolder: "Coach Name")),
-				.textPicker(TextPickerModel(key: "coachIsd", textValue: addEventModel.coachIsd, allValues: allZipCodes, contextText: "Country Code")),
-				.textEdit(TextEditModel(key: "coachMobile", textValue: addEventModel.coachMobile, contextText: "Coach Mobile Number", placeHolder: "Coach Mobile Number", keyboardType: .phonePad, isSecure: false)),
-				.textEdit(TextEditModel(key: "coachEmail", textValue: addEventModel.coachEmail, contextText: "Coach Email ID", placeHolder: "Coach Email ID", keyboardType: .emailAddress, isSecure: false))
+				.searchPlayer,
+				.textEdit(TextEditModel(key: "coachName", textValue: addEventModel.coachName, contextText: "Coach Name", placeHolder: "Coach Name", enabled: false)),
+				.textPicker(TextPickerModel(key: "coachIsd", textValue: addEventModel.coachIsd, allValues: allZipCodes, contextText: "Country Code", isEnabled: false)),
+				.textEdit(TextEditModel(key: "coachMobile", textValue: addEventModel.coachMobile, contextText: "Coach Mobile Number", placeHolder: "Coach Mobile Number", keyboardType: .phonePad, isSecure: false, enabled: false)),
+				.textEdit(TextEditModel(key: "coachEmail", textValue: addEventModel.coachEmail, contextText: "Coach Email ID", placeHolder: "Coach Email ID", keyboardType: .emailAddress, isSecure: false, enabled: false))
 			]
 			
 			formData.insert(contentsOf: coachData, at: 6)
@@ -210,6 +212,14 @@ extension EventRegistrationViewController: UITableViewDataSource {
 			
 			toggleCell.configure(model, delegate: self)
 			cell = toggleCell
+			
+		case .searchPlayer:
+			guard let playerCell = tableView.dequeueReusableCell(withIdentifier: UserSelectionTableViewCell.reuseId, for: indexPath) as? UserSelectionTableViewCell else {
+				return UITableViewCell()
+			}
+			
+			playerCell.delegate = self
+			cell = playerCell
 		}
 		
 		cell?.selectionStyle = .none
@@ -219,7 +229,7 @@ extension EventRegistrationViewController: UITableViewDataSource {
 }
 
 // MARK: Cell Delegates
-extension EventRegistrationViewController: CellDataFetchProtocol, TextPickerDelegate, SwitchCellDelegate {
+extension EventRegistrationViewController: CellDataFetchProtocol, TextPickerDelegate, SwitchCellDelegate, UserSelectionProtocol {
 	func valueChanged(keyValuePair: (key: String, value: String)) {
 		guard let codingKey = EventDetailsRegisterModel.CodingKeys(rawValue: keyValuePair.key) else { return }
 		
@@ -323,6 +333,31 @@ extension EventRegistrationViewController: CellDataFetchProtocol, TextPickerDele
 			print(error as Any)
 		}
 	}
+	
+	func selectedPlayer(_ player: SearchUserModel) {
+		self.addEventModel.coachId = player.subscriberID
+		self.addEventModel.coachIsd = player.isdCode
+		self.addEventModel.coachName = player.fullName
+		self.addEventModel.coachEmail = player.emailID
+		self.addEventModel.coachMobile = player.mobileNumber
+		
+		prepareFormData()
+	}
+	
+	func resetData() {
+		
+	}
+	
+	func playerList(forSearchText text: String, completion: @escaping ([SearchUserModel]) -> Void) {
+		service.post(searchPlayerUrl, parameters: ["search": text.lowercased(), "eventID": eventDetails?.id ?? 0], onView: view) { (response: SearchPlayerResponse) in
+			completion(response.search ?? [])
+		}
+	}
+	
+	func reloadHeight() {
+		tableView.beginUpdates()
+		tableView.endUpdates()
+	}
 }
 
 extension EventRegistrationViewController {
@@ -335,4 +370,5 @@ private enum FormCellType {
 	case textEdit(TextEditModel)
 	case textPicker(TextPickerModel)
 	case toggle(ToggleViewModel)
+	case searchPlayer
 }
