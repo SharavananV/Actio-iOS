@@ -21,11 +21,26 @@ class MyRoleViewController: UIViewController {
     var cityArrayValues: [String]?
     var selectedArrayValues: String?
     var profileRoleModel = ProfileRoleModel()
-
+    var stateName: [String]?
+    
+    var instituteName : String?
+    var fromYearString: Int?
+    var toYearString: Int?
+    var insClass : String?
+    var stream :String?
+    var division :String?
+    var playSportsName : [String]?
+    var playerSince : [Int]?
+    var weeklyHour : [Int]?
+    var coachSportsName : [String]?
+    var coachState : [String]?
+    var coachCity : [String]?
+    var coachLocality : [String]?
+    var coachabout : [String]?
 
         override func viewDidLoad() {
             super.viewDidLoad()
-            getProfile()
+            getProfileCall()
             self.formData = self.prepareFormData()
             editProfileTableView.delegate = self
             editProfileTableView.dataSource = self
@@ -38,15 +53,28 @@ class MyRoleViewController: UIViewController {
             editProfileTableView.reloadData()
         }
     
-        private func getProfile() {
+        private func getProfileCall() {
             service.post(getProfileUrl, parameters: nil, onView: view) { (response: GetProfileDataResponse) in
                 self.getProfileData = response.profile
-                self.myRoleProfile()
+                self.instituteName = self.getProfileData?.institute?.instituteName
+                self.insClass = self.getProfileData?.institute?.instituteClass
+                self.toYearString = self.getProfileData?.institute?.academicToYear
+                self.fromYearString = self.getProfileData?.institute?.academicFromYear
+                self.playSportsName = self.getProfileData?.play?.map({$0.sportsName}) as? [String]
+                self.playerSince = self.getProfileData?.play?.map({$0.playingSince}) as? [Int]
+                self.weeklyHour = self.getProfileData?.play?.map({$0.weeklyHours}) as? [Int]
+                self.coachSportsName = self.getProfileData?.coaching?.map({$0.sportsName}) as? [String]
+                self.coachState = self.getProfileData?.coaching?.map({$0.stateName}) as? [String]
+                self.coachCity = self.getProfileData?.coaching?.map({$0.cityName}) as? [String]
+                self.coachLocality = self.getProfileData?.coaching?.map({$0.locality}) as? [String]
+                self.coachabout = self.getProfileData?.coaching?.map({$0.remarks}) as? [String]
+                print(response.profile,"==========")
+                self.myRoleProfileCall()
                 self.editProfileTableView.reloadData()
             }
         }
 
-        private func myRoleProfile() {
+        private func myRoleProfileCall() {
             let parameters = [ "instituteID":self.getProfileData?.institute?.instituteID ?? "" , "classID": self.getProfileData?.institute?.classID ?? "" , "streamID": self.getProfileData?.institute?.streamID ?? "" ,"countryID":self.getProfileData?.institute?.countryID ?? "" ,"stateID":"","stateCity":true] as [String : Any]
             service.post(masterProfileUrl, parameters: parameters, onView: view) { (response: ProfileMasterResponse) in
                 self.myRoleData = response.master
@@ -59,11 +87,25 @@ class MyRoleViewController: UIViewController {
         
         private func prepareFormData() -> [FormCellType] {
 
-            let states = self.myRoleData?.state?.map({ (state) -> String in
-                return state.state ?? ""
+            let states = self.myRoleData?.stateCity?.map({ (state) -> String in
+                return state.stateName ?? ""
             }) ?? []
-            let selectedState = self.myRoleData?.state?.first(where: {
-                String($0.id ?? 0) == self.profileRoleModel.stateID
+            let selectedState = self.myRoleData?.stateCity?.first(where: {
+                String($0.stateID ?? 0) == self.profileRoleModel.stateID
+            })
+            
+            let cityValues = self.myRoleData?.stateCity?.map({$0.city})
+            
+            guard let cityObj = cityValues?.first else {
+                return formData ?? []
+            }
+            
+            let CityName = cityObj?.map({ (sCity) -> String in
+                return sCity.cityName ?? ""
+            }) ?? []
+                        
+            let selectedstateCity = cityObj?.first(where: {
+                 String($0.cityID ?? 0) == self.profileRoleModel.cityID
             })
 
             let institution = self.myRoleData?.institute?.map({ (institute) -> String in
@@ -86,14 +128,6 @@ class MyRoleViewController: UIViewController {
             
             let selectedCountry = self.myRoleData?.country?.first(where: {
                 String($0.id ?? 0) == self.profileRoleModel.countryID
-            })
-            
-            let stateCity = self.myRoleData?.stateCity?.map({ (stateCity) -> String in
-                return stateCity.stateName ?? ""
-            }) ?? []
-            
-            let selectedstateCity = self.myRoleData?.stateCity?.first(where: {
-                String($0.stateID ?? 0) == self.profileRoleModel.stateID
             })
             
             let stream = self.myRoleData?.instituteStream?.map({ (instituteStream) -> String in
@@ -124,8 +158,8 @@ class MyRoleViewController: UIViewController {
                 .textPicker(TextPickerModel(key: "stream", textValue:selectedstream?.stream, allValues: stream, contextText: "Stream",placeHolder: "Select Stream")),
                 .textPicker(TextPickerModel(key: "divison", textValue:selecteddivison?.division, allValues: divison, contextText: "Divison",placeHolder: "Select Divison")),
                 .textPicker(TextPickerModel(key: "country", textValue:selectedCountry?.country, allValues: country, contextText: "Country",placeHolder: "Select Country")),
-                .textPicker(TextPickerModel(key: "state", textValue:selectedState?.state, allValues: states, contextText: "State",placeHolder: "Select State")),
-                .textPicker(TextPickerModel(key: "city", textValue:selectedstateCity?.stateName, allValues: stateCity, contextText: "City",placeHolder: "Select City")),
+                .textPicker(TextPickerModel(key: "state", textValue:selectedState?.stateName, allValues: states, contextText: "State",placeHolder: "Select State")),
+                .textPicker(TextPickerModel(key: "city", textValue:selectedstateCity?.cityName, allValues: CityName, contextText: "City",placeHolder: "Select City")),
                 .textEdit(TextEditModel(key: "postalcode", textValue: "", contextText: "Postal Code", placeHolder: "Postal Code", isSecure: false)),
                 .sportsPlay,
                 .addCell,
@@ -163,95 +197,104 @@ class MyRoleViewController: UIViewController {
 
     }
 
-    extension MyRoleViewController :  UITableViewDataSource, UITableViewDelegate {
-        
-        func numberOfSections(in tableView: UITableView) -> Int {
-            return 1
-        }
-        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return self.formData?.count ?? 0
-        }
-        
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            var cell: UITableViewCell? = nil
-            guard let cellData = self.formData?[indexPath.row] else { return UITableViewCell() }
-            
-            switch cellData {
-            
-            case .toggle(let model):
-                guard let toggleCell = tableView.dequeueReusableCell(withIdentifier: SwitchTableViewCell.reuseId, for: indexPath) as? SwitchTableViewCell else {
-                    return UITableViewCell()
-                }
-                
-                toggleCell.configure(model, delegate: self)
-                cell = toggleCell
-                
-            case .button(let title):
-                guard let buttonCell = tableView.dequeueReusableCell(withIdentifier: FootnoteButtonTableViewCell.reuseId, for: indexPath) as? FootnoteButtonTableViewCell else {
-                    return UITableViewCell()
-                }
-                
-                buttonCell.configure(title: title, delegate: self)
-                cell = buttonCell
-                
-                
-            case .textEdit(let model):
-                guard let textEditCell = tableView.dequeueReusableCell(withIdentifier: TextEditTableViewCell.reuseId, for: indexPath) as? TextEditTableViewCell else {
-                    return UITableViewCell()
-                }
-                
-                textEditCell.configure(model)
-                textEditCell.delegate = self
-                cell = textEditCell
-                
-            case .textPicker(let model):
-                guard let textPickerCell = tableView.dequeueReusableCell(withIdentifier: TextPickerTableViewCell.reuseId, for: indexPath) as? TextPickerTableViewCell else {
-                    return UITableViewCell()
-                }
-                
-                textPickerCell.configure(model)
-                textPickerCell.delegate = self
-                cell = textPickerCell
-                
-            case .sportsPlay:
-                guard let playCell = tableView.dequeueReusableCell(withIdentifier: SportsPlayTableViewCell.reuseId, for: indexPath) as? SportsPlayTableViewCell else {
-                    return UITableViewCell()
-                }
-                playCell.sportArrayValues = self.sportArrayValues
-                cell = playCell
-            case .sportsCoach:
-                guard let coachCell = tableView.dequeueReusableCell(withIdentifier: SportsCoachTableViewCell.reuseId, for: indexPath) as? SportsCoachTableViewCell else {
-                    return UITableViewCell()
-                }
-                coachCell.sportArrayValues = self.sportArrayValues
-                coachCell.stateArrayValues = self.stateArrayValues
-                coachCell.cityArrayValues = self.cityArrayValues
-                cell = coachCell
-            case .academic:
-                guard let academicCell = tableView.dequeueReusableCell(withIdentifier: AcademicYearTableViewCell.reuseId, for: indexPath) as? AcademicYearTableViewCell else {
-                    return UITableViewCell()
-                }
-                cell = academicCell
-            case .addCell:
-                guard let addCell = tableView.dequeueReusableCell(withIdentifier: AddAnotherSportTableViewCell.reuseId, for: indexPath) as? AddAnotherSportTableViewCell else {
-                    return UITableViewCell()
-                }
-                cell = addCell
-            }
-            
-            cell?.selectionStyle = .none
-            
-            return cell ?? UITableViewCell()
-        }
-        
-        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            if (tableView.cellForRow(at: indexPath) as? AddAnotherSportTableViewCell) != nil {
-                print("Yes success")
-            }
-        }
-        
-        
+extension MyRoleViewController :  UITableViewDataSource, UITableViewDelegate {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.formData?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell: UITableViewCell? = nil
+        guard let cellData = self.formData?[indexPath.row] else { return UITableViewCell() }
+        
+        switch cellData {
+        
+        case .toggle(let model):
+            guard let toggleCell = tableView.dequeueReusableCell(withIdentifier: SwitchTableViewCell.reuseId, for: indexPath) as? SwitchTableViewCell else {
+                return UITableViewCell()
+            }
+            
+            toggleCell.configure(model, delegate: self)
+            cell = toggleCell
+            
+        case .button(let title):
+            guard let buttonCell = tableView.dequeueReusableCell(withIdentifier: FootnoteButtonTableViewCell.reuseId, for: indexPath) as? FootnoteButtonTableViewCell else {
+                return UITableViewCell()
+            }
+            
+            buttonCell.configure(title: title, delegate: self)
+            cell = buttonCell
+            
+            
+        case .textEdit(let model):
+            guard let textEditCell = tableView.dequeueReusableCell(withIdentifier: TextEditTableViewCell.reuseId, for: indexPath) as? TextEditTableViewCell else {
+                return UITableViewCell()
+            }
+            
+            textEditCell.configure(model)
+            textEditCell.delegate = self
+            cell = textEditCell
+            
+        case .textPicker(let model):
+            guard let textPickerCell = tableView.dequeueReusableCell(withIdentifier: TextPickerTableViewCell.reuseId, for: indexPath) as? TextPickerTableViewCell else {
+                return UITableViewCell()
+            }
+            
+            textPickerCell.configure(model)
+            textPickerCell.delegate = self
+            cell = textPickerCell
+            
+        case .sportsPlay:
+            guard let playCell = tableView.dequeueReusableCell(withIdentifier: SportsPlayTableViewCell.reuseId, for: indexPath) as? SportsPlayTableViewCell else {
+                return UITableViewCell()
+            }
+            playCell.sportArrayValues = self.sportArrayValues
+            playCell.selectSportTextField.text = playSportsName?[0]
+            playCell.playerSinceTextField.text = String(playerSince?[0] ?? 0)
+            playCell.practiceHoursTextField.text = String(weeklyHour?[0] ?? 0)
+            cell = playCell
+        case .sportsCoach:
+            guard let coachCell = tableView.dequeueReusableCell(withIdentifier: SportsCoachTableViewCell.reuseId, for: indexPath) as? SportsCoachTableViewCell else {
+                return UITableViewCell()
+            }
+            coachCell.coachSelectSportTextField.text = coachSportsName?[0]
+            coachCell.cityTextField.text = coachCity?[0]
+            coachCell.stateTextField.text = coachState?[0]
+            coachCell.coachSelectSportTextField.text = coachSportsName?[0]
+            coachCell.localityTextField.text = coachLocality?[0]
+            coachCell.aboutCoachingTextField.text = coachabout?[0]
+            coachCell.sportArrayValues = self.sportArrayValues
+            coachCell.stateArrayValues = self.stateArrayValues
+            coachCell.cityArrayValues = self.cityArrayValues
+            cell = coachCell
+        case .academic:
+            guard let academicCell = tableView.dequeueReusableCell(withIdentifier: AcademicYearTableViewCell.reuseId, for: indexPath) as? AcademicYearTableViewCell else {
+                return UITableViewCell()
+            }
+            cell = academicCell
+            academicCell.toYearTextField.text = String(toYearString ?? 0)
+            academicCell.fromYearTextField.text = String(fromYearString ?? 0)
+        case .addCell:
+            guard let addCell = tableView.dequeueReusableCell(withIdentifier: AddAnotherSportTableViewCell.reuseId, for: indexPath) as? AddAnotherSportTableViewCell else {
+                return UITableViewCell()
+            }
+            cell = addCell
+        }
+        
+        cell?.selectionStyle = .none
+        
+        return cell ?? UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (tableView.cellForRow(at: indexPath) as? AddAnotherSportTableViewCell) != nil {
+            print("Yes success")
+        }
+    }
+}
 extension MyRoleViewController : FootnoteButtonDelegate, CellDataFetchProtocol, TextPickerDelegate, SwitchCellDelegate {
     func footnoteButtonCallback(_ title: String) {
         print("something")

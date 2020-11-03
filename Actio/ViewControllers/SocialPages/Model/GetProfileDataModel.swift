@@ -23,7 +23,7 @@ struct GetProfile: Codable {
     let institute: Institute?
     let play: [Play]?
     let isCoach: Bool?
-    let coaching = [String: String]()
+    let coaching : [Coaching]?
     let isSponsor: Bool?
     let sponsorRemarks: String?
     let isOrganizer: Bool?
@@ -41,6 +41,28 @@ struct GetProfile: Codable {
         case isOrganizer = "is_organizer"
         case organizerRemarks = "organizer_remarks"
         case profileImage = "profile_image"
+    }
+}
+
+
+// MARK: - Coaching
+struct Coaching: Codable {
+    let id, sportsID: Int?
+    let sportsName: String?
+    let cityID: Int?
+    let cityName: String?
+    let stateID: Int?
+    let stateName, locality, remarks: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case sportsID = "sports_id"
+        case sportsName = "sports_name"
+        case cityID = "city_id"
+        case cityName = "city_name"
+        case stateID = "state_id"
+        case stateName = "state_name"
+        case locality, remarks
     }
 }
 
