@@ -65,7 +65,7 @@ class FriendsProfilePageViewController: UIViewController {
 	}
 	
 	@IBAction func chatAction(_ sender: Any) {
-		if let vc = UIStoryboard(name: "Social", bundle: nil).instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController {
+		if currentFriend?.friendsStatus == 2, let vc = UIStoryboard(name: "Social", bundle: nil).instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController {
 			vc.conversation = Conversation(subscriberID: self.currentFriend?.subscriberID, subscriberDisplayID: self.currentFriend?.subscriberDisplayID, fullName: self.currentFriend?.fullName, username: self.currentFriend?.username, emailID: self.currentFriend?.emailID, profileImage: self.currentFriend?.profileImage, chatID: nil, message: nil, unseen: nil)
 			
 			self.navigationController?.pushViewController(vc, animated: true)

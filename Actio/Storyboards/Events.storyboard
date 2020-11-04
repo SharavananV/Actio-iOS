@@ -73,23 +73,24 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="EventListTableViewCell" id="ztR-qJ-mIm" customClass="EventListTableViewCell" customModule="Actio" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="109" width="414" height="138"/>
+                                        <rect key="frame" x="0.0" y="109" width="414" height="144.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ztR-qJ-mIm" id="zEO-gS-AwV">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="138"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="144.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bnh-iu-YxG">
-                                                    <rect key="frame" x="20" y="10" width="374" height="118"/>
+                                                    <rect key="frame" x="20" y="10" width="374" height="124.5"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BVl-9V-vrw">
-                                                            <rect key="frame" x="10" y="10" width="135" height="84"/>
+                                                            <rect key="frame" x="10" y="10" width="135" height="90"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="135" id="F8x-9k-pSy"/>
+                                                                <constraint firstAttribute="width" secondItem="BVl-9V-vrw" secondAttribute="height" multiplier="3:2" id="ny1-77-Ufz"/>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dyK-cF-ywI" customClass="PaddingLabel" customModule="Actio" customModuleProvider="target">
-                                                            <rect key="frame" x="10" y="94" width="135" height="14"/>
+                                                            <rect key="frame" x="10" y="100" width="135" height="14"/>
                                                             <color key="backgroundColor" red="0.0" green="0.7843137255" blue="0.32549019610000002" alpha="1" colorSpace="calibratedRGB"/>
                                                             <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="10"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -199,7 +200,7 @@
                                                         <constraint firstAttribute="trailing" secondItem="1dq-nm-hd3" secondAttribute="trailing" constant="10" id="eYb-Bh-TTo"/>
                                                         <constraint firstItem="iT9-Dd-M8M" firstAttribute="leading" secondItem="1dq-nm-hd3" secondAttribute="leading" id="oSn-4q-vx9"/>
                                                         <constraint firstItem="BVl-9V-vrw" firstAttribute="leading" secondItem="Bnh-iu-YxG" secondAttribute="leading" constant="10" id="pQv-gV-Qdg"/>
-                                                        <constraint firstAttribute="bottom" secondItem="dyK-cF-ywI" secondAttribute="bottom" constant="10" id="uhO-6V-8fN"/>
+                                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="dyK-cF-ywI" secondAttribute="bottom" constant="10" id="uhO-6V-8fN"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>

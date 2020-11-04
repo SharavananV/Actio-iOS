@@ -140,7 +140,7 @@ extension TournamentDetailsViewController: TournamentActionProtocol, TournamentG
             bannerImageView.load(url: imagePath)
         }
         tournamentNameLabel.text = tournament.tournamentName
-        descriptionLabel.text = tournament.tournamentDescription
+		descriptionLabel.text = tournament.tournamentDescription?.htmlToString
         tournamentTypeLabel.text = tournament.feeType
         tournamentDateLabel.text = tournament.tournamentDate
         tournamentEntryFeesLabel.text = tournament.entryFees

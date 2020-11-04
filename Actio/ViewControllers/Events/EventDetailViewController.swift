@@ -184,7 +184,7 @@ extension EventDetailViewController {
 			bannerImageView.load(url: imagePath)
 		}
 		eventNameLabel.text = event.eventName
-		descriptionLabel.text = event.eventDescription
+		descriptionLabel.text = event.eventDescription?.htmlToString
 		eventTypeLabel.text = event.type
 		eventDateLabel.text = event.eventDate
 		eventEntryFeesLabel.text = event.eventFee
