@@ -166,6 +166,8 @@
 		8DDBB761252D912700D74087 /* PlayerHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDBB760252D912700D74087 /* PlayerHeaderTableViewCell.swift */; };
 		8DDBB764252D913A00D74087 /* PlayerSummaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDBB763252D913A00D74087 /* PlayerSummaryTableViewCell.swift */; };
 		8DDBB767252D919C00D74087 /* AddPlayerButtonViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDBB766252D919C00D74087 /* AddPlayerButtonViewCell.swift */; };
+		8DDDBDDA2552852400C999F0 /* NonActioSportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDDBDD92552852400C999F0 /* NonActioSportViewController.swift */; };
+		8DDDBDE02552898500C999F0 /* NonActioModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDDBDDF2552898500C999F0 /* NonActioModels.swift */; };
 		8DE6B64924B335630010A3EC /* AppFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE6B64824B335630010A3EC /* AppFonts.swift */; };
 		8DE6B64E24B35BA60010A3EC /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE6B64D24B35BA60010A3EC /* LaunchViewController.swift */; };
 		8DF77D4D252B09500065720A /* EventRegistrationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF77D4C252B09500065720A /* EventRegistrationStatus.swift */; };
@@ -353,6 +355,8 @@
 		8DDBB760252D912700D74087 /* PlayerHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		8DDBB763252D913A00D74087 /* PlayerSummaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSummaryTableViewCell.swift; sourceTree = "<group>"; };
 		8DDBB766252D919C00D74087 /* AddPlayerButtonViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayerButtonViewCell.swift; sourceTree = "<group>"; };
+		8DDDBDD92552852400C999F0 /* NonActioSportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonActioSportViewController.swift; sourceTree = "<group>"; };
+		8DDDBDDF2552898500C999F0 /* NonActioModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonActioModels.swift; sourceTree = "<group>"; };
 		8DE6B64824B335630010A3EC /* AppFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFonts.swift; sourceTree = "<group>"; };
 		8DE6B64D24B35BA60010A3EC /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		8DF77D4C252B09500065720A /* EventRegistrationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRegistrationStatus.swift; sourceTree = "<group>"; };
@@ -505,6 +509,7 @@
 			isa = PBXGroup;
 			children = (
 				8D47F0E92539804C0013900C /* Common */,
+				8DDDBDD82552844E00C999F0 /* KPI */,
 				8D0F7498253046D400200C2B /* SocialPages */,
 				8D0C5C2E252457CA005B3A4E /* Events */,
 				8D673A70251DF5E500585AF9 /* EventFeed */,
@@ -866,6 +871,23 @@
 			path = DashBoard;
 			sourceTree = "<group>";
 		};
+		8DDDBDD82552844E00C999F0 /* KPI */ = {
+			isa = PBXGroup;
+			children = (
+				8DDDBDDE2552897300C999F0 /* Model */,
+				8DDDBDD92552852400C999F0 /* NonActioSportViewController.swift */,
+			);
+			path = KPI;
+			sourceTree = "<group>";
+		};
+		8DDDBDDE2552897300C999F0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8DDDBDDF2552898500C999F0 /* NonActioModels.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		8DE6B64724B3352C0010A3EC /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -1104,6 +1126,7 @@
 				8D47F1062539D26D0013900C /* RedirectionHandler.swift in Sources */,
 				18C6B02D2512015200B7162E /* TournamentModel.swift in Sources */,
 				8DF77D51252B1F680065720A /* AddPlayersViewController.swift in Sources */,
+				8DDDBDE02552898500C999F0 /* NonActioModels.swift in Sources */,
 				8D0F749A253046EF00200C2B /* FriendListViewController.swift in Sources */,
 				1841F19624B480680021D131 /* FootnoteButtonTableViewCell.swift in Sources */,
 				18455F8D252DE556000CA7CA /* TournamentFilterViewController.swift in Sources */,
@@ -1144,6 +1167,7 @@
 				185A967F253EE869009566E9 /* SportsCoachTableViewCell.swift in Sources */,
 				8D0C5C33252465EE005B3A4E /* EventListTableViewCell.swift in Sources */,
 				8D673A6F251DD72400585AF9 /* ProfilePageViewController.swift in Sources */,
+				8DDDBDDA2552852400C999F0 /* NonActioSportViewController.swift in Sources */,
 				8D0F75ED2536D0EB00200C2B /* Conversation.swift in Sources */,
 				8DC1BD342525DD9C005C55DE /* EventRegistrationModel.swift in Sources */,
 				184DD1E4252C52B90014ABB5 /* ResetPasswordViewController.swift in Sources */,
