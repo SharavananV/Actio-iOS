@@ -81,8 +81,9 @@ class TextPickerTableViewCell: UITableViewCell {
             textField.heightAnchor.constraint(equalToConstant: 40)
         ]
         
-        imageButton.frame = CGRect(x: 0, y: 0, width: 44, height: 44)
+        imageButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         imageButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -16, bottom: 0, right: 0)
+		imageButton.imageView?.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         textField.rightView = imageButton
         textField.rightViewMode = .always
         

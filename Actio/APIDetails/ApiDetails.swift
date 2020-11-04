@@ -73,6 +73,8 @@ let masterProfileUrl = baseUrl + "profile/master"
 let getProfileUrl = baseUrl + "profile/get"
 let ProfileUrl = baseUrl + "profile"
 
+// KPI
+let nonActioMaster = baseUrl + "nonActioKPIList"
 
 // Socket URL
 let socketUrl = "http://203.223.191.66:8085"

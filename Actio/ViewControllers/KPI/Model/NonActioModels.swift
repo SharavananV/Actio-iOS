@@ -49,3 +49,19 @@ struct KPIState: Codable {
 		case countryID = "country_id"
 	}
 }
+
+// MARK: - RegisterNonActioSportModel
+struct RegisterNonActioSportModel {
+	var eventID, tournamentID, coachID: Int
+	var kpi: [Kpi]
+	
+	// Only client side use
+	var country: Int
+	var state: Int
+	var year: Int
+}
+
+// MARK: - Kpi
+struct Kpi {
+	var id, value: String
+}
