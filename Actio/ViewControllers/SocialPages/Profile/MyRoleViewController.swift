@@ -22,7 +22,8 @@ class MyRoleViewController: UIViewController {
     var selectedArrayValues: String?
     var profileRoleModel = ProfileRoleModel()
     var stateName: [String]?
-    
+    var titleSelected : String?
+
     var instituteName : String?
     var fromYearString: Int?
     var toYearString: Int?
@@ -76,7 +77,7 @@ class MyRoleViewController: UIViewController {
         }
         
     private func prepareFormData(shouldAddEmptyPlayCell: Bool = false) -> [FormCellType] {
-        
+
         let states = self.myRoleData?.stateCity?.map({ (state) -> String in
             return state.stateName ?? ""
         }) ?? []
@@ -135,6 +136,8 @@ class MyRoleViewController: UIViewController {
             String($0.id ?? 0) == self.profileRoleModel.divisonID
         })
         
+        var titleLabel = "+ Add Another sport you play"
+        
         var sportsPlayAdd: [FormCellType] = self.profileRoleModel.sportsPlay?.map({ (play) -> FormCellType in
             .sportsPlay(play)
         }) ?? [.sportsPlay(nil)]
@@ -144,7 +147,12 @@ class MyRoleViewController: UIViewController {
         }) ?? [.sportsCoach(nil)]
         
         if shouldAddEmptyPlayCell {
-            sportsPlayAdd.append(.sportsPlay(nil))
+            if titleSelected == "+ Add Another sport you play" {
+                sportsPlayAdd.append(.sportsPlay(nil))
+            }
+            else if titleSelected == "+ Add Another sport you Coach" {
+                sportsCoachAdd.append(.sportsCoach(nil))
+            }
         }
         
         let studentString = NSMutableAttributedString(string: "Are you student at school/university?", attributes: [NSAttributedString.Key.font : AppFont.PoppinsRegular(size: 15)])
@@ -163,7 +171,7 @@ class MyRoleViewController: UIViewController {
             .textPicker(TextPickerModel(key: "state", textValue:selectedState?.stateName, allValues: states, contextText: "State",placeHolder: "Select State")),
             .textPicker(TextPickerModel(key: "city", textValue:selectedstateCity?.cityName, allValues: CityName, contextText: "City",placeHolder: "Select City")),
             .textEdit(TextEditModel(key: "postalcode", textValue: profileRoleModel.postalCode, contextText: "Postal Code", placeHolder: "Postal Code", isSecure: false)),
-            .addCell("+ Add Another sport you play"),
+            .addCell(titleLabel),
             .toggle(ToggleViewModel(key: "coach", contextText: coachingString, defaultValue: (profileRoleModel.isCoach == true))),
             .toggle(ToggleViewModel(key: "sponser", contextText: sponserString, defaultValue: (profileRoleModel.isSponser == true))),
             .toggle(ToggleViewModel(key: "organize", contextText: organizeString, defaultValue: (profileRoleModel.isOrganizer == true))),
@@ -172,8 +180,9 @@ class MyRoleViewController: UIViewController {
         
         formData.insert(contentsOf: sportsPlayAdd, at: 10)
         if profileRoleModel.isCoach == true {
+            titleLabel = "+ Add Another sport you Coach"
             let coachData: [FormCellType] = [
-                .addCell("+ Add Another sport you Coach")
+                .addCell(titleLabel)
             ]
             formData.insert(contentsOf: sportsCoachAdd, at: 13)
             formData.insert(contentsOf: coachData, at: 14)
@@ -197,7 +206,6 @@ class MyRoleViewController: UIViewController {
         self.editProfileTableView.endUpdates()
         return formData
     }
-    
 }
 
 extension MyRoleViewController :  UITableViewDataSource, UITableViewDelegate {
@@ -284,6 +292,7 @@ extension MyRoleViewController :  UITableViewDataSource, UITableViewDelegate {
             guard let addCell = tableView.dequeueReusableCell(withIdentifier: AddAnotherSportTableViewCell.reuseId, for: indexPath) as? AddAnotherSportTableViewCell else {
                 return UITableViewCell()
             }
+            addCell.titleLabel.text = title
             cell = addCell
         }
         
@@ -293,9 +302,12 @@ extension MyRoleViewController :  UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (tableView.cellForRow(at: indexPath) as? AddAnotherSportTableViewCell) != nil {
-            self.formData = prepareFormData(shouldAddEmptyPlayCell: true)
-            tableView.reloadData()
+        if let cell = tableView.dequeueReusableCell(withIdentifier: AddAnotherSportTableViewCell.reuseId, for: indexPath) as? AddAnotherSportTableViewCell {
+            if (tableView.cellForRow(at: indexPath) as? AddAnotherSportTableViewCell) != nil {
+                cell.titleLabel.text = titleSelected
+                self.formData = prepareFormData(shouldAddEmptyPlayCell: true)
+                tableView.reloadData()
+            }
         }
     }
 }
@@ -309,7 +321,6 @@ extension MyRoleViewController : FootnoteButtonDelegate, CellDataFetchProtocol, 
             if let msg = response["msg"] as? String {
                 print(self.profileRoleModel.parameters(),"===============")
                 self.view.makeToast(msg)
-                
                 self.navigationController?.popViewController(animated: true)
             }
         }

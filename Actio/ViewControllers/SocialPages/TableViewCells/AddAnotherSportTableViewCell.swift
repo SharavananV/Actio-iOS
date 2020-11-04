@@ -12,6 +12,7 @@ class AddAnotherSportTableViewCell: UITableViewCell {
     static let reuseId = "AddAnotherSportTableViewCell"
 
 
+    @IBOutlet weak var titleLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

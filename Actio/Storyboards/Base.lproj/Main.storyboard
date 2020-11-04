@@ -4804,6 +4804,9 @@
                                                 <constraint firstItem="WM5-aI-7Ez" firstAttribute="top" secondItem="JDv-R3-kyb" secondAttribute="top" constant="10" id="nhl-R2-sgZ"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="titleLabel" destination="WM5-aI-7Ez" id="IKV-pc-WoZ"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <sections/>
