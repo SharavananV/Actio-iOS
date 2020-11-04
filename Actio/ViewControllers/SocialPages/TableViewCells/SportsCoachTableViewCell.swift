@@ -9,7 +9,8 @@
 import UIKit
 
 class SportsCoachTableViewCell: UITableViewCell,UIPickerViewDelegate, UIPickerViewDataSource,UITextFieldDelegate {
-    @IBOutlet weak var coachSelectSportTextField: UITextField!
+	@IBOutlet var sportsCoachBackgroundView: UIView!
+	@IBOutlet weak var coachSelectSportTextField: UITextField!
     @IBOutlet weak var aboutCoachingTextField: UITextField!
     @IBOutlet weak var localityTextField: UITextField!
     @IBOutlet weak var cityTextField: UITextField!
@@ -26,7 +27,8 @@ class SportsCoachTableViewCell: UITableViewCell,UIPickerViewDelegate, UIPickerVi
         
         pickerView.delegate = self
         pickerView.dataSource = self
-        
+		sportsCoachBackgroundView.layer.cornerRadius = 5.0
+		sportsCoachBackgroundView.layer.masksToBounds = true
         coachSelectSportTextField.delegate = self
         aboutCoachingTextField.delegate = self
         localityTextField.delegate = self

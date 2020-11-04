@@ -68,21 +68,23 @@ struct Coaching: Codable {
 
 // MARK: - Institute
 struct Institute: Codable {
-    let instituteID: Int?
-    let instituteName: String?
-    let classID: Int?
-    let instituteClass: String?
-    let streamID: Int?
-    let stream: String?
-    let divisionID: Int?
-    let division: String?
-    let countryID: Int?
-    let country: String?
-    let stateID: Int?
-    let stateName: String?
-    let cityID: Int?
-    let cityName: String?
-    let academicFromYear, academicToYear, pincode: Int?
+    var instituteID: Int?
+	var instituteName: String?
+    var classID: Int?
+	var instituteClass: String?
+	var streamID: Int?
+	var stream: String?
+	var divisionID: Int?
+	var division: String?
+	var countryID: Int?
+	var country: String?
+    var stateID: Int?
+	var stateName: String?
+	var cityID: Int?
+	var cityName: String?
+	var academicFromYear, academicToYear, pincode: Int?
+	
+	internal init() {}
 
     enum CodingKeys: String, CodingKey {
         case instituteID = "institute_id"

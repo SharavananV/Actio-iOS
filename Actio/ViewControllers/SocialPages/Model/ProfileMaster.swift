@@ -136,64 +136,73 @@ struct ProfileState: Codable {
 class ProfileRoleModel: Codable {
     
     internal init() {}
-    
-    var fromYear, toYear: String?
-    var instituteID, classID, streamID,divisonID,countryID,stateID,cityID: String?
+	
     var isStudent: Bool?
     var isCoach: Bool?
     var isSponser: Bool?
     var isOrganizer: Bool?
-    var postalCode: String?
     var frontImage, backImage: Data?
     var sportsPlay : [Play]?
     var coaching : [Coaching]?
     var institute : Institute?
+	var sponsorRemarks : String?
+	var organizerRemarks : String?
 
     
     enum CodingKeys: String, CodingKey {
         
-        case fromYear, toYear, instituteID, classID, streamID, divisonID, countryID, stateID, cityID,isStudent, isCoach, isSponser, isOrganizer, postalCode,frontImage, backImage,sportsPlay,coaching
+        case isStudent, isCoach, isSponser, isOrganizer,frontImage, backImage,sportsPlay,coaching,sponsorRemarks,organizerRemarks,institute
 
     }
     
     init(data: GetProfile?) {
-        instituteID = String(data?.institute?.instituteID ?? 0)
-        classID = String(data?.institute?.classID ?? 0)
-        streamID = String(data?.institute?.streamID ?? 0)
-        divisonID = String(data?.institute?.divisionID ?? 0)
-        countryID = String(data?.institute?.countryID ?? 0)
-        stateID = String(data?.institute?.stateID ?? 0)
-        cityID = String(data?.institute?.cityID ?? 0)
-        postalCode = String(data?.institute?.pincode ?? 0)
         isStudent = data?.isStudent
         isCoach = data?.isCoach
         isSponser = data?.isSponsor
         isOrganizer = data?.isOrganizer
-        fromYear = String(data?.institute?.academicFromYear ?? 0)
-        toYear = String(data?.institute?.academicToYear ?? 0)
         sportsPlay = data?.play
         coaching = data?.coaching
         institute = data?.institute
+		sponsorRemarks = data?.sponsorRemarks
+		organizerRemarks = data?.organizerRemarks
+		
     }
     
     func parameters() -> [String: Any] {
+		let coachingValues = coaching?.map({ (coach) -> [String: Any] in
+			return [
+				"sportsID": coach.sportsID ?? 0,
+				"cityID": coach.cityID ?? 0,
+				"locality": coach.locality ?? "",
+				"about": coach.remarks ?? ""
+			]
+		}) ?? []
+		
+		let playValues = sportsPlay?.map({ (play) -> [String: Any] in
+			return [
+				"sportsID": play.sportsID ?? 0,
+				"since": play.playingSince ?? 0,
+				"hours": play.weeklyHours ?? 0
+			]
+		}) ?? []
+		
         return [
-            CodingKeys.fromYear.rawValue: fromYear ?? "",
-            CodingKeys.toYear.rawValue : toYear ?? "",
-            CodingKeys.instituteID.rawValue : instituteID ?? "",
-            CodingKeys.classID.rawValue : classID ?? "",
-            CodingKeys.streamID.rawValue : streamID ?? "",
-            CodingKeys.divisonID.rawValue : divisonID ?? "",
-            CodingKeys.countryID.rawValue : countryID ?? "",
-            CodingKeys.stateID.rawValue : stateID ?? "",
-            CodingKeys.cityID.rawValue : cityID ?? "",
             CodingKeys.isStudent.rawValue : isStudent ?? false,
             CodingKeys.isCoach.rawValue : isCoach ?? false,
-            CodingKeys.isSponser.rawValue : isSponser ?? false,
             CodingKeys.isOrganizer.rawValue : isOrganizer ?? false,
-            CodingKeys.postalCode.rawValue : postalCode ?? "",
-            CodingKeys.sportsPlay.rawValue : sportsPlay ?? "",
-            CodingKeys.coaching.rawValue : coaching ?? "",
+            CodingKeys.sportsPlay.rawValue : playValues,
+			CodingKeys.coaching.rawValue : coachingValues,
+			"isSponsor": isSponser ?? false,
+			"instituteID" : institute?.instituteID ?? 0,
+			"fromYear":institute?.academicFromYear ?? 0,
+			"toYear":institute?.academicToYear ?? 0,
+			"classID": institute?.classID ?? 0,
+			"streamID": institute?.streamID ?? 0,
+			"divisionID":institute?.divisionID ?? 0,
+			"cityID": institute?.cityID ?? 0,
+			"pincode":institute?.pincode ?? "",
+			"aboutSponsorship": sponsorRemarks ?? "",
+			"aboutOrganize": organizerRemarks ?? ""
         ]
     }
 }

@@ -210,10 +210,10 @@ extension InfoViewController : FootnoteButtonDelegate, CellDataFetchProtocol, Te
         switch key {
         case "isdCode":
             if self.masterData?.country?.isEmpty == false, let countryId = self.masterData?.country?[index].code {
-                self.profileRoleModel.countryID = String(countryId)
+				self.profileRoleModel.institute?.countryID = Int(countryId)
             }
         case "idType":
-            if self.masterData?.idTypes?.isEmpty == false, let countryId = self.masterData?.idTypes?[index].id {
+            if self.masterData?.idTypes?.isEmpty == false, let idType = self.masterData?.idTypes?[index].id {
             }
         default:
             break

@@ -14,7 +14,8 @@ protocol SportsCellDelegate : class {
 
 class SportsPlayTableViewCell: UITableViewCell,UIPickerViewDelegate, UIPickerViewDataSource,UITextFieldDelegate {
 
-    @IBOutlet weak var practiceHoursTextField: UITextField!
+	@IBOutlet var sportsPlayBackgroundView: UIView!
+	@IBOutlet weak var practiceHoursTextField: UITextField!
     @IBOutlet weak var playerSinceTextField: UITextField!
     @IBOutlet weak var selectSportTextField: UITextField!
     static let reuseId = "SportsPlayTableViewCell"
@@ -27,13 +28,12 @@ class SportsPlayTableViewCell: UITableViewCell,UIPickerViewDelegate, UIPickerVie
         super.awakeFromNib()
         pickerView.delegate = self
         pickerView.dataSource = self
-        sportArrayValues = ["one","Two"]
-        
+		sportsPlayBackgroundView.layer.cornerRadius = 5.0
+		sportsPlayBackgroundView.layer.masksToBounds = true
         practiceHoursTextField.delegate = self
         playerSinceTextField.delegate = self
         selectSportTextField.delegate = self
         selectSportTextField.inputView = pickerView
-
     }
     
     
@@ -64,7 +64,6 @@ class SportsPlayTableViewCell: UITableViewCell,UIPickerViewDelegate, UIPickerVie
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedCountry = sportArrayValues?[row]
         selectSportTextField.text = selectedCountry
-        print(selectedCountry,"selectedCountry")
     }
     
 
