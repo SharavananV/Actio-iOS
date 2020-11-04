@@ -16,11 +16,6 @@ class AcademicYearTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
-    func configure(_ data: GetProfile) {
-        fromYearTextField.text = "2020"
-        toYearTextField.text = "2025"
-    }
 }

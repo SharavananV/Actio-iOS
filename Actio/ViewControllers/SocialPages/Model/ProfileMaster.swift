@@ -145,13 +145,35 @@ class ProfileRoleModel: Codable {
     var isOrganizer: Bool?
     var postalCode: String?
     var frontImage, backImage: Data?
-    var sportsPlay : String?
-    var coaching : String?
+    var sportsPlay : [Play]?
+    var coaching : [Coaching]?
+    var institute : Institute?
+
     
     enum CodingKeys: String, CodingKey {
         
         case fromYear, toYear, instituteID, classID, streamID, divisonID, countryID, stateID, cityID,isStudent, isCoach, isSponser, isOrganizer, postalCode,frontImage, backImage,sportsPlay,coaching
 
+    }
+    
+    init(data: GetProfile?) {
+        instituteID = String(data?.institute?.instituteID ?? 0)
+        classID = String(data?.institute?.classID ?? 0)
+        streamID = String(data?.institute?.streamID ?? 0)
+        divisonID = String(data?.institute?.divisionID ?? 0)
+        countryID = String(data?.institute?.countryID ?? 0)
+        stateID = String(data?.institute?.stateID ?? 0)
+        cityID = String(data?.institute?.cityID ?? 0)
+        postalCode = String(data?.institute?.pincode ?? 0)
+        isStudent = data?.isStudent
+        isCoach = data?.isCoach
+        isSponser = data?.isSponsor
+        isOrganizer = data?.isOrganizer
+        fromYear = String(data?.institute?.academicFromYear ?? 0)
+        toYear = String(data?.institute?.academicToYear ?? 0)
+        sportsPlay = data?.play
+        coaching = data?.coaching
+        institute = data?.institute
     }
     
     func parameters() -> [String: Any] {

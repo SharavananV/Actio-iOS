@@ -56,20 +56,10 @@ class MyRoleViewController: UIViewController {
         private func getProfileCall() {
             service.post(getProfileUrl, parameters: nil, onView: view) { (response: GetProfileDataResponse) in
                 self.getProfileData = response.profile
-                self.instituteName = self.getProfileData?.institute?.instituteName
-                self.insClass = self.getProfileData?.institute?.instituteClass
-                self.toYearString = self.getProfileData?.institute?.academicToYear
-                self.fromYearString = self.getProfileData?.institute?.academicFromYear
-                self.playSportsName = self.getProfileData?.play?.map({$0.sportsName}) as? [String]
-                self.playerSince = self.getProfileData?.play?.map({$0.playingSince}) as? [Int]
-                self.weeklyHour = self.getProfileData?.play?.map({$0.weeklyHours}) as? [Int]
-                self.coachSportsName = self.getProfileData?.coaching?.map({$0.sportsName}) as? [String]
-                self.coachState = self.getProfileData?.coaching?.map({$0.stateName}) as? [String]
-                self.coachCity = self.getProfileData?.coaching?.map({$0.cityName}) as? [String]
-                self.coachLocality = self.getProfileData?.coaching?.map({$0.locality}) as? [String]
-                self.coachabout = self.getProfileData?.coaching?.map({$0.remarks}) as? [String]
                 print(response.profile,"==========")
                 self.myRoleProfileCall()
+                self.profileRoleModel = ProfileRoleModel(data: response.profile)
+                self.formData = self.prepareFormData()
                 self.editProfileTableView.reloadData()
             }
         }
@@ -85,117 +75,130 @@ class MyRoleViewController: UIViewController {
             }
         }
         
-        private func prepareFormData() -> [FormCellType] {
-
-            let states = self.myRoleData?.stateCity?.map({ (state) -> String in
-                return state.stateName ?? ""
-            }) ?? []
-            let selectedState = self.myRoleData?.stateCity?.first(where: {
-                String($0.stateID ?? 0) == self.profileRoleModel.stateID
-            })
-            
-            let cityValues = self.myRoleData?.stateCity?.map({$0.city})
-            
-            guard let cityObj = cityValues?.first else {
-                return formData ?? []
-            }
-            
-            let CityName = cityObj?.map({ (sCity) -> String in
-                return sCity.cityName ?? ""
-            }) ?? []
-                        
-            let selectedstateCity = cityObj?.first(where: {
-                 String($0.cityID ?? 0) == self.profileRoleModel.cityID
-            })
-
-            let institution = self.myRoleData?.institute?.map({ (institute) -> String in
-                return institute.instituteName ?? ""
-            }) ?? []
-            let selectedinstitution = self.myRoleData?.institute?.first(where: {
-                String($0.id ?? 0) == self.profileRoleModel.instituteID
-            })
-            
-            let roleclass = self.myRoleData?.instituteClass?.map({ (instituteClass) -> String in
-                return instituteClass.instituteClass ?? ""
-            }) ?? []
-            let selectedroleclass = self.myRoleData?.instituteClass?.first(where: {
-                String($0.id ?? 0) == self.profileRoleModel.instituteID
-            })
-            
-            let country = self.myRoleData?.country?.map({ (country) -> String in
-                return country.country ?? ""
-            }) ?? []
-            
-            let selectedCountry = self.myRoleData?.country?.first(where: {
-                String($0.id ?? 0) == self.profileRoleModel.countryID
-            })
-            
-            let stream = self.myRoleData?.instituteStream?.map({ (instituteStream) -> String in
-                return instituteStream.stream ?? ""
-            }) ?? []
-            
-            let selectedstream = self.myRoleData?.instituteStream?.first(where: {
-                String($0.id ?? 0) == self.profileRoleModel.streamID
-            })
-            let divison = self.myRoleData?.institutedivision?.map({ (institutedivision) -> String in
-                return institutedivision.division ?? ""
-            }) ?? []
-            
-            let selecteddivison = self.myRoleData?.institutedivision?.first(where: {
-                String($0.id ?? 0) == self.profileRoleModel.divisonID
-            })
-
-            let studentString = NSMutableAttributedString(string: "Are you student at school/university?", attributes: [NSAttributedString.Key.font : AppFont.PoppinsRegular(size: 15)])
-            let coachingString = NSMutableAttributedString(string: "Do you conduct coaching?", attributes: [NSAttributedString.Key.font : AppFont.PoppinsRegular(size: 15)])
-            let sponserString = NSMutableAttributedString(string: "Do you wish to sponser any tournament?", attributes: [NSAttributedString.Key.font : AppFont.PoppinsRegular(size: 15)])
-            let organizeString = NSMutableAttributedString(string: "Do you wish to organize Events?", attributes: [NSAttributedString.Key.font : AppFont.PoppinsRegular(size: 15)])
-           
-            var formData: [FormCellType] = [
-                .toggle(ToggleViewModel(key: "student", contextText: studentString, defaultValue: (profileRoleModel.isStudent == true))),
-                .textPicker(TextPickerModel(key: "institute", textValue:selectedinstitution?.instituteName, allValues: institution, contextText: "I am studying at",placeHolder: "Select Institution")),
-                .academic,
-                .textPicker(TextPickerModel(key: "class", textValue:selectedroleclass?.instituteClass, allValues: roleclass, contextText: "Class",placeHolder: "Select Class")),
-                .textPicker(TextPickerModel(key: "stream", textValue:selectedstream?.stream, allValues: stream, contextText: "Stream",placeHolder: "Select Stream")),
-                .textPicker(TextPickerModel(key: "divison", textValue:selecteddivison?.division, allValues: divison, contextText: "Divison",placeHolder: "Select Divison")),
-                .textPicker(TextPickerModel(key: "country", textValue:selectedCountry?.country, allValues: country, contextText: "Country",placeHolder: "Select Country")),
-                .textPicker(TextPickerModel(key: "state", textValue:selectedState?.stateName, allValues: states, contextText: "State",placeHolder: "Select State")),
-                .textPicker(TextPickerModel(key: "city", textValue:selectedstateCity?.cityName, allValues: CityName, contextText: "City",placeHolder: "Select City")),
-                .textEdit(TextEditModel(key: "postalcode", textValue: "", contextText: "Postal Code", placeHolder: "Postal Code", isSecure: false)),
-                .sportsPlay,
-                .addCell,
-                .toggle(ToggleViewModel(key: "coach", contextText: coachingString, defaultValue: (profileRoleModel.isCoach == true))),
-                .toggle(ToggleViewModel(key: "sponser", contextText: sponserString, defaultValue: (profileRoleModel.isSponser == true))),
-                .toggle(ToggleViewModel(key: "organize", contextText: organizeString, defaultValue: (profileRoleModel.isOrganizer == true))),
-                .button("Submit")
-              ]
-            if profileRoleModel.isCoach == true {
-                let coachData: [FormCellType] = [
-                    .sportsCoach,
-                    .addCell
-                ]
-                formData.insert(contentsOf: coachData, at: 13)
-            }
-            if profileRoleModel.isSponser == true {
-                let sponserData: [FormCellType] = [
-                    .textEdit(TextEditModel(key: "sponsership", textValue: "", contextText: "About Sponsorship", placeHolder: "Enter about sponsorship", isSecure: false))
-                ]
-                formData.insert(contentsOf: sponserData, at: 16)
-            }
-             if profileRoleModel.isOrganizer == true {
-                let organizerData: [FormCellType] = [
-                    .textEdit(TextEditModel(key: "organizeEvents", textValue: "", contextText: "About Organizing Events", placeHolder: "Enter about organizing events", isSecure: false))
-                ]
-                formData.insert(contentsOf: organizerData, at: 18)
-            }
-            self.formData = formData
-            UIView.setAnimationsEnabled(false)
-            self.editProfileTableView.beginUpdates()
-            self.editProfileTableView.reloadSections(NSIndexSet(index: 0) as IndexSet, with: .none)
-            self.editProfileTableView.endUpdates()
-            return formData
+    private func prepareFormData(shouldAddEmptyPlayCell: Bool = false) -> [FormCellType] {
+        
+        let states = self.myRoleData?.stateCity?.map({ (state) -> String in
+            return state.stateName ?? ""
+        }) ?? []
+        let selectedState = self.myRoleData?.stateCity?.first(where: {
+            String($0.stateID ?? 0) == self.profileRoleModel.stateID
+        })
+        
+        let cityValues = self.myRoleData?.stateCity?.map({$0.city})
+        
+        guard let cityObj = cityValues?.first else {
+            return formData ?? []
         }
-
+        
+        let CityName = cityObj?.map({ (sCity) -> String in
+            return sCity.cityName ?? ""
+        }) ?? []
+        
+        let selectedstateCity = cityObj?.first(where: {
+            String($0.cityID ?? 0) == self.profileRoleModel.cityID
+        })
+        
+        let institution = self.myRoleData?.institute?.map({ (institute) -> String in
+            return institute.instituteName ?? ""
+        }) ?? []
+        let selectedinstitution = self.myRoleData?.institute?.first(where: {
+            String($0.id ?? 0) == self.profileRoleModel.instituteID
+        })
+        
+        let roleclass = self.myRoleData?.instituteClass?.map({ (instituteClass) -> String in
+            return instituteClass.instituteClass ?? ""
+        }) ?? []
+        let selectedroleclass = self.myRoleData?.instituteClass?.first(where: {
+            String($0.id ?? 0) == self.profileRoleModel.instituteID
+        })
+        
+        let country = self.myRoleData?.country?.map({ (country) -> String in
+            return country.country ?? ""
+        }) ?? []
+        
+        let selectedCountry = self.myRoleData?.country?.first(where: {
+            String($0.id ?? 0) == self.profileRoleModel.countryID
+        })
+        
+        let stream = self.myRoleData?.instituteStream?.map({ (instituteStream) -> String in
+            return instituteStream.stream ?? ""
+        }) ?? []
+        
+        let selectedstream = self.myRoleData?.instituteStream?.first(where: {
+            String($0.id ?? 0) == self.profileRoleModel.streamID
+        })
+        let divison = self.myRoleData?.institutedivision?.map({ (institutedivision) -> String in
+            return institutedivision.division ?? ""
+        }) ?? []
+        
+        let selecteddivison = self.myRoleData?.institutedivision?.first(where: {
+            String($0.id ?? 0) == self.profileRoleModel.divisonID
+        })
+        
+        var sportsPlayAdd: [FormCellType] = self.profileRoleModel.sportsPlay?.map({ (play) -> FormCellType in
+            .sportsPlay(play)
+        }) ?? [.sportsPlay(nil)]
+        
+        var sportsCoachAdd: [FormCellType] = self.profileRoleModel.coaching?.map({ (coach) -> FormCellType in
+            .sportsCoach(coach)
+        }) ?? [.sportsCoach(nil)]
+        
+        if shouldAddEmptyPlayCell {
+            sportsPlayAdd.append(.sportsPlay(nil))
+        }
+        
+        let studentString = NSMutableAttributedString(string: "Are you student at school/university?", attributes: [NSAttributedString.Key.font : AppFont.PoppinsRegular(size: 15)])
+        let coachingString = NSMutableAttributedString(string: "Do you conduct coaching?", attributes: [NSAttributedString.Key.font : AppFont.PoppinsRegular(size: 15)])
+        let sponserString = NSMutableAttributedString(string: "Do you wish to sponser any tournament?", attributes: [NSAttributedString.Key.font : AppFont.PoppinsRegular(size: 15)])
+        let organizeString = NSMutableAttributedString(string: "Do you wish to organize Events?", attributes: [NSAttributedString.Key.font : AppFont.PoppinsRegular(size: 15)])
+        
+        var formData: [FormCellType] = [
+            .toggle(ToggleViewModel(key: "student", contextText: studentString, defaultValue: (profileRoleModel.isStudent == true))),
+            .textPicker(TextPickerModel(key: "institute", textValue:selectedinstitution?.instituteName, allValues: institution, contextText: "I am studying at",placeHolder: "Select Institution")),
+            .academic(profileRoleModel.institute),
+            .textPicker(TextPickerModel(key: "class", textValue:selectedroleclass?.instituteClass, allValues: roleclass, contextText: "Class",placeHolder: "Select Class")),
+            .textPicker(TextPickerModel(key: "stream", textValue:selectedstream?.stream, allValues: stream, contextText: "Stream",placeHolder: "Select Stream")),
+            .textPicker(TextPickerModel(key: "divison", textValue:selecteddivison?.division, allValues: divison, contextText: "Divison",placeHolder: "Select Divison")),
+            .textPicker(TextPickerModel(key: "country", textValue:selectedCountry?.country, allValues: country, contextText: "Country",placeHolder: "Select Country")),
+            .textPicker(TextPickerModel(key: "state", textValue:selectedState?.stateName, allValues: states, contextText: "State",placeHolder: "Select State")),
+            .textPicker(TextPickerModel(key: "city", textValue:selectedstateCity?.cityName, allValues: CityName, contextText: "City",placeHolder: "Select City")),
+            .textEdit(TextEditModel(key: "postalcode", textValue: profileRoleModel.postalCode, contextText: "Postal Code", placeHolder: "Postal Code", isSecure: false)),
+            .addCell("+ Add Another sport you play"),
+            .toggle(ToggleViewModel(key: "coach", contextText: coachingString, defaultValue: (profileRoleModel.isCoach == true))),
+            .toggle(ToggleViewModel(key: "sponser", contextText: sponserString, defaultValue: (profileRoleModel.isSponser == true))),
+            .toggle(ToggleViewModel(key: "organize", contextText: organizeString, defaultValue: (profileRoleModel.isOrganizer == true))),
+            .button("Submit")
+        ]
+        
+        formData.insert(contentsOf: sportsPlayAdd, at: 10)
+        if profileRoleModel.isCoach == true {
+            let coachData: [FormCellType] = [
+                .addCell("+ Add Another sport you Coach")
+            ]
+            formData.insert(contentsOf: sportsCoachAdd, at: 13)
+            formData.insert(contentsOf: coachData, at: 14)
+        }
+        if profileRoleModel.isSponser == true {
+            let sponserData: [FormCellType] = [
+                .textEdit(TextEditModel(key: "sponsership", textValue: "", contextText: "About Sponsorship", placeHolder: "Enter about sponsorship", isSecure: false))
+            ]
+            formData.insert(contentsOf: sponserData, at: 16)
+        }
+        if profileRoleModel.isOrganizer == true {
+            let organizerData: [FormCellType] = [
+                .textEdit(TextEditModel(key: "organizeEvents", textValue: "", contextText: "About Organizing Events", placeHolder: "Enter about organizing events", isSecure: false))
+            ]
+            formData.insert(contentsOf: organizerData, at: 18)
+        }
+        self.formData = formData
+        UIView.setAnimationsEnabled(false)
+        self.editProfileTableView.beginUpdates()
+        self.editProfileTableView.reloadSections(NSIndexSet(index: 0) as IndexSet, with: .none)
+        self.editProfileTableView.endUpdates()
+        return formData
     }
+    
+}
 
 extension MyRoleViewController :  UITableViewDataSource, UITableViewDelegate {
     
@@ -247,37 +250,37 @@ extension MyRoleViewController :  UITableViewDataSource, UITableViewDelegate {
             textPickerCell.delegate = self
             cell = textPickerCell
             
-        case .sportsPlay:
+        case .sportsPlay(let data):
             guard let playCell = tableView.dequeueReusableCell(withIdentifier: SportsPlayTableViewCell.reuseId, for: indexPath) as? SportsPlayTableViewCell else {
                 return UITableViewCell()
             }
             playCell.sportArrayValues = self.sportArrayValues
-            playCell.selectSportTextField.text = playSportsName?[0]
-            playCell.playerSinceTextField.text = String(playerSince?[0] ?? 0)
-            playCell.practiceHoursTextField.text = String(weeklyHour?[0] ?? 0)
+            playCell.selectSportTextField.text = data?.sportsName
+            playCell.playerSinceTextField.text = String(data?.playingSince ?? 0)
+            playCell.practiceHoursTextField.text = String(data?.weeklyHours ?? 0)
             cell = playCell
-        case .sportsCoach:
+        case .sportsCoach(let coach):
             guard let coachCell = tableView.dequeueReusableCell(withIdentifier: SportsCoachTableViewCell.reuseId, for: indexPath) as? SportsCoachTableViewCell else {
                 return UITableViewCell()
             }
-            coachCell.coachSelectSportTextField.text = coachSportsName?[0]
-            coachCell.cityTextField.text = coachCity?[0]
-            coachCell.stateTextField.text = coachState?[0]
-            coachCell.coachSelectSportTextField.text = coachSportsName?[0]
-            coachCell.localityTextField.text = coachLocality?[0]
-            coachCell.aboutCoachingTextField.text = coachabout?[0]
             coachCell.sportArrayValues = self.sportArrayValues
             coachCell.stateArrayValues = self.stateArrayValues
             coachCell.cityArrayValues = self.cityArrayValues
+            coachCell.coachSelectSportTextField.text = coach?.sportsName
+            coachCell.cityTextField.text = coach?.cityName
+            coachCell.stateTextField.text = coach?.stateName
+            coachCell.localityTextField.text = coach?.locality
+            coachCell.aboutCoachingTextField.text = coach?.remarks
+
             cell = coachCell
-        case .academic:
+        case .academic(let data):
             guard let academicCell = tableView.dequeueReusableCell(withIdentifier: AcademicYearTableViewCell.reuseId, for: indexPath) as? AcademicYearTableViewCell else {
                 return UITableViewCell()
             }
             cell = academicCell
-            academicCell.toYearTextField.text = String(toYearString ?? 0)
-            academicCell.fromYearTextField.text = String(fromYearString ?? 0)
-        case .addCell:
+            academicCell.toYearTextField.text = String(data?.academicToYear ?? 0)
+            academicCell.fromYearTextField.text = String(data?.academicFromYear ?? 0)
+        case .addCell(let title):
             guard let addCell = tableView.dequeueReusableCell(withIdentifier: AddAnotherSportTableViewCell.reuseId, for: indexPath) as? AddAnotherSportTableViewCell else {
                 return UITableViewCell()
             }
@@ -291,19 +294,20 @@ extension MyRoleViewController :  UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (tableView.cellForRow(at: indexPath) as? AddAnotherSportTableViewCell) != nil {
-            print("Yes success")
+            self.formData = prepareFormData(shouldAddEmptyPlayCell: true)
+            tableView.reloadData()
         }
     }
 }
 extension MyRoleViewController : FootnoteButtonDelegate, CellDataFetchProtocol, TextPickerDelegate, SwitchCellDelegate {
     func footnoteButtonCallback(_ title: String) {
-        print("something")
         updateProfileMyRole()
     }
     
     private func updateProfileMyRole() {
         service.post(ProfileUrl, parameters: profileRoleModel.parameters(), onView: view) { (response) in
             if let msg = response["msg"] as? String {
+                print(self.profileRoleModel.parameters(),"===============")
                 self.view.makeToast(msg)
                 
                 self.navigationController?.popViewController(animated: true)
@@ -359,10 +363,10 @@ extension MyRoleViewController : FootnoteButtonDelegate, CellDataFetchProtocol, 
 }
 
 private enum FormCellType {
-    case academic
-    case sportsPlay
-    case sportsCoach
-    case addCell
+    case academic(Institute?)
+    case sportsPlay(Play?)
+    case sportsCoach(Coaching?)
+    case addCell(String)
     case textEdit(TextEditModel)
     case textPicker(TextPickerModel)
     case toggle(ToggleViewModel)
