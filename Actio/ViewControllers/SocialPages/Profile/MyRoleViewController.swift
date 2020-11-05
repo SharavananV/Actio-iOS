@@ -67,7 +67,7 @@ class MyRoleViewController: UIViewController {
 	}
 	
 	private func myRoleProfileCall() {
-		let parameters = [ "instituteID":self.profileRoleModel.institute?.instituteID ?? "" , "classID": self.profileRoleModel.institute?.classID ?? "" , "streamID": self.profileRoleModel.institute?.streamID ?? "" ,"countryID":self.profileRoleModel.institute?.countryID ?? "" ,"stateID": self.profileRoleModel.institute?.stateID, "stateCity":true] as [String : Any]
+        let parameters = [ "instituteID":self.profileRoleModel.institute?.instituteID ?? "" , "classID": self.profileRoleModel.institute?.classID ?? "" , "streamID": self.profileRoleModel.institute?.streamID ?? "" ,"countryID":self.profileRoleModel.institute?.countryID ?? "" ,"stateID": self.profileRoleModel.institute?.stateID ?? "", "stateCity":true] as [String : Any]
 		service.post(masterProfileUrl, parameters: parameters, onView: view) { (response: ProfileMasterResponse) in
 			self.myRoleData = response.master
 			self.sportArrayValues = self.myRoleData?.sports?.map({$0.sports ?? ""})
@@ -362,6 +362,14 @@ extension MyRoleViewController : FootnoteButtonDelegate, CellDataFetchProtocol, 
 			if self.myRoleData?.instituteStream?.isEmpty == false, let instituteStreamId = self.myRoleData?.instituteStream?[index].id {
 				self.profileRoleModel.institute?.streamID = Int(instituteStreamId)
 			}
+        case "divison":
+            if self.myRoleData?.institutedivision?.isEmpty == false, let instituteDivisionId = self.myRoleData?.institutedivision?[index].id {
+                self.profileRoleModel.institute?.divisionID = Int(instituteDivisionId)
+            }
+        case "city":
+            if self.myRoleData?.stateCity?.isEmpty == false, let instituteCityId = self.myRoleData?.stateCity?[index].stateID {
+                self.profileRoleModel.institute?.cityID = Int(instituteCityId)
+            }
 		default:
 			break
 		}
@@ -383,6 +391,10 @@ extension MyRoleViewController : FootnoteButtonDelegate, CellDataFetchProtocol, 
 			profileRoleModel.isOrganizer = value
 			prepareFormData()
 		}
+        else if key == "student" {
+            profileRoleModel.isStudent = value
+            prepareFormData()
+        }
 	}
 	
 }
