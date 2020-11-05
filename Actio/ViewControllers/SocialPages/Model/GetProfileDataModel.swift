@@ -108,10 +108,10 @@ struct Institute: Codable {
 }
 
 // MARK: - Play
-struct Play: Codable {
-    let id, sportsID: Int?
-    let sportsName: String?
-    let playingSince, weeklyHours: Int?
+class Play: Codable {
+    var id, sportsID: Int?
+    var sportsName: String?
+    var playingSince, weeklyHours: Int?
 
     enum CodingKeys: String, CodingKey {
         case id

@@ -43,8 +43,8 @@ class SportsCoachTableViewCell: UITableViewCell,UIPickerViewDelegate, UIPickerVi
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
         if (self.cityTextField != nil && self.cityTextField == textField) {
-            //let cityValue = self.cityTextField?.text?.isEmpty == false ? self.cityTextField?.text : self.cityArrayValues?[0]
-           // cityTextField.text = cityValue
+            let cityValue = self.cityTextField?.text?.isEmpty == false ? self.cityTextField?.text : self.cityArrayValues?[0]
+            cityTextField.text = cityValue
         } else if(self.coachSelectSportTextField != nil && self.coachSelectSportTextField == textField) {
             let sportTextValue = self.coachSelectSportTextField?.text?.isEmpty == false ? self.coachSelectSportTextField?.text : self.sportArrayValues?[0]
             coachSelectSportTextField.text = sportTextValue

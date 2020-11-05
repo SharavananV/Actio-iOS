@@ -12,32 +12,16 @@ class MyRoleViewController: UIViewController {
 	
 	@IBOutlet weak var editProfileTableView: UITableView!
 	fileprivate var formData: [FormCellType]?
+    private let service = DependencyProvider.shared.networkService
 	var myRoleData: ProfileMaster?
 	var getProfileData: GetProfile?
 	var masterData : MasterData?
-	private let service = DependencyProvider.shared.networkService
-	var sportArrayValues: [String]?
-	var stateArrayValues: [String]?
-	var cityArrayValues: [String]?
-	var selectedArrayValues: String?
 	var profileRoleModel = ProfileRoleModel()
-	var stateName: [String]?
-	var titleSelected : String?
-	
-	var instituteName : String?
-	var fromYearString: Int?
-	var toYearString: Int?
-	var insClass : String?
-	var stream :String?
-	var division :String?
-	var playSportsName : [String]?
-	var playerSince : [Int]?
-	var weeklyHour : [Int]?
-	var coachSportsName : [String]?
-	var coachState : [String]?
-	var coachCity : [String]?
-	var coachLocality : [String]?
-	var coachabout : [String]?
+    var sportArrayValues: [String]?
+    var coachSportArrayValues: [String]?
+    var stateArrayValues: [String]?
+    var cityArrayValues: [String]?
+
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -72,8 +56,9 @@ class MyRoleViewController: UIViewController {
 			self.myRoleData = response.master
 			self.sportArrayValues = self.myRoleData?.sports?.map({$0.sports ?? ""})
 			self.stateArrayValues = self.myRoleData?.state?.map({$0.state ?? ""})
-			self.cityArrayValues = self.myRoleData?.stateCity?.map({$0.stateName ?? ""})
-			
+			self.cityArrayValues = self.myRoleData?.city?.map({$0.city ?? ""})
+            self.coachSportArrayValues = self.myRoleData?.sports?.map({$0.sports ?? ""})
+
 			self.formData = self.prepareFormData()
 			self.editProfileTableView.reloadData()
 		}
@@ -88,19 +73,13 @@ class MyRoleViewController: UIViewController {
 			String($0.stateID ?? 0) == String(self.profileRoleModel.institute?.stateID ?? 0)
 		})
 		
-		let cityValues = self.myRoleData?.stateCity?.map({$0.city})
-		
-		guard let cityObj = cityValues?.first else {
-			return formData ?? []
-		}
-		
-		let CityName = cityObj?.map({ (sCity) -> String in
-			return sCity.cityName ?? ""
-		}) ?? []
-		
-		let selectedstateCity = cityObj?.first(where: {
-			String($0.cityID ?? 0) == String(self.profileRoleModel.institute?.cityID ?? 0)
-		})
+        let city = self.myRoleData?.city?.map({ (city) -> String in
+            return city.city ?? ""
+        }) ?? []
+        
+        let selectedstateCity = self.myRoleData?.city?.first(where: {
+            String($0.id ?? 0) == String(self.profileRoleModel.institute?.cityID ?? 0)
+        })
 		
 		let institution = self.myRoleData?.institute?.map({ (institute) -> String in
 			return institute.instituteName ?? ""
@@ -113,7 +92,7 @@ class MyRoleViewController: UIViewController {
 			return instituteClass.instituteClass ?? ""
 		}) ?? []
 		let selectedroleclass = self.myRoleData?.instituteClass?.first(where: {
-			String($0.id ?? 0) == String(self.profileRoleModel.institute?.instituteID ?? 0)
+			String($0.id ?? 0) == String(self.profileRoleModel.institute?.classID ?? 0)
 		})
 		
 		let country = self.myRoleData?.country?.map({ (country) -> String in
@@ -140,17 +119,19 @@ class MyRoleViewController: UIViewController {
 		})
 		
 		var titleLabel = "+ Add Another sport you play"
-		
+        if let sportsPlay = self.profileRoleModel.sportsPlay, sportsPlay.isEmpty == true {
+            self.profileRoleModel.sportsPlay?.append(Play())
+        }
 		var sportsPlayAdd: [FormCellType] = self.profileRoleModel.sportsPlay?.map({ (play) -> FormCellType in
 			.sportsPlay(play)
-		}) ?? [.sportsPlay(nil)]
+        }) ?? []
 		
 		var sportsCoachAdd: [FormCellType] = self.profileRoleModel.coaching?.map({ (coach) -> FormCellType in
 			.sportsCoach(coach)
 		}) ?? [.sportsCoach(nil)]
 		
 		if shouldAddEmptyPlayCell {
-			sportsPlayAdd.append(.sportsPlay(nil))
+			sportsPlayAdd.append(.sportsPlay(Play()))
 		}
 		if shouldAddEmptyCoachCell {
 			sportsCoachAdd.append(.sportsCoach(nil))
@@ -170,7 +151,7 @@ class MyRoleViewController: UIViewController {
 			.textPicker(TextPickerModel(key: "divison", textValue:selecteddivison?.division, allValues: divison, contextText: "Divison",placeHolder: "Select Divison")),
 			.textPicker(TextPickerModel(key: "country", textValue:selectedCountry?.country, allValues: country, contextText: "Country",placeHolder: "Select Country")),
 			.textPicker(TextPickerModel(key: "state", textValue:selectedState?.stateName, allValues: states, contextText: "State",placeHolder: "Select State")),
-			.textPicker(TextPickerModel(key: "city", textValue:selectedstateCity?.cityName, allValues: CityName, contextText: "City",placeHolder: "Select City")),
+			.textPicker(TextPickerModel(key: "city", textValue:selectedstateCity?.city, allValues: city, contextText: "City",placeHolder: "Select City")),
 			.textEdit(TextEditModel(key: "postalcode", textValue: String(profileRoleModel.institute?.pincode ?? 0), contextText: "Postal Code", placeHolder: "Postal Code", isSecure: false)),
 			.addCell(titleLabel),
 			.toggle(ToggleViewModel(key: "coach", contextText: coachingString, defaultValue: (profileRoleModel.isCoach == true))),
@@ -263,16 +244,14 @@ extension MyRoleViewController :  UITableViewDataSource, UITableViewDelegate {
 			guard let playCell = tableView.dequeueReusableCell(withIdentifier: SportsPlayTableViewCell.reuseId, for: indexPath) as? SportsPlayTableViewCell else {
 				return UITableViewCell()
 			}
+            playCell.configure(data)
 			playCell.sportArrayValues = self.sportArrayValues
-			playCell.selectSportTextField.text = data?.sportsName
-			playCell.playerSinceTextField.text = String(data?.playingSince ?? 0)
-			playCell.practiceHoursTextField.text = String(data?.weeklyHours ?? 0)
 			cell = playCell
 		case .sportsCoach(let coach):
 			guard let coachCell = tableView.dequeueReusableCell(withIdentifier: SportsCoachTableViewCell.reuseId, for: indexPath) as? SportsCoachTableViewCell else {
 				return UITableViewCell()
 			}
-			coachCell.sportArrayValues = self.sportArrayValues
+			coachCell.sportArrayValues = self.coachSportArrayValues
 			coachCell.stateArrayValues = self.stateArrayValues
 			coachCell.cityArrayValues = self.cityArrayValues
 			coachCell.coachSelectSportTextField.text = coach?.sportsName
@@ -286,9 +265,10 @@ extension MyRoleViewController :  UITableViewDataSource, UITableViewDelegate {
 			guard let academicCell = tableView.dequeueReusableCell(withIdentifier: AcademicYearTableViewCell.reuseId, for: indexPath) as? AcademicYearTableViewCell else {
 				return UITableViewCell()
 			}
-			cell = academicCell
-			academicCell.toYearTextField.text = String(data?.academicToYear ?? 0)
-			academicCell.fromYearTextField.text = String(data?.academicFromYear ?? 0)
+            cell = academicCell
+            academicCell.toYearTextField.text = String(data?.academicToYear ?? 0)
+            academicCell.fromYearTextField.text = String(data?.academicFromYear ?? 0)
+           
 		case .addCell(let title):
 			guard let addCell = tableView.dequeueReusableCell(withIdentifier: AddAnotherSportTableViewCell.reuseId, for: indexPath) as? AddAnotherSportTableViewCell else {
 				return UITableViewCell()
@@ -332,8 +312,13 @@ extension MyRoleViewController : FootnoteButtonDelegate, CellDataFetchProtocol, 
 	}
 	
 	func valueChanged(keyValuePair: (key: String, value: String)) {
-		print("something")
-		
+        switch keyValuePair.key {
+        case "postalcode":
+            self.profileRoleModel.institute?.pincode = Int(keyValuePair.value)
+        default:
+            break;
+        }
+        prepareFormData()
 	}
 	
 	func didPickText(_ key: String, index: Int) {
@@ -367,7 +352,7 @@ extension MyRoleViewController : FootnoteButtonDelegate, CellDataFetchProtocol, 
                 self.profileRoleModel.institute?.divisionID = Int(instituteDivisionId)
             }
         case "city":
-            if self.myRoleData?.stateCity?.isEmpty == false, let instituteCityId = self.myRoleData?.stateCity?[index].stateID {
+            if self.myRoleData?.city?.isEmpty == false, let instituteCityId = self.myRoleData?.city?[index].id {
                 self.profileRoleModel.institute?.cityID = Int(instituteCityId)
             }
 		default:

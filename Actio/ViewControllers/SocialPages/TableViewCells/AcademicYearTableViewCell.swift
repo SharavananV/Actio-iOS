@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AcademicYearTableViewCell: UITableViewCell {
+class AcademicYearTableViewCell: UITableViewCell,UITextFieldDelegate {
 
     @IBOutlet weak var toYearTextField: UITextField!
     @IBOutlet weak var fromYearTextField: UITextField!
@@ -16,6 +16,8 @@ class AcademicYearTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        toYearTextField.delegate = self
+        fromYearTextField.delegate = self
     }
 
 }

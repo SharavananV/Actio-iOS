@@ -20,6 +20,7 @@ class ProfileMaster: Codable {
     let country: [ProfileCountry]?
     let idTypes: [ProfileIDType]?
     let state: [ProfileState]?
+    let city: [MasterCity]?
     let stateCity: [StateCity]?
     let sports: [Sport]?
     let institute: [ProfileInstitute]?
@@ -55,7 +56,7 @@ struct InstituteStream: Codable {
 struct StateCity: Codable {
     let stateID: Int?
     let stateName: String?
-    let city: [ProfileCity]?
+    let city: [MasterCity]?
 
     enum CodingKeys: String, CodingKey {
         case stateID = "state_id"
@@ -64,15 +65,14 @@ struct StateCity: Codable {
     }
 }
 
-// MARK: - City
-struct ProfileCity: Codable {
-    let cityID: Int?
-    let cityName: String?
+// MARK: - MasterCity
+struct MasterCity: Codable {
+    let id: Int?
+    let city: String?
     let stateID: Int?
 
     enum CodingKeys: String, CodingKey {
-        case cityID = "city_id"
-        case cityName = "city_name"
+        case id, city
         case stateID = "state_id"
     }
 }
@@ -135,7 +135,10 @@ struct ProfileState: Codable {
 }
 class ProfileRoleModel: Codable {
     
-    internal init() {}
+    internal init() {
+        sportsPlay = []
+        coaching = []
+    }
 	
     var isStudent: Bool?
     var isCoach: Bool?

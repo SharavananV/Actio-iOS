@@ -8,9 +8,6 @@
 
 import UIKit
 
-protocol SportsCellDelegate : class {
-    func ValueSelectedChage(sender:SportsPlayTableViewCell ,Id:String ,selectedCell:String)
-}
 
 class SportsPlayTableViewCell: UITableViewCell,UIPickerViewDelegate, UIPickerViewDataSource,UITextFieldDelegate {
 
@@ -19,9 +16,9 @@ class SportsPlayTableViewCell: UITableViewCell,UIPickerViewDelegate, UIPickerVie
     @IBOutlet weak var playerSinceTextField: UITextField!
     @IBOutlet weak var selectSportTextField: UITextField!
     static let reuseId = "SportsPlayTableViewCell"
+
     var sportArrayValues: [String]?
-    weak var cellDelegate: SportsCellDelegate?
-    var selectedCountry: String?
+    var selectedSports: String?
     let pickerView = UIPickerView()
 
     override func awakeFromNib() {
@@ -35,8 +32,14 @@ class SportsPlayTableViewCell: UITableViewCell,UIPickerViewDelegate, UIPickerVie
         selectSportTextField.delegate = self
         selectSportTextField.inputView = pickerView
     }
+    var model : Play?
     
-    
+    func configure(_ play: Play?) {
+        self.model = play
+        selectSportTextField.text = play?.sportsName
+        playerSinceTextField.text = String(play?.playingSince ?? 0)
+        practiceHoursTextField.text = String(play?.weeklyHours ?? 0)
+    }
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
         if(self.selectSportTextField != nil && self.selectSportTextField == textField) {
@@ -44,6 +47,11 @@ class SportsPlayTableViewCell: UITableViewCell,UIPickerViewDelegate, UIPickerVie
             selectSportTextField.text = sportTextValue
         }
         self.pickerView.reloadAllComponents()
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if  let value = selectSportTextField.text {
+            self.model?.sportsName = value
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
@@ -62,8 +70,8 @@ class SportsPlayTableViewCell: UITableViewCell,UIPickerViewDelegate, UIPickerVie
         return 1
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedCountry = sportArrayValues?[row]
-        selectSportTextField.text = selectedCountry
+        selectedSports = sportArrayValues?[row]
+        selectSportTextField.text = selectedSports
     }
     
 
