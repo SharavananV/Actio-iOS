@@ -14,12 +14,13 @@ struct SearchPlayerResponse: ResponseType {
 	let errors: [ActioError]?
 	var status: String?
 	var search: [SearchUserModel]?
+	var result: [SearchUserModel]?
 }
 
 // MARK: - Search
 struct SearchUserModel: Codable {
-	var subscriberID: Int?
-	var subscriberDisplayID, fullName, dob: String?
+	var subscriberID, subscriberDisplayID: IntType?
+	var fullName, dob: String?
 	var age: Int?
 	var ageAllow, isdCode, mobileNumber, emailID: String?
 	var username: String?

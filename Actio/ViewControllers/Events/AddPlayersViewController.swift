@@ -421,7 +421,7 @@ extension AddPlayersViewController: UserSelectionProtocol, CellDataFetchProtocol
 			currentPlayer?.gender = player.gender
 			currentPlayer?.isdCode = player.isdCode
 			currentPlayer?.mobileNumber = player.mobileNumber
-			currentPlayer?.subscriberID = player.subscriberID
+			currentPlayer?.subscriberID = player.subscriberID?.value
 			
 			prepareFormData()
 		}

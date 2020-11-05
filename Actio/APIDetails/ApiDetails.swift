@@ -74,7 +74,10 @@ let getProfileUrl = baseUrl + "profile/get"
 let ProfileUrl = baseUrl + "profile"
 
 // KPI
-let nonActioMaster = baseUrl + "nonActioKPIList"
+let nonActioMasterUrl = baseUrl + "nonActioKPIList"
+let nonActioFilterUrl = baseUrl + "nonActioKPIFilter"
+let searchCoachUrl = baseUrl + "admin/master/tournamentSearchSubscriber"
+let registerNonActioKpiUrl = baseUrl + "registerNonActioEventsKPI"
 
 // Socket URL
 let socketUrl = "http://203.223.191.66:8085"

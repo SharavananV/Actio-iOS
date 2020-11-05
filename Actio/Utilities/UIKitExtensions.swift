@@ -297,9 +297,43 @@ enum DoubleType: Codable {
 	
 	var value: Double {
 		switch self {
-		case .string(_):
-			return 0
+		case .string(let value):
+			return Double(value) ?? 0
 		case .double(let value):
+			return value
+		}
+	}
+}
+
+enum IntType: Codable {
+	
+	case string(String)
+	case int(Int)
+	
+	init(from decoder: Decoder) throws {
+		let container = try decoder.singleValueContainer()
+		do {
+			self = .int(try container.decode(Int.self))
+		} catch DecodingError.typeMismatch {
+			self = .string(try container.decode(String.self))
+		}
+	}
+	
+	func encode(to encoder: Encoder) throws {
+		var container = encoder.singleValueContainer()
+		switch self {
+		case .string(let value):
+			try container.encode(value)
+		case .int(let value):
+			try container.encode(value)
+		}
+	}
+	
+	var value: Int {
+		switch self {
+		case .string(let value):
+			return Int(value) ?? 0
+		case .int(let value):
 			return value
 		}
 	}

@@ -21,6 +21,8 @@ class UserSelectionTableViewCell: UITableViewCell {
 	
 	private let service = DependencyProvider.shared.networkService
 	private var searchedUsers: [SearchUserModel]?
+	private var settings = UserSearchSettings()
+	private var tableViewHeightConstraint: NSLayoutConstraint?
 	
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -101,15 +103,21 @@ extension UserSelectionTableViewCell: UISearchBarDelegate {
 		
 		delegate?.playerList(forSearchText: searchText, completion: { (users) in
 			if self.searchedUsers == nil || self.searchedUsers?.isEmpty == true {
-				self.contentView.addSubview(self.tableView)
-				
-				NSLayoutConstraint.activate([
-					self.tableView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: .kTableCellPadding),
-					self.tableView.topAnchor.constraint(equalTo: self.searchBar.bottomAnchor, constant: 10),
-					self.tableView.bottomAnchor.constraint(lessThanOrEqualTo: self.contentView.bottomAnchor, constant: -10),
-					self.tableView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -.kTableCellPadding),
-					self.tableView.heightAnchor.constraint(equalToConstant: 132)
-				])
+				if !self.contentView.subviews.contains(self.tableView) {
+					self.contentView.addSubview(self.tableView)
+					
+					self.tableViewHeightConstraint = self.tableView.heightAnchor.constraint(equalToConstant: 132)
+					
+					NSLayoutConstraint.activate([
+						self.tableView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: .kTableCellPadding),
+						self.tableView.topAnchor.constraint(equalTo: self.searchBar.bottomAnchor, constant: 10),
+						self.tableView.bottomAnchor.constraint(lessThanOrEqualTo: self.contentView.bottomAnchor, constant: -10),
+						self.tableView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -.kTableCellPadding),
+						self.tableViewHeightConstraint!
+					])
+				} else {
+					self.tableViewHeightConstraint?.constant = 132
+				}
 				
 				self.delegate?.reloadHeight()
 			}
@@ -127,7 +135,8 @@ extension UserSelectionTableViewCell: UITableViewDataSource, UITableViewDelegate
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath)
-		cell.textLabel?.text = searchedUsers?[indexPath.row].fullName
+		let user = searchedUsers?[indexPath.row]
+		cell.textLabel?.text = settings.showUserName ? user?.username : user?.fullName
 		
 		return cell
 	}
@@ -135,6 +144,12 @@ extension UserSelectionTableViewCell: UITableViewDataSource, UITableViewDelegate
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		guard let user = searchedUsers?[indexPath.row] else { return }
 		
+		if settings.retainResult {
+			searchBar.text = settings.showUserName ? user.username : user.fullName
+		}
+		if settings.collapseTableViewOnSelection {
+			tableViewHeightConstraint?.constant = 0
+		}
 		delegate?.selectedPlayer(user)
 	}
 }
@@ -162,5 +177,36 @@ extension UserSelectionTableViewCell {
 		]
 		
 		NSLayoutConstraint.activate(constraints)
+	}
+	
+	func configure(settings: UserSearchSettings) {
+		resetButton.isHidden = !settings.showReset
+		contentLabel.text = settings.title
+		searchBar.placeholder = settings.placeHolder
+		
+		self.settings = settings
+	}
+}
+
+struct UserSearchSettings {
+	internal init(showReset: Bool, showUserName: Bool, retainResult: Bool, collapseTableViewOnSelection: Bool, title: String, placeHolder: String) {
+		self.showReset = showReset
+		self.showUserName = showUserName
+		self.retainResult = retainResult
+		self.collapseTableViewOnSelection = collapseTableViewOnSelection
+		self.title = title
+		self.placeHolder = placeHolder
+	}
+	
+	let showReset, showUserName, retainResult, collapseTableViewOnSelection: Bool
+	let title, placeHolder: String
+	
+	init() {
+		showReset = true
+		showUserName = false
+		title = "Search By Username, Subscription ID or Mobile No"
+		placeHolder = "Type your search"
+		retainResult = false
+		collapseTableViewOnSelection = false
 	}
 }

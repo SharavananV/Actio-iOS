@@ -132,7 +132,7 @@ extension TextPickerTableViewCell: UITextFieldDelegate, UIPickerViewDataSource, 
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if let key = self.model?.key {
+		if let key = self.model?.key, self.model?.allValues?.isEmpty == false {
             delegate?.didPickText(key, index: textPicker.selectedRow(inComponent: 0))
         }
     }

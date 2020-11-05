@@ -24,6 +24,18 @@ class JustTextTableViewCell: UITableViewCell {
         return label
     }()
     
+	private lazy var lineView: UIView = {
+		let view = UIView()
+		view.translatesAutoresizingMaskIntoConstraints = false
+		if #available(iOS 13.0, *) {
+			view.backgroundColor = .systemGray
+		} else {
+			view.backgroundColor = .darkGray
+		}
+		
+		return view
+	}()
+	
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -45,13 +57,13 @@ class JustTextTableViewCell: UITableViewCell {
             contentLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .kTableCellPadding),
             contentLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.kTableCellPadding),
             contentLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: .kInternalPadding),
-            contentLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -.kInternalPadding)
+            contentLabel.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -.kInternalPadding)
         ]
         
         NSLayoutConstraint.activate(constraints)
     }
     
-    func configure(_ title: String? = nil, _ attrText: NSAttributedString? = nil, alignment: NSTextAlignment) {
+	func configure(_ title: String? = nil, _ attrText: NSAttributedString? = nil, alignment: NSTextAlignment, _ bottomLine: Bool = false) {
         if let title = title {
             contentLabel.text = title
         } else if let attrText = attrText {
@@ -59,5 +71,29 @@ class JustTextTableViewCell: UITableViewCell {
         }
         
         contentLabel.textAlignment = alignment
+		
+		if bottomLine {
+			contentView.addSubview(lineView)
+			
+			let constraints = [
+				lineView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .kTableCellPadding),
+				lineView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.kTableCellPadding),
+				lineView.topAnchor.constraint(equalTo: contentLabel.bottomAnchor, constant: 5),
+				lineView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -.kInternalPadding),
+				lineView.heightAnchor.constraint(equalToConstant: 1)
+			]
+			
+			NSLayoutConstraint.activate(constraints)
+		}
     }
+	
+	override func prepareForReuse() {
+		super.prepareForReuse()
+		
+		if #available(iOS 13.0, *) {
+			contentLabel.textColor = .label
+		} else {
+			contentLabel.textColor = .darkGray
+		}
+	}
 }

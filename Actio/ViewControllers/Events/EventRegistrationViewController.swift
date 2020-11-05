@@ -335,7 +335,7 @@ extension EventRegistrationViewController: CellDataFetchProtocol, TextPickerDele
 	}
 	
 	func selectedPlayer(_ player: SearchUserModel) {
-		self.addEventModel.coachId = player.subscriberID
+		self.addEventModel.coachId = player.subscriberID?.value
 		self.addEventModel.coachIsd = player.isdCode
 		self.addEventModel.coachName = player.fullName
 		self.addEventModel.coachEmail = player.emailID
