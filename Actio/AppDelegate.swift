@@ -76,7 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       // TODO: Handle data of notification
 
       // With swizzling disabled you must let Messaging know about the message, for Analytics
-      Messaging.messaging().appDidReceiveMessage(userInfo)
+      // Messaging.messaging().appDidReceiveMessage(userInfo)
 
       // Print message ID.
       if let messageID = userInfo[gcmMessageIDKey] {
@@ -93,7 +93,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// TODO: Handle data of notification
 		
 		// With swizzling disabled you must let Messaging know about the message, for Analytics
-		Messaging.messaging().appDidReceiveMessage(userInfo)
+		// Messaging.messaging().appDidReceiveMessage(userInfo)
 		
 		// Print message ID.
 		if let messageID = userInfo[gcmMessageIDKey] {
@@ -105,14 +105,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		completionHandler(UIBackgroundFetchResult.newData)
 	}
-
-    
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "pushNotKey"), object: nil)
-        
-        Messaging.messaging().apnsToken = deviceToken
-        print(deviceToken,"appdelegate devicetoken")
-    }
 	
 	func applicationWillTerminate(_ application: UIApplication) {
 		PersistentContainer.saveContext()
@@ -123,6 +115,9 @@ extension AppDelegate : MessagingDelegate {
     // [START refresh_token]
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
         print("Firebase registration token: \(fcmToken)")
+        let dataDict:[String: String] = ["token": fcmToken]
+        NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
+        
         UDHelper.setDeviceToken(fcmToken)
     }
 }
