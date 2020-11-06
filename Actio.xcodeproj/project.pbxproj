@@ -572,9 +572,9 @@
 		8D0C5C2E252457CA005B3A4E /* Events */ = {
 			isa = PBXGroup;
 			children = (
+				8D0C5C31252465D7005B3A4E /* TableViewCells */,
 				8D0C5C422524A88E005B3A4E /* CollectionView+Datasource */,
 				8D0C5C3425246DAE005B3A4E /* Models */,
-				8D0C5C31252465D7005B3A4E /* TableViewCells */,
 				8D0C5C2F252457EC005B3A4E /* EventListViewController.swift */,
 				8D0C5C4025249B66005B3A4E /* EventDetailViewController.swift */,
 				8DC1BD2F2525D99F005C55DE /* EventRegistrationViewController.swift */,

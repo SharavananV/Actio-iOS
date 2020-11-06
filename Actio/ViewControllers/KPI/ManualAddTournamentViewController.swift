@@ -30,13 +30,30 @@ class ManualAddTournamentViewController: UIViewController {
 		self.title = "Add Tournament"
 		self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Submit", style: .done, target: self, action: #selector(self.proceedTapped))
 		self.navigationItem.rightBarButtonItem?.tintColor = .white
-		self.navigationItem.rightBarButtonItem?.isEnabled = false
 		
 		self.fetchMasterData()
     }
 	
 	@objc func proceedTapped() {
+		view.endEditing(true)
 		
+		let validationResult = registerModel?.validate()
+		switch validationResult {
+		case .invalid(let message):
+			view.makeToast(message)
+			return
+			
+		case .valid, .none:
+			break
+		}
+		
+		service.post(registerManualTournamentUrl, parameters: self.registerModel?.parameters(), onView: view) { (response) in
+			if let message = response["msg"] as? String {
+				self.view.makeToast(message) { _ in
+					self.navigationController?.popViewController(animated: true)
+				}
+			}
+		}
 	}
 	
 	func fetchMasterData() {
@@ -77,11 +94,12 @@ class ManualAddTournamentViewController: UIViewController {
 			registerModel?.events?.append(AddEventDetailsModel())
 		}
 		
-		registerModel?.events?.forEach({ (model) in
+		for index in 0..<(registerModel?.events ?? []).count {
+			let model = registerModel?.events?[index] ?? AddEventDetailsModel()
 			formData.append(
-				.addEvent(AddEventCellSettings(showDelete: true, allSports: self.masterData?.sports ?? [], model: model))
+				.addEvent(AddEventCellSettings(showDelete: true, allSports: self.masterData?.sports ?? [], model: model), index)
 			)
-		})
+		}
 		
 		self.formData = formData
 		
@@ -130,15 +148,17 @@ extension ManualAddTournamentViewController: UITableViewDataSource, UITableViewD
 				return UITableViewCell()
 			}
 			
+			dateCell.delegate = self
 			dateCell.configure(model)
 			cell = dateCell
 			
-		case .addEvent(let model):
+		case .addEvent(let model, let index):
 			guard let eventCell = tableView.dequeueReusableCell(withIdentifier: AddEventTableViewCell.reuseId, for: indexPath) as? AddEventTableViewCell else {
 				return UITableViewCell()
 			}
 			
-			eventCell.configure(model)
+			eventCell.configure(model, index)
+			eventCell.delegate = self
 			cell = eventCell
 			
 		}
@@ -149,7 +169,19 @@ extension ManualAddTournamentViewController: UITableViewDataSource, UITableViewD
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		if let _ = tableView.cellForRow(at: indexPath) as? JustTextTableViewCell {
+		if let events = registerModel?.events, let _ = tableView.cellForRow(at: indexPath) as? JustTextTableViewCell {
+			view.endEditing(true)
+			
+			for model in events {
+				if model.name == nil {
+					view.makeToast("Enter event value")
+					return
+				}
+				if model.sports == nil {
+					view.makeToast("Select Sport")
+					return
+				}
+			}
 			registerModel?.events?.append(AddEventDetailsModel())
 			
 			prepareFormData()
@@ -157,13 +189,51 @@ extension ManualAddTournamentViewController: UITableViewDataSource, UITableViewD
 	}
 }
 
-extension ManualAddTournamentViewController: CellDataFetchProtocol, TextPickerDelegate {
+extension ManualAddTournamentViewController: CellDataFetchProtocol, TextPickerDelegate, AddEventProtocol {
 	func valueChanged(keyValuePair: (key: String, value: String)) {
-		
+		switch keyValuePair.key {
+		case "tournamentName":
+			registerModel?.tournamentName = keyValuePair.value
+		case "venue":
+			registerModel?.venue = keyValuePair.value
+		case "from":
+			registerModel?.fromDate = keyValuePair.value
+		case "to":
+			registerModel?.toDate = keyValuePair.value
+		default:
+			break
+		}
 	}
 	
 	func didPickText(_ key: String, index: Int) {
+		switch key {
+		case "country":
+			registerModel?.country = masterData?.countryState?[index].countryID
+			registerModel?.state = nil
+			registerModel?.year = nil
 		
+		case "state":
+			let selectedCountry = self.masterData?.countryState?.first(where: {
+				$0.countryID == self.registerModel?.country
+			})
+			registerModel?.state = selectedCountry?.states?[index].stateID
+			registerModel?.year = nil
+			
+		case "year":
+			registerModel?.year = self.masterData?.years?[index]
+			prepareFormData()
+			
+		default:
+			return
+		}
+		
+		prepareFormData()
+	}
+	
+	func deleteTapped(_ index: Int) {
+		registerModel?.events?.remove(at: index)
+		
+		prepareFormData()
 	}
 }
 
@@ -171,6 +241,6 @@ private enum FormCellType {
 	case textEdit(TextEditModel)
 	case textPicker(TextPickerModel)
 	case fromToDate(FromToDatePickerModel)
-	case addEvent(AddEventCellSettings)
+	case addEvent(AddEventCellSettings, Int)
 	case justText(NSAttributedString)
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol AddEventProtocol: class {
-	func deleteTapped()
+	func deleteTapped(_ index: Int)
 }
 
 class AddEventTableViewCell: UITableViewCell {
@@ -23,6 +23,7 @@ class AddEventTableViewCell: UITableViewCell {
 	
 	weak var delegate: AddEventProtocol?
 	private var model: AddEventCellSettings?
+	private var index: Int = -1
 	
 	override func awakeFromNib() {
         super.awakeFromNib()
@@ -49,26 +50,33 @@ class AddEventTableViewCell: UITableViewCell {
 		self.sportNameField.inputView = textPicker
 	}
 	
-	func configure(_ data: AddEventCellSettings) {
+	func configure(_ data: AddEventCellSettings, _ index: Int) {
 		setupToolBar()
 		
 		eventNameField.text = data.model.name
 		sportNameField.text = data.model.sportsName
 		
 		self.model = data
+		self.index = index
+		
+		eventNameField.delegate = self
+		sportNameField.delegate = self
 	}
 
 	@IBAction func deleteButtonTapped(_ sender: Any) {
-		
+		delegate?.deleteTapped(index)
 	}
 }
 
 extension AddEventTableViewCell: UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
 	func textFieldDidBeginEditing(_ textField: UITextField) {
-		if textField == sportNameField, self.model?.allSports.count == 0 { return }
+		if textField == eventNameField || self.model?.allSports.count == 0 { return }
 		
-		let timeValue = self.model?.model.sportsName?.isEmpty == false ? self.model?.model.sportsName : self.model?.allSports[0].sportsName
-		textField.text = timeValue
+		if (self.model?.model.sportsName == nil || self.model?.model.sportsName?.isEmpty == false), let sport = self.model?.allSports[0] {
+			self.sportNameField.text = sport.sportsName
+			self.model?.model.sportsName = sport.sportsName
+			self.model?.model.sports = sport.id
+		}
 	}
 	
 	func textFieldDidEndEditing(_ textField: UITextField) {

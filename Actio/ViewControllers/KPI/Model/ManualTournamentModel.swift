@@ -40,4 +40,39 @@ struct RegisterNewTournamentModel {
 			"event": allEvents ?? []
 		]
 	}
+	
+	func validate() -> ValidType {
+		if Validator.isValidRequiredField(self.country) != .valid {
+			return .invalid(message: "Select Country")
+		}
+		if Validator.isValidRequiredField(self.state) != .valid {
+			return .invalid(message: "Select State")
+		}
+		if Validator.isValidRequiredField(self.year) != .valid {
+			return .invalid(message: "Select Year")
+		}
+		if Validator.isValidRequiredField(self.tournamentName ?? "") != .valid {
+			return .invalid(message: "Enter Tournament Name")
+		}
+		if Validator.isValidRequiredField(self.fromDate ?? "") != .valid {
+			return .invalid(message: "Select From Date")
+		}
+		if Validator.isValidRequiredField(self.toDate ?? "") != .valid {
+			return .invalid(message: "Select To Date")
+		}
+		if Validator.isValidRequiredField(self.venue ?? "") != .valid {
+			return .invalid(message: "Enter Venue")
+		}
+		
+		for event in (events ?? []) {
+			if Validator.isValidRequiredField(event.name ?? "") != .valid {
+				return .invalid(message: "Enter Event value")
+			}
+			if Validator.isValidRequiredField(event.sports) != .valid {
+				return .invalid(message: "Enter Sport")
+			}
+		}
+		
+		return .valid
+	}
 }

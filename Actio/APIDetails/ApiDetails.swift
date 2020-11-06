@@ -78,6 +78,7 @@ let nonActioMasterUrl = baseUrl + "nonActioKPIList"
 let nonActioFilterUrl = baseUrl + "nonActioKPIFilter"
 let searchCoachUrl = baseUrl + "admin/master/tournamentSearchSubscriber"
 let registerNonActioKpiUrl = baseUrl + "registerNonActioEventsKPI"
+let registerManualTournamentUrl = baseUrl + "registerNonActioEvents"
 
 // Socket URL
 let socketUrl = "http://203.223.191.66:8085"
