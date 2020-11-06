@@ -136,7 +136,7 @@ class AddPlayersViewController: UIViewController {
 		startedText.addAttribute(.foregroundColor, value: UIColor.black, range: NSRange(location: 8, length: 1))
 		startedText.addAttribute(.foregroundColor, value: UIColor.black, range: NSRange(location: 25, length: 1))
 		
-		let buttonTitle = updateMode ? "UPDATE" : "ADD"
+		let buttonTitle = fromController == .summaryUpdate ? "UPDATE" : "ADD"
 		
 		let formData: [FormCellType] = [
 			.attrText(startedText, .right),
@@ -341,12 +341,12 @@ extension AddPlayersViewController: UserSelectionProtocol, CellDataFetchProtocol
 	}
 	
 	private func updateExistingSummaryPlayer() {
+		currentPlayer?.registrationId = self.registrationId
+		
 		service.post(editDeletePlayerUrl, parameters: currentPlayer?.parameters(), onView: view) { (response) in
-			if let msg = response["msg"] as? String {
-				self.view.makeToast(msg)
-				
-				self.navigationController?.popViewController(animated: true)
-			}
+			self.view.makeToast("Updated successfully")
+			
+			self.navigationController?.popViewController(animated: true)
 		}
 	}
 	
