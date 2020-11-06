@@ -102,7 +102,7 @@ class AddPlayersViewController: UIViewController {
 	private func prepareFormData(_ shouldReload: Bool = true) {
 		guard let eventDetails = eventDetails else { return }
 		
-		let shouldAllowEditing = (self.currentPlayer?.subscriberID == nil)
+		let shouldAllowEditing = (self.currentPlayer?.subscriberID == nil || self.currentPlayer?.subscriberID == 0)
 		
 		var genderType: FormCellType
 		let gender = self.masterData?.gender?.first(where: {
@@ -116,9 +116,11 @@ class AddPlayersViewController: UIViewController {
 		if eventDetails.playerTypeID != 4 {
 			genderType = .textEdit(TextEditModel(key: "gender", textValue: gender?.gender, contextText: "Gender", placeHolder: "Select Gender", enabled: false))
 		} else {
-			genderType = .textPicker(TextPickerModel(key: "gender", allValues: allGenders, contextText: "Gender", placeHolder: "Select Gender"))
+			let gender = self.masterData?.gender?.first(where: {
+				$0.id == self.currentPlayer?.gender
+			})
+			genderType = .textPicker(TextPickerModel(key: "gender", textValue: gender?.gender, allValues: allGenders, contextText: "Gender", placeHolder: "Select Gender"))
 		}
-		
 		
 		let isdCodes = self.masterData?.country?.map({ (country) -> String in
 			return country.code ?? ""
@@ -403,6 +405,11 @@ extension AddPlayersViewController: UserSelectionProtocol, CellDataFetchProtocol
 				currentPlayer?.position = String(id)
 			}
 			
+		case "gender":
+			if let gender = self.masterData?.gender?[index].id {
+				self.currentPlayer?.gender = gender
+			}
+			
 		default:
 			break
 		}
@@ -464,13 +471,19 @@ extension AddPlayersViewController {
 			cdPlayer.registrationId = Int64(registrationId ?? 0)
 			cdPlayer.dob = player.dob
 			cdPlayer.email = player.email
-			cdPlayer.gender = Int16(eventDetails?.playerTypeID ?? 0)
+			
+			if eventDetails?.playerTypeID != 4 {
+				cdPlayer.gender = Int16(eventDetails?.playerTypeID ?? 0)
+			} else {
+				cdPlayer.gender = Int16(player.gender ?? 0)
+			}
+			
 			cdPlayer.isdCode = player.isdCode
 			cdPlayer.mobileNumber = player.mobileNumber
 			cdPlayer.name = player.name
 			cdPlayer.position = player.position
 			cdPlayer.createdAt = Date()
-			cdPlayer.subscriberID = String(player.subscriberID ?? 0)
+			cdPlayer.subscriberID = player.subscriberID == nil ? "" : String(player.subscriberID ?? 0)
 			
 			PersistentContainer.saveContext()
 			coreDataPlayers?.append(cdPlayer)

@@ -13,7 +13,7 @@ import CoreData
 public class CDPlayer: NSManagedObject {
 	func parameters() -> [String: Any] {
 		return [
-			"id":self.id,
+			"id":self.subscriberID,
 			"name":self.name ?? "",
 			"gender":self.gender,
 			"dob":self.dob ?? "",
