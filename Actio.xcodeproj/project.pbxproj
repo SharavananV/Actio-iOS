@@ -170,6 +170,10 @@
 		8DDDBDE02552898500C999F0 /* NonActioModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDDBDDF2552898500C999F0 /* NonActioModels.swift */; };
 		8DE6B64924B335630010A3EC /* AppFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE6B64824B335630010A3EC /* AppFonts.swift */; };
 		8DE6B64E24B35BA60010A3EC /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE6B64D24B35BA60010A3EC /* LaunchViewController.swift */; };
+		8DEBC7E525541C4F00B66C52 /* ManualAddTournamentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEBC7E425541C4E00B66C52 /* ManualAddTournamentViewController.swift */; };
+		8DEBC7E92554268400B66C52 /* AddEventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEBC7E82554268400B66C52 /* AddEventTableViewCell.swift */; };
+		8DEBC7ED25542C5600B66C52 /* FromToDatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEBC7EC25542C5600B66C52 /* FromToDatePickerTableViewCell.swift */; };
+		8DEBC7F02555102100B66C52 /* ManualTournamentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEBC7EF2555102100B66C52 /* ManualTournamentModel.swift */; };
 		8DF77D4D252B09500065720A /* EventRegistrationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF77D4C252B09500065720A /* EventRegistrationStatus.swift */; };
 		8DF77D4F252B1C090065720A /* UserSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF77D4E252B1C090065720A /* UserSelectionTableViewCell.swift */; };
 		8DF77D51252B1F680065720A /* AddPlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF77D50252B1F680065720A /* AddPlayersViewController.swift */; };
@@ -359,6 +363,10 @@
 		8DDDBDDF2552898500C999F0 /* NonActioModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonActioModels.swift; sourceTree = "<group>"; };
 		8DE6B64824B335630010A3EC /* AppFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFonts.swift; sourceTree = "<group>"; };
 		8DE6B64D24B35BA60010A3EC /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		8DEBC7E425541C4E00B66C52 /* ManualAddTournamentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualAddTournamentViewController.swift; sourceTree = "<group>"; };
+		8DEBC7E82554268400B66C52 /* AddEventTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventTableViewCell.swift; sourceTree = "<group>"; };
+		8DEBC7EC25542C5600B66C52 /* FromToDatePickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FromToDatePickerTableViewCell.swift; sourceTree = "<group>"; };
+		8DEBC7EF2555102100B66C52 /* ManualTournamentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualTournamentModel.swift; sourceTree = "<group>"; };
 		8DF77D4C252B09500065720A /* EventRegistrationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventRegistrationStatus.swift; sourceTree = "<group>"; };
 		8DF77D4E252B1C090065720A /* UserSelectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSelectionTableViewCell.swift; sourceTree = "<group>"; };
 		8DF77D50252B1F680065720A /* AddPlayersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayersViewController.swift; sourceTree = "<group>"; };
@@ -403,6 +411,7 @@
 				183384CB24B4A9BF009911A8 /* SwitchTableViewCell.swift */,
 				8DF77D4E252B1C090065720A /* UserSelectionTableViewCell.swift */,
 				18455F89252DAC75000CA7CA /* SegmentControlTableViewCell.swift */,
+				8DEBC7EC25542C5600B66C52 /* FromToDatePickerTableViewCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -874,8 +883,10 @@
 		8DDDBDD82552844E00C999F0 /* KPI */ = {
 			isa = PBXGroup;
 			children = (
+				8DEBC7E72554265900B66C52 /* TableViewCells */,
 				8DDDBDDE2552897300C999F0 /* Model */,
 				8DDDBDD92552852400C999F0 /* NonActioSportViewController.swift */,
+				8DEBC7E425541C4E00B66C52 /* ManualAddTournamentViewController.swift */,
 			);
 			path = KPI;
 			sourceTree = "<group>";
@@ -884,6 +895,7 @@
 			isa = PBXGroup;
 			children = (
 				8DDDBDDF2552898500C999F0 /* NonActioModels.swift */,
+				8DEBC7EF2555102100B66C52 /* ManualTournamentModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -939,6 +951,14 @@
 				8DE6B64D24B35BA60010A3EC /* LaunchViewController.swift */,
 			);
 			path = LaunchPage;
+			sourceTree = "<group>";
+		};
+		8DEBC7E72554265900B66C52 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				8DEBC7E82554268400B66C52 /* AddEventTableViewCell.swift */,
+			);
+			path = TableViewCells;
 			sourceTree = "<group>";
 		};
 		8DF7863A24B846B000062261 /* Subscriber */ = {
@@ -1145,6 +1165,7 @@
 				18C6B0202510C17300B7162E /* NotificationHelper.swift in Sources */,
 				18455F8A252DAC75000CA7CA /* SegmentControlTableViewCell.swift in Sources */,
 				8D47F1002539ABCF0013900C /* ContactListShareCell.swift in Sources */,
+				8DEBC7E525541C4F00B66C52 /* ManualAddTournamentViewController.swift in Sources */,
 				8D673A622514C86A00585AF9 /* TournamentPrizesTableViewCell.swift in Sources */,
 				8DE6B64924B335630010A3EC /* AppFonts.swift in Sources */,
 				8D47F0EB2539805F0013900C /* ImageZoomViewController.swift in Sources */,
@@ -1155,6 +1176,7 @@
 				1850412F2540185E0053BB2D /* MyRoleViewController.swift in Sources */,
 				8D673A7A2521E83B00585AF9 /* EventFeedModel.swift in Sources */,
 				186EBF092541765700665E9B /* GetProfileDataModel.swift in Sources */,
+				8DEBC7E92554268400B66C52 /* AddEventTableViewCell.swift in Sources */,
 				8D94E07F24AF1D0A00DBC46A /* Actio.xcdatamodeld in Sources */,
 				8DC1BD2625259A8F005C55DE /* NotificationListViewController.swift in Sources */,
 				8D21855D24B6E383002688A8 /* OtpViewController.swift in Sources */,
@@ -1177,6 +1199,7 @@
 				8D673A602514C28600585AF9 /* TournamentPrizesViewController.swift in Sources */,
 				8D673A64251B142100585AF9 /* TournamentPrizesCollectionViewCell.swift in Sources */,
 				1843558B252B419200DECA90 /* ResetAlertForgotPaaswordViewController.swift in Sources */,
+				8DEBC7ED25542C5600B66C52 /* FromToDatePickerTableViewCell.swift in Sources */,
 				8D0C5C38252475BB005B3A4E /* EventListHeaderCell.swift in Sources */,
 				8D673A72251DF5FF00585AF9 /* FeedListViewController.swift in Sources */,
 				8DA5D456250A4AF1003EAB6B /* TournamentFavoriteCollectionViewCell.swift in Sources */,
@@ -1225,6 +1248,7 @@
 				8D673A5B2513884000585AF9 /* TournamentContactDetailsViewController.swift in Sources */,
 				18C253D12512403F0043D20F /* TournamentSponserDatasource.swift in Sources */,
 				8D673A6C251DB02000585AF9 /* ImagePreviewViewController.swift in Sources */,
+				8DEBC7F02555102100B66C52 /* ManualTournamentModel.swift in Sources */,
 				8DCBAB5A24BF2D37009E8B7F /* HomePageViewController.swift in Sources */,
 				18A4A11D25388616004C81BC /* FeedWithoutImageTableViewCell.swift in Sources */,
 				8D69C318252B32EE00C186F4 /* SearchPlayerResponse.swift in Sources */,

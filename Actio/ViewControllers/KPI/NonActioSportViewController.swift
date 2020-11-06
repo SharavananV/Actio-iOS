@@ -190,8 +190,9 @@ extension NonActioSportViewController: UITableViewDataSource, UITableViewDelegat
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		if let cell = tableView.cellForRow(at: indexPath) as? JustTextTableViewCell {
-			
+		if let _ = tableView.cellForRow(at: indexPath) as? JustTextTableViewCell,
+		   let vc = storyboard?.instantiateViewController(withIdentifier: "ManualAddTournamentViewController") as? ManualAddTournamentViewController {
+			self.navigationController?.pushViewController(vc, animated: true)
 		}
 	}
 }

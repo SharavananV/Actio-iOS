@@ -283,6 +283,127 @@
             </objects>
             <point key="canvasLocation" x="1376.8115942028987" y="1229.4642857142856"/>
         </scene>
+        <!--Manual Add Tournament View Controller-->
+        <scene sceneID="LOF-lg-Y4w">
+            <objects>
+                <viewController storyboardIdentifier="ManualAddTournamentViewController" id="wl6-8D-nak" customClass="ManualAddTournamentViewController" customModule="Actio" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tjH-tz-Bnw">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hJX-4n-zes">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddEventTableViewCell" id="0ZR-SP-yrU" customClass="AddEventTableViewCell" customModule="Actio" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="189.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0ZR-SP-yrU" id="S8x-QC-v6y">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="189.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k8V-06-y7k">
+                                                    <rect key="frame" x="20" y="11" width="374" height="167"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pzm-AM-TVY">
+                                                            <rect key="frame" x="10" y="15" width="354" height="19"/>
+                                                            <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="16"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ab8-3k-jfq">
+                                                            <rect key="frame" x="15" y="56.5" width="344" height="34"/>
+                                                            <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="13"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FsC-WP-TlL">
+                                                            <rect key="frame" x="15" y="39" width="71" height="15.5"/>
+                                                            <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="13"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sport" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RPU-4M-OQZ">
+                                                            <rect key="frame" x="15" y="95.5" width="32.5" height="15.5"/>
+                                                            <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="13"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GmL-XR-o0O">
+                                                            <rect key="frame" x="15" y="113" width="344" height="34"/>
+                                                            <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="13"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                        </textField>
+                                                        <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HsE-V5-Bif">
+                                                            <rect key="frame" x="346" y="15" width="13" height="18"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="13" id="LiH-vb-des"/>
+                                                                <constraint firstAttribute="height" constant="18" id="UWw-kv-NRZ"/>
+                                                            </constraints>
+                                                            <state key="normal" image="Icon material-delete"/>
+                                                            <connections>
+                                                                <action selector="deleteButtonTapped:" destination="0ZR-SP-yrU" eventType="touchUpInside" id="Fta-AG-0Ba"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" name="LightOrangeBackground"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="HsE-V5-Bif" secondAttribute="trailing" constant="15" id="0Xm-81-BA0"/>
+                                                        <constraint firstAttribute="trailing" secondItem="pzm-AM-TVY" secondAttribute="trailing" constant="10" id="1CM-CH-9wc"/>
+                                                        <constraint firstItem="GmL-XR-o0O" firstAttribute="trailing" secondItem="ab8-3k-jfq" secondAttribute="trailing" id="7Pg-wa-Q8V"/>
+                                                        <constraint firstAttribute="bottom" secondItem="GmL-XR-o0O" secondAttribute="bottom" constant="20" id="9OQ-SM-EIW"/>
+                                                        <constraint firstItem="ab8-3k-jfq" firstAttribute="leading" secondItem="FsC-WP-TlL" secondAttribute="leading" id="Knz-RO-gOw"/>
+                                                        <constraint firstItem="pzm-AM-TVY" firstAttribute="top" secondItem="k8V-06-y7k" secondAttribute="top" constant="15" id="PX4-57-w30"/>
+                                                        <constraint firstItem="RPU-4M-OQZ" firstAttribute="leading" secondItem="ab8-3k-jfq" secondAttribute="leading" id="Y5S-XT-Ip9"/>
+                                                        <constraint firstItem="RPU-4M-OQZ" firstAttribute="top" secondItem="ab8-3k-jfq" secondAttribute="bottom" constant="5" id="YXx-i7-LSA"/>
+                                                        <constraint firstItem="HsE-V5-Bif" firstAttribute="top" secondItem="k8V-06-y7k" secondAttribute="top" constant="15" id="awW-eQ-qX9"/>
+                                                        <constraint firstItem="FsC-WP-TlL" firstAttribute="top" secondItem="pzm-AM-TVY" secondAttribute="bottom" constant="5" id="c7o-Mq-vTe"/>
+                                                        <constraint firstItem="ab8-3k-jfq" firstAttribute="top" secondItem="FsC-WP-TlL" secondAttribute="bottom" constant="2" id="fYg-d4-RDG"/>
+                                                        <constraint firstItem="GmL-XR-o0O" firstAttribute="leading" secondItem="RPU-4M-OQZ" secondAttribute="leading" id="hbI-ia-B5b"/>
+                                                        <constraint firstItem="FsC-WP-TlL" firstAttribute="leading" secondItem="k8V-06-y7k" secondAttribute="leading" constant="15" id="iuy-Ir-abV"/>
+                                                        <constraint firstItem="ab8-3k-jfq" firstAttribute="trailing" secondItem="HsE-V5-Bif" secondAttribute="trailing" id="oNB-0q-paY"/>
+                                                        <constraint firstItem="pzm-AM-TVY" firstAttribute="leading" secondItem="k8V-06-y7k" secondAttribute="leading" constant="10" id="xNg-wy-5Bu"/>
+                                                        <constraint firstItem="GmL-XR-o0O" firstAttribute="top" secondItem="RPU-4M-OQZ" secondAttribute="bottom" constant="2" id="zHj-rl-h8g"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="k8V-06-y7k" secondAttribute="bottom" id="1ak-ej-3Uf"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="k8V-06-y7k" secondAttribute="trailing" id="6Rl-zM-Tpc"/>
+                                                <constraint firstItem="k8V-06-y7k" firstAttribute="top" secondItem="S8x-QC-v6y" secondAttribute="topMargin" id="I7E-k1-t9T"/>
+                                                <constraint firstItem="k8V-06-y7k" firstAttribute="leading" secondItem="S8x-QC-v6y" secondAttribute="leadingMargin" id="p7a-MC-cPb"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="deleteButton" destination="HsE-V5-Bif" id="ohx-oQ-tHR"/>
+                                            <outlet property="eventNameField" destination="ab8-3k-jfq" id="mGH-rd-U0G"/>
+                                            <outlet property="shadowContainer" destination="k8V-06-y7k" id="E2w-nE-EpI"/>
+                                            <outlet property="sportNameField" destination="GmL-XR-o0O" id="UA7-7v-fvM"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="wl6-8D-nak" id="Ila-lC-ZTD"/>
+                                    <outlet property="delegate" destination="wl6-8D-nak" id="vIZ-lZ-gmw"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Wis-8t-tFw"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Wis-8t-tFw" firstAttribute="bottom" secondItem="hJX-4n-zes" secondAttribute="bottom" id="LnJ-Gv-mLr"/>
+                            <constraint firstItem="hJX-4n-zes" firstAttribute="leading" secondItem="Wis-8t-tFw" secondAttribute="leading" id="QaX-y7-Yok"/>
+                            <constraint firstItem="Wis-8t-tFw" firstAttribute="trailing" secondItem="hJX-4n-zes" secondAttribute="trailing" id="Qjj-CC-QgR"/>
+                            <constraint firstItem="hJX-4n-zes" firstAttribute="top" secondItem="Wis-8t-tFw" secondAttribute="top" id="tlE-1U-ols"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="hJX-4n-zes" id="GlO-N5-X6W"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ua3-C0-L9c" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2234.7826086956525" y="1240.8482142857142"/>
+        </scene>
         <!--Event Detail View Controller-->
         <scene sceneID="jIC-SP-LAR">
             <objects>
@@ -1440,6 +1561,7 @@
     </scenes>
     <resources>
         <image name="Icon awesome-edit" width="25" height="22"/>
+        <image name="Icon material-delete" width="16" height="21"/>
         <image name="Icon-awesome-calendar-alt" width="35.5" height="40"/>
         <image name="Icon-material-location-on" width="30" height="40"/>
         <image name="category" width="14.5" height="17"/>
