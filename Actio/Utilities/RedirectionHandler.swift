@@ -83,4 +83,86 @@ class RedirectionHandler {
 			}
 		}
 	}
+	
+	private let userInfoKey = "gcm.notification.userInfo"
+	
+	func shouldShowNotification(with userInfo: [AnyHashable : Any], completion: @escaping (UNNotificationPresentationOptions) -> Void) {
+		
+		if let actualInfoString = userInfo[userInfoKey] as? String,
+		   let visibleController = UIApplication.shared.delegate?.window??.visibleViewController {
+			
+			let jsonData = Data(actualInfoString.utf8)
+			
+			do {
+				let wrapper = try JSONDecoder().decode(MessageWrapper.self, from: jsonData)
+				
+				if let content = wrapper.message {
+					if content.screen == nil {
+						completion([.alert, .badge, .sound])
+					} else if let screenType = content.screen, screenType != "chat" || ((visibleController is ChatViewController) == false && screenType == "chat") {
+						completion([.alert, .badge, .sound])
+					}
+					
+					return
+				}
+			} catch {
+				print(error.localizedDescription)
+			}
+		}
+		
+		completion([])
+	}
+	
+	func handleNotification(with userInfo: [AnyHashable : Any]) {
+		if let actualInfoString = userInfo[userInfoKey] as? String {
+			let jsonData = Data(actualInfoString.utf8)
+			
+			do {
+				let wrapper = try JSONDecoder().decode(MessageWrapper.self, from: jsonData)
+				
+				if let content = wrapper.message, let notiType = content.type {
+					switch notiType {
+					case "parent_submit":
+						if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AcceptRejectRequestViewController") as? AcceptRejectRequestViewController, let fromId = content.fromID {
+							vc.childID = fromId
+							let container = RedirectContainerViewController(rootViewController: vc)
+							container.modalPresentationStyle = .fullScreen
+							
+							topViewController?.present(container, animated: false, completion: nil)
+						}
+						
+					case "coach_validate":
+						// TODO: Fill this in when KPI is complete
+						break
+						
+					case "parent_reject", "parent_approve":
+						break
+						
+					default:
+						break
+					}
+				}
+			} catch {
+				print(error.localizedDescription)
+			}
+		}
+	}
 }
+
+private struct MessageWrapper: Codable {
+	var message: Message?
+}
+
+private struct Message: Codable {
+	var notifyID, title, fromID, toID: String?
+	var type, name, msg, screen: String?
+	
+	enum CodingKeys: String, CodingKey {
+		case notifyID = "notifyId"
+		case title
+		case fromID = "from_id"
+		case toID = "to_id"
+		case type, name, msg, screen
+	}
+}
+

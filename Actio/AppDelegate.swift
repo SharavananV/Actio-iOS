@@ -125,10 +125,13 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 
 		if let messageID = userInfo[gcmMessageIDKey] {
 			print("Message ID: \(messageID)")
+			
+			RedirectionHandler.shared.shouldShowNotification(with: userInfo, completion: completionHandler)
 		}
-		
+		else {
+			completionHandler([])
+		}
 		print(userInfo)
-		completionHandler([[.alert, .sound, .badge]])
 	}
 	
 	func userNotificationCenter(_ center: UNUserNotificationCenter,
@@ -141,6 +144,8 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 		}
 		
 		print(userInfo)
+		
+		RedirectionHandler.shared.handleNotification(with: userInfo)
 		completionHandler()
 	}
 }
