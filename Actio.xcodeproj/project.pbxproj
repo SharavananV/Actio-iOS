@@ -84,6 +84,7 @@
 		8D0F75E72536CE8600200C2B /* ConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F75E62536CE8600200C2B /* ConversationTableViewCell.swift */; };
 		8D0F75EA2536CF7D00200C2B /* ChatHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F75E92536CF7D00200C2B /* ChatHistoryViewController.swift */; };
 		8D0F75ED2536D0EB00200C2B /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0F75EC2536D0EB00200C2B /* Conversation.swift */; };
+		8D1C92C3255976BC0006D5BC /* ErrorMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1C92C2255976BC0006D5BC /* ErrorMessageViewController.swift */; };
 		8D1C960D252C2A8C005FE3EC /* EventAddPlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1C960C252C2A8C005FE3EC /* EventAddPlayerTableViewCell.swift */; };
 		8D21855D24B6E383002688A8 /* OtpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D21855C24B6E383002688A8 /* OtpViewController.swift */; };
 		8D21855F24B6ED5F002688A8 /* VPMOTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D21855E24B6ED5F002688A8 /* VPMOTPView.swift */; };
@@ -274,6 +275,7 @@
 		8D0F75E62536CE8600200C2B /* ConversationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTableViewCell.swift; sourceTree = "<group>"; };
 		8D0F75E92536CF7D00200C2B /* ChatHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatHistoryViewController.swift; sourceTree = "<group>"; };
 		8D0F75EC2536D0EB00200C2B /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
+		8D1C92C2255976BC0006D5BC /* ErrorMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessageViewController.swift; sourceTree = "<group>"; };
 		8D1C960C252C2A8C005FE3EC /* EventAddPlayerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventAddPlayerTableViewCell.swift; sourceTree = "<group>"; };
 		8D21855C24B6E383002688A8 /* OtpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpViewController.swift; sourceTree = "<group>"; };
 		8D21855E24B6ED5F002688A8 /* VPMOTPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPMOTPView.swift; sourceTree = "<group>"; };
@@ -679,6 +681,7 @@
 				8D47F0EA2539805F0013900C /* ImageZoomViewController.swift */,
 				8D47F0F525399F980013900C /* ContactsListViewController.swift */,
 				8D47F1082539D7E70013900C /* RedirectContainerViewController.swift */,
+				8D1C92C2255976BC0006D5BC /* ErrorMessageViewController.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1229,6 +1232,7 @@
 				18C253CF2512323E0043D20F /* GalleryCollectionViewCell.swift in Sources */,
 				1850412C254018380053BB2D /* InfoViewController.swift in Sources */,
 				8D94E08C24AF1D3600DBC46A /* LoginViewController.swift in Sources */,
+				8D1C92C3255976BC0006D5BC /* ErrorMessageViewController.swift in Sources */,
 				8D0C5C3F25249822005B3A4E /* EventDetailModel.swift in Sources */,
 				8D673A5E2514840D00585AF9 /* TournamentContactDetailsTableViewCell.swift in Sources */,
 				185D2860252F20E300FD3D81 /* TournamentMasterModel.swift in Sources */,

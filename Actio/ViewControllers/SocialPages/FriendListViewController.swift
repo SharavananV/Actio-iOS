@@ -24,12 +24,6 @@ class FriendListViewController: UIViewController {
 		service.post(listFriendsUrl, parameters: ["search": searchText.lowercased()], onView: view) { (response: FindFriendResponse) in
 			self.allUsers = response.find
 			
-			if self.allUsers == nil || self.allUsers?.isEmpty == true {
-				self.tableView.setEmptyView("No events found", "welcome-Image")
-			} else {
-				self.tableView.backgroundView = nil
-			}
-			
 			self.tableView.reloadData()
 		}
 	}

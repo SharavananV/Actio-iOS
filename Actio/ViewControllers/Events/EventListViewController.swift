@@ -26,8 +26,15 @@ class EventListViewController: UIViewController {
 		service.post(eventListUrl,
 					 parameters: ["tournamentID": self.tournamentId ?? 0, "search": ""],
 					 onView: self.view) { (response: EventCategoryResponse) in
-						self.eventList = response.eventCategory
-						self.tableView.reloadData()
+			self.eventList = response.eventCategory
+			
+			if self.eventList == nil || self.eventList?.isEmpty == true {
+				self.tableView.setEmptyView(nil, "NoEvent")
+			} else {
+				self.tableView.backgroundView = nil
+			}
+			
+			self.tableView.reloadData()
 		}
 	}
 }
