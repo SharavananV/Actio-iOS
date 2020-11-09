@@ -3319,7 +3319,7 @@
                                             <constraint firstAttribute="height" constant="124" id="0jB-EG-epT"/>
                                             <constraint firstAttribute="width" constant="304" id="mF0-FY-Sws"/>
                                         </constraints>
-                                        <string key="text">You are logged in as child account ,  If you want to access this URL kindly login to your account  or else You already accept or Reject this URL Ignore and continue with skip</string>
+                                        <string key="text">You are logged in as child account, If you want to access this URL kindly login to your account or if you have already accepted or rejected this user, Ignore and continue with skip</string>
                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="13"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -3332,6 +3332,33 @@
                                             <constraint firstAttribute="width" constant="344" id="ISy-p7-BZV"/>
                                         </constraints>
                                     </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="8eP-1w-FSP">
+                                        <rect key="frame" x="30" y="167" width="284" height="27.333333333333343"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c16-Kh-iKq">
+                                                <rect key="frame" x="0.0" y="0.0" width="117" height="27.333333333333332"/>
+                                                <color key="backgroundColor" red="1" green="0.3411764706" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="12"/>
+                                                <state key="normal" title="Skip">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="cancelButtonAction:" destination="4UH-dX-vvl" eventType="touchUpInside" id="Pud-YI-5vn"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H76-na-Arw">
+                                                <rect key="frame" x="167" y="0.0" width="117" height="27.333333333333332"/>
+                                                <color key="backgroundColor" red="1" green="0.3411764706" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="12"/>
+                                                <state key="normal" title="Ok">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="okButtonAction:" destination="4UH-dX-vvl" eventType="touchUpInside" id="jN1-Mj-Yi2"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
@@ -3339,54 +3366,24 @@
                                     <constraint firstAttribute="trailing" secondItem="6lN-WA-Jmk" secondAttribute="trailing" id="22g-1b-dDU"/>
                                     <constraint firstAttribute="trailing" secondItem="9fo-tm-IsR" secondAttribute="trailing" constant="20" id="CaB-ZR-JUj"/>
                                     <constraint firstItem="9fo-tm-IsR" firstAttribute="leading" secondItem="Tj4-9D-evg" secondAttribute="leading" constant="20" id="Cy7-q1-pLg"/>
+                                    <constraint firstItem="8eP-1w-FSP" firstAttribute="leading" secondItem="Tj4-9D-evg" secondAttribute="leading" constant="30" id="EPA-14-83b"/>
+                                    <constraint firstAttribute="bottom" secondItem="8eP-1w-FSP" secondAttribute="bottom" constant="21" id="EZd-Ba-xxf"/>
                                     <constraint firstAttribute="height" constant="215.33333333333331" id="LTv-y0-BQD"/>
                                     <constraint firstAttribute="width" constant="344" id="QSm-Mi-4O8"/>
+                                    <constraint firstItem="8eP-1w-FSP" firstAttribute="top" secondItem="6lN-WA-Jmk" secondAttribute="bottom" constant="21" id="UGI-3j-e4k"/>
+                                    <constraint firstAttribute="trailing" secondItem="8eP-1w-FSP" secondAttribute="trailing" constant="30" id="adh-Mz-PkC"/>
                                     <constraint firstItem="6lN-WA-Jmk" firstAttribute="top" secondItem="9fo-tm-IsR" secondAttribute="bottom" constant="8" id="gQG-Ha-K2w"/>
                                     <constraint firstItem="9fo-tm-IsR" firstAttribute="top" secondItem="Tj4-9D-evg" secondAttribute="top" constant="13" id="pFJ-h5-ZlY"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c16-Kh-iKq">
-                                <rect key="frame" x="66" y="425" width="97" height="29"/>
-                                <color key="backgroundColor" red="1" green="0.3411764706" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="97" id="bnq-sj-WVT"/>
-                                    <constraint firstAttribute="height" constant="29" id="cX5-Pw-RwK"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="12"/>
-                                <state key="normal" title="Cancel">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="cancelButtonAction:" destination="4UH-dX-vvl" eventType="touchUpInside" id="Pud-YI-5vn"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H76-na-Arw">
-                                <rect key="frame" x="234" y="425" width="97" height="27"/>
-                                <color key="backgroundColor" red="1" green="0.3411764706" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="27" id="97N-zt-yZl"/>
-                                    <constraint firstAttribute="width" constant="97" id="bf9-Ow-mFL"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="12"/>
-                                <state key="normal" title="Ok">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="okButtonAction:" destination="4UH-dX-vvl" eventType="touchUpInside" id="jN1-Mj-Yi2"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="VX9-Or-KS3"/>
                         <color key="backgroundColor" red="0.78814870120000002" green="0.78828507660000002" blue="0.78814005850000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Tj4-9D-evg" firstAttribute="centerY" secondItem="VX9-Or-KS3" secondAttribute="centerY" id="1dA-UY-s3K"/>
                             <constraint firstItem="VX9-Or-KS3" firstAttribute="trailing" secondItem="Tj4-9D-evg" secondAttribute="trailing" constant="35" id="EAI-6d-dSK"/>
-                            <constraint firstItem="H76-na-Arw" firstAttribute="top" secondItem="6lN-WA-Jmk" secondAttribute="bottom" constant="18.666666666666686" id="I7n-gl-h8K"/>
                             <constraint firstItem="Tj4-9D-evg" firstAttribute="centerX" secondItem="VX9-Or-KS3" secondAttribute="centerX" id="O7t-TZ-YRJ"/>
-                            <constraint firstItem="H76-na-Arw" firstAttribute="leading" secondItem="c16-Kh-iKq" secondAttribute="trailing" constant="71" id="ePs-Kq-D3W"/>
-                            <constraint firstItem="c16-Kh-iKq" firstAttribute="leading" secondItem="VX9-Or-KS3" secondAttribute="leading" constant="66" id="o4E-eW-HI1"/>
                             <constraint firstItem="Tj4-9D-evg" firstAttribute="leading" secondItem="VX9-Or-KS3" secondAttribute="leading" constant="35" id="or1-gW-M57"/>
-                            <constraint firstItem="c16-Kh-iKq" firstAttribute="top" secondItem="6lN-WA-Jmk" secondAttribute="bottom" constant="18.666666666666686" id="uwh-iP-Tc2"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ehQ-GV-w7K"/>
