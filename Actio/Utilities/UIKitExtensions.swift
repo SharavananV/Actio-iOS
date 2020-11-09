@@ -345,3 +345,63 @@ class ChatTextAttachment: NSTextAttachment {
 		return returnBounds
 	}
 }
+
+extension UITableView {
+	func setEmptyView(_ message: String? = nil, _ imageName: String? = nil) {
+		let view: UIView = {
+			let view = UIView()
+			
+			return view
+		}()
+		
+		let label: UILabel = {
+			let label = UILabel()
+			label.translatesAutoresizingMaskIntoConstraints = false
+			label.text = message?.uppercased()
+			label.textAlignment = .center
+			label.font = AppFont.PoppinsRegular(size: 18)
+			label.numberOfLines = 0
+			
+			view.addSubview(label)
+			
+			return label
+		}()
+		
+		let imageView: UIImageView? = {
+			guard let imageName = imageName, let image = UIImage(named: imageName) else {
+				return nil
+			}
+			let imageView = UIImageView(image: image)
+			imageView.contentMode = .scaleAspectFit
+			imageView.translatesAutoresizingMaskIntoConstraints = false
+			
+			view.addSubview(imageView)
+			
+			return imageView
+		}()
+		
+		var constraints = [
+			imageView?.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+			imageView?.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+			imageView?.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+			
+			label.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+			label.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+		]
+		
+		if let imageView = imageView {
+			constraints += [
+				imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: 2.0/3.0),
+				label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10)
+			]
+		} else {
+			constraints += [
+				label.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+			]
+		}
+		
+		NSLayoutConstraint.activate(constraints.compactMap({ $0 }))
+		
+		self.backgroundView = view
+	}
+}

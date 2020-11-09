@@ -54,7 +54,7 @@ class ChildLogoutWarningViewController: UIViewController {
         
     }
     func logout(completion: @escaping ((String) -> Void)) {
-		service.post(logoutUrl, parameters: ["Mode":"1", "deviceToken": UDHelper.getDeviceToken()], onView: view) { (response) in
+		service.post(logoutUrl, parameters: ["Mode":"3", "deviceToken": UDHelper.getDeviceToken()], onView: view) { (response) in
 			UDHelper.resetUserStuff()
 		}
 	}

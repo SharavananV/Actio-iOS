@@ -93,7 +93,7 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginButtonAction(_ sender: Any) {
 		if let username = userNameTextField.text, let password = passwordTextField.text {
-			service.post(loginUrl, parameters: ["username": username,"password": password, "Mode": "1", "deviceToken": UDHelper.getDeviceToken()], onView: view) { (response: LoginModelResponse) in
+			service.post(loginUrl, parameters: ["username": username,"password": password, "Mode": "3", "deviceToken": UDHelper.getDeviceToken()], onView: view) { (response: LoginModelResponse) in
 				UDHelper.setAuthToken(response.token ?? "")
 				UDHelper.setData(for: .loggedInUser, data: response)
 				

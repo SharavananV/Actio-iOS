@@ -16,10 +16,18 @@ class FriendListViewController: UIViewController {
 	private let service = DependencyProvider.shared.networkService
 	private var allUsers: [Friend]?
 	
+	override func viewDidLoad() {
+		self.tableView.setEmptyView("No events found", "welcome-Image")
+	}
+	
 	private func listFriends(_ searchText: String) {
 		service.post(listFriendsUrl, parameters: ["search": searchText.lowercased()], onView: view) { (response: FindFriendResponse) in
-			if let allUsers = response.find {
-				self.allUsers = allUsers
+			self.allUsers = response.find
+			
+			if self.allUsers == nil || self.allUsers?.isEmpty == true {
+				self.tableView.setEmptyView("No events found", "welcome-Image")
+			} else {
+				self.tableView.backgroundView = nil
 			}
 			
 			self.tableView.reloadData()
