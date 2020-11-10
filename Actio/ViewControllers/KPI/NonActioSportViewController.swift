@@ -252,7 +252,7 @@ extension NonActioSportViewController: CellDataFetchProtocol, TextPickerDelegate
 	}
 	
 	func selectedPlayer(_ player: SearchUserModel) {
-		self.registerModel?.coachID = player.subscriberID?.value
+		self.registerModel?.coachID = player.subscriberDisplayID?.value
 		self.registerModel?.coachName = player.fullName
 		
 		prepareFormData()
