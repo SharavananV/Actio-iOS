@@ -89,7 +89,7 @@ class SocketIOManager {
 		})
 	}
 	
-	func shareTextMessage(fromId: String, toIds: [String], message: String, refId: String, type: String) {
+	func shareTextMessage(fromId: String, toIds: [[String: String]], message: String, refId: String, type: String) {
 		if !isConnected() {
 			establishConnection()
 			

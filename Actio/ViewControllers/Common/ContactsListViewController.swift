@@ -69,14 +69,16 @@ class ContactsListViewController: UIViewController {
 	}
 	
 	@objc func sendTapped() {
-		let allToIds: [String]? = friendsList?.compactMap({ (friend) -> String? in
+		let allToIds: [[String: String]]? = friendsList?.compactMap({ (friend) -> [String: String]? in
 			if friend.isSelected, let toId = friend.subscriberID {
-				return String(toId)
+				return ["id": String(toId)]
 			} else {
 				return nil
 			}
 		})
+		
 		if let fromId = loggedInUser?.subscriberSeqID, let allToIds = allToIds, !allToIds.isEmpty {
+			
 			socketManager.shareTextMessage(
 				fromId: String(fromId),
 				toIds: allToIds,
