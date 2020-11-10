@@ -38,7 +38,7 @@ class UserSelectionTableViewCell: UITableViewCell {
 	private lazy var contentLabel: UILabel = {
 		let label = UILabel(frame: .zero)
 		label.translatesAutoresizingMaskIntoConstraints = false
-		label.font = AppFont.PoppinsMedium(size: 13)
+		label.font = AppFont.PoppinsMedium(size: 15)
 		label.textColor = .darkGray
 		label.text = "Search By Username, Subscription ID or Mobile No"
 		label.numberOfLines = 0

@@ -32,13 +32,12 @@ class EventDetailsRegisterModel: Codable {
 			CodingKeys.teamName.rawValue: teamName ?? "",
 			CodingKeys.ageGroup.rawValue: ageGroup ?? "",
 			CodingKeys.cityID.rawValue: cityID ?? "",
-			CodingKeys.isCoach.rawValue: isCoach ?? "false",
 			CodingKeys.coachName.rawValue: coachName ?? "",
 			CodingKeys.coachIsd.rawValue: coachIsd ?? "",
 			CodingKeys.coachMobile.rawValue: coachMobile ?? "",
 			CodingKeys.coachEmail.rawValue: coachEmail ?? "",
 			CodingKeys.registrationID.rawValue: registrationID ?? "",
-			CodingKeys.coachId.rawValue: coachId ?? ""
+			CodingKeys.coachId.rawValue: String(coachId ?? 0)
 		]
 	}
 	

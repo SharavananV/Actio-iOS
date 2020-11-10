@@ -138,15 +138,13 @@ class EventRegistrationViewController: UIViewController {
 			String($0.id ?? 0) == self.addEventModel.cityID
 		})
 		
-		let isCoachString = NSAttributedString(string: "Do you want to include Coach Information", attributes: [.font : AppFont.PoppinsSemiBold(size: 14)])
-		
 		var formData: [FormCellType] = [
 			.textPicker(TextPickerModel(key: "registerBy", textValue: registerByValue, allValues: registerBy, contextText: "Registration By", placeHolder: "Select Register By")),
 			.textEdit(TextEditModel(key: "registerAs", textValue: eventDetails.type, contextText: "Register As", enabled: false)),
 			.textEdit(TextEditModel(key: "playerType", textValue: eventDetails.playerType, contextText: "Player Type", enabled: false)),
 			.textPicker(TextPickerModel(key: "ageGroup", textValue: selectedAgeGroup?.groupName, allValues: ageGroups, contextText: "Age Group", placeHolder: "Select Age Group")),
 			.textEdit(TextEditModel(key: "teamName", textValue: addEventModel.teamName, contextText: "Team Name", placeHolder: "Team name allows a-z,0-9,_,.")),
-			.toggle(ToggleViewModel(key: "isCoach", contextText: isCoachString, defaultValue: (addEventModel.isCoach == true))),
+			.searchPlayer,
 			.textPicker(TextPickerModel(key: "country", textValue: selectedCountry?.country, allValues: countries, contextText: "Country", placeHolder: "Select Country")),
 			.textPicker(TextPickerModel(key: "state", textValue: selectedState?.state, allValues: states, contextText: "State", placeHolder: "Select State")),
 			.textPicker(TextPickerModel(key: "cityID", textValue: selectedCity?.city, allValues: cities, contextText: "City", placeHolder: "Select City"))
@@ -158,7 +156,6 @@ class EventRegistrationViewController: UIViewController {
 			}) ?? []
 			
 			let coachData: [FormCellType] = [
-				.searchPlayer,
 				.textEdit(TextEditModel(key: "coachName", textValue: addEventModel.coachName, contextText: "Coach Name", placeHolder: "Coach Name", enabled: false)),
 				.textPicker(TextPickerModel(key: "coachIsd", textValue: addEventModel.coachIsd, allValues: allZipCodes, contextText: "Country Code", isEnabled: false)),
 				.textEdit(TextEditModel(key: "coachMobile", textValue: addEventModel.coachMobile, contextText: "Coach Mobile Number", placeHolder: "Coach Mobile Number", keyboardType: .phonePad, isSecure: false, enabled: false)),
@@ -204,20 +201,13 @@ extension EventRegistrationViewController: UITableViewDataSource {
 			textPickerCell.configure(model)
 			textPickerCell.delegate = self
 			cell = textPickerCell
-		
-		case .toggle(let model):
-			guard let toggleCell = tableView.dequeueReusableCell(withIdentifier: SwitchTableViewCell.reuseId, for: indexPath) as? SwitchTableViewCell else {
-				return UITableViewCell()
-			}
-			
-			toggleCell.configure(model, delegate: self)
-			cell = toggleCell
 			
 		case .searchPlayer:
 			guard let playerCell = tableView.dequeueReusableCell(withIdentifier: UserSelectionTableViewCell.reuseId, for: indexPath) as? UserSelectionTableViewCell else {
 				return UITableViewCell()
 			}
 			
+			playerCell.configure(settings: UserSearchSettings(showReset: false, showUserName: false, retainResult: false, collapseTableViewOnSelection: false, title: "Search By Coach", placeHolder: "Type your search"))
 			playerCell.delegate = self
 			cell = playerCell
 		}
@@ -229,7 +219,7 @@ extension EventRegistrationViewController: UITableViewDataSource {
 }
 
 // MARK: Cell Delegates
-extension EventRegistrationViewController: CellDataFetchProtocol, TextPickerDelegate, SwitchCellDelegate, UserSelectionProtocol {
+extension EventRegistrationViewController: CellDataFetchProtocol, TextPickerDelegate, UserSelectionProtocol {
 	func valueChanged(keyValuePair: (key: String, value: String)) {
 		guard let codingKey = EventDetailsRegisterModel.CodingKeys(rawValue: keyValuePair.key) else { return }
 		
@@ -300,14 +290,6 @@ extension EventRegistrationViewController: CellDataFetchProtocol, TextPickerDele
 		prepareFormData()
 	}
 	
-	func toggleValueChanged(_ key: String, value: Bool) {
-		if key == "isCoach" {
-			addEventModel.isCoach = value
-			
-			prepareFormData()
-		}
-	}
-	
 	func clearOldCoreData() {
 		let fetchRequest = CDPlayer.fetchRequestForYesterday()
 		let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
@@ -340,6 +322,7 @@ extension EventRegistrationViewController: CellDataFetchProtocol, TextPickerDele
 		self.addEventModel.coachName = player.fullName
 		self.addEventModel.coachEmail = player.emailID
 		self.addEventModel.coachMobile = player.mobileNumber
+		self.addEventModel.isCoach = true
 		
 		prepareFormData()
 	}
@@ -369,6 +352,5 @@ extension EventRegistrationViewController {
 private enum FormCellType {
 	case textEdit(TextEditModel)
 	case textPicker(TextPickerModel)
-	case toggle(ToggleViewModel)
 	case searchPlayer
 }
