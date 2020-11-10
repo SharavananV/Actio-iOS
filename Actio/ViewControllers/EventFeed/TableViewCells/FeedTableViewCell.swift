@@ -33,5 +33,7 @@ class FeedTableViewCell: UITableViewCell {
         cellBackgroundView.layer.shadowRadius = 6.0
         cellBackgroundView.layer.masksToBounds = false
 
+		self.feedProfileImageView.layer.cornerRadius = self.feedProfileImageView.frame.height/2
+		self.feedProfileImageView.clipsToBounds = true
     }
 }

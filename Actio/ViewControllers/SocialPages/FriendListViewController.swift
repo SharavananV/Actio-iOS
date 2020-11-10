@@ -16,10 +16,6 @@ class FriendListViewController: UIViewController {
 	private let service = DependencyProvider.shared.networkService
 	private var allUsers: [Friend]?
 	
-	override func viewDidLoad() {
-		self.tableView.setEmptyView("No events found", "welcome-Image")
-	}
-	
 	private func listFriends(_ searchText: String) {
 		service.post(listFriendsUrl, parameters: ["search": searchText.lowercased()], onView: view) { (response: FindFriendResponse) in
 			self.allUsers = response.find

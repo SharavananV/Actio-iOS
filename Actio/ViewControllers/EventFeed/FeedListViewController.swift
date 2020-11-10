@@ -70,20 +70,16 @@ extension FeedListViewController : UITableViewDelegate,UITableViewDataSource,UIS
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableViewCell", for: indexPath) as? FeedTableViewCell else {
-            return UITableViewCell()
-        }
-        
-        guard let cell2 = tableView.dequeueReusableCell(withIdentifier: "FeedWithoutImageTableViewCell", for: indexPath) as? FeedWithoutImageTableViewCell else {
-            return UITableViewCell()
-        }
-        
         let feedList = searching ? self.filteredList : self.feedList
         
         guard let feed = feedList?[indexPath.row] else {
             return UITableViewCell()
         }
         if feed.images != nil {
+			guard let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableViewCell", for: indexPath) as? FeedTableViewCell else {
+				return UITableViewCell()
+			}
+			
             if feed.profileImage != nil {
                 if let imagePath = URL(string:  baseImageUrl + feed.profileImage!) {
                     cell.feedProfileImageView.load(url: imagePath)
@@ -91,8 +87,7 @@ extension FeedListViewController : UITableViewDelegate,UITableViewDataSource,UIS
             }else {
                 cell.feedProfileImageView.image = #imageLiteral(resourceName: "205383133115.jpg")
             }
-            cell.feedProfileImageView.layer.cornerRadius = cell.feedProfileImageView.frame.height/2
-            cell.feedProfileImageView.clipsToBounds = true
+            
             cell.feedDescriptionLabel.text = feed.listDescription
             cell.feedNameLabel.text = feed.fullName
             cell.feedTitleLabel.text = feed.title
@@ -103,19 +98,15 @@ extension FeedListViewController : UITableViewDelegate,UITableViewDataSource,UIS
                 }
             }
             
-            let feedDateFormatter = DateFormatter()
-            feedDateFormatter.dateFormat = "MMM dd,yyyy hh:mm:ss a"
-            if let createdDate = feedDateFormatter.date(from: "\(feed.createdDate) \(feed.createdTime)"), Calendar.current.isDateInToday(createdDate) {
-                let timeDiff = createdDate.timeIntervalSince(Date())
-                cell.feedTimeLabel.text = timeDiff.displayString + " ago"
-            }
-            else {
-                cell.feedTimeLabel.text = feed.createdDate ?? ""+" "+feed.createdTime!
-            }
+			cell.feedTimeLabel.text = feed.createdDate
             
             return cell
             
         } else {
+			guard let cell2 = tableView.dequeueReusableCell(withIdentifier: "FeedWithoutImageTableViewCell", for: indexPath) as? FeedWithoutImageTableViewCell else {
+				return UITableViewCell()
+			}
+			
             if feed.profileImage != nil {
                 if let imagePath = URL(string:  baseImageUrl + feed.profileImage!) {
                     cell2.feedProfileImageView.load(url: imagePath)
@@ -123,22 +114,13 @@ extension FeedListViewController : UITableViewDelegate,UITableViewDataSource,UIS
             }else {
                 cell2.feedProfileImageView.image = #imageLiteral(resourceName: "205383133115.jpg")
             }
-            cell2.feedProfileImageView.layer.cornerRadius = cell.feedProfileImageView.frame.height/2
-            cell2.feedProfileImageView.clipsToBounds = true
+            
             cell2.feedDescriptionLabel.text = feed.listDescription
             cell2.feedNameLabel.text = feed.fullName
             cell2.feedTitleLabel.text = feed.title
             self.subscriberID = feed.subscriberID
             
-            let feedDateFormatter = DateFormatter()
-            feedDateFormatter.dateFormat = "MMM dd,yyyy hh:mm:ss a"
-            if let createdDate = feedDateFormatter.date(from: "\(feed.createdDate ?? "") \(feed.createdTime ?? "")"), Calendar.current.isDateInToday(createdDate) {
-                let timeDiff = createdDate.timeIntervalSince(Date())
-                cell2.feedTimeLabel.text = timeDiff.displayString + " ago"
-            }
-            else {
-                cell2.feedTimeLabel.text = feed.createdDate ?? ""+" "+feed.createdTime!
-            }
+			cell2.feedTimeLabel.text = feed.createdDate
             
             return cell2
         }
@@ -152,7 +134,7 @@ extension FeedListViewController : UITableViewDelegate,UITableViewDataSource,UIS
         }
         vc.feedDetail = feedDetail
 
-        self.navigationController?.pushViewController(vc, animated: false)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
