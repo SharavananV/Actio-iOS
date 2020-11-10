@@ -17,6 +17,12 @@ struct MyProfileResponse: ResponseType {
 	let profile: ProfileData?
 	let find: [Friend]?
 	let list: [Friend]?
+	let eventAssociated: [EventAssociated]?
+	
+	enum CodingKeys: String, CodingKey {
+		case errors, msg, status, logID, profile, find, list
+		case eventAssociated = "event_associated"
+	}
 }
 
 struct FindFriendResponse: ResponseType {
@@ -79,8 +85,6 @@ class Friend: Codable {
 		return Conversation(subscriberID: subscriberID, subscriberDisplayID: subscriberDisplayID, fullName: fullName, username: username, emailID: emailID, profileImage: profileImage, chatID: nil, message: nil, unseen: nil)
 	}
 }
-
-
 
 struct FriendsListResponse: ResponseType {
     var errors: [ActioError]?
