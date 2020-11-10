@@ -28,6 +28,7 @@ class FriendsProfilePageViewController: UIViewController {
 	private let service = DependencyProvider.shared.networkService
 	private var friendsListModel : [Friend]?
 	private var currentFriend: Profile?
+	var notificationId: Int?
 	var friendId: Int?
 	
 	override func viewDidLoad() {
@@ -41,7 +42,9 @@ class FriendsProfilePageViewController: UIViewController {
         friendsListCollectionView.dataSource = self
         eventsAssociatedCollectionView.dataSource = self
         eventsAssociatedCollectionView.delegate = self
+		
 		friendsListCall()
+		updateSeenStatus()
 	}
 	
 	func friendsListCall() {
@@ -61,6 +64,14 @@ class FriendsProfilePageViewController: UIViewController {
 			
 			self?.friendsListCollectionView.reloadData()
 			self?.eventsAssociatedCollectionView.reloadData()
+		}
+	}
+	
+	private func updateSeenStatus() {
+		if let notificationId = self.notificationId {
+			service.post(notificationSeenUpdateUrl, parameters: ["notifyID": notificationId], onView: self.view) { _ in
+				debugPrint("Seen status updated for notification")
+			}
 		}
 	}
 	

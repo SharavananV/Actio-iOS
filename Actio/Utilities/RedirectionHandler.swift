@@ -53,30 +53,21 @@ class RedirectionHandler {
 					return
 				}
 				vc.tournamentId = refId
-				let container = RedirectContainerViewController(rootViewController: vc)
-				container.modalPresentationStyle = .fullScreen
-				
-				topViewController?.present(container, animated: false, completion: nil)
+				self.presentController(vc)
 				
 			case "E":
 				guard let vc = UIStoryboard(name: "Events", bundle: nil).instantiateViewController(withIdentifier: "EventDetailViewController") as? EventDetailViewController else {
 					return
 				}
 				vc.eventId = refId
-				let container = RedirectContainerViewController(rootViewController: vc)
-				container.modalPresentationStyle = .fullScreen
-				
-				topViewController?.present(container, animated: false, completion: nil)
+				self.presentController(vc)
 				
 			case "F":
 				guard let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FeedDetailsViewController") as? FeedDetailsViewController else {
 					return
 				}
 				vc.feedId = refId
-				let container = RedirectContainerViewController(rootViewController: vc)
-				container.modalPresentationStyle = .fullScreen
-				
-				topViewController?.present(container, animated: false, completion: nil)
+				self.presentController(vc)
 				
 			default:
 				break
@@ -122,30 +113,45 @@ class RedirectionHandler {
 				
 				if let content = wrapper.message, let notiType = content.type {
 					switch notiType {
-					case "parent_submit":
-						if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AcceptRejectRequestViewController") as? AcceptRejectRequestViewController, let fromId = content.fromID {
+					case "parent_submit", "parent_reject", "parent_approve":
+						if content.userStatus == "4" {
+							if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OtpViewController") as? OtpViewController {
+								
+								self.presentController(vc)
+							}
+						}
+						else if notiType == "parent_submit", let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AcceptRejectRequestViewController") as? AcceptRejectRequestViewController, let fromId = content.fromID {
 							vc.childID = fromId
-							let container = RedirectContainerViewController(rootViewController: vc)
-							container.modalPresentationStyle = .fullScreen
-							
-							topViewController?.present(container, animated: false, completion: nil)
+							self.presentController(vc)
 						}
 						
 					case "coach_validate":
 						// TODO: Fill this in when KPI is complete
 						break
 						
-					case "parent_reject", "parent_approve":
-						break
-						
 					default:
 						break
+					}
+				}
+				if let content = wrapper.message, let screenType = content.screen, screenType != "profile" {
+					if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FriendsProfilePageViewController") as? FriendsProfilePageViewController {
+						vc.friendId = Int(content.fromID ?? "0")
+						vc.notificationId = Int(content.notifyID ?? "0")
+						
+						self.presentController(vc)
 					}
 				}
 			} catch {
 				print(error.localizedDescription)
 			}
 		}
+	}
+	
+	private func presentController(_ vc: UIViewController) {
+		let container = RedirectContainerViewController(rootViewController: vc)
+		container.modalPresentationStyle = .fullScreen
+		
+		topViewController?.present(container, animated: false, completion: nil)
 	}
 }
 
@@ -155,7 +161,7 @@ private struct MessageWrapper: Codable {
 
 private struct Message: Codable {
 	var notifyID, title, fromID, toID: String?
-	var type, name, msg, screen: String?
+	var type, name, msg, screen, userStatus: String?
 	
 	enum CodingKeys: String, CodingKey {
 		case notifyID = "notifyId"
