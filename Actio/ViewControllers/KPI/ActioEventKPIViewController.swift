@@ -106,7 +106,7 @@ class ActioEventKPIViewController: UIViewController {
 			.info("Event", kpiEventDetails?.eventName),
 			.info("Date", kpiEventDetails?.eventDateRange),
 			.info("Venue", kpiEventDetails?.venueName),
-			.textPicker(TextPickerModel(key: "coach", textValue: selectedCoach, allValues: allCoaches, contextText: "Coach", placeHolder: "Select Coach"))
+			.textPicker(TextPickerModel(key: "coach", textValue: selectedCoach, allValues: allCoaches, contextText: "Coach", placeHolder: "Select Coach", isEnabled: fromScreen == .submit))
 		]
 		
 		self.kpiEventDetails?.kpi?.forEach({ (kpiModel) in

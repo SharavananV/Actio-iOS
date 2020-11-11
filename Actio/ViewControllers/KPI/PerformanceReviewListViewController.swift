@@ -183,9 +183,14 @@ extension PerformanceReviewListViewController: UITableViewDataSource, UITableVie
 			}
 				
 		case 2:
-			if userRole == 1, let event = self.actioEvents?[indexPath.row] {
+			if userRole == 1, let event = self.nonActioEvents?[indexPath.row] {
 				if event.eventStatus == .revalidate {
-					// User update tapped for non actio
+					if let vc = UIStoryboard(name: "Events", bundle: nil).instantiateViewController(withIdentifier: "NonActioSportViewController") as? NonActioSportViewController {
+						vc.updateEventDetails = event
+						vc.fromScreen = .update
+						
+						self.navigationController?.pushViewController(vc, animated: true)
+					}
 				} else {
 					view.makeToast("Not allowed")
 				}

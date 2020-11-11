@@ -17,6 +17,14 @@ class NonActioSportViewController: UIViewController {
 	private var masterData: NonActioMaster?
 	private var filterData: NonActioFilter?
 	private var registerModel: RegisterKPIModel? = RegisterKPIModel()
+	
+	var updateEventDetails: NonActioEvent? {
+		didSet {
+			registerModel?.kpiID = updateEventDetails?.kpiID
+			registerModel?.kpiType = updateEventDetails?.eventKpiType
+		}
+	}
+	var fromScreen: FromController = .submit
 		
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,15 +37,16 @@ class NonActioSportViewController: UIViewController {
 		tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 10))
 		
 		self.title = "Non Actio Sports"
-		self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Submit", style: .done, target: self, action: #selector(self.proceedTapped))
+		let titleText = fromScreen == .submit ? "Submit" : "Update"
+		self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: titleText, style: .done, target: self, action: #selector(self.proceedTapped))
 		self.navigationItem.rightBarButtonItem?.tintColor = .white
-		self.navigationItem.rightBarButtonItem?.isEnabled = false
+		self.navigationItem.rightBarButtonItem?.isEnabled = fromScreen == .update
 		
         fetchMasterData()
     }
 	
 	@objc func proceedTapped() {
-		let validationResult = registerModel?.validate()
+		let validationResult = fromScreen == .submit ? registerModel?.validate() : registerModel?.validateForUpdateKpi()
 		switch validationResult {
 		case .invalid(let message):
 			view.makeToast(message)
@@ -47,7 +56,10 @@ class NonActioSportViewController: UIViewController {
 			break
 		}
 		
-		service.post(registerNonActioKpiUrl, parameters: registerModel?.parameters(), onView: view) { (response) in
+		let serviceUrl = fromScreen == .submit ? registerNonActioKpiUrl : updateActioKpi
+		let params: [String: Any]? = fromScreen == .submit ? registerModel?.parameters() : registerModel?.updateParams()
+		
+		service.post(serviceUrl, parameters: params, onView: view) { (response) in
 			if let message = response["msg"] as? String {
 				self.view.makeToast(message) { _ in
 					self.navigationController?.popViewController(animated: true)
@@ -65,60 +77,88 @@ class NonActioSportViewController: UIViewController {
 	}
 	
 	private func prepareFormData() {
-		let countries = self.masterData?.countryState?.compactMap({ $0.countryName }) ?? []
-		let selectedCountry = self.masterData?.countryState?.first(where: {
-			$0.countryID == self.registerModel?.country
-		})
+		var formData: [FormCellType]
 		
-		let states = selectedCountry?.states?.compactMap({ $0.stateName }) ?? []
-		let selectedState = selectedCountry?.states?.first(where: {
-			$0.stateID == self.registerModel?.state
-		})
-		
-		let allYears = self.filterData?.years?.map({ String($0) }) ?? []
-		let selectedYear = registerModel?.year == nil ? "" : String(registerModel?.year ?? 0)
-		
-		let allTournaments = self.filterData?.tournaments?.compactMap({ $0.tournamentName }) ?? []
-		let selectedTournament = self.filterData?.tournaments?.first(where: {
-			$0.tournamentID == self.registerModel?.tournamentID
-		})?.tournamentName ?? ""
-		
-		let allEvents = self.filterData?.events?.compactMap({ $0.eventName }) ?? []
-		let selectedEvent = self.filterData?.events?.first(where: {
-			$0.eventID == self.registerModel?.eventID
-		})?.eventName ?? ""
-		
-		let addTournamentText = NSMutableAttributedString(string:"+ Add tournament manually", attributes: [NSAttributedString.Key.font : AppFont.PoppinsRegular(size: 17), NSAttributedString.Key.foregroundColor : AppColor.OrangeColor()])
-		
-		var formData: [FormCellType] = [
-			.textPicker(TextPickerModel(key: "country", textValue: selectedCountry?.countryName, allValues: countries, contextText: "Country", placeHolder: "Select Country", actioField: false)),
-			.textPicker(TextPickerModel(key: "state", textValue: selectedState?.stateName, allValues: states, contextText: "State", placeHolder: "Select State", actioField: false)),
-			.textPicker(TextPickerModel(key: "year", textValue: selectedYear, allValues: allYears, contextText: "Year", placeHolder: "Select Year", actioField: false)),
-			.textPicker(TextPickerModel(key: "tournament", textValue: selectedTournament, allValues: allTournaments, contextText: "Tournament", placeHolder: "Select Tournament", actioField: false)),
-			.attrText(addTournamentText, .center),
-			.textPicker(TextPickerModel(key: "event", textValue: selectedEvent, allValues: allEvents, contextText: "Event", placeHolder: "Select Event", actioField: false)),
-			.searchPlayer(UserSearchSettings(showReset: false, showUserName: true, retainResult: false, collapseTableViewOnSelection: false, title: "Search by Coach", placeHolder: "Search By Username, Subscription ID or Mobile No"))
-		]
-		
-		if registerModel?.coachID != nil {
-			formData.append(
-				.text(registerModel?.coachName ?? "", .natural, true)
-			)
-		}
-		
-		self.filterData?.kpi?.forEach({ (kpiModel) in
-			let kpiIDString = String(kpiModel.kpiID ?? 0)
-			let textValue = registerModel?.kpi[kpiIDString]
-			let keyboardType: UIKeyboardType = kpiModel.kpiType == 2 ? .numberPad : .default
-			formData.append(
-				.textEdit(TextEditModel(key: kpiIDString, textValue: textValue, contextText: kpiModel.kpiName ?? "", placeHolder: "", keyboardType: keyboardType, actioField: false))
-			)
+		if fromScreen == .submit {
+			let countries = self.masterData?.countryState?.compactMap({ $0.countryName }) ?? []
+			let selectedCountry = self.masterData?.countryState?.first(where: {
+				$0.countryID == self.registerModel?.country
+			})
 			
-			if self.registerModel?.kpi.isEmpty == true {
-				self.registerModel?.kpi[kpiIDString] = ""
-				self.registerModel?.kpiText[kpiIDString] = kpiModel.kpiName
+			let states = selectedCountry?.states?.compactMap({ $0.stateName }) ?? []
+			let selectedState = selectedCountry?.states?.first(where: {
+				$0.stateID == self.registerModel?.state
+			})
+			
+			let allYears = self.filterData?.years?.map({ String($0) }) ?? []
+			let selectedYear = registerModel?.year == nil ? "" : String(registerModel?.year ?? 0)
+			
+			let allTournaments = self.filterData?.tournaments?.compactMap({ $0.tournamentName }) ?? []
+			let selectedTournament = self.filterData?.tournaments?.first(where: {
+				$0.tournamentID == self.registerModel?.tournamentID
+			})?.tournamentName ?? ""
+			
+			let allEvents = self.filterData?.events?.compactMap({ $0.eventName }) ?? []
+			let selectedEvent = self.filterData?.events?.first(where: {
+				$0.eventID == self.registerModel?.eventID
+			})?.eventName ?? ""
+			
+			let addTournamentText = NSMutableAttributedString(string:"+ Add tournament manually", attributes: [NSAttributedString.Key.font : AppFont.PoppinsRegular(size: 17), NSAttributedString.Key.foregroundColor : AppColor.OrangeColor()])
+			
+			formData = [
+				.textPicker(TextPickerModel(key: "country", textValue: selectedCountry?.countryName, allValues: countries, contextText: "Country", placeHolder: "Select Country", actioField: false)),
+				.textPicker(TextPickerModel(key: "state", textValue: selectedState?.stateName, allValues: states, contextText: "State", placeHolder: "Select State", actioField: false)),
+				.textPicker(TextPickerModel(key: "year", textValue: selectedYear, allValues: allYears, contextText: "Year", placeHolder: "Select Year", actioField: false)),
+				.textPicker(TextPickerModel(key: "tournament", textValue: selectedTournament, allValues: allTournaments, contextText: "Tournament", placeHolder: "Select Tournament", actioField: false)),
+				.attrText(addTournamentText, .center),
+				.textPicker(TextPickerModel(key: "event", textValue: selectedEvent, allValues: allEvents, contextText: "Event", placeHolder: "Select Event", actioField: false)),
+				.searchPlayer(UserSearchSettings(showReset: false, showUserName: true, retainResult: false, collapseTableViewOnSelection: false, title: "Search by Coach", placeHolder: "Search By Username, Subscription ID or Mobile No"))
+			]
+			
+			if registerModel?.coachID != nil {
+				formData.append(
+					.text(registerModel?.coachName ?? "", .natural, true)
+				)
 			}
-		})
+			
+			self.filterData?.kpi?.forEach({ (kpiModel) in
+				let kpiIDString = String(kpiModel.kpiID ?? 0)
+				let textValue = registerModel?.kpi[kpiIDString]
+				let keyboardType: UIKeyboardType = kpiModel.kpiType == 2 ? .numberPad : .default
+				formData.append(
+					.textEdit(TextEditModel(key: kpiIDString, textValue: textValue, contextText: kpiModel.kpiName ?? "", placeHolder: "", keyboardType: keyboardType, actioField: false))
+				)
+				
+				if self.registerModel?.kpi.isEmpty == true {
+					self.registerModel?.kpi[kpiIDString] = ""
+					self.registerModel?.kpiText[kpiIDString] = kpiModel.kpiName
+				}
+			})
+		}
+		else {
+			formData = [
+				.textEdit(TextEditModel(key: "country", textValue: updateEventDetails?.eventCountry, contextText: "Country", placeHolder: "Select Country", enabled: false, actioField: false)),
+				.textEdit(TextEditModel(key: "state", textValue: updateEventDetails?.eventState, contextText: "State", placeHolder: "Select State", enabled: false, actioField: false)),
+				.textEdit(TextEditModel(key: "year", textValue: updateEventDetails?.eventYear, contextText: "Year", placeHolder: "Select Year", enabled: false, actioField: false)),
+				.textEdit(TextEditModel(key: "tournament", textValue: updateEventDetails?.tournamentName, contextText: "Tournament", placeHolder: "Select Tournament", enabled: false, actioField: false)),
+				.textEdit(TextEditModel(key: "event", textValue: updateEventDetails?.eventName, contextText: "Event", placeHolder: "Select Event", enabled: false, actioField: false))
+			]
+			
+			self.updateEventDetails?.eventKpi?.forEach({ (kpiModel) in
+				let kpiIDString = String(kpiModel.kpiCategoryID ?? 0)
+				
+				if self.registerModel?.kpi[kpiIDString] == nil || self.registerModel?.kpi[kpiIDString] == "" {
+					self.registerModel?.kpi[kpiIDString] = kpiModel.kpiCategoryValue
+					self.registerModel?.kpiText[kpiIDString] = kpiModel.kpiCategoryName
+				}
+				
+				let textValue = registerModel?.kpi[kpiIDString]
+				let keyboardType: UIKeyboardType = kpiModel.typeStatus == 2 ? .numberPad : .default
+				formData.append(
+					.textEdit(TextEditModel(key: kpiIDString, textValue: textValue, contextText: kpiModel.kpiCategoryName ?? "", placeHolder: "", keyboardType: keyboardType, actioField: false))
+				)
+			})
+		}
 		
 		if filterData?.kpi?.isEmpty == false {
 			navigationItem.rightBarButtonItem?.isEnabled = true
@@ -276,6 +316,10 @@ extension NonActioSportViewController: CellDataFetchProtocol, TextPickerDelegate
 			
 			self.prepareFormData()
 		}
+	}
+	
+	enum FromController {
+		case submit, update
 	}
 }
 
