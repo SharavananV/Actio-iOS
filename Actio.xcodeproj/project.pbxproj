@@ -87,7 +87,11 @@
 		8D1C92C3255976BC0006D5BC /* ErrorMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1C92C2255976BC0006D5BC /* ErrorMessageViewController.swift */; };
 		8D1C92C8255ACE360006D5BC /* TwoLabelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1C92C7255ACE340006D5BC /* TwoLabelTableViewCell.swift */; };
 		8D1C92CB255ACFF00006D5BC /* ActioEventKPIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1C92CA255ACFF00006D5BC /* ActioEventKPIViewController.swift */; };
-		8D1C92CE255AD2B50006D5BC /* ActioModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1C92CD255AD2B50006D5BC /* ActioModels.swift */; };
+		8D1C92CE255AD2B50006D5BC /* ActioKPIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1C92CD255AD2B50006D5BC /* ActioKPIModels.swift */; };
+		8D1C92D1255BADE40006D5BC /* ActioKPITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1C92D0255BADE40006D5BC /* ActioKPITableViewCell.swift */; };
+		8D1C92D4255BAE0C0006D5BC /* NonActioKPITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1C92D3255BAE0C0006D5BC /* NonActioKPITableViewCell.swift */; };
+		8D1C92D8255BAFA10006D5BC /* PerformanceReviewListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1C92D7255BAFA10006D5BC /* PerformanceReviewListViewController.swift */; };
+		8D1C92DC255BB3D10006D5BC /* PerformanceReviewListModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1C92DB255BB3D10006D5BC /* PerformanceReviewListModels.swift */; };
 		8D1C960D252C2A8C005FE3EC /* EventAddPlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D1C960C252C2A8C005FE3EC /* EventAddPlayerTableViewCell.swift */; };
 		8D21855D24B6E383002688A8 /* OtpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D21855C24B6E383002688A8 /* OtpViewController.swift */; };
 		8D21855F24B6ED5F002688A8 /* VPMOTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D21855E24B6ED5F002688A8 /* VPMOTPView.swift */; };
@@ -171,7 +175,7 @@
 		8DDBB764252D913A00D74087 /* PlayerSummaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDBB763252D913A00D74087 /* PlayerSummaryTableViewCell.swift */; };
 		8DDBB767252D919C00D74087 /* AddPlayerButtonViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDBB766252D919C00D74087 /* AddPlayerButtonViewCell.swift */; };
 		8DDDBDDA2552852400C999F0 /* NonActioSportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDDBDD92552852400C999F0 /* NonActioSportViewController.swift */; };
-		8DDDBDE02552898500C999F0 /* NonActioModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDDBDDF2552898500C999F0 /* NonActioModels.swift */; };
+		8DDDBDE02552898500C999F0 /* NonActioKPIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDDBDDF2552898500C999F0 /* NonActioKPIModels.swift */; };
 		8DE6B64924B335630010A3EC /* AppFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE6B64824B335630010A3EC /* AppFonts.swift */; };
 		8DE6B64E24B35BA60010A3EC /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE6B64D24B35BA60010A3EC /* LaunchViewController.swift */; };
 		8DEBC7E525541C4F00B66C52 /* ManualAddTournamentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEBC7E425541C4E00B66C52 /* ManualAddTournamentViewController.swift */; };
@@ -281,7 +285,11 @@
 		8D1C92C2255976BC0006D5BC /* ErrorMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessageViewController.swift; sourceTree = "<group>"; };
 		8D1C92C7255ACE340006D5BC /* TwoLabelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoLabelTableViewCell.swift; sourceTree = "<group>"; };
 		8D1C92CA255ACFF00006D5BC /* ActioEventKPIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActioEventKPIViewController.swift; sourceTree = "<group>"; };
-		8D1C92CD255AD2B50006D5BC /* ActioModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActioModels.swift; sourceTree = "<group>"; };
+		8D1C92CD255AD2B50006D5BC /* ActioKPIModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActioKPIModels.swift; sourceTree = "<group>"; };
+		8D1C92D0255BADE40006D5BC /* ActioKPITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActioKPITableViewCell.swift; sourceTree = "<group>"; };
+		8D1C92D3255BAE0C0006D5BC /* NonActioKPITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonActioKPITableViewCell.swift; sourceTree = "<group>"; };
+		8D1C92D7255BAFA10006D5BC /* PerformanceReviewListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceReviewListViewController.swift; sourceTree = "<group>"; };
+		8D1C92DB255BB3D10006D5BC /* PerformanceReviewListModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceReviewListModels.swift; sourceTree = "<group>"; };
 		8D1C960C252C2A8C005FE3EC /* EventAddPlayerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventAddPlayerTableViewCell.swift; sourceTree = "<group>"; };
 		8D21855C24B6E383002688A8 /* OtpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtpViewController.swift; sourceTree = "<group>"; };
 		8D21855E24B6ED5F002688A8 /* VPMOTPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPMOTPView.swift; sourceTree = "<group>"; };
@@ -368,7 +376,7 @@
 		8DDBB763252D913A00D74087 /* PlayerSummaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerSummaryTableViewCell.swift; sourceTree = "<group>"; };
 		8DDBB766252D919C00D74087 /* AddPlayerButtonViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayerButtonViewCell.swift; sourceTree = "<group>"; };
 		8DDDBDD92552852400C999F0 /* NonActioSportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonActioSportViewController.swift; sourceTree = "<group>"; };
-		8DDDBDDF2552898500C999F0 /* NonActioModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonActioModels.swift; sourceTree = "<group>"; };
+		8DDDBDDF2552898500C999F0 /* NonActioKPIModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonActioKPIModels.swift; sourceTree = "<group>"; };
 		8DE6B64824B335630010A3EC /* AppFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFonts.swift; sourceTree = "<group>"; };
 		8DE6B64D24B35BA60010A3EC /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		8DEBC7E425541C4E00B66C52 /* ManualAddTournamentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualAddTournamentViewController.swift; sourceTree = "<group>"; };
@@ -898,6 +906,7 @@
 				8DDDBDD92552852400C999F0 /* NonActioSportViewController.swift */,
 				8DEBC7E425541C4E00B66C52 /* ManualAddTournamentViewController.swift */,
 				8D1C92CA255ACFF00006D5BC /* ActioEventKPIViewController.swift */,
+				8D1C92D7255BAFA10006D5BC /* PerformanceReviewListViewController.swift */,
 			);
 			path = KPI;
 			sourceTree = "<group>";
@@ -905,9 +914,10 @@
 		8DDDBDDE2552897300C999F0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				8DDDBDDF2552898500C999F0 /* NonActioModels.swift */,
+				8DDDBDDF2552898500C999F0 /* NonActioKPIModels.swift */,
 				8DEBC7EF2555102100B66C52 /* ManualTournamentModel.swift */,
-				8D1C92CD255AD2B50006D5BC /* ActioModels.swift */,
+				8D1C92CD255AD2B50006D5BC /* ActioKPIModels.swift */,
+				8D1C92DB255BB3D10006D5BC /* PerformanceReviewListModels.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -969,6 +979,8 @@
 			isa = PBXGroup;
 			children = (
 				8DEBC7E82554268400B66C52 /* AddEventTableViewCell.swift */,
+				8D1C92D0255BADE40006D5BC /* ActioKPITableViewCell.swift */,
+				8D1C92D3255BAE0C0006D5BC /* NonActioKPITableViewCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -1159,7 +1171,7 @@
 				8D47F1062539D26D0013900C /* RedirectionHandler.swift in Sources */,
 				18C6B02D2512015200B7162E /* TournamentModel.swift in Sources */,
 				8DF77D51252B1F680065720A /* AddPlayersViewController.swift in Sources */,
-				8DDDBDE02552898500C999F0 /* NonActioModels.swift in Sources */,
+				8DDDBDE02552898500C999F0 /* NonActioKPIModels.swift in Sources */,
 				8D0F749A253046EF00200C2B /* FriendListViewController.swift in Sources */,
 				1841F19624B480680021D131 /* FootnoteButtonTableViewCell.swift in Sources */,
 				18455F8D252DE556000CA7CA /* TournamentFilterViewController.swift in Sources */,
@@ -1179,8 +1191,10 @@
 				18455F8A252DAC75000CA7CA /* SegmentControlTableViewCell.swift in Sources */,
 				8D47F1002539ABCF0013900C /* ContactListShareCell.swift in Sources */,
 				8DEBC7E525541C4F00B66C52 /* ManualAddTournamentViewController.swift in Sources */,
+				8D1C92D4255BAE0C0006D5BC /* NonActioKPITableViewCell.swift in Sources */,
 				8D673A622514C86A00585AF9 /* TournamentPrizesTableViewCell.swift in Sources */,
 				8DE6B64924B335630010A3EC /* AppFonts.swift in Sources */,
+				8D1C92D1255BADE40006D5BC /* ActioKPITableViewCell.swift in Sources */,
 				8D47F0EB2539805F0013900C /* ImageZoomViewController.swift in Sources */,
 				18435580252B233200DECA90 /* ForgotUsernameSubscriberIDViewController.swift in Sources */,
 				185A9682253EE8BA009566E9 /* AcademicYearTableViewCell.swift in Sources */,
@@ -1192,10 +1206,11 @@
 				8DEBC7E92554268400B66C52 /* AddEventTableViewCell.swift in Sources */,
 				8D94E07F24AF1D0A00DBC46A /* Actio.xcdatamodeld in Sources */,
 				8DC1BD2625259A8F005C55DE /* NotificationListViewController.swift in Sources */,
-				8D1C92CE255AD2B50006D5BC /* ActioModels.swift in Sources */,
+				8D1C92CE255AD2B50006D5BC /* ActioKPIModels.swift in Sources */,
 				8D21855D24B6E383002688A8 /* OtpViewController.swift in Sources */,
 				8D47F0F3253984760013900C /* ImageLoader.swift in Sources */,
 				8DCBAB5B24BF2D37009E8B7F /* HomePageCollectionViewCell.swift in Sources */,
+				8D1C92D8255BAFA10006D5BC /* PerformanceReviewListViewController.swift in Sources */,
 				1841F19524B480680021D131 /* TextEditTableViewCell.swift in Sources */,
 				8D21856124B6ED75002688A8 /* VPMOTPTextField.swift in Sources */,
 				8D9C07A1250B886100514692 /* TournamentListModel.swift in Sources */,
@@ -1241,6 +1256,7 @@
 				8DA048BB24B331D40099D528 /* AppColors.swift in Sources */,
 				8DDBB767252D919C00D74087 /* AddPlayerButtonViewCell.swift in Sources */,
 				18C253CF2512323E0043D20F /* GalleryCollectionViewCell.swift in Sources */,
+				8D1C92DC255BB3D10006D5BC /* PerformanceReviewListModels.swift in Sources */,
 				1850412C254018380053BB2D /* InfoViewController.swift in Sources */,
 				8D94E08C24AF1D3600DBC46A /* LoginViewController.swift in Sources */,
 				8D1C92C3255976BC0006D5BC /* ErrorMessageViewController.swift in Sources */,

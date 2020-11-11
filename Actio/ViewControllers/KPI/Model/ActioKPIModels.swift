@@ -28,6 +28,7 @@ struct KPIEvent: Codable {
 	var venueName: String?
 	var kpi: [KpiFilterModel]?
 	var coachList: [CoachList]?
+	var selectedCoach: String?
 	
 	enum CodingKeys: String, CodingKey {
 		case eventID = "event_id"
@@ -43,6 +44,17 @@ struct KPIEvent: Codable {
 		case venueName = "venue_name"
 		case kpi
 		case coachList = "coach_list"
+		case selectedCoach
+	}
+	
+	init(_ event: ActioEvent) {
+		self.eventName = event.eventName
+		self.tournamentName = event.tournamentName
+		if let startDate = event.eventStartDate, let endDate = event.eventEndDate {
+			self.eventDateRange = startDate + " - " + endDate
+		}
+		self.venueName = event.eventVenue
+		self.selectedCoach = event.eventCoachName
 	}
 }
 

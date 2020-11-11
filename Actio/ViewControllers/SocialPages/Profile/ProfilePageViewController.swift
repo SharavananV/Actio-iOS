@@ -56,7 +56,8 @@ class ProfilePageViewController: UIViewController {
     }
 	
 	@IBAction func performanceReviewAction(_ sender: Any) {
-		
+		let vc = UIStoryboard(name: "Events", bundle: nil).instantiateViewController(withIdentifier: "PerformanceReviewListViewController")
+		self.navigationController?.pushViewController(vc, animated: true)
 	}
 	
 	@IBAction func addNonActioEvents(_ sender: Any) {

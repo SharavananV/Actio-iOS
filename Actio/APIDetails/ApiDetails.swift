@@ -81,7 +81,9 @@ let registerNonActioKpiUrl = baseUrl + "registerNonActioEventsKPI"
 let registerManualTournamentUrl = baseUrl + "registerNonActioEvents"
 let actioKPIUrl = baseUrl + "actioKPI"
 let submitActioKpi = baseUrl + "insertActioKPI"
+let updateActioKpi = baseUrl + "updateKPI"
 let performanceReviewerListUrl = baseUrl + "performanceReviewerList"
+let performanceReviewListUrl = baseUrl + "performanceReview"
 
 // Socket URL
 let socketUrl = "http://203.223.191.66:8085"

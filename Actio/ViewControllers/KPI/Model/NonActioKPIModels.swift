@@ -64,6 +64,7 @@ class RegisterKPIModel {
 	var state: Int?
 	var year: Int?
 	var coachName: String?
+	var kpiID, kpiType: Int?
 	
 	init() {}
 	
@@ -75,6 +76,17 @@ class RegisterKPIModel {
 			"eventID": eventID ?? "",
 			"tournamentID": tournamentID ?? "",
 			"coachID": coachID ?? "",
+			"kpi": kpiValues
+		]
+	}
+	
+	func updateParams() -> [String: Any] {
+		let kpiValues = kpi.map { (pair) -> [String: Any] in
+			return ["id": pair.key, "category_value": pair.value]
+		}
+		return [
+			"kpiID": kpiID ?? "",
+			"event_kpi_type": kpiType ?? "",
 			"kpi": kpiValues
 		]
 	}
@@ -119,6 +131,16 @@ class RegisterKPIModel {
 			return .invalid(message: "Select a coach")
 		}
 		
+		for (key, value) in kpi {
+			if Validator.isValidRequiredField(value) != .valid {
+				return .invalid(message: "\(kpiText[key] ?? "") is empty")
+			}
+		}
+		
+		return .valid
+	}
+	
+	func validateForUpdateKpi() -> ValidType {
 		for (key, value) in kpi {
 			if Validator.isValidRequiredField(value) != .valid {
 				return .invalid(message: "\(kpiText[key] ?? "") is empty")

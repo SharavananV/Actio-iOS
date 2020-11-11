@@ -18,6 +18,27 @@ class ActioEventKPIViewController: UIViewController {
 	private var registerModel: RegisterKPIModel? = RegisterKPIModel()
 	
 	var eventId: Int?
+	var updateEventDetails: ActioEvent? {
+		didSet {
+			if let details = self.updateEventDetails {
+				self.kpiEventDetails = KPIEvent(details)
+				self.kpiEventDetails?.kpi = details.eventKpi?.map({ (model) -> KpiFilterModel in
+					return KpiFilterModel(kpiID: model.kpiCategoryID, kpiName: model.kpiCategoryName, kpiType: model.typeStatus)
+				})
+				
+				self.registerModel?.kpiID = details.kpiID
+				self.registerModel?.kpiType = details.eventKpiType
+				
+				details.eventKpi?.forEach({ (model) in
+					if let value = model.kpiCategoryValue {
+						let key = String(model.kpiCategoryID ?? 0)
+						self.registerModel?.kpi[key] = value
+					}
+				})
+			}
+		}
+	}
+	var fromScreen: FromController = .submit
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -29,10 +50,15 @@ class ActioEventKPIViewController: UIViewController {
 		tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 10))
 		
 		self.title = "Actio Event Details"
-		self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Submit", style: .done, target: self, action: #selector(self.proceedTapped))
+		let titleText = fromScreen == .submit ? "Submit" : "Update"
+		self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: titleText, style: .done, target: self, action: #selector(self.proceedTapped))
 		self.navigationItem.rightBarButtonItem?.tintColor = .white
 		
-		fetchDetails()
+		if fromScreen == .update {
+			prepareFormData()
+		} else {
+			fetchDetails()
+		}
 	}
 	
 	private func fetchDetails() {
@@ -50,7 +76,7 @@ class ActioEventKPIViewController: UIViewController {
 	@objc func proceedTapped() {
 		view.endEditing(true)
 		
-		let validationResult = registerModel?.validateForActioKpi()
+		let validationResult = fromScreen == .submit ? registerModel?.validateForActioKpi() : registerModel?.validateForUpdateKpi()
 		switch validationResult {
 		case .invalid(let message):
 			view.makeToast(message)
@@ -60,7 +86,10 @@ class ActioEventKPIViewController: UIViewController {
 			break
 		}
 		
-		service.post(submitActioKpi, parameters: registerModel?.parameters(), onView: view) { (response) in
+		let serviceUrl = fromScreen == .submit ? submitActioKpi : updateActioKpi
+		let params: [String: Any]? = fromScreen == .submit ? registerModel?.parameters() : registerModel?.updateParams()
+		
+		service.post(serviceUrl, parameters: params, onView: view) { (response) in
 			if let message = response["msg"] as? String {
 				self.view.makeToast(message) { _ in
 					self.navigationController?.popViewController(animated: true)
@@ -71,13 +100,13 @@ class ActioEventKPIViewController: UIViewController {
 	
 	private func prepareFormData() {
 		let allCoaches = kpiEventDetails?.coachList?.map({ $0.coachName ?? "" }) ?? []
-		
+		let selectedCoach = fromScreen == .submit ? registerModel?.coachName: kpiEventDetails?.selectedCoach
 		var formData: [FormCellType] = [
 			.info("Tournament", kpiEventDetails?.tournamentName),
 			.info("Event", kpiEventDetails?.eventName),
 			.info("Date", kpiEventDetails?.eventDateRange),
 			.info("Venue", kpiEventDetails?.venueName),
-			.textPicker(TextPickerModel(key: "coach", textValue: registerModel?.coachName, allValues: allCoaches, contextText: "Coach", placeHolder: "Select Coach"))
+			.textPicker(TextPickerModel(key: "coach", textValue: selectedCoach, allValues: allCoaches, contextText: "Coach", placeHolder: "Select Coach"))
 		]
 		
 		self.kpiEventDetails?.kpi?.forEach({ (kpiModel) in
@@ -161,6 +190,10 @@ extension ActioEventKPIViewController: TextPickerDelegate, CellDataFetchProtocol
 	func valueChanged(keyValuePair: (key: String, value: String)) {
 		self.registerModel?.kpi[keyValuePair.key] = keyValuePair.value
 		prepareFormData()
+	}
+	
+	enum FromController {
+		case submit, update
 	}
 }
 
