@@ -179,7 +179,12 @@ extension PerformanceReviewListViewController: UITableViewDataSource, UITableVie
 					view.makeToast("Not allowed")
 				}
 			} else {
-				// Coach tapped
+				if let event = self.actioEvents?[indexPath.row], let vc = UIStoryboard(name: "Events", bundle: nil).instantiateViewController(withIdentifier: "KPIUserListViewController") as? KPIUserListViewController {
+					vc.eventId = event.eventID
+					vc.eventKpiType = event.eventKpiType
+					
+					self.navigationController?.pushViewController(vc, animated: true)
+				}
 			}
 				
 		case 2:
@@ -195,7 +200,12 @@ extension PerformanceReviewListViewController: UITableViewDataSource, UITableVie
 					view.makeToast("Not allowed")
 				}
 			} else {
-				// Coach tapped
+				if let event = self.nonActioEvents?[indexPath.row], let vc = UIStoryboard(name: "Events", bundle: nil).instantiateViewController(withIdentifier: "KPIUserListViewController") as? KPIUserListViewController {
+					vc.eventId = event.eventID
+					vc.eventKpiType = event.eventKpiType
+					
+					self.navigationController?.pushViewController(vc, animated: true)
+				}
 			}
 			
 		default:
