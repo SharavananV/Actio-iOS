@@ -16,7 +16,7 @@ class NonActioSportViewController: UIViewController {
 	private var formData: [FormCellType]?
 	private var masterData: NonActioMaster?
 	private var filterData: NonActioFilter?
-	private var registerModel: RegisterNonActioSportModel? = RegisterNonActioSportModel()
+	private var registerModel: RegisterKPIModel? = RegisterKPIModel()
 		
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,12 +91,12 @@ class NonActioSportViewController: UIViewController {
 		let addTournamentText = NSMutableAttributedString(string:"+ Add tournament manually", attributes: [NSAttributedString.Key.font : AppFont.PoppinsRegular(size: 17), NSAttributedString.Key.foregroundColor : AppColor.OrangeColor()])
 		
 		var formData: [FormCellType] = [
-			.textPicker(TextPickerModel(key: "country", textValue: selectedCountry?.countryName, allValues: countries, contextText: "Country", placeHolder: "Select Country")),
-			.textPicker(TextPickerModel(key: "state", textValue: selectedState?.stateName, allValues: states, contextText: "State", placeHolder: "Select State")),
-			.textPicker(TextPickerModel(key: "year", textValue: selectedYear, allValues: allYears, contextText: "Year", placeHolder: "Select Year")),
-			.textPicker(TextPickerModel(key: "tournament", textValue: selectedTournament, allValues: allTournaments, contextText: "Tournament", placeHolder: "Select Tournament")),
+			.textPicker(TextPickerModel(key: "country", textValue: selectedCountry?.countryName, allValues: countries, contextText: "Country", placeHolder: "Select Country", actioField: false)),
+			.textPicker(TextPickerModel(key: "state", textValue: selectedState?.stateName, allValues: states, contextText: "State", placeHolder: "Select State", actioField: false)),
+			.textPicker(TextPickerModel(key: "year", textValue: selectedYear, allValues: allYears, contextText: "Year", placeHolder: "Select Year", actioField: false)),
+			.textPicker(TextPickerModel(key: "tournament", textValue: selectedTournament, allValues: allTournaments, contextText: "Tournament", placeHolder: "Select Tournament", actioField: false)),
 			.attrText(addTournamentText, .center),
-			.textPicker(TextPickerModel(key: "event", textValue: selectedEvent, allValues: allEvents, contextText: "Event", placeHolder: "Select Event")),
+			.textPicker(TextPickerModel(key: "event", textValue: selectedEvent, allValues: allEvents, contextText: "Event", placeHolder: "Select Event", actioField: false)),
 			.searchPlayer(UserSearchSettings(showReset: false, showUserName: true, retainResult: false, collapseTableViewOnSelection: false, title: "Search by Coach", placeHolder: "Search By Username, Subscription ID or Mobile No"))
 		]
 		
@@ -111,7 +111,7 @@ class NonActioSportViewController: UIViewController {
 			let textValue = registerModel?.kpi[kpiIDString]
 			let keyboardType: UIKeyboardType = kpiModel.kpiType == 2 ? .numberPad : .default
 			formData.append(
-				.textEdit(TextEditModel(key: kpiIDString, textValue: textValue, contextText: kpiModel.kpiName ?? "", placeHolder: "", keyboardType: keyboardType))
+				.textEdit(TextEditModel(key: kpiIDString, textValue: textValue, contextText: kpiModel.kpiName ?? "", placeHolder: "", keyboardType: keyboardType, actioField: false))
 			)
 			
 			if self.registerModel?.kpi.isEmpty == true {

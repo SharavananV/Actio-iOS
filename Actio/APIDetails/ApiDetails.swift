@@ -71,7 +71,7 @@ let notificationSeenUpdateUrl = baseUrl + "notify/seen"
 let myProfileUrl = baseUrl + "profile/myprofile"
 let masterProfileUrl = baseUrl + "profile/master"
 let getProfileUrl = baseUrl + "profile/get"
-let ProfileUrl = baseUrl + "profile"
+let profileUrl = baseUrl + "profile"
 
 // KPI
 let nonActioMasterUrl = baseUrl + "nonActioKPIList"
@@ -79,6 +79,9 @@ let nonActioFilterUrl = baseUrl + "nonActioKPIFilter"
 let searchCoachUrl = baseUrl + "admin/master/tournamentSearchSubscriber"
 let registerNonActioKpiUrl = baseUrl + "registerNonActioEventsKPI"
 let registerManualTournamentUrl = baseUrl + "registerNonActioEvents"
+let actioKPIUrl = baseUrl + "actioKPI"
+let submitActioKpi = baseUrl + "insertActioKPI"
+let performanceReviewerListUrl = baseUrl + "performanceReviewerList"
 
 // Socket URL
 let socketUrl = "http://203.223.191.66:8085"

@@ -128,10 +128,14 @@ extension ProfilePageViewController : UICollectionViewDelegate,UICollectionViewD
 			let friendsList = self.friendsListModel?[indexPath.row]
 			if let nav = storyboard?.instantiateViewController(withIdentifier: "FriendsProfilePageViewController") as? FriendsProfilePageViewController {
 				nav.friendId = friendsList?.subscriberID
-				self.navigationController?.pushViewController(nav, animated: false)
+				self.navigationController?.pushViewController(nav, animated: true)
 			}
 		} else {
-			// TODO: Add some screen here
+			if let associatedList = self.eventsAssociated?[indexPath.item], let vc = UIStoryboard(name: "Events", bundle: nil).instantiateViewController(withIdentifier: "ActioEventKPIViewController") as? ActioEventKPIViewController {
+				vc.eventId = associatedList.id
+				
+				self.navigationController?.pushViewController(vc, animated: true)
+			}
 		}
 	}
 }

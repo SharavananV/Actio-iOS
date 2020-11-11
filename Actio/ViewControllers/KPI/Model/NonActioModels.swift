@@ -54,7 +54,7 @@ struct KPIState: Codable {
 }
 
 // MARK: - RegisterNonActioSportModel
-class RegisterNonActioSportModel {
+class RegisterKPIModel {
 	var eventID, tournamentID, coachID: Int?
 	var kpi = [String: String]()
 	var kpiText = [String: String]()
@@ -97,6 +97,26 @@ class RegisterNonActioSportModel {
 		}
 		if Validator.isValidRequiredField(self.year) != .valid {
 			return .invalid(message: "Select Year")
+		}
+		
+		for (key, value) in kpi {
+			if Validator.isValidRequiredField(value) != .valid {
+				return .invalid(message: "\(kpiText[key] ?? "") is empty")
+			}
+		}
+		
+		return .valid
+	}
+	
+	func validateForActioKpi() -> ValidType {
+		if Validator.isValidRequiredField(self.eventID) != .valid {
+			return .invalid(message: "Select Event")
+		}
+		if Validator.isValidRequiredField(self.tournamentID) != .valid {
+			return .invalid(message: "Select Tournament")
+		}
+		if Validator.isValidRequiredField(self.coachID) != .valid {
+			return .invalid(message: "Select a coach")
 		}
 		
 		for (key, value) in kpi {

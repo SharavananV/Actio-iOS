@@ -29,7 +29,7 @@ class TextPickerTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var textField: UITextField = {
+    private lazy var textField: ActioTextField = {
         let textField = ActioTextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = AppFont.PoppinsMedium(size: 17)
@@ -42,7 +42,7 @@ class TextPickerTableViewCell: UITableViewCell {
         let button = UIButton(type: .custom)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
-        button.tintColor = .black
+        button.tintColor = .gray
         
         let image = UIImage(named: "down")?.withRenderingMode(.alwaysTemplate)
         button.setImage(image, for: .normal)
@@ -81,8 +81,8 @@ class TextPickerTableViewCell: UITableViewCell {
             textField.heightAnchor.constraint(equalToConstant: 40)
         ]
         
-        imageButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-        imageButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -16, bottom: 0, right: 0)
+        imageButton.frame = CGRect(x: 0, y: 0, width: 18, height: 30)
+        imageButton.imageEdgeInsets = UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 5)
 		imageButton.imageView?.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         textField.rightView = imageButton
         textField.rightViewMode = .always
@@ -120,6 +120,7 @@ class TextPickerTableViewCell: UITableViewCell {
         contentLabel.text = model.contextText
         textField.placeholder = model.placeHolder
 		textField.isUserInteractionEnabled = model.isEnabled
+		textField.applyActioTheme = model.actioField
     }
 }
 
@@ -169,13 +170,15 @@ class TextPickerModel {
     var allValues: [String]?
     var contextText: String?
 	var isEnabled: Bool = true
+	var actioField: Bool = true
     
-    init(key: String, textValue: String? = nil, allValues: [String], contextText: String, placeHolder: String? = nil, isEnabled: Bool = true) {
+    init(key: String, textValue: String? = nil, allValues: [String], contextText: String, placeHolder: String? = nil, isEnabled: Bool = true, actioField: Bool = true) {
         self.key = key
         self.textValue = textValue
         self.allValues = allValues
         self.contextText = contextText
         self.placeHolder = placeHolder
 		self.isEnabled = isEnabled
+		self.actioField = actioField
     }
 }

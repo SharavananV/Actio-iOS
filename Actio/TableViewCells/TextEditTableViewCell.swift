@@ -85,6 +85,7 @@ class TextEditTableViewCell: UITableViewCell {
             textField.text = formattedNumber(number: model.textValue ?? "")
         }
 		
+		textField.applyActioTheme = model.actioField
 		textField.isUserInteractionEnabled = self.model?.enabled == true
     }
     
@@ -138,10 +139,11 @@ class TextEditModel {
     var placeHolder: String?
     var keyBoardType: UIKeyboardType
 	var enabled: Bool = true
+	var actioField: Bool = true
     
     var contextText: String?
     
-	init(key: String, textValue: String? = nil, contextText: String, placeHolder: String? = nil, keyboardType: UIKeyboardType = .default, isSecure: Bool = false, enabled: Bool = true) {
+	init(key: String, textValue: String? = nil, contextText: String, placeHolder: String? = nil, keyboardType: UIKeyboardType = .default, isSecure: Bool = false, enabled: Bool = true, actioField: Bool = true) {
         self.key = key
         self.isSecure = isSecure
         self.textValue = textValue
@@ -149,5 +151,6 @@ class TextEditModel {
         self.keyBoardType = keyboardType
         self.placeHolder = placeHolder
 		self.enabled = enabled
+		self.actioField = actioField
     }
 }

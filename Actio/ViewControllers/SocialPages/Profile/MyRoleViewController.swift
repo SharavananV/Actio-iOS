@@ -303,7 +303,7 @@ extension MyRoleViewController : FootnoteButtonDelegate, CellDataFetchProtocol, 
 	}
 	
 	private func updateProfileMyRole() {
-		service.post(ProfileUrl, parameters: profileRoleModel.parameters(), onView: view) { (response) in
+		service.post(profileUrl, parameters: profileRoleModel.parameters(), onView: view) { (response) in
 			if let msg = response["msg"] as? String {
 				self.view.makeToast(msg)
 				self.navigationController?.popViewController(animated: true)

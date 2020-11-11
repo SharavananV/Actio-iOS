@@ -20,6 +20,16 @@ class ActioTextField: UITextField {
             }
         }
     }
+	
+	var applyActioTheme: Bool = true {
+		didSet {
+			if self.applyActioTheme == false {
+				self.layer.borderColor = nil
+				self.layer.borderWidth = 0
+				self.borderStyle = .roundedRect
+			}
+		}
+	}
     
     public var textInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5) {
         didSet {
