@@ -150,6 +150,21 @@ extension Date {
 		
 		return justTimeFormatter.string(from: self)
 	}
+	
+	func splitDate() -> (String, String, String) {
+		let dateFormatter = DateFormatter()
+		dateFormatter.dateFormat = "MMM"
+		
+		let month = dateFormatter.string(from: self)
+		dateFormatter.dateFormat = "dd"
+		
+		let date = dateFormatter.string(from: self)
+		dateFormatter.dateFormat = "yyyy"
+		
+		let year = dateFormatter.string(from: self)
+		
+		return (month, date, year)
+	}
 }
 
 extension UIViewController {

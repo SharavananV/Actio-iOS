@@ -54,6 +54,8 @@ let searchPlayerUrl = baseUrl + "registration/player"
 let addPlayersUrl = baseUrl + "registration/addplayers"
 let submitRegistrationUrl = baseUrl + "registration/submit"
 let editDeletePlayerUrl = baseUrl + "registration/editplayer"
+let matchScheduleListUrl = baseUrl + "match/get"
+let matchScheduleDetailsUrl = baseUrl + "match/detail"
 
 // Friends
 let listFriendsUrl = baseUrl + "friend/find"
