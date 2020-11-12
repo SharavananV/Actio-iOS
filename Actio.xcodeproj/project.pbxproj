@@ -99,6 +99,9 @@
 		8D3FAFC4255C0B9E006C8C35 /* KPIUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3FAFC3255C0B9E006C8C35 /* KPIUserTableViewCell.swift */; };
 		8D3FAFC7255C0C26006C8C35 /* KPIUserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3FAFC6255C0C26006C8C35 /* KPIUserListViewController.swift */; };
 		8D3FAFCA255C0E4E006C8C35 /* CoachReviewListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3FAFC9255C0E4E006C8C35 /* CoachReviewListModel.swift */; };
+		8D3FAFCD255C19CF006C8C35 /* CoachReviewApprovalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3FAFCC255C19CF006C8C35 /* CoachReviewApprovalViewController.swift */; };
+		8D3FAFD0255C2399006C8C35 /* CoachReviewDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3FAFCF255C2399006C8C35 /* CoachReviewDetails.swift */; };
+		8D3FAFD7255CF844006C8C35 /* ShowKPIReasonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3FAFD6255CF843006C8C35 /* ShowKPIReasonViewController.swift */; };
 		8D47F0E625397FC30013900C /* ZoomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D47F0E525397FC30013900C /* ZoomImageView.swift */; };
 		8D47F0EB2539805F0013900C /* ImageZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D47F0EA2539805F0013900C /* ImageZoomViewController.swift */; };
 		8D47F0EF2539844C0013900C /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D47F0EE2539844C0013900C /* ImageCache.swift */; };
@@ -300,6 +303,9 @@
 		8D3FAFC3255C0B9E006C8C35 /* KPIUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KPIUserTableViewCell.swift; sourceTree = "<group>"; };
 		8D3FAFC6255C0C26006C8C35 /* KPIUserListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KPIUserListViewController.swift; sourceTree = "<group>"; };
 		8D3FAFC9255C0E4E006C8C35 /* CoachReviewListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachReviewListModel.swift; sourceTree = "<group>"; };
+		8D3FAFCC255C19CF006C8C35 /* CoachReviewApprovalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachReviewApprovalViewController.swift; sourceTree = "<group>"; };
+		8D3FAFCF255C2399006C8C35 /* CoachReviewDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachReviewDetails.swift; sourceTree = "<group>"; };
+		8D3FAFD6255CF843006C8C35 /* ShowKPIReasonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowKPIReasonViewController.swift; sourceTree = "<group>"; };
 		8D47F0E525397FC30013900C /* ZoomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomImageView.swift; sourceTree = "<group>"; };
 		8D47F0EA2539805F0013900C /* ImageZoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageZoomViewController.swift; sourceTree = "<group>"; };
 		8D47F0EE2539844C0013900C /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
@@ -914,6 +920,8 @@
 				8D1C92CA255ACFF00006D5BC /* ActioEventKPIViewController.swift */,
 				8D1C92D7255BAFA10006D5BC /* PerformanceReviewListViewController.swift */,
 				8D3FAFC6255C0C26006C8C35 /* KPIUserListViewController.swift */,
+				8D3FAFCC255C19CF006C8C35 /* CoachReviewApprovalViewController.swift */,
+				8D3FAFD6255CF843006C8C35 /* ShowKPIReasonViewController.swift */,
 			);
 			path = KPI;
 			sourceTree = "<group>";
@@ -926,6 +934,7 @@
 				8D1C92CD255AD2B50006D5BC /* ActioKPIModels.swift */,
 				8D1C92DB255BB3D10006D5BC /* PerformanceReviewListModels.swift */,
 				8D3FAFC9255C0E4E006C8C35 /* CoachReviewListModel.swift */,
+				8D3FAFCF255C2399006C8C35 /* CoachReviewDetails.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1218,6 +1227,7 @@
 				8DC1BD2625259A8F005C55DE /* NotificationListViewController.swift in Sources */,
 				8D1C92CE255AD2B50006D5BC /* ActioKPIModels.swift in Sources */,
 				8D21855D24B6E383002688A8 /* OtpViewController.swift in Sources */,
+				8D3FAFD0255C2399006C8C35 /* CoachReviewDetails.swift in Sources */,
 				8D47F0F3253984760013900C /* ImageLoader.swift in Sources */,
 				8DCBAB5B24BF2D37009E8B7F /* HomePageCollectionViewCell.swift in Sources */,
 				8D1C92D8255BAFA10006D5BC /* PerformanceReviewListViewController.swift in Sources */,
@@ -1228,6 +1238,7 @@
 				185A967F253EE869009566E9 /* SportsCoachTableViewCell.swift in Sources */,
 				8D0C5C33252465EE005B3A4E /* EventListTableViewCell.swift in Sources */,
 				8D673A6F251DD72400585AF9 /* ProfilePageViewController.swift in Sources */,
+				8D3FAFD7255CF844006C8C35 /* ShowKPIReasonViewController.swift in Sources */,
 				8DDDBDDA2552852400C999F0 /* NonActioSportViewController.swift in Sources */,
 				8D0F75ED2536D0EB00200C2B /* Conversation.swift in Sources */,
 				8DC1BD342525DD9C005C55DE /* EventRegistrationModel.swift in Sources */,
@@ -1273,6 +1284,7 @@
 				8D0C5C3F25249822005B3A4E /* EventDetailModel.swift in Sources */,
 				8D1C92CB255ACFF00006D5BC /* ActioEventKPIViewController.swift in Sources */,
 				8D673A5E2514840D00585AF9 /* TournamentContactDetailsTableViewCell.swift in Sources */,
+				8D3FAFCD255C19CF006C8C35 /* CoachReviewApprovalViewController.swift in Sources */,
 				185D2860252F20E300FD3D81 /* TournamentMasterModel.swift in Sources */,
 				8D9C07A3250B888000514692 /* TournamentFavoritesModel.swift in Sources */,
 				18DC39BD24B608EB008708FC /* ActioSpinner.swift in Sources */,

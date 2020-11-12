@@ -85,6 +85,8 @@ let updateActioKpi = baseUrl + "updateKPI"
 let performanceReviewerListUrl = baseUrl + "performanceReviewerList"
 let performanceReviewListUrl = baseUrl + "performanceReview"
 let performanceCoachReviewListUrl = baseUrl + "performanceCoachReviewList"
+let getEventKPIForCoachUrl = baseUrl + "getEventKPIForCoach"
+let submitReviewerActionUrl =  baseUrl + "coachReviewKPI"
 
 // Socket URL
 let socketUrl = "http://203.223.191.66:8085"

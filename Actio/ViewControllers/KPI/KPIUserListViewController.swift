@@ -63,4 +63,18 @@ extension KPIUserListViewController: UITableViewDataSource, UITableViewDelegate 
 		
 		return cell
 	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		guard let player = allPlayers?[indexPath.row] else {
+			return
+		}
+		
+		if let vc = UIStoryboard(name: "Events", bundle: nil).instantiateViewController(withIdentifier: "CoachReviewApprovalViewController") as? CoachReviewApprovalViewController {
+			vc.eventId = eventId
+			vc.eventKpiType = eventKpiType
+			vc.kpiId = player.kpiID
+			
+			self.navigationController?.pushViewController(vc, animated: true)
+		}
+	}
 }
