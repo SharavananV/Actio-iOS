@@ -22,18 +22,24 @@ class EventScheduleListViewController: UIViewController {
 	override func viewDidLoad() {
         super.viewDidLoad()
 
+		tableView.tableFooterView = UIView()
+		
+		self.title = "Match Schedule"
+		
         fetchDetails()
     }
 	
 	private func fetchDetails() {
-		service.post(matchScheduleListUrl, parameters: ["eventID": 231], onView: view) { (response: EventScheduleResponse) in
+		service.post(matchScheduleListUrl, parameters: ["eventID": eventID ?? 0], onView: view) { (response: EventScheduleResponse) in
 			self.scheduleDetails = response.schedule
 			
 			// Select first schedule by default
-			self.scheduleDetails?[self.selectedIndex].isSelected = true
-			
-			self.dateCollectionView.reloadData()
-			self.tableView.reloadData()
+			if self.scheduleDetails?.isEmpty == false {
+				self.scheduleDetails?[self.selectedIndex].isSelected = true
+				
+				self.dateCollectionView.reloadData()
+				self.tableView.reloadData()
+			}
 		}
 	}
 }
@@ -86,5 +92,14 @@ extension EventScheduleListViewController: UITableViewDataSource, UITableViewDel
 		cell.configure(match)
 		
 		return cell
+	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		if let vc = self.storyboard?.instantiateViewController(withIdentifier: "EventScheduleDetailViewController") as? EventScheduleDetailViewController {
+			let match = scheduleDetails?[selectedIndex].match?[indexPath.row]
+			vc.scheduleId = match?.scheduleID
+			
+			self.navigationController?.pushViewController(vc, animated: true)
+		}
 	}
 }

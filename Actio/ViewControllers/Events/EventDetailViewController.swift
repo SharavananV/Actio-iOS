@@ -160,7 +160,11 @@ extension EventDetailViewController: TournamentGalleryProtocol, EventActionProto
 	func didSelectAction(_ action: EventActionDatasource.EventAction) {
 		switch action {
 		case .matches:
-			break
+			if let vc = self.storyboard?.instantiateViewController(withIdentifier: "EventScheduleListViewController") as? EventScheduleListViewController {
+				vc.eventID = eventId
+				
+				self.navigationController?.pushViewController(vc, animated: true)
+			}
 		}
 	}
 }

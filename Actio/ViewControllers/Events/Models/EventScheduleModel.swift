@@ -34,6 +34,8 @@ struct Match: Codable {
 	var matchType, matchName, matchDescription, matchDate: String?
 	var mdate, fromTime, from, toTime: String?
 	var to: String?
+	var eventName: String?
+	var venueID: Int?
 	var competitorID: Int?
 	var competitor: String?
 	var opponentID: Int?
@@ -44,6 +46,8 @@ struct Match: Codable {
 	var venueAssetName, changeRemarks, actualStartDate, ast: String?
 	var actualStartTime, actualEndTime, aet, competitorScore: String?
 	var oponentScore, playground: String?
+	var competitorRegisterBy, competitorCoach, opponentRegisterBy, opponentCoach: String?
+	var competitorTeam, opponentTeam: [Team]?
 	
 	enum CodingKeys: String, CodingKey {
 		case iscustom
@@ -54,11 +58,9 @@ struct Match: Codable {
 		case matchName = "match_name"
 		case matchDescription = "description"
 		case matchDate = "match_date"
-		case mdate
 		case fromTime = "from_time"
-		case from
+		case from, to, mdate
 		case toTime = "to_time"
-		case to
 		case competitorID = "competitor_id"
 		case competitor
 		case opponentID = "opponent_id"
@@ -76,5 +78,33 @@ struct Match: Codable {
 		case competitorScore = "competitor_score"
 		case oponentScore = "oponent_score"
 		case playground
+		case eventName = "event_name"
+		case venueID = "venue_id"
+		case competitorRegisterBy = "competitor_register_by"
+		case competitorCoach = "competitor_coach"
+		case opponentRegisterBy = "opponent_register_by"
+		case opponentCoach = "opponent_coach"
+		case competitorTeam = "competitor_team"
+		case opponentTeam = "opponent_team"
+	}
+}
+
+// MARK: - EventScheduleDetailResponse
+struct EventScheduleDetailResponse: ResponseType {
+	var errors: [ActioError]?
+	var msg: String?
+	var status, logID: String?
+	var match: Match?
+}
+
+// MARK: - Team
+struct Team: Codable {
+	var playerID, subscriberID: Int?
+	var fullName: String?
+	
+	enum CodingKeys: String, CodingKey {
+		case playerID = "player_id"
+		case subscriberID = "subscriber_id"
+		case fullName = "full_name"
 	}
 }

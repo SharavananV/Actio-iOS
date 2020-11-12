@@ -106,6 +106,8 @@
 		8D3FAFDE255D1474006C8C35 /* EventScheduleListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3FAFDD255D1474006C8C35 /* EventScheduleListViewController.swift */; };
 		8D3FAFE2255D16D3006C8C35 /* EventDateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3FAFE1255D16D3006C8C35 /* EventDateCollectionViewCell.swift */; };
 		8D3FAFE6255D3C1A006C8C35 /* MatchFixtureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3FAFE5255D3C1A006C8C35 /* MatchFixtureTableViewCell.swift */; };
+		8D3FAFE9255D50C7006C8C35 /* EventScheduleDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3FAFE8255D50C7006C8C35 /* EventScheduleDetailViewController.swift */; };
+		8D3FAFEC255D5258006C8C35 /* PlayerListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3FAFEB255D5258006C8C35 /* PlayerListTableViewCell.swift */; };
 		8D47F0E625397FC30013900C /* ZoomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D47F0E525397FC30013900C /* ZoomImageView.swift */; };
 		8D47F0EB2539805F0013900C /* ImageZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D47F0EA2539805F0013900C /* ImageZoomViewController.swift */; };
 		8D47F0EF2539844C0013900C /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D47F0EE2539844C0013900C /* ImageCache.swift */; };
@@ -314,6 +316,8 @@
 		8D3FAFDD255D1474006C8C35 /* EventScheduleListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventScheduleListViewController.swift; sourceTree = "<group>"; };
 		8D3FAFE1255D16D3006C8C35 /* EventDateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDateCollectionViewCell.swift; sourceTree = "<group>"; };
 		8D3FAFE5255D3C1A006C8C35 /* MatchFixtureTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchFixtureTableViewCell.swift; sourceTree = "<group>"; };
+		8D3FAFE8255D50C7006C8C35 /* EventScheduleDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventScheduleDetailViewController.swift; sourceTree = "<group>"; };
+		8D3FAFEB255D5258006C8C35 /* PlayerListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerListTableViewCell.swift; sourceTree = "<group>"; };
 		8D47F0E525397FC30013900C /* ZoomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomImageView.swift; sourceTree = "<group>"; };
 		8D47F0EA2539805F0013900C /* ImageZoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageZoomViewController.swift; sourceTree = "<group>"; };
 		8D47F0EE2539844C0013900C /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
@@ -619,6 +623,7 @@
 				8DF77D50252B1F680065720A /* AddPlayersViewController.swift */,
 				8DDBB757252D81AC00D74087 /* EventSummaryViewController.swift */,
 				8D3FAFDD255D1474006C8C35 /* EventScheduleListViewController.swift */,
+				8D3FAFE8255D50C7006C8C35 /* EventScheduleDetailViewController.swift */,
 			);
 			path = Events;
 			sourceTree = "<group>";
@@ -635,6 +640,7 @@
 				8DDBB763252D913A00D74087 /* PlayerSummaryTableViewCell.swift */,
 				8DDBB766252D919C00D74087 /* AddPlayerButtonViewCell.swift */,
 				8D3FAFE5255D3C1A006C8C35 /* MatchFixtureTableViewCell.swift */,
+				8D3FAFEB255D5258006C8C35 /* PlayerListTableViewCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -1264,6 +1270,7 @@
 				8DDDBDDA2552852400C999F0 /* NonActioSportViewController.swift in Sources */,
 				8D0F75ED2536D0EB00200C2B /* Conversation.swift in Sources */,
 				8DC1BD342525DD9C005C55DE /* EventRegistrationModel.swift in Sources */,
+				8D3FAFEC255D5258006C8C35 /* PlayerListTableViewCell.swift in Sources */,
 				184DD1E4252C52B90014ABB5 /* ResetPasswordViewController.swift in Sources */,
 				8D833033252C97C7001CDE81 /* CDPlayer+CoreDataClass.swift in Sources */,
 				183384C624B49CDD009911A8 /* ActioGradientButton.swift in Sources */,
@@ -1332,6 +1339,7 @@
 				18A4A11D25388616004C81BC /* FeedWithoutImageTableViewCell.swift in Sources */,
 				8D3FAFC7255C0C26006C8C35 /* KPIUserListViewController.swift in Sources */,
 				8D69C318252B32EE00C186F4 /* SearchPlayerResponse.swift in Sources */,
+				8D3FAFE9255D50C7006C8C35 /* EventScheduleDetailViewController.swift in Sources */,
 				8DF77D4F252B1C090065720A /* UserSelectionTableViewCell.swift in Sources */,
 				8DF77D4D252B09500065720A /* EventRegistrationStatus.swift in Sources */,
 			);

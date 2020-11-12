@@ -133,6 +133,17 @@ extension UIView {
         self.layer.insertSublayer(gradient, at: 0)
         return gradient
     }
+	
+	@discardableResult
+	func applyGradientFromTop(colours: [UIColor]) -> CAGradientLayer {
+		let gradient: CAGradientLayer = CAGradientLayer()
+		gradient.frame = self.bounds
+		gradient.colors = colours.map { $0.cgColor }
+		gradient.startPoint = CGPoint(x: 0.5, y: 0)
+		gradient.endPoint = CGPoint(x: 0.5, y: 1)
+		self.layer.insertSublayer(gradient, at: 0)
+		return gradient
+	}
 }
 extension UIViewController {
     func changeNavigationBar() {
