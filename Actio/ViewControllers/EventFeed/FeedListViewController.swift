@@ -8,8 +8,9 @@
 
 import UIKit
 import Alamofire
+import SideMenu
 
-class FeedListViewController: UIViewController {
+class FeedListViewController: UIViewController, LogoutDelegate {
 
     @IBOutlet var addFeedButton: UIButton!
     @IBOutlet var searchBar: UISearchBar!
@@ -31,7 +32,11 @@ class FeedListViewController: UIViewController {
         searchBar.backgroundImage = UIImage()
         changeNavigationBar()
 
-    }
+		let menuButton = UIBarButtonItem(image: UIImage(named: "menu-white"), style: .plain, target: self, action: #selector(self.handleMenuToggle))
+		self.navigationItem.leftBarButtonItem  = menuButton
+		let notificationButton = UIBarButtonItem(image: UIImage(named: "bell"), style: .plain, target: self, action: #selector(self.openNotificationPage))
+		self.navigationItem.rightBarButtonItem  = notificationButton
+	}
     
     override func viewWillAppear(_ animated: Bool) {
         if let textfield = searchBar.value(forKey: "searchField") as? UITextField {
@@ -41,6 +46,27 @@ class FeedListViewController: UIViewController {
         
         feedListApiCall()
     }
+	
+	@objc func handleMenuToggle() {
+		if let menuController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuViewController") as? MenuViewController {
+			menuController.delegate = self
+			
+			let menu = SideMenuNavigationController(rootViewController: menuController)
+			menu.leftSide = true
+			menu.menuWidth = UIScreen.main.bounds.size.width - 80
+			menu.statusBarEndAlpha = 0
+			menu.isNavigationBarHidden = true
+			present(menu, animated: true, completion: nil)
+		}
+	}
+	
+	@objc func openNotificationPage() {
+		let notificationVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NotificationListViewController") as! NotificationListViewController
+		let navigationController = UINavigationController(rootViewController: notificationVC)
+		
+		navigationController.modalPresentationStyle = .fullScreen
+		present(navigationController, animated: true, completion: nil)
+	}
     
     @IBAction func addFeedButtonAction(_ sender: Any) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "AddEventViewController") as? AddEditFeedViewController {
@@ -63,6 +89,15 @@ class FeedListViewController: UIViewController {
 		}
     }
 
+	func presentLogin() {
+		self.dismiss(animated: true) {
+			if let topController = UIApplication.shared.keyWindow()?.topViewController() {
+				let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginNavigation")
+				controller.modalPresentationStyle = .fullScreen
+				topController.present(controller, animated: false, completion: nil)
+			}
+		}
+	}
 }
 extension FeedListViewController : UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

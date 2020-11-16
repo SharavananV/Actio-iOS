@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SideMenu
 
-class ProfilePageViewController: UIViewController {
+class ProfilePageViewController: UIViewController, LogoutDelegate {
     
     @IBOutlet weak var changePasswordButton: UIButton!
     @IBOutlet weak var editProfileButton: UIButton!
@@ -30,7 +31,12 @@ class ProfilePageViewController: UIViewController {
 		
         profileFriendsListCollectionView.delegate = self
         profileFriendsListCollectionView.dataSource = self
-    }
+		
+		let menuButton = UIBarButtonItem(image: UIImage(named: "menu-white"), style: .plain, target: self, action: #selector(self.handleMenuToggle))
+		self.navigationItem.leftBarButtonItem  = menuButton
+		let notificationButton = UIBarButtonItem(image: UIImage(named: "bell"), style: .plain, target: self, action: #selector(self.openNotificationPage))
+		self.navigationItem.rightBarButtonItem  = notificationButton
+	}
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
@@ -39,6 +45,27 @@ class ProfilePageViewController: UIViewController {
 		
 		self.profileImageView.layer.cornerRadius = UIScreen.main.bounds.width * 0.165
 		self.profileImageView.clipsToBounds = true
+	}
+	
+	@objc func handleMenuToggle() {
+		if let menuController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuViewController") as? MenuViewController {
+			menuController.delegate = self
+			
+			let menu = SideMenuNavigationController(rootViewController: menuController)
+			menu.leftSide = true
+			menu.menuWidth = UIScreen.main.bounds.size.width - 80
+			menu.statusBarEndAlpha = 0
+			menu.isNavigationBarHidden = true
+			present(menu, animated: true, completion: nil)
+		}
+	}
+	
+	@objc func openNotificationPage() {
+		let notificationVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NotificationListViewController") as! NotificationListViewController
+		let navigationController = UINavigationController(rootViewController: notificationVC)
+		
+		navigationController.modalPresentationStyle = .fullScreen
+		present(navigationController, animated: true, completion: nil)
 	}
     
     @IBAction func editProfileButtonAction(_ sender: Any) {
@@ -80,6 +107,16 @@ class ProfilePageViewController: UIViewController {
 			self.actioEventsCollectionView.reloadData()
         }
     }
+	
+	func presentLogin() {
+		self.dismiss(animated: true) {
+			if let topController = UIApplication.shared.keyWindow()?.topViewController() {
+				let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginNavigation")
+				controller.modalPresentationStyle = .fullScreen
+				topController.present(controller, animated: false, completion: nil)
+			}
+		}
+	}
 }
 extension ProfilePageViewController : UICollectionViewDelegate,UICollectionViewDataSource {
     
