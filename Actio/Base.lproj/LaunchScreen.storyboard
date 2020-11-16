@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="Poppins-Regular.ttf">
-            <string>Poppins-Regular</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="EHf-IW-A2E">
@@ -22,41 +18,36 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="welcome-Image" translatesAutoresizingMaskIntoConstraints="NO" id="ta8-Up-DKu">
-                                <rect key="frame" x="20" y="158" width="374" height="328"/>
+                                <rect key="frame" x="20" y="174" width="374" height="328"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="328" id="XFl-0t-KpV"/>
                                     <constraint firstAttribute="width" constant="374" id="w8K-Oi-XdV"/>
                                 </constraints>
                             </imageView>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Qf-dR-d8L">
-                                <rect key="frame" x="42" y="504" width="331" height="113"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qzu-DE-2ge">
+                                <rect key="frame" x="90.5" y="64" width="233" height="90"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="331" id="Dj5-zW-89d"/>
-                                    <constraint firstAttribute="height" constant="113" id="oND-b3-afX"/>
-                                </constraints>
-                                <string key="text">Suspendisse nunc leo, ornare vel facilisis lacinia, tincidunt sed erat. Aliquam ac nulla tristique, ultricies orci eu, accumsan metus.</string>
-                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="16"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qzu-DE-2ge">
-                                <rect key="frame" x="91" y="64" width="233" height="113"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="113" id="OOK-mp-ilA"/>
                                     <constraint firstAttribute="width" constant="233" id="UMF-wP-PVf"/>
                                 </constraints>
                                 <attributedString key="attributedText">
-                                    <fragment content="Welcome to ">
+                                    <fragment content="Welcome to">
                                         <attributes>
-                                            <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <font key="NSFont" size="30" name="HelveticaNeue"/>
+                                            <color key="NSColor" red="0.56470588235294117" green="0.047058823529411764" blue="0.24705882352941178" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="32" name="HelveticaNeue"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content="Actio">
+                                    <fragment content=" ">
                                         <attributes>
                                             <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <font key="NSFont" size="38" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="Actio Sports">
+                                        <attributes>
+                                            <color key="NSColor" red="1" green="0.3411764705882353" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="38" name="HelveticaNeue-Bold"/>
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
@@ -64,19 +55,17 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="qzu-DE-2ge" firstAttribute="top" secondItem="a6B-kB-Dq6" secondAttribute="top" constant="20" id="3sr-Yf-6eX"/>
-                            <constraint firstItem="2Qf-dR-d8L" firstAttribute="top" secondItem="ta8-Up-DKu" secondAttribute="bottom" constant="18" id="4aR-XV-fE4"/>
-                            <constraint firstItem="a6B-kB-Dq6" firstAttribute="trailing" secondItem="ta8-Up-DKu" secondAttribute="trailing" constant="20" id="IH4-j9-gme"/>
-                            <constraint firstItem="ta8-Up-DKu" firstAttribute="top" secondItem="qzu-DE-2ge" secondAttribute="bottom" constant="-19" id="YpJ-pf-GyG"/>
-                            <constraint firstItem="qzu-DE-2ge" firstAttribute="leading" secondItem="a6B-kB-Dq6" secondAttribute="leading" constant="91" id="h30-rs-lRh"/>
-                            <constraint firstItem="a6B-kB-Dq6" firstAttribute="trailing" secondItem="2Qf-dR-d8L" secondAttribute="trailing" constant="41" id="lYo-uJ-FAy"/>
-                            <constraint firstItem="ta8-Up-DKu" firstAttribute="leading" secondItem="a6B-kB-Dq6" secondAttribute="leading" constant="20" id="qpD-ou-Gbr"/>
-                            <constraint firstItem="a6B-kB-Dq6" firstAttribute="trailing" secondItem="qzu-DE-2ge" secondAttribute="trailing" constant="90" id="uSz-Zy-IH1"/>
-                            <constraint firstItem="2Qf-dR-d8L" firstAttribute="leading" secondItem="a6B-kB-Dq6" secondAttribute="leading" constant="42" id="z8L-rs-9Jz"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="a6B-kB-Dq6"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="qzu-DE-2ge" firstAttribute="centerX" secondItem="05V-Kb-HTY" secondAttribute="centerX" id="2Pl-JU-5ys"/>
+                            <constraint firstItem="qzu-DE-2ge" firstAttribute="top" secondItem="a6B-kB-Dq6" secondAttribute="top" constant="20" id="3sr-Yf-6eX"/>
+                            <constraint firstItem="a6B-kB-Dq6" firstAttribute="trailing" secondItem="ta8-Up-DKu" secondAttribute="trailing" constant="20" id="IH4-j9-gme"/>
+                            <constraint firstItem="ta8-Up-DKu" firstAttribute="top" secondItem="qzu-DE-2ge" secondAttribute="bottom" constant="20" id="YpJ-pf-GyG"/>
+                            <constraint firstItem="qzu-DE-2ge" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="a6B-kB-Dq6" secondAttribute="leading" constant="20" id="h30-rs-lRh"/>
+                            <constraint firstItem="ta8-Up-DKu" firstAttribute="leading" secondItem="a6B-kB-Dq6" secondAttribute="leading" constant="20" id="qpD-ou-Gbr"/>
+                            <constraint firstItem="a6B-kB-Dq6" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qzu-DE-2ge" secondAttribute="trailing" constant="20" id="uSz-Zy-IH1"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -86,5 +75,8 @@
     </scenes>
     <resources>
         <image name="welcome-Image" width="366.5" height="328.5"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
