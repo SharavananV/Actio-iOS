@@ -57,7 +57,7 @@ class ManualAddTournamentViewController: UIViewController {
 	}
 	
 	func fetchMasterData() {
-		service.post(nonActioMasterUrl, parameters: nil, onView: view) { [weak self] (response: NonActioMasterResponse) in
+		service.post(nonActioMasterUrl, parameters: nil, onView: view, shouldDismissOnError: true) { [weak self] (response: NonActioMasterResponse) in
 			self?.masterData = response.result
 			
 			self?.prepareFormData()

@@ -53,7 +53,7 @@ class ContactsListViewController: UIViewController {
 	}
 
 	private func fetchContactsList() {
-		service.post(contactsListUrl, parameters: nil, onView: view) { [weak self] (response: ChatListResponse) in
+		service.post(contactsListUrl, parameters: nil, onView: view, shouldDismissOnError: true) { [weak self] (response: ChatListResponse) in
 			self?.friendsList = response.friends
 			
 			self?.tableView.reloadData()

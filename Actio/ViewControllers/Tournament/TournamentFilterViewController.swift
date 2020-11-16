@@ -164,7 +164,7 @@ class TournamentFilterViewController: UIViewController {
     
     private func getTournamentMasterDetails() {
         service.post(tournamentMasterUrl,parameters: nil,
-                     onView: self.view) { (response: TournamentMasterResponse) in
+                     onView: self.view, shouldDismissOnError: true) { (response: TournamentMasterResponse) in
             self.masterDetails = response.result
             self.cityArrayValues = self.masterDetails?.city?.map({$0.cityName ?? ""})
             self.typeArrayValues = self.masterDetails?.tournamentType?.map({$0.name ?? ""})

@@ -30,7 +30,7 @@ class EventScheduleListViewController: UIViewController {
     }
 	
 	private func fetchDetails() {
-		service.post(matchScheduleListUrl, parameters: ["eventID": eventID ?? 0], onView: view) { (response: EventScheduleResponse) in
+		service.post(matchScheduleListUrl, parameters: ["eventID": eventID ?? 0], onView: view, shouldDismissOnError: true) { (response: EventScheduleResponse) in
 			self.scheduleDetails = response.schedule
 			
 			// Select first schedule by default

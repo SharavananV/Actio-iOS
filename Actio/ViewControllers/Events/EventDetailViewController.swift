@@ -47,7 +47,8 @@ class EventDetailViewController: UIViewController {
 	private func getEventDetails() {
 		service.post(eventDetailUrl,
 					 parameters: ["eventID": eventId ?? 0],
-					 onView: self.view) { (response: EventDetailResponse) in
+					 onView: self.view,
+					 shouldDismissOnError: true) { (response: EventDetailResponse) in
 			UDHelper.setData(for: .currentEvent, data: response.event)
 			self.eventDetails = response.event
 			self.updateUI()

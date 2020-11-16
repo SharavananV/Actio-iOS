@@ -50,7 +50,7 @@ class FriendsProfilePageViewController: UIViewController {
 	func friendsListCall() {
 		let parameters = ["friendID": friendId ?? 0]
 		
-		service.post(friendListUrl, parameters: parameters , onView: view) { [weak self] (response: FriendsListResponse) in
+		service.post(friendListUrl, parameters: parameters , onView: view, shouldDismissOnError: true) { [weak self] (response: FriendsListResponse) in
 			self?.currentFriend = response.profile
 			self?.friendsListModel = response.list
 			self?.friendsEmailLabel.text = self?.currentFriend?.emailID

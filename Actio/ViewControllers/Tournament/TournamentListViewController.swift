@@ -107,7 +107,7 @@ class TournamentListViewController: UIViewController,filterValueDelegate {
             parameters["city"] = filterdValues?["city"]
         }
 
-		service.post(tournamentListUrl, parameters: parameters, onView: view) { (response: TournamentListResponse) in
+		service.post(tournamentListUrl, parameters: parameters, onView: view, shouldDismissOnError: true) { (response: TournamentListResponse) in
 			self.tournamentListModel = response.list
 			self.nearMeTournamentListTableView.reloadData()
 			self.favoriteCollectionView.reloadData()

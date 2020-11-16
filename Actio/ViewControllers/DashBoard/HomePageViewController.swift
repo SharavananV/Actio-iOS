@@ -115,20 +115,24 @@ extension HomePageViewController: UICollectionViewDelegate,UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            if let nav = storyboard?.instantiateViewController(withIdentifier: "TournamentListViewController") as? TournamentListViewController {
-                self.navigationController?.pushViewController(nav, animated: false)
-            }
-        }
-		if indexPath.row == 1 {
+		switch indexPath.row {
+		case 0:
+			if let nav = storyboard?.instantiateViewController(withIdentifier: "TournamentListViewController") as? TournamentListViewController {
+				self.navigationController?.pushViewController(nav, animated: false)
+			}
+			
+		case 1:
 			if let nav = UIStoryboard(name: "Social", bundle: nil).instantiateViewController(withIdentifier: "ChatHistoryViewController") as? ChatHistoryViewController {
 				self.navigationController?.pushViewController(nav, animated: false)
 			}
-		}
-		if indexPath.row == 2 {
+			
+		case 2:
 			if let nav = UIStoryboard(name: "Social", bundle: nil).instantiateViewController(withIdentifier: "FriendListViewController") as? FriendListViewController {
 				self.navigationController?.pushViewController(nav, animated: false)
 			}
+			
+		default:
+			view.makeToast("Coming soon")
 		}
     }
 }

@@ -37,7 +37,7 @@ class CoachReviewApprovalViewController: UIViewController {
 			"event_kpi_type": eventKpiType ?? 0
 		]
 		
-		service.post(getEventKPIForCoachUrl, parameters: params, onView: view) { (response: CoachReviewDetailsResponse) in
+		service.post(getEventKPIForCoachUrl, parameters: params, onView: view, shouldDismissOnError: true) { (response: CoachReviewDetailsResponse) in
 			self.kpiDetails = response.result
 			
 			self.tournamentNameLabel.text = self.kpiDetails?.tournamentName

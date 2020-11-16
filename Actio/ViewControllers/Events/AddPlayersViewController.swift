@@ -92,7 +92,7 @@ class AddPlayersViewController: UIViewController {
 	private func fetchMasterData(countryId: String? = nil, stateId: String? = nil, sportsId: String? = nil) {
 		let parameters = [ "countryID": countryId ?? "", "stateID": stateId ?? "", "sportsID": sportsId ?? ""]
 		
-		service.post(eventMasterUrl, parameters: parameters, onView: view) { (response: EventsMasterResponse) in
+		service.post(eventMasterUrl, parameters: parameters, onView: view, shouldDismissOnError: true) { (response: EventsMasterResponse) in
 			self.masterData = response.master
 			
 			self.prepareFormData()

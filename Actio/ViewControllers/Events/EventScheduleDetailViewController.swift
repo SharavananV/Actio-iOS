@@ -42,7 +42,7 @@ class EventScheduleDetailViewController: UIViewController {
     }
 	
 	private func fetchDetails() {
-		service.post(matchScheduleDetailsUrl, parameters: ["scheduleID": scheduleId ?? 0], onView: view) { (response: EventScheduleDetailResponse) in
+		service.post(matchScheduleDetailsUrl, parameters: ["scheduleID": scheduleId ?? 0], onView: view, shouldDismissOnError: true) { (response: EventScheduleDetailResponse) in
 			self.matchDetails = response.match
 			self.updateUI()
 			

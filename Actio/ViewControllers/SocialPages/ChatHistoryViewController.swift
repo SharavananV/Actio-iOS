@@ -35,7 +35,7 @@ class ChatHistoryViewController: UIViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		service.post(allConversationUrl, parameters: nil, onView: view) { (response: ConversationResponse) in
+		service.post(allConversationUrl, parameters: nil, onView: view, shouldDismissOnError: true) { (response: ConversationResponse) in
 			self.allConversations = response.conversation
 			
 			self.tableView.reloadData()

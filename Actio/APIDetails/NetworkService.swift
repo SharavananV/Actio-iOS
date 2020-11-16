@@ -26,8 +26,9 @@ class NetworkService {
 		})
 	}
 	
-	func post<E: ResponseType>(_ url: String, headers: [String: String]? = nil, parameters: [String: Any]? = nil, onView view: UIView, handleError: Bool = true, shouldAddDefaultHeaders: Bool = true, completion: @escaping (E)->Void) {
-		actualMethod(url, method: .post, headers: headers, parameters: parameters, onView: view, handleError: handleError, shouldAddDefaultHeaders: shouldAddDefaultHeaders, completion: completion)
+	func post<E: ResponseType>(_ url: String, headers: [String: String]? = nil, parameters: [String: Any]? = nil, onView view: UIView, handleError: Bool = true, shouldAddDefaultHeaders: Bool = true, shouldDismissOnError: Bool = false, completion: @escaping (E)->Void) {
+		actualMethod(url, method: .post, headers: headers, parameters: parameters, onView: view, handleError: handleError, shouldAddDefaultHeaders: shouldAddDefaultHeaders,
+					 shouldDismissOnError: shouldDismissOnError, completion: completion)
 	}
 	
 	private func actualMethod<E: ResponseType>(
@@ -37,6 +38,7 @@ class NetworkService {
 		onView view: UIView,
 		handleError: Bool = true,
 		shouldAddDefaultHeaders: Bool = true,
+		shouldDismissOnError: Bool = false,
 		completion: @escaping (E)->Void)
 	{
 		var allHeaders : HTTPHeaders = shouldAddDefaultHeaders ? ["Authorization" : "Bearer "+UDHelper.getAuthToken(), "Content-Type": "application/json"] : [:]
@@ -52,19 +54,20 @@ class NetworkService {
 			
 			guard let value = response.value else {
 				print("🥶 Error: \(String(describing: response.error))")
-				view.makeToast("Network error, Try again later")
+				self.showToast("Network error, Try again later", on: view, shouldDismiss: shouldDismissOnError)
 				
 				return
 			}
 			
 			if handleError, value.status == "422" {
+				var message = "Something went wrong!"
 				if let errorMessage = value.errors?.first?.msg {
-					view.makeToast(errorMessage)
+					message = errorMessage
 				} else if let errorMessage = value.msg {
-					view.makeToast(errorMessage)
-				} else {
-					view.makeToast("Something went wrong!")
+					message = errorMessage
 				}
+				
+				self.showToast(message, on: view, shouldDismiss: shouldDismissOnError)
 			}
 			else {
 				completion(value)
@@ -123,6 +126,23 @@ class NetworkService {
 				}
 			} catch {
 				print("Error decoding data")
+			}
+		}
+	}
+	
+	private func showToast(_ message: String, on view: UIView, shouldDismiss: Bool) {
+		view.makeToast(message, duration: 2) {_ in
+			if !shouldDismiss { return }
+			
+			let parentVC = view.parentViewController
+			if let nav = parentVC?.navigationController {
+				if nav.viewControllers.first == parentVC {
+					nav.dismiss(animated: false, completion: nil)
+				} else {
+					nav.popViewController(animated: false)
+				}
+			} else {
+				parentVC?.dismiss(animated: false, completion: nil)
 			}
 		}
 	}

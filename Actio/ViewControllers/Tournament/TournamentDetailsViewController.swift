@@ -48,7 +48,7 @@ class TournamentDetailsViewController: UIViewController, UIViewControllerPreview
     }
     
     private func getTournamentDetails() {
-        service.post(tournamentDetailsUrl, parameters: ["tournamentID": tournamentId ?? 0], onView: view) { (response: TournamentResponse) in
+        service.post(tournamentDetailsUrl, parameters: ["tournamentID": tournamentId ?? 0], onView: view, shouldDismissOnError: true) { (response: TournamentResponse) in
 			self.tournamentDetails = response.tournament
 			self.updateUI()
 		}

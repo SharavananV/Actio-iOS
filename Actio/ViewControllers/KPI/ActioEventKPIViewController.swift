@@ -64,7 +64,7 @@ class ActioEventKPIViewController: UIViewController {
 	private func fetchDetails() {
 		guard let eventId = self.eventId else { return }
 		
-		service.post(actioKPIUrl, parameters: ["eventID": eventId], onView: view) { (response: ActioKPIResponse) in
+		service.post(actioKPIUrl, parameters: ["eventID": eventId], onView: view, shouldDismissOnError: true) { (response: ActioKPIResponse) in
 			self.kpiEventDetails = response.event
 			self.registerModel?.eventID = eventId
 			self.registerModel?.tournamentID = self.kpiEventDetails?.tournamentID

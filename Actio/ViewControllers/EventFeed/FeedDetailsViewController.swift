@@ -32,7 +32,7 @@ class FeedDetailsViewController: UIViewController {
     }
 
 	func feedDetailCall() {
-		service.post(feedListUrl, parameters: ["feedID": feedId ?? 0, "search": ""], onView: view) { (response: EventFeedResponse) in
+		service.post(feedListUrl, parameters: ["feedID": feedId ?? 0, "search": ""], onView: view, shouldDismissOnError: true) { (response: EventFeedResponse) in
 			guard let detail = response.list else { return }
 			
 			switch detail {

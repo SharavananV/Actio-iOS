@@ -25,7 +25,8 @@ class EventListViewController: UIViewController {
 	private func fetchEvents() {
 		service.post(eventListUrl,
 					 parameters: ["tournamentID": self.tournamentId ?? 0, "search": ""],
-					 onView: self.view) { (response: EventCategoryResponse) in
+					 onView: self.view,
+					 shouldDismissOnError: true) { (response: EventCategoryResponse) in
 			self.eventList = response.eventCategory
 			
 			if self.eventList == nil || self.eventList?.isEmpty == true {

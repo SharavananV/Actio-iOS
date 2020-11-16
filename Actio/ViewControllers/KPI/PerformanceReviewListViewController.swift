@@ -31,7 +31,7 @@ class PerformanceReviewListViewController: UIViewController {
     }
     
 	private func fetchDetails() {
-		service.post(performanceReviewerListUrl, parameters: nil, onView: view) { (response: ReviewerListResponse) in
+		service.post(performanceReviewerListUrl, parameters: nil, onView: view, shouldDismissOnError: true) { (response: ReviewerListResponse) in
 			self.reviewerList = response.list
 			
 			if self.shouldSelectByDefault {

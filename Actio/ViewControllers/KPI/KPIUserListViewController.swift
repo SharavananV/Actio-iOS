@@ -29,7 +29,7 @@ class KPIUserListViewController: UIViewController {
     }
 	
 	private func fetchDetails() {
-		service.post(performanceCoachReviewListUrl, parameters: ["eventID": eventId ?? 0, "event_kpi_type": eventKpiType ?? 0], onView: view) { (response: PerformanceCoachReviewListResponse) in
+		service.post(performanceCoachReviewListUrl, parameters: ["eventID": eventId ?? 0, "event_kpi_type": eventKpiType ?? 0], onView: view, shouldDismissOnError: true) { (response: PerformanceCoachReviewListResponse) in
 			self.allPlayers = response.result?.list
 			self.eventName = response.result?.eventName
 			
