@@ -89,8 +89,10 @@ extension NotificationListViewController: UITableViewDataSource, UITableViewDele
 			}
 			
 		case "coach_validate":
-			// TODO: Fill this in when KPI is complete
-			break
+			if let vc = UIStoryboard(name: "Events", bundle: nil).instantiateViewController(withIdentifier: "PerformanceReviewListViewController") as? PerformanceReviewListViewController {
+				vc.shouldSelectByDefault = true
+				self.navigationController?.pushViewController(vc, animated: true)
+			}
 			
 		case "parent_reject", "parent_approve":
 			break

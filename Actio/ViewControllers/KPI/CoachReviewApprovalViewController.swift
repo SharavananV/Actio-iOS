@@ -50,7 +50,7 @@ class CoachReviewApprovalViewController: UIViewController {
 			}
 			
 			self.kpiDetails?.eventKpi?.forEach({ (model) in
-				let kpiDetailsView = self.getKPIDetailsCell(model)
+				let kpiDetailsView = self.getKPIDetailsCell(model).contentView
 				self.detailsStackView.addArrangedSubview(kpiDetailsView)
 			})
 		}

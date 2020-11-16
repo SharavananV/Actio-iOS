@@ -126,19 +126,26 @@ class RedirectionHandler {
 						}
 						
 					case "coach_validate":
-						// TODO: Fill this in when KPI is complete
-						break
+						if let vc = UIStoryboard(name: "Events", bundle: nil).instantiateViewController(withIdentifier: "PerformanceReviewListViewController") as? PerformanceReviewListViewController {
+							vc.shouldSelectByDefault = true
+							self.presentController(vc)
+						}
+					
+					case "profile":
+						if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FriendsProfilePageViewController") as? FriendsProfilePageViewController, let fromId = content.fromID {
+							vc.friendId = Int(fromId)
+							self.presentController(vc)
+						}
+						
+					case "chat":
+						if let vc = UIStoryboard(name: "Social", bundle: nil).instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController {
+							vc.conversation = Conversation(subscriberID: Int(content.fromID ?? "0"), subscriberDisplayID: nil, fullName: content.name, username: nil, emailID: nil, profileImage: nil, chatID: nil, message: nil, unseen: nil)
+							
+							self.presentController(vc)
+						}
 						
 					default:
 						break
-					}
-				}
-				if let content = wrapper.message, let screenType = content.screen, screenType != "profile" {
-					if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FriendsProfilePageViewController") as? FriendsProfilePageViewController {
-						vc.friendId = Int(content.fromID ?? "0")
-						vc.notificationId = Int(content.notifyID ?? "0")
-						
-						self.presentController(vc)
 					}
 				}
 			} catch {

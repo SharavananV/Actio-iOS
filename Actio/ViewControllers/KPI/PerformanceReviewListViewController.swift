@@ -17,6 +17,7 @@ class PerformanceReviewListViewController: UIViewController {
 	private var userRole: Int?
 	private var actioEvents: [ActioEvent]?
 	private var nonActioEvents: [NonActioEvent]?
+	var shouldSelectByDefault: Bool = false
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +34,12 @@ class PerformanceReviewListViewController: UIViewController {
 		service.post(performanceReviewerListUrl, parameters: nil, onView: view) { (response: ReviewerListResponse) in
 			self.reviewerList = response.list
 			
-			self.tableView.reloadData()
+			if self.shouldSelectByDefault {
+				self.userRole = 1
+				self.fetchReviewItems()
+			} else {
+				self.tableView.reloadData()
+			}
 		}
 	}
 	
