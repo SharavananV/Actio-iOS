@@ -46,13 +46,25 @@ struct GetProfile: Codable {
 
 
 // MARK: - Coaching
-struct Coaching: Codable {
-    let id, sportsID: Int?
-    let sportsName: String?
-    let cityID: Int?
-    let cityName: String?
-    let stateID: Int?
-    let stateName, locality, remarks: String?
+class Coaching: Codable {
+	internal init() {
+		self.id = nil
+		self.sportsID = nil
+		self.sportsName = nil
+		self.cityID = nil
+		self.cityName = nil
+		self.stateID = nil
+		self.stateName = nil
+		self.locality = nil
+		self.remarks = nil
+	}
+	
+    var id, sportsID: Int?
+    var sportsName: String?
+	var cityID: Int?
+	var cityName: String?
+	var stateID: Int?
+	var stateName, locality, remarks: String?
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -64,10 +76,30 @@ struct Coaching: Codable {
         case stateName = "state_name"
         case locality, remarks
     }
+	
+	func validate() -> ValidType {
+		if Validator.isValidRequiredField(self.sportsID) != .valid {
+			return .invalid(message: "Select Sport")
+		}
+		if Validator.isValidRequiredField(self.stateID) != .valid {
+			return .invalid(message: "Select State")
+		}
+		if Validator.isValidRequiredField(self.cityID) != .valid {
+			return .invalid(message: "Select City")
+		}
+		if Validator.isValidRequiredField(self.locality) != .valid {
+			return .invalid(message: "Enter Locality")
+		}
+		if Validator.isValidRequiredField(self.remarks) != .valid {
+			return .invalid(message: "Enter About Coach")
+		}
+		
+		return .valid
+	}
 }
 
 // MARK: - Institute
-struct Institute: Codable {
+class Institute: Codable {
     var instituteID: Int?
 	var instituteName: String?
     var classID: Int?
@@ -83,6 +115,50 @@ struct Institute: Codable {
 	var cityID: Int?
 	var cityName: String?
 	var academicFromYear, academicToYear, pincode: Int?
+	
+	func validate() -> ValidType {
+		if Validator.isValidRequiredField(self.instituteID) != .valid {
+			return .invalid(message: "Select Institution")
+		}
+		if Validator.isValidRequiredField(self.academicFromYear) != .valid {
+			return .invalid(message: "Enter From Academic Year")
+		}
+		if Validator.isValidYear(self.academicFromYear) != .valid {
+			return .invalid(message: "Enter Valid Academic Year")
+		}
+		if Validator.isValidRequiredField(self.academicToYear) != .valid {
+			return .invalid(message: "Enter To Academic Year")
+		}
+		if Validator.checkIfFromGreaterThanToYear(self.academicFromYear, toYear: self.academicToYear) != .valid {
+			return .invalid(message: "Academic year must be greater than from year")
+		}
+		if Validator.isValidRequiredField(self.classID) != .valid {
+			return .invalid(message: "Select Class")
+		}
+		if Validator.isValidRequiredField(self.streamID) != .valid {
+			return .invalid(message: "Select Stream")
+		}
+		if Validator.isValidRequiredField(self.divisionID) != .valid {
+			return .invalid(message: "Select Division")
+		}
+		if Validator.isValidRequiredField(self.countryID) != .valid {
+			return .invalid(message: "Select Country")
+		}
+		if Validator.isValidRequiredField(self.stateID) != .valid {
+			return .invalid(message: "Select State")
+		}
+		if Validator.isValidRequiredField(self.cityID) != .valid {
+			return .invalid(message: "Select City")
+		}
+		if Validator.isValidRequiredField(self.pincode) != .valid {
+			return .invalid(message: "Enter Postal Code")
+		}
+		if Validator.isValidPostalCode(self.pincode) != .valid {
+			return .invalid(message: "Enter Valid Postal Code")
+		}
+		
+		return .valid
+	}
 	
 	internal init() {}
 
@@ -120,4 +196,27 @@ class Play: Codable {
         case playingSince = "playing_since"
         case weeklyHours = "weekly_hours"
     }
+	
+	func validate() -> ValidType {
+		if Validator.isValidRequiredField(self.sportsName) != .valid {
+			return .invalid(message: "Select Sport")
+		}
+		if Validator.isValidRequiredField(self.playingSince) != .valid {
+			return .invalid(message: "Enter Player Since")
+		}
+		if Validator.isValidYear(self.playingSince) != .valid {
+			return .invalid(message: "Enter Valid Player Since")
+		}
+		if Validator.isValidPastYear(self.playingSince) != .valid {
+			return .invalid(message: "Entered Player Since should not be greater than current year")
+		}
+		if Validator.isValidRequiredField(self.weeklyHours) != .valid {
+			return .invalid(message: "Enter Weekly Practice Hrs")
+		}
+		if Validator.isValidWeeklyHours(self.weeklyHours) != .valid {
+			return .invalid(message: "Invalid Practice Hrs")
+		}
+		
+		return .valid
+	}
 }

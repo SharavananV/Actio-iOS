@@ -67,16 +67,30 @@ struct StateCity: Codable {
 
 // MARK: - MasterCity
 struct MasterCity: Codable {
-    let id: Int?
-    let city: String?
-    let stateID: Int?
+    private let id: Int?
+	private let city: String?
+	private let kCityId: Int?
+	private let kCityName: String?
+
+	let stateId: Int?
+	var cityId: Int? {
+		return id ?? kCityId
+	}
+	var cityName: String? {
+		return city ?? kCityName
+	}
 
     enum CodingKeys: String, CodingKey {
-        case id, city
-        case stateID = "state_id"
+		case id, city
+        case kCityId = "city_id"
+		case kCityName = "city_name"
+        case stateId = "state_id"
     }
 }
 
+struct ProfileCity {
+	
+}
 
 // MARK: - Institutedivision
 struct Institutedivision: Codable {
@@ -133,24 +147,23 @@ struct ProfileState: Codable {
         case code
     }
 }
-class ProfileRoleModel: Codable {
-    
+
+class ProfileRoleModel: Codable {    
     internal init() {
         sportsPlay = []
         coaching = []
     }
 	
-    var isStudent: Bool?
+    var isStudent: Bool? = true
     var isCoach: Bool?
     var isSponser: Bool?
     var isOrganizer: Bool?
     var frontImage, backImage: Data?
-    var sportsPlay : [Play]?
-    var coaching : [Coaching]?
+    var sportsPlay: [Play]
+    var coaching: [Coaching]
     var institute : Institute?
 	var sponsorRemarks : String?
 	var organizerRemarks : String?
-
     
     enum CodingKeys: String, CodingKey {
         
@@ -159,20 +172,51 @@ class ProfileRoleModel: Codable {
     }
     
     init(data: GetProfile?) {
-        isStudent = data?.isStudent
+        isStudent = data?.isStudent ?? true
         isCoach = data?.isCoach
         isSponser = data?.isSponsor
         isOrganizer = data?.isOrganizer
-        sportsPlay = data?.play
-        coaching = data?.coaching
+        sportsPlay = data?.play ?? []
+        coaching = data?.coaching ?? []
         institute = data?.institute
 		sponsorRemarks = data?.sponsorRemarks
 		organizerRemarks = data?.organizerRemarks
-		
     }
+	
+	func validate() -> ValidType {
+		if isSponser == true {
+			if Validator.isValidRequiredField(self.sponsorRemarks) != .valid {
+				return .invalid(message: "Enter About Sponsor")
+			}
+		}
+		
+		if isOrganizer == true {
+			if Validator.isValidRequiredField(self.organizerRemarks) != .valid {
+				return .invalid(message: "Enter About Organizing Events")
+			}
+		}
+		
+		if let instituteValidation = self.institute?.validate(), instituteValidation != .valid {
+			return instituteValidation
+		}
+		
+		for sport in self.sportsPlay {
+			if sport.validate() != .valid {
+				return sport.validate()
+			}
+		}
+		
+		for coach in self.coaching {
+			if coach.validate() != .valid {
+				return coach.validate()
+			}
+		}
+		
+		return .valid
+	}
     
     func parameters() -> [String: Any] {
-		let coachingValues = coaching?.map({ (coach) -> [String: Any] in
+		let coachingValues = coaching.map({ (coach) -> [String: Any] in
 			return [
 				"sportsID": coach.sportsID ?? 0,
 				"cityID": coach.cityID ?? 0,
@@ -181,7 +225,7 @@ class ProfileRoleModel: Codable {
 			]
 		}) ?? []
 		
-		let playValues = sportsPlay?.map({ (play) -> [String: Any] in
+		let playValues = sportsPlay.map({ (play) -> [String: Any] in
 			return [
 				"sportsID": play.sportsID ?? 0,
 				"since": play.playingSince ?? 0,

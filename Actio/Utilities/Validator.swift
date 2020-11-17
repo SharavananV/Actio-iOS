@@ -60,11 +60,27 @@ struct Validator {
 		}
 	}
 	
+	static func isValidRequiredField(_ name: String?) -> ValidType {
+		if let name = name, name.trimmingCharacters(in: .whitespacesAndNewlines).count > 0 {
+			return .valid
+		} else {
+			return .invalid(message: "")
+		}
+	}
+	
 	static func isValidRequiredField(_ name: Int?) -> ValidType {
 		if let name = name, String(name).trimmingCharacters(in: .whitespacesAndNewlines).count > 0 {
 			return .valid
 		} else {
 			return .invalid(message: "")
+		}
+	}
+	
+	static func isValidPostalCode(_ name: Int?) -> ValidType {
+		if let name = name, String(name).trimmingCharacters(in: .whitespacesAndNewlines).count == 6 {
+			return .valid
+		} else {
+			return .invalid(message: "Enter Valid Postal Code")
 		}
 	}
     
@@ -75,6 +91,7 @@ struct Validator {
             return .invalid(message: "Enter a valid fullname")
         }
     }
+	
     static func isValidGender(_ gender: String) -> ValidType {
         if !gender.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             return .valid
@@ -83,6 +100,39 @@ struct Validator {
         }
     }
  
+	static func isValidYear(_ year: Int?) -> ValidType {
+		let name = String(year ?? 0)
+		if name.trimmingCharacters(in: .whitespacesAndNewlines).count == 4 {
+			return .valid
+		} else {
+			return .invalid(message: "Enter a valid year")
+		}
+	}
+	
+	static func isValidPastYear(_ year: Int?) -> ValidType {
+		let currentYear = Calendar.current.component(.year, from: Date())
+		if let name = year, name <= currentYear {
+			return .valid
+		} else {
+			return .invalid(message: "Enter a valid year")
+		}
+	}
+	
+	static func checkIfFromGreaterThanToYear(_ fromYear: Int?, toYear: Int?) -> ValidType {
+		if let fromYear = fromYear, let toYear = toYear, fromYear <= toYear {
+			return .valid
+		}
+		
+		return .invalid(message: "Enter a valid year")
+	}
+	
+	static func isValidWeeklyHours(_ year: Int?) -> ValidType {
+		if let name = year, name <= 168 {
+			return .valid
+		} else {
+			return .invalid(message: "Enter valid hours")
+		}
+	}
     
     static func isValidPassword(_ password: String) -> ValidType {
         if !password.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {

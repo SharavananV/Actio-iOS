@@ -19,5 +19,18 @@ class AcademicYearTableViewCell: UITableViewCell,UITextFieldDelegate {
         toYearTextField.delegate = self
         fromYearTextField.delegate = self
     }
+	
+	private var model: Institute?
+	
+	func configure(_ data: Institute?) {
+		self.model = data
+	}
 
+	func textFieldDidEndEditing(_ textField: UITextField) {
+		if textField == fromYearTextField {
+			self.model?.academicFromYear = Int(textField.text ?? "0")
+		} else {
+			self.model?.academicToYear = Int(textField.text ?? "0")
+		}
+	}
 }

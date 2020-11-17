@@ -41,7 +41,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IYD-3f-cMK">
-                                <rect key="frame" x="90.666666666666686" y="20" width="233" height="89.666666666666686"/>
+                                <rect key="frame" x="90.666666666666686" y="20.000000000000007" width="233" height="89.666666666666686"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="233" id="9HH-v7-RVC"/>
                                 </constraints>
@@ -60,7 +60,7 @@
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content="Actio Sports">
+                                    <fragment content="Actio Sport">
                                         <attributes>
                                             <color key="NSColor" red="1" green="0.3411764705882353" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <font key="NSFont" size="38" name="HelveticaNeue-Bold"/>
@@ -178,8 +178,8 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="245" verticalCompressionResistancePriority="250" image="login" translatesAutoresizingMaskIntoConstraints="NO" id="4mp-3r-J3N">
                                 <rect key="frame" x="0.0" y="43.999999999999986" width="414" height="220.66666666666663"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Actio" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OL3-HK-h1u">
-                                <rect key="frame" x="152" y="126.33333333333331" width="110.33333333333331" height="56"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Actio Sport" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OL3-HK-h1u">
+                                <rect key="frame" x="86" y="126.33333333333331" width="242" height="56"/>
                                 <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="48"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -586,7 +586,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hky-Ak-RUF" userLabel="ContentView">
-                                <rect key="frame" x="20" y="210.33333333333334" width="374" height="315.66666666666663"/>
+                                <rect key="frame" x="20" y="205.33333333333334" width="374" height="325.66666666666663"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We have requested Jo** S**** to authorize the profile. Once it is authorized, your profile will be active" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CUF-Ty-iqh">
                                         <rect key="frame" x="20" y="20" width="334" height="61"/>
@@ -649,7 +649,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kMd-NB-hNm" customClass="ActioGradientButton" customModule="Actio" customModuleProvider="target">
-                                        <rect key="frame" x="163" y="275.66666666666663" width="48" height="30"/>
+                                        <rect key="frame" x="158" y="275.66666666666663" width="58" height="40"/>
                                         <state key="normal" title="Logout">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -1541,7 +1541,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="tWm-x1-hoz">
-                                <rect key="frame" x="10" y="64" width="394" height="603"/>
+                                <rect key="frame" x="10" y="64" width="394" height="652"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="nLu-3K-BbP">
                                     <size key="itemSize" width="170" height="170"/>
@@ -2357,7 +2357,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="907"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2yV-gE-BwR" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="828"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="819.33333333333337"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pH1-uV-fyg">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="136.66666666666666"/>
@@ -2403,19 +2403,19 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brito John" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M0L-cM-yoM">
-                                                <rect key="frame" x="10" y="212" width="394" height="28"/>
+                                                <rect key="frame" x="10" y="212" width="394" height="23.333333333333343"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="britojohn@mail.com" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n3U-xp-BT1">
-                                                <rect key="frame" x="10" y="244" width="394" height="22.666666666666686"/>
+                                                <rect key="frame" x="10" y="239.33333333333331" width="394" height="18.666666666666686"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="bgm-FL-Gy6">
-                                                <rect key="frame" x="0.0" y="276.66666666666669" width="414" height="145"/>
+                                                <rect key="frame" x="0.0" y="268" width="414" height="145"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="145" id="nMl-Os-1Kd"/>
@@ -2428,10 +2428,10 @@
                                                 </collectionViewFlowLayout>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProfileFriendsListCollectionViewCell" id="Xwi-ZH-Dl7" customClass="ProfileFriendsListCollectionViewCell" customModule="Actio" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="11" width="95" height="123.33333333333331"/>
+                                                        <rect key="frame" x="0.0" y="12.333333333333334" width="95" height="120.33333333333331"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="nU0-3g-mEY">
-                                                            <rect key="frame" x="0.0" y="0.0" width="95" height="123.33333333333331"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="95" height="120.33333333333331"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userplaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="pAy-z2-dlF">
@@ -2442,7 +2442,7 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uST-hc-M0k">
-                                                                    <rect key="frame" x="10" y="95" width="75" height="18.333333333333329"/>
+                                                                    <rect key="frame" x="10" y="95" width="75" height="15.333333333333329"/>
                                                                     <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="13"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -2466,13 +2466,13 @@
                                                 </cells>
                                             </collectionView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Key Performance Indicator" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VKW-rl-wn4">
-                                                <rect key="frame" x="10" y="441.66666666666669" width="394" height="22.666666666666686"/>
+                                                <rect key="frame" x="10" y="433" width="394" height="18.666666666666686"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <collectionView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="vke-5r-DRa">
-                                                <rect key="frame" x="0.0" y="500.66666666666663" width="414" height="239"/>
+                                                <rect key="frame" x="0.0" y="485" width="414" height="239"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="414" id="YFm-Xu-uIS"/>
@@ -2532,13 +2532,13 @@
                                                                             </constraints>
                                                                         </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xdm-rW-p4E">
-                                                                            <rect key="frame" x="8" y="108" width="109" height="21"/>
+                                                                            <rect key="frame" x="8" y="108" width="109" height="17.666666666666671"/>
                                                                             <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="ffk-JD-NmO">
-                                                                            <rect key="frame" x="8" y="137" width="109" height="15"/>
+                                                                            <rect key="frame" x="8" y="133.66666666666666" width="109" height="15"/>
                                                                             <subviews>
                                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon-material-location-on" translatesAutoresizingMaskIntoConstraints="NO" id="5qm-rO-Qe1">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="15" height="15"/>
@@ -2605,19 +2605,19 @@
                                                 </connections>
                                             </collectionView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Actio Events" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gTW-L5-Uy0">
-                                                <rect key="frame" x="10" y="472.33333333333337" width="394" height="18.333333333333314"/>
+                                                <rect key="frame" x="10" y="459.66666666666669" width="394" height="15.333333333333314"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="13"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Non Actio Events" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lyt-pe-jHZ">
-                                                <rect key="frame" x="10" y="749.66666666666663" width="394" height="18.333333333333371"/>
+                                                <rect key="frame" x="10" y="734" width="394" height="15.333333333333371"/>
                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="13"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jxl-y5-AGW" customClass="ActioGradientButton" customModule="Actio" customModuleProvider="target">
-                                                <rect key="frame" x="88.666666666666686" y="778" width="237" height="30"/>
+                                                <rect key="frame" x="83.666666666666686" y="759.33333333333337" width="247" height="40"/>
                                                 <state key="normal" title="ADD KPI FOR NON ACTIO EVENTS">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
@@ -2626,7 +2626,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bwz-Vn-AVE">
-                                                <rect key="frame" x="372" y="441.66666666666669" width="32" height="32"/>
+                                                <rect key="frame" x="372" y="433" width="32" height="32"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="32" id="87X-tL-3mZ"/>
                                                     <constraint firstAttribute="width" constant="32" id="Atl-jb-HSh"/>
@@ -3227,7 +3227,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MeP-PN-u4d">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="184"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Actio" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWG-AF-Zpw">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Actio Sport" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWG-AF-Zpw">
                                         <rect key="frame" x="20" y="131" width="374" height="28"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="23"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -3783,8 +3783,8 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="245" verticalCompressionResistancePriority="250" image="login" translatesAutoresizingMaskIntoConstraints="NO" id="NPY-IJ-n3f">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="220.66666666666666"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Actio" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n3O-FC-Bmo">
-                                <rect key="frame" x="142.66666666666666" y="76.666666666666686" width="128.99999999999997" height="67.333333333333314"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Actio Sport" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n3O-FC-Bmo">
+                                <rect key="frame" x="71.333333333333343" y="76.666666666666686" width="271.33333333333326" height="67.333333333333314"/>
                                 <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="48"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -3881,8 +3881,8 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="245" verticalCompressionResistancePriority="250" image="login" translatesAutoresizingMaskIntoConstraints="NO" id="KNg-TV-Bd0">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="220.66666666666666"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Actio" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H9w-zI-iSO">
-                                <rect key="frame" x="142.66666666666666" y="76.666666666666686" width="128.99999999999997" height="67.333333333333314"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Actio Sport" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H9w-zI-iSO">
+                                <rect key="frame" x="71.333333333333343" y="76.666666666666686" width="271.33333333333326" height="67.333333333333314"/>
                                 <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="48"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -4091,8 +4091,8 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="245" verticalCompressionResistancePriority="250" image="login" translatesAutoresizingMaskIntoConstraints="NO" id="ouB-f6-lfV">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="220.66666666666666"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Actio" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oyq-1J-gPe">
-                                <rect key="frame" x="142.66666666666666" y="76.666666666666686" width="128.99999999999997" height="67.333333333333314"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Actio Sport" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oyq-1J-gPe">
+                                <rect key="frame" x="71.333333333333343" y="76.666666666666686" width="271.33333333333326" height="67.333333333333314"/>
                                 <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="48"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -4175,7 +4175,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="6Qh-39-moR">
-                                                <rect key="frame" x="89" y="296" width="236" height="30"/>
+                                                <rect key="frame" x="79" y="296" width="256" height="30"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ayc-G8-7jK">
                                                         <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
@@ -4189,7 +4189,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yfb-lY-1Ot" customClass="ActioGradientButton" customModule="Actio" customModuleProvider="target">
-                                                        <rect key="frame" x="55" y="0.0" width="54" height="30"/>
+                                                        <rect key="frame" x="55" y="0.0" width="64" height="30"/>
                                                         <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="14"/>
                                                         <state key="normal" title="Unfriend">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -4199,7 +4199,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uVT-Pp-0nX" customClass="ActioGradientButton" customModule="Actio" customModuleProvider="target">
-                                                        <rect key="frame" x="134" y="0.0" width="47" height="30"/>
+                                                        <rect key="frame" x="144" y="0.0" width="57" height="30"/>
                                                         <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="14"/>
                                                         <state key="normal" title="Friends">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -4209,7 +4209,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XnW-Ct-0i7">
-                                                        <rect key="frame" x="206" y="0.0" width="30" height="30"/>
+                                                        <rect key="frame" x="226" y="0.0" width="30" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="BpF-D7-GAJ"/>
                                                             <constraint firstAttribute="width" constant="30" id="ZuZ-uC-hfP"/>
@@ -4527,8 +4527,8 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="245" verticalCompressionResistancePriority="250" image="login" translatesAutoresizingMaskIntoConstraints="NO" id="GT6-1H-qQG">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="220.66666666666666"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Actio" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sgN-bQ-RAg">
-                                <rect key="frame" x="142.66666666666666" y="76.666666666666686" width="128.99999999999997" height="67.333333333333314"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Actio Sport" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sgN-bQ-RAg">
+                                <rect key="frame" x="71.333333333333343" y="76.666666666666686" width="271.33333333333326" height="67.333333333333314"/>
                                 <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="48"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -4683,22 +4683,21 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Academic Year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="afn-BV-lTu">
-                                                    <rect key="frame" x="20" y="11" width="67" height="14"/>
-                                                    <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="10"/>
+                                                    <rect key="frame" x="19.999999999999993" y="11" width="100.33333333333331" height="14"/>
+                                                    <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="From Year" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ybO-NK-YxE">
-                                                    <rect key="frame" x="20" y="38" width="180" height="34"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="From Year" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ybO-NK-YxE" customClass="ActioTextField" customModule="Actio" customModuleProvider="target">
+                                                    <rect key="frame" x="20" y="38" width="174.33333333333334" height="34"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="34" id="8Sd-ta-Lg5"/>
-                                                        <constraint firstAttribute="width" constant="180" id="J3O-qy-V0C"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="To Year" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sYp-x0-E10">
-                                                    <rect key="frame" x="226" y="38" width="180" height="34"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="To Year" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sYp-x0-E10" customClass="ActioTextField" customModule="Actio" customModuleProvider="target">
+                                                    <rect key="frame" x="220" y="38" width="174" height="34"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="34" id="FjF-iM-Nbh"/>
                                                     </constraints>
@@ -4706,7 +4705,7 @@
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Tt-AO-dR5">
-                                                    <rect key="frame" x="210" y="38" width="8" height="27"/>
+                                                    <rect key="frame" x="204.33333333333334" y="38" width="7.6666666666666572" height="27"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -4716,8 +4715,9 @@
                                                 <constraint firstItem="ybO-NK-YxE" firstAttribute="leading" secondItem="Zdc-go-BC7" secondAttribute="leading" constant="20" symbolic="YES" id="1Tn-tS-LYw"/>
                                                 <constraint firstItem="afn-BV-lTu" firstAttribute="top" secondItem="Zdc-go-BC7" secondAttribute="top" constant="11" id="2Ky-7T-p9m"/>
                                                 <constraint firstItem="ybO-NK-YxE" firstAttribute="top" secondItem="afn-BV-lTu" secondAttribute="bottom" constant="13" id="4S2-Ee-KnI"/>
+                                                <constraint firstItem="sYp-x0-E10" firstAttribute="width" secondItem="ybO-NK-YxE" secondAttribute="width" id="9K8-vS-aa0"/>
                                                 <constraint firstItem="afn-BV-lTu" firstAttribute="leading" secondItem="Zdc-go-BC7" secondAttribute="leading" constant="20" symbolic="YES" id="AdC-5Z-QBP"/>
-                                                <constraint firstAttribute="trailing" secondItem="sYp-x0-E10" secondAttribute="trailing" constant="8" id="AsN-XA-g9t"/>
+                                                <constraint firstAttribute="trailing" secondItem="sYp-x0-E10" secondAttribute="trailing" constant="20" id="AsN-XA-g9t"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="afn-BV-lTu" secondAttribute="trailing" constant="20" symbolic="YES" id="Fxk-wH-pc7"/>
                                                 <constraint firstAttribute="bottom" secondItem="sYp-x0-E10" secondAttribute="bottom" constant="20" symbolic="YES" id="LfJ-4O-Kkb"/>
                                                 <constraint firstAttribute="bottom" secondItem="4Tt-AO-dR5" secondAttribute="bottom" constant="27" id="T1Q-Ge-Bvg"/>
@@ -4755,7 +4755,7 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Select Sport" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7AR-lv-hCq">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Select Sport" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7AR-lv-hCq" customClass="ActioTextField" customModule="Actio" customModuleProvider="target">
                                                             <rect key="frame" x="10" y="56.333333333333329" width="356" height="40"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="40" id="oJJ-8G-qdy"/>
@@ -4769,7 +4769,7 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Enter player since" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FXv-RM-Rmr">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter player since" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FXv-RM-Rmr" customClass="ActioTextField" customModule="Actio" customModuleProvider="target">
                                                             <rect key="frame" x="10" y="128" width="356" height="40"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="40" id="u0s-oe-711"/>
@@ -4783,7 +4783,7 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Enter Practice hours" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dmP-5T-qZm">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Practice hours" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dmP-5T-qZm" customClass="ActioTextField" customModule="Actio" customModuleProvider="target">
                                                             <rect key="frame" x="10" y="199.66666666666666" width="356" height="40"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="40" id="O48-Ql-yz6"/>
@@ -4791,11 +4791,19 @@
                                                             <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                         </textField>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Soy-9Q-ERg">
+                                                            <rect key="frame" x="349.66666666666669" y="13" width="16.333333333333314" height="22"/>
+                                                            <state key="normal" image="Icon material-delete"/>
+                                                            <connections>
+                                                                <action selector="deleteButtonAction:" destination="qIf-UH-TvA" eventType="touchUpInside" id="5zu-Il-Ix4"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" name="LightOrangeBackground"/>
                                                     <constraints>
                                                         <constraint firstItem="QNC-FQ-eYI" firstAttribute="top" secondItem="a3y-Jl-sqn" secondAttribute="top" constant="15" id="4BB-jF-oUl"/>
                                                         <constraint firstItem="7AR-lv-hCq" firstAttribute="leading" secondItem="Pzf-oH-RfY" secondAttribute="leading" id="4m5-HJ-g9e"/>
+                                                        <constraint firstItem="Soy-9Q-ERg" firstAttribute="centerY" secondItem="QNC-FQ-eYI" secondAttribute="centerY" id="6W0-f0-LZw"/>
                                                         <constraint firstItem="dmP-5T-qZm" firstAttribute="top" secondItem="OkF-qh-6VT" secondAttribute="bottom" constant="10" id="7Ly-n2-UEy"/>
                                                         <constraint firstItem="Igm-Ro-hhf" firstAttribute="top" secondItem="7AR-lv-hCq" secondAttribute="bottom" constant="10" id="9JW-Ry-U8V"/>
                                                         <constraint firstAttribute="trailing" secondItem="QNC-FQ-eYI" secondAttribute="trailing" constant="10" id="9iI-52-Nsx"/>
@@ -4814,6 +4822,7 @@
                                                         <constraint firstItem="OkF-qh-6VT" firstAttribute="top" secondItem="FXv-RM-Rmr" secondAttribute="bottom" constant="10" id="bCk-lQ-Vk7"/>
                                                         <constraint firstItem="Pzf-oH-RfY" firstAttribute="top" secondItem="QNC-FQ-eYI" secondAttribute="bottom" constant="2" id="i86-7F-ctd"/>
                                                         <constraint firstItem="Igm-Ro-hhf" firstAttribute="trailing" secondItem="7AR-lv-hCq" secondAttribute="trailing" id="lrE-lS-1NZ"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Soy-9Q-ERg" secondAttribute="trailing" constant="8" id="slT-ev-f4v"/>
                                                         <constraint firstItem="dmP-5T-qZm" firstAttribute="trailing" secondItem="OkF-qh-6VT" secondAttribute="trailing" constant="-2" id="tZl-yB-mpG"/>
                                                         <constraint firstItem="QNC-FQ-eYI" firstAttribute="leading" secondItem="a3y-Jl-sqn" secondAttribute="leading" constant="10" id="tsE-sX-8TV"/>
                                                     </constraints>
@@ -4827,6 +4836,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="deleteButtonAction" destination="Soy-9Q-ERg" id="64K-jt-LLN"/>
                                             <outlet property="playerSinceTextField" destination="FXv-RM-Rmr" id="UKv-r9-u9C"/>
                                             <outlet property="practiceHoursTextField" destination="dmP-5T-qZm" id="qSF-Fz-UXk"/>
                                             <outlet property="selectSportTextField" destination="7AR-lv-hCq" id="hvr-n4-wES"/>
@@ -4855,7 +4865,7 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Select Sport" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d6P-Bm-UmQ">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Select Sport" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d6P-Bm-UmQ" customClass="ActioTextField" customModule="Actio" customModuleProvider="target">
                                                             <rect key="frame" x="10" y="56.333333333333329" width="356" height="40"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="40" id="B05-kC-Teh"/>
@@ -4869,7 +4879,7 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Select State" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TcV-PX-xaN">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Select State" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TcV-PX-xaN" customClass="ActioTextField" customModule="Actio" customModuleProvider="target">
                                                             <rect key="frame" x="10" y="128" width="356" height="40"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="40" id="8nb-31-5DE"/>
@@ -4883,7 +4893,7 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Select City" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lHj-Aq-f0e">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Select City" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lHj-Aq-f0e" customClass="ActioTextField" customModule="Actio" customModuleProvider="target">
                                                             <rect key="frame" x="10" y="199.66666666666666" width="356" height="40"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="40" id="Tbp-ap-ZWx"/>
@@ -4897,7 +4907,7 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Select Locality" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qic-4j-9mO">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Select Locality" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qic-4j-9mO" customClass="ActioTextField" customModule="Actio" customModuleProvider="target">
                                                             <rect key="frame" x="10" y="271.33333333333331" width="356" height="40"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="40" id="ZS0-UT-ibe"/>
@@ -4911,7 +4921,7 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="About Coaching" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8or-Sg-bJi">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="About Coaching" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8or-Sg-bJi" customClass="ActioTextField" customModule="Actio" customModuleProvider="target">
                                                             <rect key="frame" x="10" y="343" width="356" height="40"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="40" id="szY-t5-Is2"/>
@@ -4919,6 +4929,13 @@
                                                             <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
                                                             <textInputTraits key="textInputTraits"/>
                                                         </textField>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GjD-WT-zH2">
+                                                            <rect key="frame" x="349.66666666666669" y="13" width="16.333333333333314" height="22"/>
+                                                            <state key="normal" image="Icon material-delete"/>
+                                                            <connections>
+                                                                <action selector="deleteButtonAction:" destination="G6q-bs-gFN" eventType="touchUpInside" id="g3D-Ib-tj8"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" name="LightOrangeBackground"/>
                                                     <constraints>
@@ -4936,6 +4953,7 @@
                                                         <constraint firstItem="TcV-PX-xaN" firstAttribute="leading" secondItem="w9j-HP-eOp" secondAttribute="leading" id="I5u-eX-OWB"/>
                                                         <constraint firstItem="qic-4j-9mO" firstAttribute="top" secondItem="pdS-ao-PHG" secondAttribute="bottom" constant="10" id="JcR-Bg-5iH"/>
                                                         <constraint firstItem="d6P-Bm-UmQ" firstAttribute="top" secondItem="6uS-vt-bWf" secondAttribute="bottom" constant="10" id="JhR-j2-sN4"/>
+                                                        <constraint firstItem="GjD-WT-zH2" firstAttribute="centerY" secondItem="jRQ-Jh-Mdm" secondAttribute="centerY" id="K5j-ix-D6q"/>
                                                         <constraint firstItem="pdS-ao-PHG" firstAttribute="leading" secondItem="lHj-Aq-f0e" secondAttribute="leading" id="LIn-dD-mQ2"/>
                                                         <constraint firstItem="lHj-Aq-f0e" firstAttribute="leading" secondItem="bi3-Id-Aij" secondAttribute="leading" id="MTN-U6-4de"/>
                                                         <constraint firstAttribute="height" constant="418" id="MuM-cs-Cjm"/>
@@ -4949,6 +4967,7 @@
                                                         <constraint firstItem="qic-4j-9mO" firstAttribute="leading" secondItem="pdS-ao-PHG" secondAttribute="leading" id="huJ-hx-M1a"/>
                                                         <constraint firstItem="8or-Sg-bJi" firstAttribute="trailing" secondItem="Wes-0y-IUh" secondAttribute="trailing" constant="-6" id="jXG-DB-WLl"/>
                                                         <constraint firstItem="bi3-Id-Aij" firstAttribute="trailing" secondItem="TcV-PX-xaN" secondAttribute="trailing" constant="2" id="kg3-T6-JbI"/>
+                                                        <constraint firstAttribute="trailing" secondItem="GjD-WT-zH2" secondAttribute="trailing" constant="8" id="lke-Kb-N5I"/>
                                                         <constraint firstItem="TcV-PX-xaN" firstAttribute="trailing" secondItem="w9j-HP-eOp" secondAttribute="trailing" id="lyr-MN-JTn"/>
                                                         <constraint firstItem="qic-4j-9mO" firstAttribute="trailing" secondItem="pdS-ao-PHG" secondAttribute="trailing" constant="-4" id="m5n-wA-jY2"/>
                                                         <constraint firstAttribute="trailing" secondItem="jRQ-Jh-Mdm" secondAttribute="trailing" constant="10" id="nVD-vi-KQl"/>
@@ -4970,6 +4989,7 @@
                                             <outlet property="aboutCoachingTextField" destination="8or-Sg-bJi" id="2c0-ph-y9F"/>
                                             <outlet property="cityTextField" destination="lHj-Aq-f0e" id="6kE-RI-xlg"/>
                                             <outlet property="coachSelectSportTextField" destination="d6P-Bm-UmQ" id="CEh-F7-E4y"/>
+                                            <outlet property="deleteButton" destination="GjD-WT-zH2" id="QwH-qW-fXo"/>
                                             <outlet property="localityTextField" destination="qic-4j-9mO" id="OSJ-FY-lLF"/>
                                             <outlet property="sportsCoachBackgroundView" destination="DnB-ZX-eeG" id="jlc-6a-fGY"/>
                                             <outlet property="stateTextField" destination="TcV-PX-xaN" id="u83-5k-4Y6"/>
@@ -5079,23 +5099,23 @@
     </scenes>
     <designables>
         <designable name="GoX-8E-Ihn">
-            <size key="intrinsicContentSize" width="48" height="30"/>
+            <size key="intrinsicContentSize" width="58" height="40"/>
         </designable>
         <designable name="jxl-y5-AGW">
-            <size key="intrinsicContentSize" width="237" height="30"/>
+            <size key="intrinsicContentSize" width="247" height="40"/>
         </designable>
         <designable name="kMd-NB-hNm">
-            <size key="intrinsicContentSize" width="48" height="30"/>
+            <size key="intrinsicContentSize" width="58" height="40"/>
         </designable>
         <designable name="uVT-Pp-0nX">
-            <size key="intrinsicContentSize" width="47" height="29"/>
+            <size key="intrinsicContentSize" width="57" height="39"/>
         </designable>
         <designable name="yfb-lY-1Ot">
-            <size key="intrinsicContentSize" width="54" height="29"/>
+            <size key="intrinsicContentSize" width="64" height="39"/>
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="65c-BC-yB6"/>
+        <segue reference="Cd1-lU-7aD"/>
         <segue reference="edO-MK-xxW"/>
         <segue reference="WSG-t3-hnP"/>
         <segue reference="vR9-e8-8w5"/>
@@ -5105,6 +5125,7 @@
         <image name="Icon awesome-share-alt" width="20" height="23"/>
         <image name="Icon awesome-user-alt" width="16" height="16"/>
         <image name="Icon feather-heart" width="10.333333015441895" height="9.3333330154418945"/>
+        <image name="Icon material-delete" width="16.333333969116211" height="21"/>
         <image name="Icon material-home" width="19" height="16"/>
         <image name="Icon material-search" width="17" height="17"/>
         <image name="Icon-Chat" width="42" height="42.333332061767578"/>

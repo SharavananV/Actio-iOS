@@ -44,7 +44,7 @@
                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                         </attributes>
                                     </fragment>
-                                    <fragment content="Actio Sports">
+                                    <fragment content="Actio Sport">
                                         <attributes>
                                             <color key="NSColor" red="1" green="0.3411764705882353" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <font key="NSFont" size="38" name="HelveticaNeue-Bold"/>

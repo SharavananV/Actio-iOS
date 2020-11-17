@@ -8,6 +8,9 @@
 
 import UIKit
 
+protocol SportInfoDeleteProtocol: class {
+	func sportDeleted(_ data: Play?)
+}
 
 class SportsPlayTableViewCell: UITableViewCell,UIPickerViewDelegate, UIPickerViewDataSource,UITextFieldDelegate {
 
@@ -15,11 +18,13 @@ class SportsPlayTableViewCell: UITableViewCell,UIPickerViewDelegate, UIPickerVie
 	@IBOutlet weak var practiceHoursTextField: UITextField!
     @IBOutlet weak var playerSinceTextField: UITextField!
     @IBOutlet weak var selectSportTextField: UITextField!
-    static let reuseId = "SportsPlayTableViewCell"
+	@IBOutlet var deleteButtonAction: UIButton!
+	static let reuseId = "SportsPlayTableViewCell"
 
-    var sportArrayValues: [String]?
-    var selectedSports: String?
+    private var allSports: [Sport]?
+    private var selectedSports: Sport?
     let pickerView = UIPickerView()
+	weak var delegate: SportInfoDeleteProtocol?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,32 +35,53 @@ class SportsPlayTableViewCell: UITableViewCell,UIPickerViewDelegate, UIPickerVie
         practiceHoursTextField.delegate = self
         playerSinceTextField.delegate = self
         selectSportTextField.delegate = self
+		
+		playerSinceTextField.keyboardType = .numberPad
+		practiceHoursTextField.keyboardType = .numberPad
+		
         selectSportTextField.inputView = pickerView
     }
     var model : Play?
     
-    func configure(_ play: Play?) {
+	func configure(_ play: Play?, allSports: [Sport]?, showDelete: Bool = false) {
         self.model = play
+		self.allSports = allSports
+		
         selectSportTextField.text = play?.sportsName
         playerSinceTextField.text = String(play?.playingSince ?? 0)
         practiceHoursTextField.text = String(play?.weeklyHours ?? 0)
+		deleteButtonAction.isHidden = showDelete == false
+		
+		pickerView.reloadAllComponents()
     }
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        
-        if(self.selectSportTextField != nil && self.selectSportTextField == textField) {
-            let sportTextValue = self.selectSportTextField?.text?.isEmpty == false ? self.selectSportTextField?.text : self.sportArrayValues?[0]
+	
+	@IBAction func deleteButtonAction(_ sender: Any) {
+		delegate?.sportDeleted(self.model)
+	}
+	
+	func textFieldDidBeginEditing(_ textField: UITextField) {
+		if allSports?.isEmpty == false, self.selectSportTextField != nil && self.selectSportTextField == textField {
+			let sportTextValue = self.selectSportTextField?.text?.isEmpty == false ? self.selectSportTextField?.text : self.allSports?.first?.sports
             selectSportTextField.text = sportTextValue
         }
-        self.pickerView.reloadAllComponents()
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if  let value = selectSportTextField.text {
-            self.model?.sportsName = value
-        }
+		switch textField {
+		case self.selectSportTextField:
+			let selectedSport = allSports?.first { $0.sports == textField.text }
+			self.model?.sportsID = selectedSport?.id
+			self.model?.sportsName = textField.text
+		case self.playerSinceTextField:
+			self.model?.playingSince = Int(textField.text ?? "0")
+		case self.practiceHoursTextField:
+			self.model?.weeklyHours = Int(textField.text ?? "0")
+		default:
+			break
+		}
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return sportArrayValues?.count ?? 0
+        return allSports?.count ?? 0
     }
 
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
@@ -63,15 +89,15 @@ class SportsPlayTableViewCell: UITableViewCell,UIPickerViewDelegate, UIPickerVie
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return sportArrayValues?[row]
+		return allSports?[row].sports
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedSports = sportArrayValues?[row]
-        selectSportTextField.text = selectedSports
+        selectedSports = allSports?[row]
+		selectSportTextField.text = selectedSports?.sports
     }
     
 

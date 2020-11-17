@@ -25,7 +25,7 @@ class HomePageViewController: UIViewController, LogoutDelegate {
 		let notificationButton = UIBarButtonItem(image: UIImage(named: "bell"), style: .plain, target: self, action: #selector(self.openNotificationPage))
 		self.navigationItem.rightBarButtonItem  = notificationButton
 		
-		self.title = "Actio Sports"
+		self.title = "Actio Sport"
 		
 		changeNavigationBar()
     }
