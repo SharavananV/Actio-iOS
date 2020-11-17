@@ -218,7 +218,6 @@ extension InfoViewController : FootnoteButtonDelegate, CellDataFetchProtocol, Te
         default:
             break
         }
-
     }
 
     

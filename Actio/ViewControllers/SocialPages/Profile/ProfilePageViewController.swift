@@ -95,13 +95,13 @@ class ProfilePageViewController: UIViewController, LogoutDelegate {
 	}
 	
     func myProfileCall() {
-        service.post(myProfileUrl, parameters: nil, onView: view) { (response: MyProfileResponse) in
+		service.post(myProfileUrl, parameters: nil, onView: view) { [self] (response: MyProfileResponse) in
             self.userDetails = response.profile?.profile
             self.profileEmailLabel.text = self.userDetails?.emailID
             self.profileNameLabel.text = self.userDetails?.fullName
-            if let url = URL(string: self.userDetails?.profileImage ?? "") {
-                self.profileImageView.load(url: url)
-            }
+			if let profileImage = self.userDetails?.profileImage, let url = URL(string: baseImageUrl + profileImage) {
+				self.profileImageView.load(url: url)
+			}
             self.userName = self.userDetails?.username
             self.friendsListModel = response.profile?.list
 			self.eventsAssociated = response.eventAssociated

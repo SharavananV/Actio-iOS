@@ -74,6 +74,7 @@ let myProfileUrl = baseUrl + "profile/myprofile"
 let masterProfileUrl = baseUrl + "profile/master"
 let getProfileUrl = baseUrl + "profile/get"
 let profileUrl = baseUrl + "profile"
+let profileImageUploadUrl = baseUrl + "profile/image"
 
 // KPI
 let nonActioMasterUrl = baseUrl + "nonActioKPIList"
