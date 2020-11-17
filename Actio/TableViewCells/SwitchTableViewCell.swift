@@ -2,7 +2,7 @@
 //  SwitchTableViewCell.swift
 //  Actio
 //
-//  Created by apple on 07/07/20.
+//  Created by Arun Eswaramurthi on 07/07/20.
 //  Copyright © 2020 Knila. All rights reserved.
 //
 
@@ -60,12 +60,12 @@ class SwitchTableViewCell: UITableViewCell, UITextViewDelegate {
         contentView.addSubview(toggle)
         
         let constraints = [
-            contextTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .kInternalPadding),
+            contextTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .kTableCellPadding),
             contextTextView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: .kInternalPadding),
             contextTextView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -.kInternalPadding),
             
-            toggle.leadingAnchor.constraint(equalTo: contextTextView.trailingAnchor, constant: .kInternalPadding),
-            toggle.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.kInternalPadding),
+            toggle.leadingAnchor.constraint(equalTo: contextTextView.trailingAnchor, constant: .kTableCellPadding),
+            toggle.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.kTableCellPadding),
             toggle.centerYAnchor.constraint(equalTo: contextTextView.centerYAnchor),
             toggle.widthAnchor.constraint(equalToConstant: 60)
         ]
@@ -76,8 +76,9 @@ class SwitchTableViewCell: UITableViewCell, UITextViewDelegate {
     // MARK: Data manipulation
     var model: ToggleViewModel?
     
-    func configure(_ model: ToggleViewModel) {
+    func configure(_ model: ToggleViewModel, delegate: SwitchCellDelegate) {
         self.model = model
+        self.delegate = delegate
         
         contextTextView.attributedText = model.contextText
         toggle.setOn(model.defaultValue, animated: false)

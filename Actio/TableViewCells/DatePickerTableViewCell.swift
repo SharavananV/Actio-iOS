@@ -62,14 +62,15 @@ class DatePickerTableViewCell: UITableViewCell {
         contentView.addSubview(textField)
         
         let constraints = [
-            contentLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .kInternalPadding),
-            contentLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.kInternalPadding),
+            contentLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .kTableCellPadding),
+            contentLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.kTableCellPadding),
             contentLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: .kInternalPadding),
             
-            textField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .kInternalPadding),
+            textField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .kTableCellPadding),
             textField.topAnchor.constraint(equalTo: contentLabel.bottomAnchor, constant: .kInternalPadding),
             textField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -.kInternalPadding),
-            textField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.kInternalPadding),
+            textField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.kTableCellPadding),
+            textField.heightAnchor.constraint(equalToConstant: 40)
         ]
         
         NSLayoutConstraint.activate(constraints)
@@ -86,18 +87,12 @@ class DatePickerTableViewCell: UITableViewCell {
         return datePicker
     }()
     
-    private var dateFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM/dd/yyyy"
-        return dateFormatter
-    }()
-    
     private func setupToolBar() {
         textField.inputView = self.datePicker
     }
     
     @objc func datePicked(_ sender: UIDatePicker) {
-        textField.text = dateFormatter.string(from: sender.date)
+        textField.text = sender.date.ddMMyyyy
         self.model?.dateValue = sender.date
     }
     
@@ -108,13 +103,16 @@ class DatePickerTableViewCell: UITableViewCell {
         self.model = model
         
         contentLabel.text = model.contextText
-        datePicker.minimumDate = Date()
+        datePicker.minimumDate = model.minDate
         datePicker.maximumDate = model.maxDate
         
         if let defaultDate = model.dateValue {
             datePicker.date = defaultDate
-            textField.text = dateFormatter.string(from: defaultDate)
-        }
+            textField.text = defaultDate.ddMMyyyy
+		} else {
+			textField.text = nil
+		}
+		textField.isUserInteractionEnabled = model.isEnabled
     }
     
     func clearData() {
@@ -125,7 +123,7 @@ class DatePickerTableViewCell: UITableViewCell {
 extension DatePickerTableViewCell: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         let date = self.model?.dateValue ?? datePicker.date
-        textField.text = dateFormatter.string(from: date)
+        textField.text = date.ddMMyyyy
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -143,20 +141,19 @@ class DatePickerModel {
     var maxDate: Date?
     
     var contextText: String?
+	var isEnabled: Bool = true
     
-    init(key: String, minDate: Date? = nil, maxDate: Date? = nil, dateValue: Date? = nil, contextText: String) {
+    init(key: String, minDate: Date? = nil, maxDate: Date? = nil, dateValue: Date? = nil, contextText: String, isEnabled: Bool = true) {
         self.key = key
         self.minDate = minDate
         self.maxDate = maxDate
         self.dateValue = dateValue
         self.contextText = contextText
+		self.isEnabled = isEnabled
     }
     
-    convenience init(key: String, dateString: String? = nil, contextText: String) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM/dd/yyyy"
-        
-        let date = dateFormatter.date(from: dateString ?? "")
-        self.init(key: key, dateValue: date, contextText: contextText)
+	convenience init(key: String, dateString: String? = nil, contextText: String, isEnabled: Bool = true) {
+        let date = dateString?.toDate
+        self.init(key: key, dateValue: date, contextText: contextText, isEnabled: isEnabled)
     }
 }

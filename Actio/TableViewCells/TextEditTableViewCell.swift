@@ -25,11 +25,13 @@ class TextEditTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var textField: UITextField = {
+    private lazy var textField: ActioTextField = {
         let textField = ActioTextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = AppFont.PoppinsMedium(size: 17)
         textField.delegate = self
+        textField.autocapitalizationType = .none
+        textField.autocorrectionType = .no
         
         return textField
     }()
@@ -53,15 +55,15 @@ class TextEditTableViewCell: UITableViewCell {
         contentView.addSubview(textField)
         
         let constraints = [
-            contentLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .kInternalPadding),
-            contentLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.kInternalPadding),
+            contentLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .kTableCellPadding),
+            contentLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.kTableCellPadding),
             contentLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: .kInternalPadding),
             
-            textField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .kInternalPadding),
+            textField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: .kTableCellPadding),
             textField.topAnchor.constraint(equalTo: contentLabel.bottomAnchor, constant: .kInternalPadding),
             textField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -.kInternalPadding),
-            textField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.kInternalPadding),
-            textField.heightAnchor.constraint(equalToConstant: 44)
+            textField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -.kTableCellPadding),
+            textField.heightAnchor.constraint(equalToConstant: 40)
         ]
         
         NSLayoutConstraint.activate(constraints)
@@ -82,6 +84,9 @@ class TextEditTableViewCell: UITableViewCell {
         if let type = self.model?.keyBoardType, type == .phonePad {
             textField.text = formattedNumber(number: model.textValue ?? "")
         }
+		
+		textField.applyActioTheme = model.actioField
+		textField.isUserInteractionEnabled = self.model?.enabled == true
     }
     
     func clearData() {
@@ -111,7 +116,7 @@ extension TextEditTableViewCell: UITextFieldDelegate {
     
     private func formattedNumber(number: String) -> String {
         let cleanPhoneNumber = number.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
-        let mask = "(XXX) XXX-XXXX"
+        let mask = "XXXXXXXXXX"
 
         var result = ""
         var index = cleanPhoneNumber.startIndex
@@ -133,14 +138,19 @@ class TextEditModel {
     var textValue: String?
     var placeHolder: String?
     var keyBoardType: UIKeyboardType
+	var enabled: Bool = true
+	var actioField: Bool = true
     
     var contextText: String?
     
-    init(key: String, textValue: String? = nil, contextText: String, placeHolder: String? = nil, keyboardType: UIKeyboardType = .default, isSecure: Bool = false) {
+	init(key: String, textValue: String? = nil, contextText: String, placeHolder: String? = nil, keyboardType: UIKeyboardType = .default, isSecure: Bool = false, enabled: Bool = true, actioField: Bool = true) {
         self.key = key
         self.isSecure = isSecure
         self.textValue = textValue
         self.contextText = contextText
         self.keyBoardType = keyboardType
+        self.placeHolder = placeHolder
+		self.enabled = enabled
+		self.actioField = actioField
     }
 }

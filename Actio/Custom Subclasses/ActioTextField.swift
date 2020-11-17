@@ -2,7 +2,7 @@
 //  ActioTextField.swift
 //  Actio
 //
-//  Created by apple on 07/07/20.
+//  Created by Arun Eswaramurthi on 07/07/20.
 //  Copyright © 2020 Knila. All rights reserved.
 //
 
@@ -12,9 +12,24 @@ class ActioTextField: UITextField {
     /// Toggle this to display eye icon on the textfield
     override var isSecureTextEntry: Bool {
         didSet {
-            makeFieldSecure()
+            if self.isSecureTextEntry {
+                makeFieldSecure()
+            } else {
+                rightView = nil
+                rightViewMode = .never
+            }
         }
     }
+	
+	var applyActioTheme: Bool = true {
+		didSet {
+			if self.applyActioTheme == false {
+				self.layer.borderColor = nil
+				self.layer.borderWidth = 0
+				self.borderStyle = .roundedRect
+			}
+		}
+	}
     
     public var textInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5) {
         didSet {
@@ -41,9 +56,9 @@ class ActioTextField: UITextField {
     }
     
     private func beautify() {
-        self.layer.borderColor = UIColor.textFieldBorder.cgColor
+        self.layer.borderColor = #colorLiteral(red: 1, green: 0.3411764706, blue: 0.2, alpha: 1)
         self.layer.borderWidth = 0.5
-        self.tintColor = UIColor.themeOrange
+        self.tintColor = #colorLiteral(red: 1, green: 0.3411764706, blue: 0.2, alpha: 1)
     }
     
     private func makeFieldSecure() {
