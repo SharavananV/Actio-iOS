@@ -2,19 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Program requires GPS to get user&apos;s location</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Program requires GPS to get user&apos;s location</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Program requires GPS to get user&apos;s location</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>Actio Sport</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -44,16 +35,27 @@
 			<string></string>
 		</dict>
 	</array>
-	<key>NSCameraUsageDescription</key>
-	<string>This app will use camera</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>You can select photo</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>This app will use camera</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Program requires GPS to get user's location</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Program requires GPS to get user's location</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Program requires GPS to get user's location</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>You can select photo</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Poppins-Regular.ttf</string>
